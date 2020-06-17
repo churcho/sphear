@@ -39,7 +39,6 @@ matx_key_base =
 
 config :matx, Matx.Endpoint,
   http: [
-    port: "4001"),
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: matx_key_base,
@@ -47,7 +46,6 @@ config :matx, Matx.Endpoint,
 
 config :blippx, Blippx.Endpoint,
   http: [
-    port: "4002"),
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: blippx_key_base,
