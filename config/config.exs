@@ -19,11 +19,11 @@ config :proxy,
   https: [:inet6, port: 443],
   backends: [
     %{
-      host: ~r{matx\.se$},
+      host: ~r{matx\.(se|nu)$},
       phoenix_endpoint: MatxWeb.Endpoint
     },
     %{
-      host: ~r{blippx\.se$},
+      host: ~r{blippx\.(se|nu)$},
       phoenix_endpoint: BlippxWeb.Endpoint
     },
     %{
