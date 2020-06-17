@@ -3,28 +3,44 @@ defmodule Proxy.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  alias Phoenix.LiveReloader.Socket,  as: LiveReloadSocket
+  alias Plug.Cowboy
+
   use Application
+  require Logger
 
   def start(_type, _args) do
-    children = [
-      # Start the Telemetry supervisor
-      Proxy.Telemetry,
-      # Start the Endpoint (http/https)
-      Proxy.Endpoint
-      # Start a worker by calling: Proxy.Worker.start_link(arg)
-      # {Proxy.Worker, arg}
+    import Supervisor.Spec, warn: false
+
+    port = to_port(80)
+    dispatch = [{:_, [
+      {:_, Proxy.Cowboy2Handler, {nil, nil}}
+    ]}]
+
+    opts = [
+      port: port,
+      dispatch: dispatch
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Proxy.Supervisor]
-    Supervisor.start_link(children, opts)
+    children = [{Plug.Cowboy, scheme: :http, plug: {nil, nil}, options: opts}]
+
+    opts2 = [strategy: :one_for_one, name: Proxy.Supervisor]
+
+
+    Logger.info("successfully started proxy on port 80")
+
+    Supervisor.start_link(children, opts2)
   end
 
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
-  def config_change(changed, _new, removed) do
-    Proxy.Endpoint.config_change(changed, removed)
-    :ok
+  defp websocket_handler(path, endpoint, options) do
+    {path, Phoenix.Endpoint.Cowboy2Handler, {endpoint, options}}
   end
+
+  defp to_port(nil) do
+    Logger.error "Server can't start because :port in config is nil, please use a valid port number"
+    exit(:shutdown)
+  end
+  defp to_port(binary)  when is_binary(binary),   do: String.to_integer(binary)
+  defp to_port(integer) when is_integer(integer), do: integer
+  defp to_port({:system, env_var}), do: to_port(System.get_env(env_var))
 end

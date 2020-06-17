@@ -7,8 +7,6 @@ defmodule Matx.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      Matx.Repo,
       # Start the Telemetry supervisor
       MatxWeb.Telemetry,
       # Start the PubSub system

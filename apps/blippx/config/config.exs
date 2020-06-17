@@ -7,16 +7,16 @@
 # General application configuration
 use Mix.Config
 
-config :blippx,
-  ecto_repos: [Blippx.Repo]
+run_server? = System.get_env("RENDER_HOSTNAME") == nil || true
 
 # Configures the endpoint
 config :blippx, BlippxWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "www.blippx.se"],
   secret_key_base: "qvsYvVSwsbUdrpXeKR87736NkpXWt6MB4Nm8GdVcxTYHOUG5OK/VofkIE5U0pDQc",
   render_errors: [view: BlippxWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Blippx.PubSub,
-  live_view: [signing_salt: "w1yXZMvx"]
+  live_view: [signing_salt: "w1yXZMvx"],
+  server: run_server?
 
 # Configures Elixir's Logger
 config :logger, :console,

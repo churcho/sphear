@@ -7,16 +7,16 @@
 # General application configuration
 use Mix.Config
 
-config :matx,
-  ecto_repos: [Matx.Repo]
+run_server? = System.get_env("RENDER_HOSTNAME") == nil || true
 
 # Configures the endpoint
 config :matx, MatxWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "www.matx.se"],
   secret_key_base: "LvraWvgTgb2gBiBWgOHLv+PdMU4/Gav+nlrX3aO5P89Nz9UIZL07jCCPHtGM+cNb",
   render_errors: [view: MatxWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Matx.PubSub,
-  live_view: [signing_salt: "P3qqfOik"]
+  live_view: [signing_salt: "P3qqfOik"],
+  server: run_server?
 
 # Configures Elixir's Logger
 config :logger, :console,

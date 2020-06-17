@@ -7,23 +7,50 @@
 # all use the same configuration file. If you want different
 # configurations or dependencies per app, it is best to
 # move said applications out of the umbrella.
-import Config
+import Mix.Config
 
-# Configure Mix tasks and generators
+import_config "../apps/*/config/config.exs"
+
+config :phoenix, :serve_endpoints, true
+
+config :proxy, 
+  # any Cowboy options are allowed
+  http: [:inet6, port: 80],
+  https: [:inet6, port: 443],
+  backends: [
+    %{
+      host: ~r{matx\.se$},
+      phoenix_endpoint: MatxWeb.Endpoint
+    },
+    %{
+      host: ~r{blippx\.se$},
+      phoenix_endpoint: BlippxWeb.Endpoint
+    },
+    %{
+      host: ~r/localhost/,
+      phoenix_endpoint: MatxWeb.Endpoint
+    },
+    %{
+      host: ~r/127.0.0.1/,
+      phoenix_endpoint: MatxWeb.Endpoint
+    }
+  ]
+
+# Configure ecto_repo and generators
 config :db,
   ecto_repos: [Db.Repo]
 
 config :proxy,
-  ecto_repos: [Proxy.Repo],
-  generators: [context_app: false]
+  ecto_repos: [Db.Repo],
+  generators: [context_app: :db]
 
-# Configures the endpoint
-config :proxy, Proxy.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "iCKUBZnxiscnSbOnp7+kJYvOY5dvNwRLeLM7Wr9pc2S2zKf4mhMd9mR/hyvWNELQ",
-  render_errors: [view: Proxy.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Proxy.PubSub,
-  live_view: [signing_salt: "eJd00MIm"]
+config :matx,
+  ecto_repos: [Db.Repo],
+  generators: [context_app: :db]
+
+config :blippx,
+  ecto_repos: [Db.Repo],
+  generators: [context_app: :db]
 
 # Sample configuration:
 #

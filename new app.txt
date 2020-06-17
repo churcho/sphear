@@ -1,0 +1,17 @@
+cd apps
+mix phx.new x --live
+
+--> /mix.exs
+releases: 
+	sphear: 
+		applications:
+			x <<<< add
+			
+--> /apps/x/config/config.exs
+config :x,
+	ecto_repos: [Db.Repo] <<<<< change
+	
+--> /apps/x/config/dev.exs
+config :x, 
+	x.Repo <<<<< remove block
+	
