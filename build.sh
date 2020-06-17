@@ -7,11 +7,11 @@ mix deps.get --only prod
 MIX_ENV=prod mix compile
 
 # Compile assets
-npm install --prefix ./apps/mithral_web/assets
-npm run deploy --prefix ./apps/mithral_web/assets
+npm install --prefix ./apps/matx/assets
+npm run deploy --prefix ./apps/matx/assets
 
-npm install --prefix ./apps/tavus/assets
-npm run deploy --prefix ./apps/tavus/assets
+npm install --prefix ./apps/blippx/assets
+npm run deploy --prefix ./apps/blippx/assets
 
 mix phx.digest
 
@@ -20,4 +20,4 @@ rm -rf "_build"
 MIX_ENV=prod mix release
 
 # Run migrations
-_build/prod/rel/mithral/bin/mithral eval "Mithral.Release.migrate"
+_build/prod/rel/sphear/bin/sphear eval "Db.Release.migrate"
