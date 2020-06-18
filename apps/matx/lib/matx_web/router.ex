@@ -17,7 +17,8 @@ defmodule MatxWeb.Router do
   scope "/", MatxWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    get "/", PageController, :index
+    live "/demo", PageLive, :index
   end
 
   # Other scopes may use custom stacks.

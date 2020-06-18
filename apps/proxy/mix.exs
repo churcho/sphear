@@ -41,7 +41,8 @@ defmodule Proxy.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.1"},
       {:ranch, "~> 1.7"},
-      {:plug, "~> 1.10", override: true}
+      {:plug, "~> 1.10", override: true},
+      {:db, in_umbrella: true}
     ]
   end
 
