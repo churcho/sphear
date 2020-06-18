@@ -19,6 +19,7 @@ defmodule MatxWeb.Router do
 
     get "/", PageController, :index
     live "/demo", PageLive, :index
+    get "/button", PageController, :button
   end
 
   # Other scopes may use custom stacks.
