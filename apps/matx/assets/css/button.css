@@ -27,15 +27,17 @@
     border: 0px solid rgb(46, 45, 42);
     box-sizing: border-box;
     transition: all .85s cubic-bezier(0.25, 1, 0.33, 1);
-    box-shadow: 0 30px 85px rgba(0, 0, 0, 0.14), 0 15px 35px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 30px 85px rgba(0, 0, 0, 0.7), 0 15px 35px rgba(0, 0, 0, 0.7);
 }
 
 .my-super-cool-btn:hover span:before {
     transform: scale(0.8);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.14), 0 15px 35px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.7), 0 15px 35px rgba(0, 0, 0, 0.7);
+    background-color: white;
 }
 
 .my-super-cool-btn:hover img {
     transform: scale(0.75);
     transition: all 1s cubic-bezier(0.25, 1, .33, 1);
+    z-index: 50;
 }
