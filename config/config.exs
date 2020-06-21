@@ -38,7 +38,12 @@ config :proxy,
 
 # Configure ecto_repo and generators
 config :db,
-  ecto_repos: [Db.Repo]
+  ecto_repos: [Db.Repo],
+  generators: [context_app: :db]
+
+config :proxy,
+  ecto_repos: [Db.Repo],
+  generators: [context_app: :db]
 
 config :matx,
   ecto_repos: [Db.Repo],
