@@ -13,6 +13,12 @@ import_config "../apps/*/config/config.exs"
 
 config :phoenix, :serve_endpoints, true
 
+config :entrance,              
+  repo: Db.Repo,
+  security_module: Entrance.Auth.Bcrypt,
+  user_module: Db.Accounts.User,
+  default_authenticable_field: :email
+
 config :proxy, 
   # any Cowboy options are allowed
   http: [:inet6, port: 80],

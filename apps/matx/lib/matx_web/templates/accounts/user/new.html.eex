@@ -1,0 +1,54 @@
+<header>
+      <!--Nav-->
+      <nav class="bottom-0 md:bottom-auto md:bg-white p-2 mt-0 fixed w-full max-w-full z-10 pin-t shadow-md px-10">
+        <div class="container mx-auto flex flex-wrap justify-between max-w-full">
+          <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+            <div id="wrapper">
+              <a href="/demo" class="text-white no-underline hover:text-white hover:no-underline my-super-cool-btn">
+                <span>
+                    <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+</header>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full">
+    <div>
+      <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+        Skapa ditt konto nu
+      </h2>
+    </div>
+    <%= form_for @changeset, Routes.user_path(@conn, :create), [class: "mt-8"], fn f -> %>
+      <div class="rounded-md shadow-sm">
+        <%= if @changeset.action do %>
+          <div class="alert alert-danger">
+            <p>Oops, something went wrong! Please check the errors below.</p>
+          </div>
+        <% end %>
+
+        <div>
+          <%= error_tag f, :email %>
+          <%= text_input f, :email, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        </div>
+        <div class="-mt-px">
+          <%= error_tag f, :password %>
+          <%= text_input f, :password, [placeholder: "Lösenord", name: "password", type: "password", placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"] %>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <%= submit "Registrera", [class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"] %>
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -40,7 +40,8 @@ defmodule Db.MixProject do
       {:phoenix_pubsub, "~> 2.0"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:entrance, "~> 0.4.3"}
     ]
   end
 

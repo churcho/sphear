@@ -51,7 +51,8 @@ defmodule Matx.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:db, in_umbrella: true}
+      {:db, in_umbrella: true},
+      {:entrance, "~> 0.4.3"}
     ]
   end
 
