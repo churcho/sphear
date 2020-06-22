@@ -27,16 +27,6 @@ defmodule MatxWeb.Router do
     live "/login", LoginLive, :index
     live "/register", RegisterLive, :index
     get "/button", PageController, :button
-
-    # Accounts
-    scope "/", Accounts do
-      get "/user/new", UserController, :new
-      post "/user/new", UserController, :create
-
-      get "/session/new", SessionController, :new
-      post "/session/new", SessionController, :create
-      delete "/logout", SessionController, :delete
-    end
   end
 
   scope "/protected", MatxWeb do

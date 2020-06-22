@@ -1,24 +1,16 @@
 defmodule MatxWeb.PageLive do
   use MatxWeb, :live_view
 
-  @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, val: 1)}
+    {:ok, assign(socket, value: "", val: "")}
   end
 
-  @impl true
-  def handle_event("step1", _, socket) do
-    {:noreply, assign(socket, val: 2)}
+  def render(assigns, _socket) do
+    Phoenix.View.render(MatxWeb.PageView, "page_live.html", assigns)
   end
 
-  @impl true
-  def handle_event("step2", _, socket) do
-    {:noreply, assign(socket, val: 3)}
-  end
-
-  @impl true
-  def handle_event("step3", _, socket) do
-    {:noreply, assign(socket, val: 1)}
+  def handle_event("search", %{"session" => %{"value" => value}}, socket) do
+    {:noreply, assign(socket, value: value)}
   end
 
   def handle_event("login", _, socket) do
