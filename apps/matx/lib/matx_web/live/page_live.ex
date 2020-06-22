@@ -21,4 +21,11 @@ defmodule MatxWeb.PageLive do
     {:noreply, assign(socket, val: 1)}
   end
 
+  def handle_event("login", _, socket) do
+    {:noreply, push_redirect(socket, to: "/login")}
+  end
+
+  def handle_event("register", _, socket) do
+    {:noreply, push_redirect(socket, to: "/register")}
+  end
 end

@@ -6,6 +6,7 @@ defmodule Db.Accounts.User do
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
     field :hashed_password, :string
     field :session_secret, :string
 
@@ -14,8 +15,9 @@ defmodule Db.Accounts.User do
 
   def create_changeset(user \\ %Db.Accounts.User{}, attrs) do
     user
-    |> cast(attrs, [:email, :password, :hashed_password, :session_secret])
-    |> validate_required([:email, :password])
+    |> cast(attrs, [:email, :password, :password_confirmation, :hashed_password, :session_secret])
+    |> validate_required([:email, :password], message: "Fältet är tomt")
+    |> validate_confirmation(:password, message: "Lösenorden matchar inte")
     |> hash_password
   end
 end 

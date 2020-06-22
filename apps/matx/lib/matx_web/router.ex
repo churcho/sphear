@@ -24,6 +24,8 @@ defmodule MatxWeb.Router do
 
     get "/", PageController, :index
     live "/demo", PageLive, :index
+    live "/login", LoginLive, :index
+    live "/register", RegisterLive, :index
     get "/button", PageController, :button
 
     # Accounts

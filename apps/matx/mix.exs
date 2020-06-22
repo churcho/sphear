@@ -52,7 +52,8 @@ defmodule Matx.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:db, in_umbrella: true},
-      {:entrance, "~> 0.4.3"}
+      {:entrance, "~> 0.4.3"},
+      {:bcrypt_elixir, "~> 2.2.0"}
     ]
   end
 
