@@ -1,6 +1,6 @@
 <main role="main" class="container m-auto max-w-full">
   <%= if @flash != %{} do %>
-    <div phx-click="lv:clear-flash" phx-value-key="info" class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end">
+    <div phx-click="lv:clear-flash" phx-value-key="info" class="z-50 fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end">
       <!--
         Notification panel, show/hide based on alert state.
 

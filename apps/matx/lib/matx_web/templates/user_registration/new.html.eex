@@ -1,0 +1,54 @@
+<header>
+      <!--Nav-->
+      <nav class="bottom-0 md:bottom-auto md:bg-white p-2 mt-0 fixed w-full max-w-full z-10 pin-t shadow-md px-10">
+        <div class="container mx-auto flex flex-wrap justify-between max-w-full">
+          <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+            <div id="wrapper">
+              <%= link to: "/demo", class: "text-white no-underline hover:text-white hover:no-underline my-super-cool-btn" do %>
+                <span>
+                    <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
+                </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+</header>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full">
+    <div>
+      <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+        Skapa ditt konto nu
+      </h2>
+      <p class="mt-2 text-center text-sm leading-5 text-gray-600">
+        Eller
+        <%= link "logga in", to: Routes.user_session_path(@conn, :new), class: "font-medium text-red-500 hover:text-red-700 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+      </p>
+    </div>
+    <%= form_for @changeset, Routes.user_registration_path(@conn, :create), fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="rounded-md shadow-sm text-sm mt-3 text-red-600 font-bold">
+          <%= for error <- @changeset.errors do %>
+            <%= elem(error, 0) %> <%= elem(elem(error, 1), 0) %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="mt-4 rounded-md shadow-sm text-sm text-red-600 font-bold" style="<%= if @changeset.action, do: "box-shadow: 0 1px 2px 0 rgba(226, 5, 65, 0.71);" %>">
+        <div>
+          <%= error_tag f, :email %>
+          <%= text_input f, :email, required: true, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        </div>
+        <div class="-mt-px">
+          <%= error_tag f, :password %>
+          <%= text_input f, :password, required: true, placeholder: "Lösenord", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <%= submit "Registrera", [class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-400 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-500 transition duration-150 ease-in-out"] %>
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>

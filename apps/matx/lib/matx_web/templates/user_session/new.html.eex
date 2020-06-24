@@ -4,11 +4,11 @@
         <div class="container mx-auto flex flex-wrap justify-between max-w-full">
           <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
             <div id="wrapper">
-              <button phx-click="home" class="text-white no-underline hover:text-white hover:no-underline my-super-cool-btn">
+              <%= link to: "/demo", class: "text-white no-underline hover:text-white hover:no-underline my-super-cool-btn" do %>
                 <span>
                     <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
                 </span>
-              </button>
+              <% end %>
             </div>
           </div>
         </div>
@@ -23,41 +23,35 @@
       </h2>
       <p class="mt-2 text-center text-sm leading-5 text-gray-600">
         Eller
-        <button phx-click="register" class="font-medium text-red-500 hover:text-red-700 focus:outline-none focus:underline transition ease-in-out duration-150">
-          registrera ett nytt
-        </button>
+        <%= link "registrera ett nytt", to: Routes.user_registration_path(@conn, :new), class: "font-medium text-red-500 hover:text-red-700 focus:outline-none focus:underline transition ease-in-out duration-150" %>
       </p>
     </div>
-    <%= f = form_for :session, "#", [phx_submit: "post", multipart: true] %>
+    <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
       <input type="hidden" name="remember" value="true" />
-      <%= if @error do %>
-        <div class="rounded-md shadow-sm">
-          <%= @error %>
+      <%= if @error_message do %>
+        <div class="rounded-md shadow-sm text-sm mt-3 text-red-600 font-bold">
+          <%= @error_message %>
         </div>
       <% end %>
-      <div class="mt-4 rounded-md shadow-sm">
+      <div class="mt-4 rounded-md shadow-sm" style="<%= if @error_message, do: "box-shadow: 0 1px 2px 0 rgba(226, 5, 65, 0.71);" %>">
         <div>
           <%= error_tag f, :email %>
-          <%= text_input f, :email, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+          <%= email_input f, :email, required: true, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
         </div>
         <div class="-mt-px">
           <%= error_tag f, :password %>
-          <%= text_input f, :password, [placeholder: "Lösenord", name: "password", type: "password", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"] %>
+          <%= password_input f, :password, required: true, placeholder: "Lösenord", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
         </div>
       </div>
 
       <div class="mt-6 flex items-center justify-between">
         <div class="flex items-center">
-          <input id="remember_me" type="checkbox" class="form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out" />
-          <label for="remember_me" class="ml-2 block text-sm leading-5 text-gray-900">
-            Spara email
-          </label>
+          <%= checkbox f, :remember_me, class: "form-checkbox h-4 w-4 text-red-600 transition duration-150 ease-in-out" %>
+          <%= label f, :remember_me, "Håll mig inloggad", class: "ml-2 block text-sm leading-5 text-gray-900" %>
         </div>
 
         <div class="text-sm leading-5">
-          <a href="#" class="font-medium text-red-400 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-            Glömt lösenordet
-          </a>
+          <%= link "Glömt lösenordet?", to: Routes.user_reset_password_path(@conn, :new), class: "font-medium text-red-400 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
         </div>
       </div>
 
@@ -70,6 +64,6 @@
           </span>
         </button>
       </div>
-    </form>
+    <% end %>
   </div>
 </div>
