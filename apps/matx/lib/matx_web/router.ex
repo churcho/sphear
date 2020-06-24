@@ -8,11 +8,6 @@ defmodule MatxWeb.Router do
     plug :put_root_layout, {MatxWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Entrance.Login.Session
-  end
-
-  pipeline :protected do
-    plug MatxWeb.Plugs.RequireLogin
   end
 
   pipeline :api do
@@ -24,16 +19,7 @@ defmodule MatxWeb.Router do
 
     get "/", PageController, :index
     live "/demo", PageLive, :index
-    live "/login", LoginLive, :index
-    live "/register", RegisterLive, :index
     get "/button", PageController, :button
-  end
-
-  scope "/protected", MatxWeb do
-    pipe_through :browser
-    pipe_through :protected
-
-    get "/", PageController, :protected
   end
 
   # Other scopes may use custom stacks.

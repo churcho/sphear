@@ -1,10 +1,9 @@
 defmodule MatxWeb.LoginLive do
     use MatxWeb, :live_view
-
-    import Entrance.Login.Session, only: [login: 2, logout: 1]
   
-    def mount(_params, _session, socket) do
-      {:ok, assign(socket, error: "")}
+    def mount(_params, session, socket) do
+      IO.inspect session
+      {:ok, assign(socket, error: "", session: session)}
     end
 
     def render(assigns, _socket) do
@@ -12,9 +11,8 @@ defmodule MatxWeb.LoginLive do
     end
 
     def handle_event("post", %{"session" => %{"email" => email}, "password" => password}, socket) do
-      if user = Entrance.auth(email, password) do
+      if user = "" do
         socket
-        |> login(user)
         |> put_flash(:info, "Successfully logged in")
         |> push_redirect(to: "/")
       else

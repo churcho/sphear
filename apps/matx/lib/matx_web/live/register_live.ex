@@ -4,7 +4,7 @@ defmodule MatxWeb.RegisterLive do
     alias Db.Accounts
   
     def mount(_params, _session, socket) do
-      {:ok, assign(socket, error: "", changeset: Entrance.User.create_changeset)}
+      {:ok, assign(socket, error: "")}
     end
 
     def render(assigns, _socket) do
