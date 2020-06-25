@@ -7,11 +7,8 @@ mix deps.get --only prod
 MIX_ENV=prod mix compile
 
 # Compile assets
-npm install --prefix ./apps/matx/assets
-npm run deploy --prefix ./apps/matx/assets
-
-npm install --prefix ./apps/blippx/assets
-npm run deploy --prefix ./apps/blippx/assets
+npm install --prefix apps/matx/assets
+npm run deploy --prefix apps/matx/assets
 
 mix phx.digest
 
