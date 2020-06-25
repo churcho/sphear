@@ -1,15 +1,51 @@
-<h1>Forgot your password?</h1>
+<header>
+      <!--Nav-->
+      <nav class="bottom-0 md:bottom-auto md:bg-white p-2 mt-0 fixed w-full max-w-full z-10 pin-t shadow-md px-10">
+        <div class="container mx-auto flex flex-wrap justify-between max-w-full">
+          <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+            <div id="wrapper">
+              <%= link to: "/demo", class: "text-white no-underline hover:text-white hover:no-underline my-super-cool-btn" do %>
+                <span>
+                    <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
+                </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </nav>
+</header>
 
-<%= form_for :user, Routes.user_reset_password_path(@conn, :create), fn f -> %>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full">
+    <div>
+      <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+        Glömt ditt lösenord?
+      </h2>
+    </div>
+    <%= form_for :user, Routes.user_reset_password_path(@conn, :create), fn f -> %>
+      <input type="hidden" name="remember" value="true" />
+      <div class="mt-4 rounded-md shadow-sm">
+        <div>
+          <%= error_tag f, :email %>
+          <%= email_input f, :email, required: true, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+        </div>
+      </div>
 
-  <div>
-    <%= submit "Send instructions to reset password" %>
+      <div class="mt-6 flex items-center justify-between">
+        <div class="flex items-center">
+          <%= link "Logga in?", to: Routes.user_session_path(@conn, :new), class: "font-medium text-red-400 hover:text-red-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+        </div>
+      </div>
+
+      <div class="mt-6 relative">
+        <%= submit "Återställ lösenordet", [class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-400 hover:bg-red-500 focus:outline-none focus:border-red-500 focus:shadow-outline-red active:bg-red-500 transition duration-150 ease-in-out"] %>
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <svg class=" shadow-inner shadow-2xl h-5 w-5 text-red-500 group-hover:text-red-400 transition ease-in-out duration-150 " fill="white" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+        </button>
+      </div>
+    <% end %>
   </div>
-<% end %>
-
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
-</p>
+</div>

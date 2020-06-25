@@ -21,7 +21,7 @@ defmodule MatxWeb.UserResetPasswordController do
     conn
     |> put_flash(
       :info,
-      "If your e-mail is in our system, you will receive instructions to reset your password shortly."
+      "Ifall denna mail är registrerad så har den fått mail med instruktioner om hur lösenordet ska återställas."
     )
     |> redirect(to: "/")
   end
@@ -36,7 +36,7 @@ defmodule MatxWeb.UserResetPasswordController do
     case Accounts.reset_user_password(conn.assigns.user, user_params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Password reset successfully.")
+        |> put_flash(:info, "Lösenordet återställdes.")
         |> redirect(to: Routes.user_session_path(conn, :new))
 
       {:error, changeset} ->
@@ -51,7 +51,7 @@ defmodule MatxWeb.UserResetPasswordController do
       conn |> assign(:user, user) |> assign(:token, token)
     else
       conn
-      |> put_flash(:error, "Reset password link is invalid or it has expired.")
+      |> put_flash(:error, "Något gick fel med återställningsprocessen.")
       |> redirect(to: "/")
       |> halt()
     end

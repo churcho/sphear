@@ -4,6 +4,8 @@ defmodule Db.Repo.Migrations.CreateUsersAuthTables do
   def change do
     execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
+    drop_if_exists(:users)
+
     create table(:users) do
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
