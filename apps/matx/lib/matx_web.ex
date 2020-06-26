@@ -84,6 +84,12 @@ defmodule MatxWeb do
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers
 
+      def live_modal(socket, component, opts) do
+        path = Keyword.fetch!(opts, :return_to)
+        modal_opts = [id: :modal, return_to: path, component: component, opts: opts]
+        live_component(socket, MatxWeb.ModalComponent, modal_opts)
+      end
+
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 

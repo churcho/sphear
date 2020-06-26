@@ -5,6 +5,8 @@ module.exports = {
         "../**/views/**/*.ex",
         "../**/live/**/*.ex",
         "./js/**/*.js",
+        "./**/templates/**/*.html.eex",
+        "./**/templates/**/*.html.leex",
     ],
     theme: {
         textShadow: {

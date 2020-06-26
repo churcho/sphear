@@ -39,6 +39,12 @@ defmodule MatxWeb.Router do
     put "/users/settings/update_password", UserSettingsController, :update_password
     put "/users/settings/update_email", UserSettingsController, :update_email
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    live "/restaurants", RestaurantLive.Index, :index
+    live "/restaurants/new", RestaurantLive.Index, :new
+    live "/restaurants/:id/edit", RestaurantLive.Index, :edit
+
+    live "/restaurants/:id/show/edit", RestaurantLive.Show, :edit
   end
 
   scope "/", MatxWeb do
@@ -50,6 +56,8 @@ defmodule MatxWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+
+    live "/restaurants/:id", RestaurantLive.Show, :show
   end
 
   # Other scopes may use custom stacks.

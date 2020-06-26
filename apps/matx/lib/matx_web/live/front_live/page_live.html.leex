@@ -1,0 +1,91 @@
+<div class="md:hidden absolute w-full fullscreen-bg h-screen pt-24">
+  <video loop muted autoplay poster="/images/burger.webp" class="h-26 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full fullscreen-bg__video">
+      <source src="/images/burger.webm" type="video/webm">
+  </video>
+</div>
+
+<div class="relative overflow-hidden">
+  <div class="relative">
+    <main class="mx-auto px-6 sm:px-6" style="background-color: rgba(251, 224, 246, 0.3)">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+        <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+          <div class="text-sm font-semibold uppercase tracking-wide text-gray-800 md:text-gray-600 sm:text-base lg:text-sm xl:text-base">
+            Kommer snart
+          </div>
+          <h2 class="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-shadow-md text-gray-200 md:text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
+            Beställ <span class="text-red-400">take-away</span> <span class="text-red-300">snabbt</span> och <span class="text-red-300">smidigt</span>
+          </h2>
+          <p class="mt-2 text-xs text-gray-700 md:text-gray-800 sm:mt-5 sm:text-xs lg:text-lg xl:text-xl">
+            Äntligen slipper vi behöva ringa för mat. <br >Beställ take-away från dina favorit restauranger här på MatX.se nu!
+          </p>
+          <div class="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+            <p class="text-base font-medium text-gray-900">
+            </p>
+
+            <form phx-submit="search" phx-change="search" class="mt-3 sm:flex px-10">
+              <input type="text" name="search" value="<%= @presentation_model.search %>"
+              placeholder="Hitta restaurang" autocomplete="off" class="appearance-none block w-full px-3 py-1 border border-gray-300 text-base leading-6 rounded-md placeholder-gray-500 shadow-sm focus:outline-none focus:placeholder-gray-400 focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:flex-1" <%= if @presentation_model.loading, do: 'readonly' %>>
+              
+              <button type="submit" class="mt-3 w-full px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-black bg-white shadow-sm hover:bg-green-200 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray active:bg-gray-900 transition duration-150 ease-in-out sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
+                Hitta restaurang
+              </button>
+            </form>
+
+            <p class="mt-3 text-sm leading-5 text-gray-700">
+              Hitta  
+              <a href="#" class="font-medium text-red-500 underline">restauranger, rätter, platser
+              </a>
+            </p>
+            
+            <div>
+              <%= for restaurant <- @presentation_model.restaurants do %>
+                <a href="#" phx-click="restaurant_click" phx-value-id="<%= restaurant.id %>" class="bg-gray-200 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+                  <div class="bg-opacity-25 bg-red-300 flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                      <div class="flex-shrink-0">
+                        <img class="h-12 w-12 rounded-full" src="/images/pad-thai.svg"/>
+                      </div>
+                      <div class="min-w-0 flex-1 px-4">
+                        <div>
+                          <div class="text-sm leading-5 font-medium text-red-500 truncate"><%= restaurant.name %>
+                          </div>
+                          <div class="mt-2 flex items-center text-sm leading-5 text-gray-900">
+                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="truncate"><%= restaurant.address %> - <span class="text-red-600"><%= restaurant.url %></p>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              <% end %>
+            </div>
+
+            <%= if @presentation_model.loading do %>
+              <div class="loader">
+                Laddar resultat
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+          <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
+            <div class="hidden md:block fullscreen-bg h-screen">
+              <video loop muted autoplay poster="/images/burger.webp" class="h-26 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full fullscreen-bg__video">
+                  <source src="/images/burger.webm" type="video/webm">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

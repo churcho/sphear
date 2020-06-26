@@ -47,5 +47,8 @@
 
   <% end %>
 
-  <%= @inner_content %>
+  <%= live_component @socket, MatxWeb.HeaderLive, id: "header", email: @email %>
+  <div class="sm:pt-24">
+    <%= @inner_content %>
+  </div>
 </main>
