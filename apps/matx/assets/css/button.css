@@ -5,6 +5,11 @@
     letter-spacing: 1px;
     font-size: 2rem;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.my-super-cool-btn:focus {
+    outline: none !important;
 }
 
 .my-super-cool-btn span {
@@ -40,4 +45,70 @@
     transform: scale(0.75);
     transition: all 1s cubic-bezier(0.25, 1, .33, 1);
     z-index: 50;
+}
+
+.button_1 {
+    /* Some layout code… */
+    animation: button_1 1s ease-out 0s 1 normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    opacity: 0;
+    border-radius: 100%;
+    border: 0px solid rgb(46, 45, 42);
+    background-color: white;
+}
+
+@keyframes button_1 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+        transform: translateX(100px);
+    }
+}
+
+.button_2 {
+    /* Some layout code… */
+    animation: button_2 1s ease-out 0s 1 normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    opacity: 0;
+    border-radius: 100%;
+    border: 0px solid rgb(46, 45, 42);
+    background-color: white;
+}
+
+@keyframes button_2 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+        transform: translateY(-100px);
+    }
+}
+
+.button_3 {
+    /* Some layout code… */
+    animation: button_3 1s ease-out 0s 1 normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    opacity: 0;
+    border-radius: 100%;
+    border: 0px solid rgb(46, 45, 42);
+    background-color: white;
+}
+
+@keyframes button_3 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+        transform: translateX(-100px);
+    }
 }

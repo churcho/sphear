@@ -6,14 +6,14 @@ defmodule MatxWeb.HeaderLive do
   def mount(_params, %{"user_token" => user_token} = conn, socket) do
     case Db.Accounts.get_user_by_session_token(user_token) do
       current_user ->
-        {:ok, assign(socket, email: current_user.email)}
+        {:noreply, assign(socket, email: current_user.email, open: false)}
       _ ->
         {:noreply, redirect(socket, to: Routes.page_path(MatxWeb.Endpoint, :demo))}
     end
   end
 
   def mount(_params, conn, socket) do
-    {:ok, assign(socket, email: "")}
+    {:noreply, assign(socket, email: "", open: false)}
   end
 
   def render(assigns, _socket) do
@@ -43,5 +43,13 @@ defmodule MatxWeb.HeaderLive do
       _ ->
         {:noreply, push_redirect(socket, to: "/demo")}
       end
+  end
+
+  def handle_event("button_mobile_focus", _, socket) do
+    {:noreply, assign(socket, open: true)}
+  end
+
+  def handle_event("button_mobile_blur", _, socket) do
+    {:noreply, assign(socket, open: false)}
   end
 end
