@@ -2,7 +2,7 @@ defmodule MatxWeb.PageLive do
   use MatxWeb, :live_view
 
   alias MatxWeb.UserAuth
-  alias MatxWeb.PresentationModel
+  alias MatxWeb.SearchModel
   alias Db.Feeders.Restaurant
   alias Db.Feeders
 
@@ -10,34 +10,34 @@ defmodule MatxWeb.PageLive do
     current_user = Db.Accounts.get_user_by_session_token(user_token)
     socket =
       socket
-      |> initialize_presentation_model
+      |> initialize_search_model
 
-    {:ok, assign(socket, email: current_user.email)}
+    {:ok, assign(socket, email: current_user.email, map_open: false, searching: false)}
   end
 
   def mount(_params, conn, socket) do
     socket =
       socket
-      |> initialize_presentation_model
+      |> initialize_search_model
 
-    {:ok, assign(socket, email: "")}
+    {:ok, assign(socket, email: "", map_open: false, searching: false)}
   end
 
-  defp initialize_presentation_model(socket) do
-    {:ok, presentation_model} = PresentationModel.new(search_function: &Feeders.suggest/1)
+  defp initialize_search_model(socket) do
+    {:ok, search_model} = SearchModel.new(search_function: &Feeders.suggest/1)
 
     socket
-    |> assign(presentation_model: presentation_model)
+    |> assign(search_model: search_model)
   end
 
   defp prepare_query(socket, search) do
     socket
-    |> update(:presentation_model, &PresentationModel.prepare_query(&1, search))
+    |> update(:search_model, &SearchModel.prepare_query(&1, search))
   end
 
   defp execute_query(socket) do
     socket
-    |> update(:presentation_model, &PresentationModel.execute_query(&1))
+    |> update(:search_model, &SearchModel.execute_query(&1))
   end
 
   def render(assigns, _socket) do
@@ -62,6 +62,22 @@ defmodule MatxWeb.PageLive do
     {:noreply, socket}
   end
 
+  def handle_event("search_focus", _, socket) do
+    {:noreply, assign(socket, searching: true)}
+  end
+
+  def handle_event("search_blur", _, socket) do
+    {:noreply, assign(socket, searching: false)}
+  end
+
+  def handle_event("map_click", _, socket) do
+    {:noreply, assign(socket, map_open: true)}
+  end
+
+  def handle_event("list_click", _, socket) do
+    {:noreply, assign(socket, map_open: false)}
+  end
+
   def handle_event("restaurant_click", %{"id" => id}, socket) do
     {:noreply, push_redirect(socket, to: Routes.restaurant_show_path(MatxWeb.Endpoint, :show, Db.Feeders.get_restaurant!(id)))}
   end
@@ -81,4 +97,23 @@ defmodule MatxWeb.PageLive do
   def handle_event("register", _, socket) do
     {:noreply, redirect(socket, to: Routes.user_registration_path(MatxWeb.Endpoint, :new))}
   end
+
+  defp button_colors(:map, map_open) do
+    case map_open do
+      true ->
+        "text-white bg-red-600"
+      false ->
+        "text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
+    end
+  end
+
+  defp button_colors(:list, map_open) do
+    case map_open do
+      false ->
+        "text-white bg-red-600"
+      true ->
+        "text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
+    end
+  end
+
 end

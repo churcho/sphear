@@ -39,7 +39,11 @@ defmodule MatxWeb.HeaderLive do
   def handle_event("button", %{"view" => view}, socket) do
     case view do
       "Elixir.MatxWeb.PageLive" ->
-        {:noreply, push_redirect(socket, to: "/restaurants")}
+        if socket.assigns.email == "" do
+          {:noreply, redirect(socket, to: Routes.user_session_path(MatxWeb.Endpoint, :new))}
+        else
+          {:noreply, push_redirect(socket, to: "/restaurants")}
+        end
       _ ->
         {:noreply, push_redirect(socket, to: "/demo")}
       end

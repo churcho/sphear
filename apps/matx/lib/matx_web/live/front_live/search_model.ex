@@ -1,4 +1,4 @@
-defmodule MatxWeb.PresentationModel do
+defmodule MatxWeb.SearchModel do
   defstruct restaurant: "", restaurants: [], loading: false, search_function: nil, info: nil, search: ""
 
   def new(search_function: search_function) when is_function(search_function, 1) do
