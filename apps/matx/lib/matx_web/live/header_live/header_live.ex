@@ -6,14 +6,14 @@ defmodule MatxWeb.HeaderLive do
   def mount(_params, %{"user_token" => user_token} = conn, socket) do
     case Db.Accounts.get_user_by_session_token(user_token) do
       current_user ->
-        {:noreply, assign(socket, email: current_user.email, open: false)}
+        {:noreply, assign(socket, email: current_user.email, open: false, hide: false)}
       _ ->
         {:noreply, redirect(socket, to: Routes.page_path(MatxWeb.Endpoint, :demo))}
     end
   end
 
   def mount(_params, conn, socket) do
-    {:noreply, assign(socket, email: "", open: false)}
+    {:noreply, assign(socket, email: "", open: false, hide: false)}
   end
 
   def render(assigns, _socket) do

@@ -43,11 +43,11 @@
   
     <p class="alert alert-danger" role="alert"
       phx-click="lv:clear-flash"
-      phx-value-key="error"><%= live_flash(@flash, :error) %></p>
-
+      phx-value-key="error"><%= live_flash(@flash, :error) %>
+    </p>
   <% end %>
 
-  <%= live_component @socket, MatxWeb.HeaderLive, id: "header", email: @email, open: false %>
+  <%= live_component @socket, MatxWeb.HeaderLive, id: "header", email: @email, open: false, hide: assigns[:searching] %>
   <div class="md:pt-24">
     <%= @inner_content %>
   </div>

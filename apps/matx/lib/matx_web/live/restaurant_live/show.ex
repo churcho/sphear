@@ -23,6 +23,6 @@ defmodule MatxWeb.RestaurantLive.Show do
      |> assign(:restaurant, Feeders.get_restaurant!(id))}
   end
 
-  defp page_title(:show), do: "Show Restaurant"
-  defp page_title(:edit), do: "Edit Restaurant"
+  defp page_title(:show), do: "Visa restaurang"
+  defp page_title(:edit), do: "Ändra restaurang"
 end

@@ -1,14 +1,14 @@
 <div class="absolute hidden lg:block w-full fullscreen-bg h-screen">
-    <video loop muted autoplay poster="/images/burger.webp" class="h-26 w-full object-fill sm:h-72 md:h-96 lg:w-full lg:h-full">
-        <source src="/images/bg_pizza.webm" type="video/webm">
-    </video>
-  </div>
+  <video loop muted autoplay poster="/images/pizza.webp" class="h-26 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full">
+      <source src="/images/bg_pizza.webm" type="video/webm">
+  </video>
+</div>
 
-  <div class="absolute block lg:hidden w-full fullscreen-bg h-screen pt-24">
-    <video loop muted autoplay poster="/images/burger.webp" class="h-26 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full fullscreen-bg__video">
-        <source src="/images/burger.webm" type="video/webm">
-    </video>
-  </div>
+<div class="absolute block lg:hidden w-full fullscreen-bg h-screen pt-24">
+  <video loop muted autoplay poster="/images/burger.webp" class="h-26 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full fullscreen-bg__video">
+      <source src="/images/burger.webm" type="video/webm">
+  </video>
+</div>
 
 <div class="relative overflow-hidden">
   <div class="relative">
@@ -43,7 +43,7 @@
             
             <%= if @search_model.search == "" do %>
               <div class="flex justify-center mt-3">
-                <div class="inline-flex rounded-md shadow w-full">
+                <div class="inline-flex rounded-md shadow w-full mx-1">
                   <a class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none focus:shadow-outline transition duration-150 ease-in-out bg-gray-500">
                     Lista
                   </a>
@@ -56,7 +56,7 @@
               </div>
             <% else %>
               <div class="flex justify-center mt-3">
-                <div class="inline-flex rounded-md shadow w-full">
+                <div class="inline-flex rounded-md shadow w-full mx-1">
                   <a phx-click="list_click" href="#" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out <%= button_colors(:list, @map_open) %>">
                     Lista
                   </a>

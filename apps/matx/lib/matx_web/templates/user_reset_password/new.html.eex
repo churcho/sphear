@@ -1,12 +1,12 @@
 <header>
   <!--Nav-->
-  <nav class="bottom-0 md:bottom-auto md:bg-white p-2 mt-0 fixed w-full max-w-full z-10 pin-t shadow-md px-10">
+  <nav class="top-0 md:bottom-auto md:bg-white p-2 mt-0 fixed w-full max-w-full z-10 pin-t shadow-md px-10">
     <div class="container mx-auto flex flex-wrap justify-between max-w-full">
       <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
         <div id="wrapper">
           <%= link to: "/demo", class: "text-white no-underline hover:text-white hover:no-underline my-super-cool-btn" do %>
             <span>
-                <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
+              <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
             </span>
           <% end %>
         </div>
