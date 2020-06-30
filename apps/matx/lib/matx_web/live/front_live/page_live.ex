@@ -103,7 +103,7 @@ defmodule MatxWeb.PageLive do
       true ->
         "text-white bg-red-600"
       false ->
-        "text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
+        "bg-white text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
     end
   end
 
@@ -112,7 +112,7 @@ defmodule MatxWeb.PageLive do
       false ->
         "text-white bg-red-600"
       true ->
-        "text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
+        "bg-white text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
     end
   end
 
