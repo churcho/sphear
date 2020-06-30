@@ -48,7 +48,7 @@
                     Lista
                   </a>
                 </div>
-                <div class="inline-flex rounded-md shadow w-full">
+                <div class="inline-flex rounded-md shadow w-full mx-1">
                   <a class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none focus:shadow-outline focus:border-black transition duration-150 ease-in-out bg-gray-500">
                     Karta
                   </a>
@@ -57,12 +57,12 @@
             <% else %>
               <div class="flex justify-center mt-3">
                 <div class="inline-flex rounded-md shadow w-full">
-                  <a phx-click="list_click" href="#" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none focus:shadow-outline transition duration-150 ease-in-out <%= button_colors(:list, @map_open) %>">
+                  <a phx-click="list_click" href="#" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out <%= button_colors(:list, @map_open) %>">
                     Lista
                   </a>
                 </div>
-                <div class="inline-flex rounded-md shadow w-full">
-                  <a phx-click="map_click" href="#" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none focus:shadow-outline focus:border-black transition duration-150 ease-in-out <%= button_colors(:map, @map_open) %>">
+                <div class="inline-flex rounded-md shadow w-full mx-1">
+                  <a phx-click="map_click" href="#" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out <%= button_colors(:map, @map_open) %>">
                     Karta
                   </a>
                 </div>
