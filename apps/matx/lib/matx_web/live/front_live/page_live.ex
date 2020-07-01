@@ -67,6 +67,7 @@ defmodule MatxWeb.PageLive do
   end
 
   def handle_event("search_blur", _, socket) do
+    Process.sleep(50)
     {:noreply, assign(socket, searching: false)}
   end
 
@@ -103,7 +104,7 @@ defmodule MatxWeb.PageLive do
       true ->
         "text-white bg-red-600"
       false ->
-        "bg-white text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
+        "text-red-700 bg-white hover:text-white hover:bg-red-500 bg-opacity-25"
     end
   end
 
@@ -112,7 +113,7 @@ defmodule MatxWeb.PageLive do
       false ->
         "text-white bg-red-600"
       true ->
-        "bg-white text-red-700 bg-red-100 hover:text-white hover:bg-red-500"
+        "text-red-700 bg-white hover:text-white hover:bg-red-500 bg-opacity-25"
     end
   end
 

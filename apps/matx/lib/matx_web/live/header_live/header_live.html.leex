@@ -27,7 +27,7 @@
             <!-- Mobile main button -->
               <!-- Hide it when searching on mobile -->
               <%= if @hide != true do %>
-                <button phx-focus="button_mobile_focus" phx-blur="button_mobile_blur" phx-debounce="50" id="button_main" phx-target="header" phx-value-view="<%= @socket.view %>" class="z-10 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none">
+                <button phx-value-open="<%= @open %>" phx-click="button_mobile" phx-blur="button_mobile_blur" phx-debounce="50" id="button_main" phx-target="header" phx-value-view="<%= @socket.view %>" class="z-10 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none">
                   <span>
                       <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/cutlery.svg" alt="MatX Logo" />
                   </span>
