@@ -5,6 +5,10 @@ defmodule MatxWeb.SearchModel do
     {:ok, %__MODULE__{search_function: search_function}}
   end
 
+  def new_restaurants(restaurants) do
+    {:ok, %__MODULE__{restaurants: restaurants, loading: false}}
+  end
+
   def new(_), do: {:error, "Query function must take one argument"}
 
   def prepare_query(%__MODULE__{} = struct, search) do

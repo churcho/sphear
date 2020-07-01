@@ -15,7 +15,7 @@
 <div class="relative overflow-hidden">
   <div class="relative">
     <main class="mx-auto px-6 md:px-10">
-      <div class='text-center md:max-w-3xl md:mx-auto <%= if @search_model.search == "", do: "lg:pt-32" %>'>
+      <div class='text-center md:max-w-3xl md:mx-auto <%= if @search_model.restaurants == [], do: "lg:pt-32" %>'>
         <!-- Hide text when typing in mobile -->
         <%= if @searching == false do %>
           <div class="block lg:hidden">
@@ -43,15 +43,15 @@
             <input name="search" value="<%= @search_model.search %>" phx-blur="search_blur" phx-focus="search_focus"
             placeholder="Hitta take-away för..." autocomplete="off" class="appearance-none block w-full px-3 py-3 border border-gray-300 text-base leading-6 rounded-md placeholder-gray-500 shadow-sm focus:outline-none focus:placeholder-gray-400 focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:flex-1" >
             
-            <%= if @search_model.search == "" do %>
+            <%= if @search_model.restaurants == [] do %>
               <div class="flex justify-center mt-3">
                 <div class="inline-flex rounded-md shadow w-full mr-1">
-                  <a class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none focus:shadow-outline transition duration-150 ease-in-out bg-white bg-opacity-25">
+                  <a href="#" phx-click="empty_list_click" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out bg-white bg-opacity-25">
                     Lista
                   </a>
                 </div>
                 <div class="inline-flex rounded-md shadow w-full ml-1">
-                  <a class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none focus:shadow-outline focus:border-black transition duration-150 ease-in-out bg-white bg-opacity-25">
+                  <a href="#" phx-click="map_click" class="w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md focus:outline-none transition duration-150 ease-in-out bg-white bg-opacity-25">
                     Karta
                   </a>
                 </div>

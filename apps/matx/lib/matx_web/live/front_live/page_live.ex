@@ -79,6 +79,12 @@ defmodule MatxWeb.PageLive do
     {:noreply, assign(socket, map_open: false)}
   end
 
+  def handle_event("empty_list_click", _, socket) do
+    restaurants = Feeders.list_restaurants
+    {:ok, search_model} = SearchModel.new_restaurants(restaurants)
+    {:noreply, assign(socket, map_open: false, search_model: search_model)}
+  end
+
   def handle_event("restaurant_click", %{"id" => id}, socket) do
     {:noreply, push_redirect(socket, to: Routes.restaurant_show_path(MatxWeb.Endpoint, :show, Db.Feeders.get_restaurant!(id)))}
   end
