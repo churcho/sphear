@@ -1,15 +1,15 @@
-## Matx
+# Matx
 
 ## Public
 
-# Login
+### Login
 POST /api/login
 * email:string
 * password:string
 -> {"success" => token:string}
 -> {error:string}
 
-# Register
+### Register
 POST /api/register
 * email:string
 * password:string
@@ -19,7 +19,7 @@ POST /api/register
 
 ## Authenticated
 
-# Troll (just for testing auth)
+### Troll (just for testing auth)
 GET /api/troll
 [headers]
 * Authenthication: Bearer [token]
