@@ -145,12 +145,12 @@ defmodule MatxWeb.UserAuth do
                 |> assign(:user_token, decoded_token)
               _ ->
                 conn
-                |> Plug.Conn.send_resp(401, '{"error": "auth_invalid, please reauthenticate"')
+                |> Plug.Conn.send_resp(401, '{"error": "auth_invalid, please reauthenticate"}')
                 |> halt()
             end
           :error ->
             conn
-            |> Plug.Conn.send_resp(401, '{"error": "token_invalid"')
+            |> Plug.Conn.send_resp(401, '{"error": "token_invalid"}')
             |> halt()
         end
       {:error, error} -> 
@@ -162,14 +162,14 @@ defmodule MatxWeb.UserAuth do
   def extract_token(conn) do
     case Plug.Conn.get_req_header(conn, "authorization") do
       [auth_header] -> get_token_from_header(auth_header)
-       _ -> {:error, '{"error": "missing_auth_header"'}
+       _ -> {:error, '{"error": "missing_auth_header"}'}
     end
   end
   defp get_token_from_header(auth_header) do
     {:ok, reg} = Regex.compile("Bearer\:?\s+(.*)$", "i")
     case Regex.run(reg, auth_header) do
       [_, match] -> {:ok, String.trim(match)}
-      _ -> {:error, '{"error": "token_not_found"'}
+      _ -> {:error, '{"error": "token_not_found"}'}
     end
   end
 
