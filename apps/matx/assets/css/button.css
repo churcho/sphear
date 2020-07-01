@@ -112,3 +112,72 @@
         transform: translateX(-100px);
     }
 }
+
+@keyframes button_3_reversed {
+    0% {
+        opacity: 1;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 0;
+        animation-timing-function: ease-out;
+        transform: translateX(0px);
+    }
+}
+
+.button_3_reversed {
+    /* Some layout code… */
+    animation: button_3_reversed 0.2s ease-in 0s 1 normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    opacity: 1;
+    border-radius: 100%;
+    border: 0px solid rgb(46, 45, 42);
+    background-color: white;
+}
+
+.button_2_reversed {
+    /* Some layout code… */
+    animation: button_2_reversed 0.2s ease-in 0s 1 normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    opacity: 1;
+    border-radius: 100%;
+    border: 0px solid rgb(46, 45, 42);
+    background-color: white;
+}
+
+@keyframes button_2_reversed {
+    0% {
+        opacity: 1;
+        transform: translateY(-100px);
+    }
+    100% {
+        opacity: 0;
+        animation-timing-function: ease-out;
+        transform: translateY(0px);
+    }
+}
+
+.button_1_reversed {
+    /* Some layout code… */
+    animation: button_1_reversed 0.2s ease-in 0s 1 normal;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    opacity: 1;
+    border-radius: 100%;
+    border: 0px solid rgb(46, 45, 42);
+    background-color: white;
+}
+
+@keyframes button_1_reversed {
+    0% {
+        opacity: 1;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 0;
+        animation-timing-function: ease-out;
+        transform: translateX(0px);
+    }
+}
