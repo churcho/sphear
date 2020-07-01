@@ -2,11 +2,11 @@ defmodule MatxWeb.Api.UserSessionView do
   use MatxWeb, :view
 
   def render("show.json", token) do
-    %{data: %{token: token.token}}
+    %{success: %{token: token.token}}
   end
 
   def render("info.json", message) do
-    %{info: message.message}
+    %{success: message.message}
   end
 
   def render("error.json", message) do

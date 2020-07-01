@@ -1,20 +1,27 @@
-# Matx
+## Matx
 
-To start your Phoenix server:
+## Public
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
-  * Start Phoenix endpoint with `mix phx.server`
+# Login
+POST /api/login
+* email:string
+* password:string
+-> {"success" => token:string}
+-> {error:string}
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+# Register
+POST /api/register
+* email:string
+* password:string
+* password_confirmation:string
+-> {"success" => token:string, email:string}
+-> {"error" => "errors" => [field]:error_message:string}
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Authenticated
 
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+# Troll (just for testing auth)
+GET /api/troll
+[headers]
+* Authenthication: Bearer [token]
+-> {success:string}
+-> {error:string}

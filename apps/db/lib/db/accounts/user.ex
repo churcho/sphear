@@ -30,8 +30,8 @@ defmodule Db.Accounts.User do
 
   defp validate_email(changeset) do
     changeset
-    |> validate_required([:email])
-    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "Saknar @ tecknet")
+    |> validate_required([:email], message: "saknas")
+    |> validate_format(:email, ~r/^[\w.!#$%&’*+\-\/=?\^`{|}~]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/i, message: "Felaktigt format")
     |> validate_length(:email, max: 160)
     |> unsafe_validate_unique(:email, Db.Repo, message: "Denna användare finns redan")
     |> unique_constraint(:email, message: "Denna användare finns redan")
@@ -39,7 +39,7 @@ defmodule Db.Accounts.User do
 
   defp validate_password(changeset) do
     changeset
-    |> validate_required([:password])
+    |> validate_required([:password, :password_confirmation], message: "saknas")
     |> validate_confirmation(:password, message: "lösenorden matchar inte")
     |> validate_length(:password, min: 5, max: 80, message: "Lösenordet måste vara minst 5 tecken")
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")

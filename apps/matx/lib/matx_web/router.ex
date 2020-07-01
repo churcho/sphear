@@ -65,6 +65,7 @@ defmodule MatxWeb.Router do
 
     post "/login", UserSessionController, :create
     post "/logout", UserSessionController, :delete
+    post "/register", UserRegistrationController, :create
   end
 
   scope "/api", MatxWeb.Api do
