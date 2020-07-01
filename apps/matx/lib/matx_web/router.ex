@@ -35,6 +35,7 @@ defmodule MatxWeb.Router do
   scope "/", MatxWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    delete "/users/log_out", UserSessionController, :delete
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings/update_password", UserSettingsController, :update_password
     put "/users/settings/update_email", UserSettingsController, :update_email
@@ -44,7 +45,7 @@ defmodule MatxWeb.Router do
     live "/restaurants/new", RestaurantLive.Index, :new
     live "/restaurants/:id/edit", RestaurantLive.Index, :edit
 
-    live "/restaurants/:id/show/edit", RestaurantLive.Show, :edit
+    live "/restaurants/:id/show/edit", RestaurantLive.Show, :edit    
   end
 
   scope "/", MatxWeb do
@@ -52,7 +53,6 @@ defmodule MatxWeb.Router do
 
     get "/", PageController, :index
     live "/demo", PageLive, :index
-    delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
