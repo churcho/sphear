@@ -43,13 +43,13 @@
 
 .my-super-cool-btn:hover img {
     transform: scale(0.75);
-    transition: all 1s cubic-bezier(0.25, 1, .33, 1);
+    transition: all 0.5s cubic-bezier(0.25, 1, .33, 1);
     z-index: 50;
 }
 
 .button_1 {
     /* Some layout code… */
-    animation: button_1 0.3s ease-out 0s 1 normal;
+    animation: button_1 0.2s ease-out 0s 1 normal;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     opacity: 0;
@@ -71,7 +71,7 @@
 
 .button_2 {
     /* Some layout code… */
-    animation: button_2 0.3s ease-out 0s 1 normal;
+    animation: button_2 0.2s ease-out 0s 1 normal;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     opacity: 0;
@@ -93,7 +93,7 @@
 
 .button_3 {
     /* Some layout code… */
-    animation: button_3 0.3s ease-out 0s 1 normal;
+    animation: button_3 0.2s ease-out 0s 1 normal;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     opacity: 0;

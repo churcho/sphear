@@ -49,21 +49,8 @@ defmodule MatxWeb.HeaderLive do
     end
   end
 
-  def handle_event("button_mobile", %{"view" => view, "open" => open}, socket) do
-    if socket.assigns.open do
-      case view do
-        "Elixir.MatxWeb.PageLive" ->
-          if socket.assigns.email == "" do
-            {:noreply, redirect(socket, to: Routes.user_session_path(MatxWeb.Endpoint, :new))}
-          else
-            {:noreply, push_redirect(socket, to: "/restaurants")}
-          end
-        _ ->
-          {:noreply, push_redirect(socket, to: "/demo")}
-      end
-    else
-      {:noreply, assign(socket, open: true)}
-    end
+  def handle_event("button_mobile", %{"open" => open}, socket) do
+    {:noreply, assign(socket, open: !socket.assigns.open)}
   end
 
   def handle_event("button_mobile_blur", _, socket) do
