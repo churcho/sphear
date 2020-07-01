@@ -60,6 +60,19 @@ defmodule MatxWeb.Router do
     live "/restaurants/:id", RestaurantLive.Show, :show
   end
 
+  scope "/api", MatxWeb.Api do
+    pipe_through [:api]
+
+    post "/login", UserSessionController, :create
+    post "/logout", UserSessionController, :delete
+  end
+
+  scope "/api", MatxWeb.Api do
+    pipe_through [:api, :get_auth_token]
+
+    get "/troll", TrollController, :troll
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", YourAppWeb do
   #   pipe_through :api

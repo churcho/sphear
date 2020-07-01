@@ -36,6 +36,15 @@ defmodule MatxWeb.UserAuth do
     |> redirect(to: user_return_to || signed_in_path(conn))
   end
 
+  def generate_api_token(user) do
+    Accounts.generate_user_session_token(user)
+  end
+
+  def logout_token(conn) do
+    user_token = get_session(conn, :user_token)
+    user_token && Accounts.delete_session_token(user_token)
+  end
+
   defp maybe_write_remember_me_cookie(conn, token, %{"remember_me" => "true"}) do
     put_resp_cookie(conn, @remember_me_cookie, token, @remember_me_options)
   end
@@ -118,6 +127,49 @@ defmodule MatxWeb.UserAuth do
       |> halt()
     else
       conn
+    end
+  end
+
+  @doc """
+  Used for API auth
+  """
+  def get_auth_token(conn, _opts) do
+    case extract_token(conn) do
+      {:ok, token} -> 
+        IO.inspect token
+        case Base.decode64(token) do
+          {:ok, decoded_token} ->
+            case Accounts.get_user_by_session_token(decoded_token) do
+              user ->
+                conn
+                |> assign(:user_token, decoded_token)
+              _ ->
+                conn
+                |> Plug.Conn.send_resp(401, '{"error": "auth_invalid, please reauthenticate"')
+                |> halt()
+            end
+          :error ->
+            conn
+            |> Plug.Conn.send_resp(401, '{"error": "token_invalid"')
+            |> halt()
+        end
+      {:error, error} -> 
+        conn
+        |> Plug.Conn.send_resp(401, error)
+        |> halt()
+    end
+  end
+  def extract_token(conn) do
+    case Plug.Conn.get_req_header(conn, "authorization") do
+      [auth_header] -> get_token_from_header(auth_header)
+       _ -> {:error, '{"error": "missing_auth_header"'}
+    end
+  end
+  defp get_token_from_header(auth_header) do
+    {:ok, reg} = Regex.compile("Bearer\:?\s+(.*)$", "i")
+    case Regex.run(reg, auth_header) do
+      [_, match] -> {:ok, String.trim(match)}
+      _ -> {:error, '{"error": "token_not_found"'}
     end
   end
 
