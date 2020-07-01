@@ -36,6 +36,7 @@ defmodule Db.Feeders do
 
   """
   def get_restaurant!(id), do: Repo.get!(Restaurant, id)
+  def get_restaurant(id), do: Repo.get(Restaurant, id)
 
   @doc """
   Creates a restaurant.

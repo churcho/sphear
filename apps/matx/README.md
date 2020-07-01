@@ -6,6 +6,7 @@
 POST /api/login
 * email:string
 * password:string
+
 -> {"success" => token:string}
 -> {error:string}
 
@@ -14,14 +15,22 @@ POST /api/register
 * email:string
 * password:string
 * password_confirmation:string
+
 -> {"success" => token:string, email:string}
 -> {"error" => "errors" => [field]:error_message:string}
+
+### Restaurants
+GET /api/restaurants
+GET /api/restaurant/:ID
+
+-> {"success" => restaurants/restaurant}
+-> {"error":string}
 
 ## Authenticated
 
 ### Troll (just for testing auth)
 GET /api/troll
-[headers]
-* Authenthication: Bearer [token]
+[Header] Authorization: Bearer: [token]
+
 -> {success:string}
 -> {error:string}

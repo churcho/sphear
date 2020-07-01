@@ -136,7 +136,6 @@ defmodule MatxWeb.UserAuth do
   def get_auth_token(conn, _opts) do
     case extract_token(conn) do
       {:ok, token} -> 
-        IO.inspect token
         case Base.decode64(token) do
           {:ok, decoded_token} ->
             case Accounts.get_user_by_session_token(decoded_token) do
