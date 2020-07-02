@@ -71,18 +71,34 @@ defmodule MatxWeb.PageLive do
     {:noreply, assign(socket, searching: false)}
   end
 
+  # No map, search and no restaurants should open map and show all restaurants
+  def handle_event("map_click", _, %{assigns: %{map_open: false, search_model: %{"search": "", "restaurants": []}}} = socket) do
+    restaurants = Feeders.list_restaurants
+    {:ok, search_model} = SearchModel.new_restaurants(restaurants)
+    {:noreply, assign(socket, map_open: true, search_model: search_model)}
+  end
+  # Edge case, if map is open and showing restaurants without searching for anything we should close it with the same button aswell
+  def handle_event("map_click", _, %{assigns: %{map_open: true, search_model: %{"search": "", "restaurants": _}}} = socket) do
+    {:ok, search_model} = SearchModel.new_restaurants([])
+    {:noreply, assign(socket, map_open: false, search_model: search_model)}
+  end
   def handle_event("map_click", _, socket) do
     {:noreply, assign(socket, map_open: true)}
   end
 
-  def handle_event("list_click", _, socket) do
-    {:noreply, assign(socket, map_open: false)}
-  end
-
-  def handle_event("empty_list_click", _, socket) do
+  # No list, search and no restaurants should show all restaurants
+  def handle_event("list_click", _, %{assigns: %{search_model: %{"search": "", "restaurants": []}}} = socket) do
     restaurants = Feeders.list_restaurants
     {:ok, search_model} = SearchModel.new_restaurants(restaurants)
     {:noreply, assign(socket, map_open: false, search_model: search_model)}
+  end
+  # Edge case, if list is open and showing restaurants without searching for anything we should close it with the same button aswell
+  def handle_event("list_click", _, %{assigns: %{map_open: false, search_model: %{"search": "", "restaurants": _}}} = socket) do
+    {:ok, search_model} = SearchModel.new_restaurants([])
+    {:noreply, assign(socket, map_open: false, search_model: search_model)}
+  end
+  def handle_event("list_click", _, socket) do
+    {:noreply, assign(socket, map_open: false)}
   end
 
   def handle_event("restaurant_click", %{"id" => id}, socket) do

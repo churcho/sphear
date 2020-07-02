@@ -1,12 +1,14 @@
 defmodule MatxWeb.SearchModel do
   defstruct restaurant: "", restaurants: [], loading: false, search_function: nil, info: nil, search: ""
 
+  alias Db.Feeders
+
   def new(search_function: search_function) when is_function(search_function, 1) do
     {:ok, %__MODULE__{search_function: search_function}}
   end
 
   def new_restaurants(restaurants) do
-    {:ok, %__MODULE__{restaurants: restaurants, loading: false}}
+    {:ok, %__MODULE__{restaurants: restaurants, search_function: &Feeders.suggest/1, loading: false}}
   end
 
   def new(_), do: {:error, "Query function must take one argument"}
