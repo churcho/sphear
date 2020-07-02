@@ -35,6 +35,12 @@
     box-shadow: 0 30px 85px rgba(0, 0, 0, 0.7), 0 15px 35px rgba(0, 0, 0, 0.7);
 }
 
+.md-button span:before {
+    transform: scale(0.9);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.7), 0 15px 35px rgba(0, 0, 0, 0.7);
+    background-color: white;
+}
+
 .my-super-cool-btn:hover span:before {
     transform: scale(0.8);
     box-shadow: 0 20px 55px rgba(0, 0, 0, 0.7), 0 15px 35px rgba(0, 0, 0, 0.7);
