@@ -30,6 +30,7 @@ defmodule MatxWeb.RestaurantLive.FormComponent do
   defp save_restaurant(socket, :edit, restaurant_params) do
     case Feeders.update_restaurant(socket.assigns.restaurant, restaurant_params) do
       {:ok, restaurant} ->
+        MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_changed", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
         {:noreply,
          socket
          |> put_flash(:info, "Restaurang #{restaurant.name} uppdaterades")

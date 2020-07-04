@@ -62,6 +62,16 @@ defmodule MatxWeb.PageLive do
     {:noreply, socket}
   end
 
+  def handle_event("reset_search", %{"search" => search}, socket) do
+    case search do
+      "" ->
+        {:noreply, socket}
+      _ ->
+        {:ok, search_model} = SearchModel.new
+        {:noreply, assign(socket, search_model: search_model)}
+    end
+  end
+
   def handle_event("search_focus", _, socket) do
     {:noreply, assign(socket, searching: true)}
   end

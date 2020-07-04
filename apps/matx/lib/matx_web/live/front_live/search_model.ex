@@ -3,6 +3,10 @@ defmodule MatxWeb.SearchModel do
 
   alias Db.Feeders
 
+  def new() do
+    {:ok, %__MODULE__{search_function: &Feeders.suggest/1}}
+  end
+
   def new(search_function: search_function) when is_function(search_function, 1) do
     {:ok, %__MODULE__{search_function: search_function}}
   end

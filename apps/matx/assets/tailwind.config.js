@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
     purge: [
         "../**/*.html.eex",
@@ -15,12 +17,18 @@ module.exports = {
             h1: '0 0 3px #FF0000, 0 0 5px #0000FF',
             xl: '0 0 3px rgba(0, 0, 0, .8), 0 0 5px rgba(0, 0, 0, .9)',
             none: 'none',
-        }
+        },
+        extend: {
+            fontFamily: {
+                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+            },
+        },
     },
     variants: {
         textShadow: ['responsive', 'hover'],
     },
     plugins: [
-        require('tailwindcss-textshadow')
+        require('tailwindcss-textshadow'),
+        require('@tailwindcss/ui'),
     ],
 }

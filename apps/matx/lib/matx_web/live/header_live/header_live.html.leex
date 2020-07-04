@@ -6,19 +6,19 @@
         <div id="wrapper">
           <!-- Mobile stuff --> 
             <!-- Extra 3 mobile buttons -->
-              <%= button to: Routes.user_session_path(MatxWeb.Endpoint, :delete), method: "delete", id: "button_1", class: (if @open, do: "button_1", else: "button_1_reversed") <> " fixed z-0 opacity-0 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none" do %>
+              <%= button to: Routes.user_session_path(MatxWeb.Endpoint, :delete), method: "delete", id: "button_1", class: (if @open, do: "button_1", else: "") <> " " <> (if @opened_once and !@open, do: "button_1_reversed", else: "") <> " fixed z-0 opacity-0 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none" do %>
                 <span>
                     <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/log-out.svg" alt="MatX Logo" />
                 </span>
               <% end %>
 
-              <button id="button_2" phx-click="button" phx-target="header" phx-value-view="<%= @socket.view %>" class="<%= if @open, do: 'button_2', else: 'button_2_reversed' %> fixed z-0 opacity-0 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none">
+              <button id="button_2" phx-click="button" phx-target="header" phx-value-view="<%= @socket.view %>" class="<%= if @open, do: 'button_2' %> <%= @opened_once %> <%= if @opened_once and !@open, do: 'button_2_reversed' %> fixed z-0 opacity-0 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none">
                 <span>
                     <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/invoice.svg" alt="MatX Logo" />
                 </span>
               </button>
 
-              <button id="button_3" phx-click="button" phx-target="header" phx-value-view="<%= @socket.view %>" class="<%= if @open, do: 'button_3', else: 'button_3_reversed' %> fixed z-0 opacity-0 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none">
+              <button id="button_3" phx-click="button" phx-target="header" phx-value-view="<%= @socket.view %>" class="<%= if @open, do: 'button_3' %> <%= if @opened_once and !@open, do: 'button_3_reversed' %> fixed z-0 opacity-0 md:hidden text-white no-underline hover:text-white hover:no-underline my-super-cool-btn focus:outline-none">
                 <span>
                     <img unselectable="on" draggable="false" style="user-select: none; pointer-events: none" class="h-12 w-auto sm:h-12" src="/images/takeaway.svg" alt="MatX Logo" />
                 </span>

@@ -31,7 +31,7 @@ config :proxy,
       phoenix_endpoint: MatxWeb.Endpoint
     },
     %{
-      host: ~r/127.0.0.1/,
+      host: ~r/192.\d{1,3}.\d{1}.\d{1,3}/,
       phoenix_endpoint: MatxWeb.Endpoint
     }
   ]
