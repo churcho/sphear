@@ -14,6 +14,7 @@ defmodule Proxy.Application do
 
     port = to_port(80)
     dispatch = [{:_, [
+      websocket_handler("/socket", MatxWeb.Endpoint, {MatxWeb.UserSocket, :websocket}),
       {:_, Proxy.Cowboy2Handler, {nil, nil}}
     ]}]
 
