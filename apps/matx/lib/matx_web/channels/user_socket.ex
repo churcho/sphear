@@ -1,6 +1,8 @@
 defmodule MatxWeb.UserSocket do
   use Phoenix.Socket
 
+  transport :websocket, Phoenix.Transports.WebSocket, check_origin: false
+
   ## Channels
   channel "restaurants:*", MatxWeb.RestaurantChannel
 
