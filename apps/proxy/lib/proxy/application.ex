@@ -9,12 +9,24 @@ defmodule Proxy.Application do
   use Application
   require Logger
 
+  defp websocket() do
+    {
+      "/socket",
+      Phoenix.Endpoint.CowboyWebSocket,
+      {
+        Phoenix.Transports.WebSocket,
+        {MatxWeb.Endpoint, MatxWeb.UserSocket, :websocket}
+      }
+    }
+  end
+
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
     port = to_port(80)
     dispatch = [{:_, [
-      websocket_handler("/socket", MatxWeb.Endpoint, {MatxWeb.UserSocket, :websocket}),
+      #websocket_handler("/socket", MatxWeb.Endpoint, {MatxWeb.UserSocket, )
+      websocket(),
       {:_, Proxy.Cowboy2Handler, {nil, nil}}
     ]}]
 
