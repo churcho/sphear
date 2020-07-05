@@ -93,6 +93,7 @@ defmodule Proxy.Cowboy2Handler do
     ## Websocket callbacks
     # Copied from https://github.com/phoenixframework/phoenix/blob/master/lib/phoenix/endpoint/cowboy2_handler.ex
     def websocket_init([handler | state]) do
+      log_request("Proxy.Cowboy2Handler WEBSOCKET INIT !!!!!! <<<<<<<<<<<<")
       {:ok, state} = handler.init(state)
       {:ok, [handler | state]}
     end

@@ -12,7 +12,7 @@ defmodule Proxy.Application do
   defp websocket() do
     {
       "/socket/websocket",
-      Phoenix.Endpoint.Cowboy2Handler,
+      Proxy.Cowboy2Handler,
       {
         MatxWeb.Endpoint,
         {MatxWeb.UserSocket, :websocket}
