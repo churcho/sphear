@@ -133,6 +133,45 @@ defmodule MatxWeb.UserAuth do
   @doc """
   Used for API auth
   """
+  def auth_token(socket, token) do
+    IO.puts("@@@@@@@@@@@@ start auth token")
+    case get_auth_token(token) do
+      {:ok, user} ->
+        IO.puts "@@@@@@@@@@@@ user"
+        IO.inspect user
+        {:ok, user}
+      {:error, error} ->
+        IO.inspect error
+        IO.puts "ERPR?"
+        {:error, error}
+    end
+  end
+
+  # For websockets
+  # returns {ok, user}
+  #         {:error, "message"}
+  def get_auth_token(token) do
+    IO.inspect token
+    case Base.decode64(token) do
+      {:ok, decoded_token} ->
+        IO.inspect decoded_token
+        case Accounts.get_user_by_session_token(decoded_token) do
+          nil ->
+            {:error, "token expired"}
+          user ->
+            {:ok, user}
+          _ ->
+            {:error, "token expired"}
+        end
+      :error ->
+        {:error, "token invalid"}
+    end
+  end
+  def get_auth_token(conn, _) do
+    {:error, "token missing"}
+  end
+
+  # For https
   def get_auth_token(conn, _opts) do
     case extract_token(conn) do
       {:ok, token} -> 
