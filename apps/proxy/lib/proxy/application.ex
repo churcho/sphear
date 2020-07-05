@@ -11,11 +11,11 @@ defmodule Proxy.Application do
 
   defp websocket() do
     {
-      "/socket",
-      Phoenix.Endpoint.CowboyWebSocket,
+      "/socket/websocket",
+      Phoenix.Endpoint.Cowboy2Handler,
       {
-        Phoenix.Transports.WebSocket,
-        {MatxWeb.Endpoint, MatxWeb.UserSocket, :websocket}
+        MatxWeb.Endpoint,
+        {MatxWeb.UserSocket, :websocket}
       }
     }
   end
