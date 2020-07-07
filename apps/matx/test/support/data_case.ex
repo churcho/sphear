@@ -18,7 +18,7 @@ defmodule Matx.DataCase do
 
   using do
     quote do
-      alias Matx.Repo
+      alias Matx.Db
 
       import Ecto
       import Ecto.Changeset
@@ -28,10 +28,10 @@ defmodule Matx.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Matx.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Matx.Db)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Matx.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Matx.Db, {:shared, self()})
     end
 
     :ok

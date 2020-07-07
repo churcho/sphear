@@ -37,14 +37,14 @@ matx_key_base =
 
 ##########################
 
-config :matx, Matx.Endpoint,
+config :matx, MatxWeb.Endpoint,
   http: [
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: matx_key_base,
   server: false
 
-config :blippx, Blippx.Endpoint,
+config :blippx, BlippxWeb.Endpoint,
   http: [
     transport_options: [socket_opts: [:inet6]]
   ],

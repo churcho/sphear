@@ -31,11 +31,11 @@ defmodule BlippxWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("blippx.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("blippx.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("blippx.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("blippx.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("blippx.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),

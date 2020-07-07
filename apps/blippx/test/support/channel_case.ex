@@ -29,10 +29,10 @@ defmodule BlippxWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blippx.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Db.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Blippx.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Db.Repo, {:shared, self()})
     end
 
     :ok

@@ -18,7 +18,7 @@ defmodule Blippx.DataCase do
 
   using do
     quote do
-      alias Blippx.Repo
+      alias Blippx.Db
 
       import Ecto
       import Ecto.Changeset
@@ -28,10 +28,10 @@ defmodule Blippx.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blippx.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blippx.Db)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Blippx.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Blippx.Db, {:shared, self()})
     end
 
     :ok

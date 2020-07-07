@@ -30,18 +30,18 @@ defmodule Db.Accounts.User do
 
   defp validate_email(changeset) do
     changeset
-    |> validate_required([:email], message: "saknas")
-    |> validate_format(:email, ~r/^[\w.!#$%&’*+\-\/=?\^`{|}~]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/i, message: "Felaktigt format")
+    |> validate_required([:email])
+    |> validate_format(:email, ~r/^[\w.!#$%&’*+\-\/=?\^`{|}~]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/i, message: "must have the @ sign and no spaces")
     |> validate_length(:email, max: 160)
-    |> unsafe_validate_unique(:email, Db.Repo, message: "Denna användare finns redan")
-    |> unique_constraint(:email, message: "Denna användare finns redan")
+    |> unsafe_validate_unique(:email, Db.Repo)
+    |> unique_constraint(:email)
   end
 
   defp validate_password(changeset) do
     changeset
-    |> validate_required([:password, :password_confirmation], message: "saknas")
-    |> validate_confirmation(:password, message: "lösenorden matchar inte")
-    |> validate_length(:password, min: 5, max: 80, message: "Lösenordet måste vara minst 5 tecken")
+    |> validate_required([:password, :password_confirmation])
+    |> validate_confirmation(:password)
+    |> validate_length(:password, min: 5, max: 80)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
@@ -76,7 +76,7 @@ defmodule Db.Accounts.User do
   """
   def password_changeset(user, attrs) do
     user
-    |> cast(attrs, [:password])
+    |> cast(attrs, [:password, :password_confirmation])
     |> validate_confirmation(:password, message: "does not match password")
     |> validate_password()
   end

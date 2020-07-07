@@ -31,11 +31,11 @@ defmodule MatxWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("matx.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("matx.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("matx.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("matx.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("matx.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("db.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),

@@ -1,4 +1,4 @@
-defmodule MatxWeb.ConnCase do
+defmodule Matx.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -22,7 +22,7 @@ defmodule MatxWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import MatxWeb.ConnCase
+      import Matx.ConnCase
 
       alias MatxWeb.Router.Helpers, as: Routes
 

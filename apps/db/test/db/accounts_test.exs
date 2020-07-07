@@ -23,7 +23,7 @@ defmodule Db.AccountsTest do
 
     test "does not return the user if the password is not valid" do
       user = user_fixture()
-      refute Accounts.get_user_by_email_and_password(user.email, "invalid")
+      refute Accounts.get_user_by_email_and_password(user.email, "fail")
     end
 
     test "returns the user if the email and password are valid" do
@@ -53,16 +53,17 @@ defmodule Db.AccountsTest do
 
       assert %{
                password: ["can't be blank"],
+               password_confirmation: ["can't be blank"],
                email: ["can't be blank"]
              } = errors_on(changeset)
     end
 
     test "validates email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not valid"})
+      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "lol", password_confirmation: "not valid"})
 
       assert %{
                email: ["must have the @ sign and no spaces"],
-               password: ["should be at least 12 character(s)"]
+               password: ["should be at least 5 character(s)"]
              } = errors_on(changeset)
     end
 
@@ -85,7 +86,7 @@ defmodule Db.AccountsTest do
 
     test "registers users with a hashed password" do
       email = unique_user_email()
-      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password()})
+      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password(), password_confirmation: valid_user_password()})
       assert user.email == email
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
@@ -96,7 +97,7 @@ defmodule Db.AccountsTest do
   describe "change_user_registration/2" do
     test "returns a changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
-      assert changeset.required == [:password, :email]
+      assert changeset.required == [:password, :password_confirmation, :email]
     end
   end
 
@@ -222,7 +223,7 @@ defmodule Db.AccountsTest do
   describe "change_user_password/2" do
     test "returns a user changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_password(%User{})
-      assert changeset.required == [:password]
+      assert changeset.required == [:password, :password_confirmation]
     end
   end
 
@@ -234,13 +235,13 @@ defmodule Db.AccountsTest do
     test "validates password", %{user: user} do
       {:error, changeset} =
         Accounts.update_user_password(user, valid_user_password(), %{
-          password: "not valid",
+          password: "lol",
           password_confirmation: "another"
         })
 
       assert %{
-               password: ["should be at least 12 character(s)"],
-               password_confirmation: ["does not match password"]
+               password: ["should be at least 5 character(s)"],
+               password_confirmation: ["does not match confirmation", "does not match password"]
              } = errors_on(changeset)
     end
 
@@ -443,13 +444,13 @@ defmodule Db.AccountsTest do
     test "validates password", %{user: user} do
       {:error, changeset} =
         Accounts.reset_user_password(user, %{
-          password: "not valid",
+          password: "lol",
           password_confirmation: "another"
         })
 
       assert %{
-               password: ["should be at least 12 character(s)"],
-               password_confirmation: ["does not match password"]
+               password: ["should be at least 5 character(s)"],
+               password_confirmation: ["does not match confirmation", "does not match password"]
              } = errors_on(changeset)
     end
 
