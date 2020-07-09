@@ -13,10 +13,6 @@ defmodule MatxWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   ## Authentication routes
 
   scope "/", MatxWeb do
@@ -58,23 +54,6 @@ defmodule MatxWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :confirm
 
     live "/restaurants/:id", RestaurantLive.Show, :show
-  end
-
-  scope "/api", MatxWeb.Api do
-    pipe_through [:api]
-
-    post "/login", UserSessionController, :create
-    post "/logout", UserSessionController, :delete
-    post "/register", UserRegistrationController, :create
-
-    get "/restaurants", RestaurantController, :index
-    get "/restaurant/:id", RestaurantController, :show
-  end
-
-  scope "/api", MatxWeb.Api do
-    pipe_through [:api, :get_auth_token]
-
-    get "/troll", TrollController, :troll
   end
 
   # Other scopes may use custom stacks.

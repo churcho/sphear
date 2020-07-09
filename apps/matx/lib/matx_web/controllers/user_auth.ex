@@ -134,15 +134,10 @@ defmodule MatxWeb.UserAuth do
   Used for API auth
   """
   def auth_token(socket, token) do
-    IO.puts("@@@@@@@@@@@@ start auth token")
     case get_auth_token(token) do
       {:ok, user} ->
-        IO.puts "@@@@@@@@@@@@ user"
-        IO.inspect user
         {:ok, user}
       {:error, error} ->
-        IO.inspect error
-        IO.puts "ERPR?"
         {:error, error}
     end
   end
@@ -151,10 +146,8 @@ defmodule MatxWeb.UserAuth do
   # returns {ok, user}
   #         {:error, "message"}
   def get_auth_token(token) do
-    IO.inspect token
     case Base.decode64(token) do
       {:ok, decoded_token} ->
-        IO.inspect decoded_token
         case Accounts.get_user_by_session_token(decoded_token) do
           nil ->
             {:error, "token expired"}

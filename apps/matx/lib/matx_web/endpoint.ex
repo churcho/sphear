@@ -50,5 +50,5 @@ defmodule MatxWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug MatxWeb.Router
+  plug MatxWeb.RouterPlug
 end

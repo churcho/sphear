@@ -22,6 +22,9 @@ defmodule MatxWeb.ChannelCase do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
       import MatxWeb.ChannelCase
+      import Phoenix.ConnTest
+
+      alias MatxWeb.RouterApi.Helpers, as: Routes
 
       # The default endpoint for testing
       @endpoint MatxWeb.Endpoint
