@@ -23,6 +23,7 @@ defmodule Matx.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import Matx.ConnCase
+      import Bureaucrat.Helpers
 
       alias MatxWeb.Router.Helpers, as: Routes
 

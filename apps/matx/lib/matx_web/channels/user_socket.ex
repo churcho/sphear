@@ -2,7 +2,7 @@ defmodule MatxWeb.UserSocket do
   use Phoenix.Socket
   
   ## Channels
-  channel "restaurants:*", MatxWeb.RestaurantChannel
+  channel "restaurants:*", MatxWeb.Channels.RestaurantChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

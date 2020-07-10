@@ -4,9 +4,17 @@ defmodule Db.RestaurantsFixtures do
   entities via the `Db.Restaurants` context.
   """
 
-  def restaurant_name, do: "restaurant #{System.unique_integer()}"
-  def valid_url, do: "https://#{System.unique_integer()}.io"
-  def valid_address, do: "trollvägen #{System.unique_integer()}"
+
+  defp random_3() do
+    last_3(System.unique_integer())
+  end
+  defp last_3(integer) do
+    String.slice(Integer.to_string(integer), -3, 3)
+  end
+
+  def restaurant_name, do: "restaurant #{random_3()}"
+  def valid_url, do: "https://#{random_3()}.io"
+  def valid_address, do: "trollvägen #{random_3()}"
 
   def restaurant_fixture(attrs \\ %{}) do
     {:ok, restaurant} =

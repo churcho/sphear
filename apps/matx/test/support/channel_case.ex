@@ -23,6 +23,7 @@ defmodule MatxWeb.ChannelCase do
       import Phoenix.ChannelTest
       import MatxWeb.ChannelCase
       import Phoenix.ConnTest
+      import Bureaucrat.Helpers
 
       alias MatxWeb.RouterApi.Helpers, as: Routes
 

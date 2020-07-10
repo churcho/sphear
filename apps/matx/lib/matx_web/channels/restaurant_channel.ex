@@ -1,4 +1,4 @@
-defmodule MatxWeb.RestaurantChannel do
+defmodule MatxWeb.Channels.RestaurantChannel do
   use Phoenix.Channel
   require Logger
   import MatxWeb.UserAuth
@@ -59,11 +59,16 @@ defmodule MatxWeb.RestaurantChannel do
     case Feeders.get_restaurant(id) do
       nil ->
         {:reply, 
-          {:error, %{data: "Could not find restaurant"}},
+          {:error, %{message: "Could not find restaurant"}},
           socket}
       restaurant ->
         {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}}, socket}
       end
+  end
+  def handle_in("get", _, socket) do
+    {:reply, 
+    {:error, %{message: "Missing 'id'"}},
+    socket}
   end
 
   def handle_in("create", restaurant_params, socket) do
@@ -72,7 +77,7 @@ defmodule MatxWeb.RestaurantChannel do
         {:reply,
           {:error, %{message: "Unauthorized"}},
         socket}
-      user_id ->
+      _user_id ->
         case Feeders.create_restaurant(restaurant_params) do
           {:ok, restaurant} ->
             MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
@@ -88,50 +93,62 @@ defmodule MatxWeb.RestaurantChannel do
   end
 
   def handle_in("delete", %{"id" => id}, socket) do
-    case Feeders.get_restaurant(id) do
+    case socket.assigns[:user_id] do
       nil ->
-        {:reply, 
-          {:error, %{data: "Could not find restaurant with id: " <> id}},
-          socket}
-      restaurant ->
-        id = restaurant.id
-        {:ok, _} = Feeders.delete_restaurant(restaurant)
-        MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_deleted", %{id: id})
-        {:reply, 
-          {:ok, %{data: "Deleted restaurant with id: " <> id}}, 
-          socket}
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Feeders.get_restaurant(id) do
+          nil ->
+            {:reply, 
+              {:error, %{message: "Could not find restaurant with id: " <> id}},
+              socket}
+          restaurant ->
+            {:ok, _} = Feeders.delete_restaurant(restaurant)
+            MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_deleted", %{message: "Deleted restaurant '#{restaurant.name}'", id: restaurant.id})
+            {:reply, 
+              {:ok, %{message: "Deleted restaurant '#{restaurant.name}' with id #{restaurant.id}"}}, 
+              socket}
+          end
       end
   end
   def handle_in("delete", _, socket) do
     {:reply, 
-    {:error, %{data: "Missing 'id'"}},
+    {:error, %{message: "Missing 'id'"}},
     socket}
   end
 
   def handle_in("update", %{"id" => id, "params" => params}, socket) do
-    case Feeders.get_restaurant(id) do
+    case socket.assigns[:user_id] do
       nil ->
-        {:reply, 
-          {:error, %{data: "Could not find restaurant with id: " <> id}},
-          socket}
-      restaurant ->
-        case Feeders.update_restaurant(restaurant, params) do
-          {:ok, restaurant} ->
-            MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_updated", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Feeders.get_restaurant(id) do
+          nil ->
             {:reply, 
-              {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}}, 
+              {:error, %{message: "Could not find restaurant with id: " <> id}},
               socket}
-          {:error, %Ecto.Changeset{} = changeset} ->
-            {:reply,
-              {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
-              socket}
+          restaurant ->
+            case Feeders.update_restaurant(restaurant, params) do
+              {:ok, restaurant} ->
+                MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_updated", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
+                {:reply, 
+                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}}, 
+                  socket}
+              {:error, %Ecto.Changeset{} = changeset} ->
+                {:reply,
+                  {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+                  socket}
+            end
         end
-      
     end
   end
   def handle_in("update", _, socket) do
     {:reply,
-    {:error, %{data: "Missing 'id' or 'params'"}},
+    {:error, %{message: "Missing 'id' or 'params'"}},
     socket}
   end
 
