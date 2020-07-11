@@ -143,8 +143,9 @@ defmodule MatxWeb.MarkdownWriter do
       end
 
     file
-    |> puts("#### #{record.assigns.bureaucrat_desc}")
-    |> puts("##### Request")
+    |> puts("#")
+    |> puts("### #{record.assigns.bureaucrat_desc}")
+    |> puts("##### → <ins>Request</ins>")
     |> puts("* __Method:__ #{record.method}")
     |> puts("* __Path:__ #{path}")
 
