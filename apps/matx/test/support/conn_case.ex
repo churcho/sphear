@@ -26,6 +26,7 @@ defmodule Matx.ConnCase do
       import Bureaucrat.Helpers
 
       alias MatxWeb.Router.Helpers, as: Routes
+      alias MatxWeb.RouterApi.Helpers, as: ApiRoutes
 
       # The default endpoint for testing
       @endpoint MatxWeb.Endpoint

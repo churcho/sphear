@@ -43,7 +43,12 @@ defmodule MatxWeb.MarkdownWriter do
 
       Enum.each(actions, fn {action, _} ->
         anchor = to_anchor(controller, action)
-        puts(file, "    * [#{action}](##{anchor})")
+        case action do
+          :create ->
+            puts(file, "    * [#{anchor}](##{anchor})")
+          _ ->
+            puts(file, "    * [#{action}](##{anchor})")
+        end
       end)
     end)
 
@@ -60,7 +65,12 @@ defmodule MatxWeb.MarkdownWriter do
 
   defp write_action(action, controller, records, file) do
     anchor = to_anchor(controller, action)
-    puts(file, "## <a id=#{anchor}></a>#{action}")
+    case action do
+      :create ->
+        puts(file, "## <a id=#{anchor}></a>#{anchor}")
+      _ ->
+        puts(file, "## <a id=#{anchor}></a>#{action}")
+    end
     Enum.each(records, &write_example(&1, file))
     file
     |> puts("---")

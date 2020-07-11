@@ -25,7 +25,8 @@ defmodule MatxWeb.ChannelCase do
       import Phoenix.ConnTest
       import Bureaucrat.Helpers
 
-      alias MatxWeb.RouterApi.Helpers, as: Routes
+      alias MatxWeb.Router.Helpers, as: Routes
+      alias MatxWeb.RouterApi.Helpers, as: ApiRoutes
 
       # The default endpoint for testing
       @endpoint MatxWeb.Endpoint

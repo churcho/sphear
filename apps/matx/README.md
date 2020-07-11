@@ -37,6 +37,10 @@ The endpoint will reply with either:
     * [user actions - create a restaurant](#channel-restaurants-user-actions-create-a-restaurant)
     * [user actions - edit a restaurant](#channel-restaurants-user-actions-edit-a-restaurant)
     * [user actions - delete a restaurant](#channel-restaurants-user-actions-delete-a-restaurant)
+  * [(REST) Register account](#rest-register-account)
+    * [rest-register-account-create](#rest-register-account-create)
+  * [(REST) Login account](#rest-login-account)
+    * [rest-login-account-create](#rest-login-account-create)
 
 # channel restaurants
 ## <a id=channel-restaurants-guest-actions-ping></a>guest actions - ping
@@ -70,25 +74,25 @@ The endpoint will reply with either:
   "data": {
     "restaurants": [
       {
-        "address": "trollvägen 206",
-        "created": "2020-07-10T05:14:10",
-        "id": 6549,
-        "name": "restaurant 270",
-        "url": "https://238.io"
+        "address": "trollvägen 309",
+        "created": "2020-07-11T00:05:37",
+        "id": 7501,
+        "name": "restaurant 373",
+        "url": "https://341.io"
       },
       {
-        "address": "trollvägen 639",
-        "created": "2020-07-10T05:14:10",
-        "id": 6550,
-        "name": "restaurant 703",
-        "url": "https://671.io"
+        "address": "trollvägen 149",
+        "created": "2020-07-11T00:05:37",
+        "id": 7502,
+        "name": "restaurant 213",
+        "url": "https://181.io"
       },
       {
-        "address": "trollvägen 110",
-        "created": "2020-07-10T05:14:10",
-        "id": 6551,
-        "name": "restaurant 174",
-        "url": "https://142.io"
+        "address": "trollvägen 053",
+        "created": "2020-07-11T00:05:37",
+        "id": 7503,
+        "name": "restaurant 117",
+        "url": "https://085.io"
       }
     ]
   }
@@ -102,7 +106,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 6565
+  "id": 7496
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -111,11 +115,11 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 851",
-    "created": "2020-07-10T05:14:11",
-    "id": 6565,
-    "name": "restaurant 915",
-    "url": "https://883.io"
+    "address": "trollvägen 822",
+    "created": "2020-07-11T00:05:37",
+    "id": 7496,
+    "name": "restaurant 886",
+    "url": "https://854.io"
   }
 }
 ```
@@ -129,7 +133,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "user_id": 21018
+  "user_id": 22503
 }
 ```
 ---
@@ -152,8 +156,8 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-10T05:14:10",
-    "id": 6545,
+    "created": "2020-07-11T00:05:37",
+    "id": 7509,
     "name": "test",
     "url": "some url"
   }
@@ -167,8 +171,8 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-10T05:14:10",
-    "id": 6545,
+    "created": "2020-07-11T00:05:37",
+    "id": 7509,
     "name": "test",
     "url": "some url"
   }
@@ -182,7 +186,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 6560,
+  "id": 7507,
   "params": {
     "name": "new name",
     "url": "new url"
@@ -195,9 +199,9 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 095",
-    "created": "2020-07-10T05:14:11",
-    "id": 6560,
+    "address": "trollvägen 733",
+    "created": "2020-07-11T00:05:37",
+    "id": 7507,
     "name": "new name",
     "url": "new url"
   }
@@ -210,9 +214,9 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 095",
-    "created": "2020-07-10T05:14:11",
-    "id": 6560,
+    "address": "trollvägen 733",
+    "created": "2020-07-11T00:05:37",
+    "id": 7507,
     "name": "new name",
     "url": "new url"
   }
@@ -226,7 +230,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 6562
+  "id": 7505
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -234,7 +238,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'restaurant 365' with id 6562"
+  "message": "Deleted restaurant 'restaurant 310' with id 7505"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -243,8 +247,154 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 6562,
-  "message": "Deleted restaurant 'restaurant 365'"
+  "id": 7505,
+  "message": "Deleted restaurant 'restaurant 310'"
 }
 ```
+---
+# (REST) Register account
+## <a id=rest-register-account-create></a>rest-register-account-create
+#### POST /register - REGISTER SUCCESS
+##### Request
+* __Method:__ POST
+* __Path:__ /api/register
+* __Request headers:__
+```
+content-type: multipart/mixed; boundary=plug_conn_test
+```
+* __Request body:__
+```json
+{
+  "email": "user-576460752303423131@example.com",
+  "password": "hello world!",
+  "password_confirmation": "hello world!"
+}
+```
+
+##### ← <ins>Response to you</ins>
+* __Status__: 200
+* __Response headers:__
+```
+content-type: application/json; charset=utf-8
+cache-control: max-age=0, private, must-revalidate
+x-request-id: FiCJ8P0AzMAlgE8AAAGF
+```
+* __Response body:__
+```json
+{
+  "success": {
+    "email": "user-576460752303423131@example.com",
+    "token": "sSC9b65WzzkezvnMvS3jILvXsUdK65JmUVChnNXGsRg="
+  }
+}
+```
+
+#### POST /register - REGISTER FAIL
+##### Request
+* __Method:__ POST
+* __Path:__ /api/register
+* __Request headers:__
+```
+content-type: multipart/mixed; boundary=plug_conn_test
+```
+* __Request body:__
+```json
+{
+  "email": "with spaces",
+  "password": "lol",
+  "password_confirmation": "lol"
+}
+```
+
+##### ← <ins>Response to you</ins>
+* __Status__: 200
+* __Response headers:__
+```
+content-type: application/json; charset=utf-8
+cache-control: max-age=0, private, must-revalidate
+x-request-id: FiCJ8P7pFMD8lmMAAAHF
+```
+* __Response body:__
+```json
+{
+  "error": {
+    "errors": {
+      "email": [
+        "must have the @ sign and no spaces"
+      ],
+      "password": [
+        "should be at least 5 character(s)"
+      ]
+    }
+  }
+}
+```
+
+---
+# (REST) Login account
+## <a id=rest-login-account-create></a>rest-login-account-create
+#### POST /login - LOGIN SUCCESS
+##### Request
+* __Method:__ POST
+* __Path:__ /api/login
+* __Request headers:__
+```
+content-type: multipart/mixed; boundary=plug_conn_test
+```
+* __Request body:__
+```json
+{
+  "email": "user-576460752303422270@example.com",
+  "password": "hello world!"
+}
+```
+
+##### ← <ins>Response to you</ins>
+* __Status__: 200
+* __Response headers:__
+```
+content-type: application/json; charset=utf-8
+cache-control: max-age=0, private, must-revalidate
+x-request-id: FiCJ8P0AzMBuoLcAAAGl
+```
+* __Response body:__
+```json
+{
+  "success": {
+    "token": "d3+4T5uhrOiHIHAkCgzogvBIQT+oPr+kZFZRRxStcZE="
+  }
+}
+```
+
+#### POST /login - LOGIN FAIL
+##### Request
+* __Method:__ POST
+* __Path:__ /api/login
+* __Request headers:__
+```
+content-type: multipart/mixed; boundary=plug_conn_test
+```
+* __Request body:__
+```json
+{
+  "email": "user-576460752303422812@example.com",
+  "password": "lol"
+}
+```
+
+##### ← <ins>Response to you</ins>
+* __Status__: 200
+* __Response headers:__
+```
+content-type: application/json; charset=utf-8
+cache-control: max-age=0, private, must-revalidate
+x-request-id: FiCJ8P7pFMDpE5oAAAHl
+```
+* __Response body:__
+```json
+{
+  "error": "Fel användarnamn eller lösenord"
+}
+```
+
 ---

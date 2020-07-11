@@ -24,7 +24,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     conn = Phoenix.ConnTest.build_conn()
     # Login with the user credentials
     conn =
-      post(conn, Routes.api_user_session_path(conn, :create), %{
+      post(conn, ApiRoutes.api_user_session_path(conn, :create), %{
         "email" => user.email,
         "password" => valid_user_password()
       })
