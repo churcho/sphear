@@ -4,7 +4,7 @@ defmodule MatxWeb.RouterApi do
   import MatxWeb.UserAuth
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["application/json"]
   end
 
   scope "/api", MatxWeb.Api, as: :api do
