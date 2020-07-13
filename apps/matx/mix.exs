@@ -53,7 +53,8 @@ defmodule Matx.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:db, in_umbrella: true},
       {:bcrypt_elixir, "~> 2.2.0"},
-      {:bureaucrat, "~> 0.2.7"}
+      {:bureaucrat, "~> 0.2.7"},
+      {:plug_health, "~> 0.1.0"}
     ]
   end
 

@@ -26,6 +26,9 @@ defmodule MatxWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  # Render health checks
+  plug HealthCheckPlug, path: "/health"
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
