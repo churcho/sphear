@@ -7,8 +7,8 @@ defmodule Proxy.Cowboy2Handler do
       Application.get_env(:proxy, :conn, Plug.Cowboy.Conn)
     end
   
-    defp log_request(message) do
-      if true do
+    defp log_request(agent, message) do
+      if agent != "Render/1.0" do
         Logger.info(message)
       end
     end
@@ -20,7 +20,8 @@ defmodule Proxy.Cowboy2Handler do
     # endpoint and opts are not passed in because they
     # are dynamically chosen
     def init(req, {_endpoint, _opts}) do
-      log_request("Proxy.Cowboy2Handler called with req: #{inspect(req)}")
+      agent = req.headers["user-agent"]
+      log_request(agent, "Proxy.Cowboy2Handler called with req: #{inspect(req)}")
   
       conn = connection().conn(req)
   
@@ -28,9 +29,9 @@ defmodule Proxy.Cowboy2Handler do
       backends = Application.get_env(:proxy, :backends)
   
       backend = choose_backend(conn, backends)
-      log_request("Backend chosen: #{inspect(backend)}")
+      log_request(agent, "Backend chosen: #{inspect(backend)}")
 
-      save_request(req)
+      #save_request(req)
   
       dispatch(backend, req)
     end
@@ -93,7 +94,6 @@ defmodule Proxy.Cowboy2Handler do
     ## Websocket callbacks
     # Copied from https://github.com/phoenixframework/phoenix/blob/master/lib/phoenix/endpoint/cowboy2_handler.ex
     def websocket_init([handler | state]) do
-      log_request("Proxy.Cowboy2Handler WEBSOCKET INIT !!!!!! <<<<<<<<<<<<")
       {:ok, state} = handler.init(state)
       {:ok, [handler | state]}
     end
