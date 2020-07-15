@@ -112,7 +112,9 @@ defmodule MatxWeb.PageLive do
   end
 
   def handle_event("restaurant_click", %{"id" => id}, socket) do
-    {:noreply, push_redirect(socket, to: Routes.restaurant_show_path(MatxWeb.Endpoint, :show, Db.Feeders.get_restaurant!(id)))}
+    with {:ok, restaurant} <- Db.Feeders.get_restaurant(id) do
+      {:noreply, push_redirect(socket, to: Routes.restaurant_show_path(MatxWeb.Endpoint, :show, restaurant))}
+    end
   end
 
   def handle_event("settings", _, socket) do

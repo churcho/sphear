@@ -17,10 +17,12 @@ defmodule MatxWeb.RestaurantLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:restaurant, Feeders.get_restaurant!(id))}
+    with {:ok, restaurant} <- Feeders.get_restaurant(id) do
+      {:noreply,
+      socket
+      |> assign(:page_title, page_title(socket.assigns.live_action))
+      |> assign(:restaurant, restaurant)}
+    end
   end
 
   defp page_title(:show), do: "Visa restaurang"

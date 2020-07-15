@@ -9,9 +9,9 @@ defmodule MatxWeb.Api.RestaurantController do
 
   def show(conn, %{"id" => id}) do
     case Feeders.get_restaurant(id) do
-      nil ->
+      {:error, _} ->
         render(conn, "error.json", message: "Restaurangen hittades inte")
-      restaurant ->
+      {:ok, restaurant} ->
         render(conn, "show.json", restaurant: restaurant)
     end
   end

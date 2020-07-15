@@ -87,7 +87,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
     test "get one restaurant", %{socket: socket} do
       restaurant_fixture()
-      restaurant = restaurant_fixture()
+      restaurant = restaurant_fixture() |> Db.Repo.preload(:menus)
       restaurant_json = Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)
       data = %{data: restaurant_json}
   

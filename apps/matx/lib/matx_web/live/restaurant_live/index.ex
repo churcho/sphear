@@ -41,9 +41,11 @@ defmodule MatxWeb.RestaurantLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Ändra restaurang")
-    |> assign(:restaurant, Feeders.get_restaurant!(id))
+    with {:ok, restaurant} <- Feeders.get_restaurant(id) do
+      socket
+      |> assign(:page_title, "Ändra restaurang")
+      |> assign(:restaurant, restaurant)
+    end
   end
 
   defp apply_action(socket, :new, _params) do
@@ -60,10 +62,11 @@ defmodule MatxWeb.RestaurantLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    restaurant = Feeders.get_restaurant!(id)
-    {:ok, _} = Feeders.delete_restaurant(restaurant)
+    with {:ok, restaurant} <- Feeders.get_restaurant(id) do
+      {:ok, _} = Feeders.delete_restaurant(restaurant)
 
-    {:noreply, assign(socket, :restaurants, list_restaurants())}
+      {:noreply, assign(socket, :restaurants, list_restaurants())}
+    end
   end
 
   defp list_restaurants do

@@ -8,6 +8,12 @@ defmodule Db.Feeders do
 
   alias Db.Feeders.Restaurant
 
+  use EctoList.Context,
+    list: Restaurant,
+    repo: Repo,
+    list_items_key: :menus,
+    items_order_key: :menus_order
+
   @doc """
   Returns the list of restaurants.
 
@@ -18,7 +24,7 @@ defmodule Db.Feeders do
 
   """
   def list_restaurants do
-    Repo.all(Restaurant)
+    Repo.all(Restaurant) |> Repo.preload(:menus)
   end
 
   @doc """
@@ -28,15 +34,19 @@ defmodule Db.Feeders do
 
   ## Examples
 
-      iex> get_restaurant!(123)
-      %Restaurant{}
+      iex> get_restaurant(123)
+      {:ok, %Restaurant{}}
 
-      iex> get_restaurant!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_restaurant(456)
+      {:error, :not_found}
 
   """
-  def get_restaurant!(id), do: Repo.get!(Restaurant, id)
-  def get_restaurant(id), do: Repo.get(Restaurant, id)
+  def get_restaurant(id) do
+    case Repo.get(Restaurant, id) do
+      nil -> {:error, :not_found}
+      restaurant -> {:ok, restaurant |> Repo.preload(:menus)}
+    end
+  end
 
   @doc """
   Creates a restaurant.
@@ -111,5 +121,138 @@ defmodule Db.Feeders do
 
   defp has_prefix?(restaurant, prefix) do
     String.starts_with?(String.downcase(restaurant.name), String.downcase(prefix))
+  end
+
+  alias Db.Feeders.Menu
+
+  @doc """
+  Returns the list of menus.
+
+  ## Examples
+
+      iex> list_menus()
+      [%Menu{}, ...]
+
+  """
+  def list_menus do
+    Repo.all(Menu)
+  end
+
+  @doc """
+  Gets a single menu.
+
+  Raises `Ecto.NoResultsError` if the Menu does not exist.
+
+  ## Examples
+
+      iex> get_menu!(123)
+      %Menu{}
+
+      iex> get_menu!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_menu!(id), do: Repo.get!(Menu, id)
+
+  def get_menu(id) do
+    case Repo.get(Menu, id) do
+      nil -> {:error, :not_found}
+      menu -> {:ok, menu}
+    end
+  end
+
+  @doc """
+  Creates a menu.
+
+  ## Examples
+
+      iex> create_menu(%{field: value})
+      {:ok, %Menu{}}
+
+      iex> create_menu(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_menu(attrs \\ %{}) do
+    %Menu{}
+    |> Menu.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a menu.
+
+  ## Examples
+
+      iex> update_menu(menu, %{field: new_value})
+      {:ok, %Menu{}}
+
+      iex> update_menu(menu, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_menu(%Menu{} = menu, attrs) do
+    menu
+    |> Menu.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a menu.
+
+  ## Examples
+
+      iex> delete_menu(menu)
+      {:ok, %Menu{}}
+
+      iex> delete_menu(menu)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_menu(%Menu{} = menu) do
+    Repo.delete(menu)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking menu changes.
+
+  ## Examples
+
+      iex> change_menu(menu)
+      %Ecto.Changeset{data: %Menu{}}
+
+  """
+  def change_menu(%Menu{} = menu, attrs \\ %{}) do
+    Menu.changeset(menu, attrs)
+  end
+
+  ## Order of menu, Restaurant context
+  @doc """
+    Returns an `%Ecto.Changeset{}` for tracking menu order changes.
+
+    ## Examples
+
+      iex> change_menu_order(restaurant, menu_item, (index), :action)
+      %Ecto.Changeset{%Restaurant{}}
+  """
+  def change_menu_order(restaurant, menu_item, index, :insert) do
+    new_order = EctoList.ListItem.insert_at(restaurant.menus_order, menu_item, index)
+    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  end
+  def change_menu_order(restaurant, menu_item, :lower) do
+    new_order = EctoList.ListItem.move_lower(restaurant.menus_order, menu_item)
+    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  end
+  def change_menu_order(restaurant, menu_item, :higher) do
+    new_order = EctoList.ListItem.move_higher(restaurant.menus_order, menu_item)
+    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  end
+  def change_menu_order(restaurant, menu_item, :to_bottom) do
+    new_order = EctoList.ListItem.move_to_bottom(restaurant.menus_order, menu_item)
+    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  end
+  def change_menu_order(restaurant, menu_item, :to_top) do
+    new_order = EctoList.ListItem.move_to_top(restaurant.menus_order, menu_item)
+    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
   end
 end

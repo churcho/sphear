@@ -1,4 +1,4 @@
-defmodule MatxWeb.Channels.RestaurantChannel do
+defmodule MatxWeb.Channels.MenuChannel do
   use Phoenix.Channel
   require Logger
   import MatxWeb.UserAuth
@@ -12,7 +12,7 @@ defmodule MatxWeb.Channels.RestaurantChannel do
   `:ignore` to deny subscription/broadcast on this channel
   for the requested topic
   """
-  def join("restaurants:lobby", %{"token" => token}, socket) do
+  def join("menus:lobby", %{"token" => token}, socket) do
     case auth_token(socket, token) do
       {:ok, user} ->
         socket = assign(socket, :user_id, user.id)
@@ -22,19 +22,17 @@ defmodule MatxWeb.Channels.RestaurantChannel do
         {:error, error_message}
     end
   end
-  def join("restaurants:lobby", _, socket) do
+  def join("menus:lobby", _, socket) do
     send(self(), :guest_join)
     {:ok, socket}
   end
 
   def handle_info(:user_join, socket) do
-    #restaurants = Phoenix.View.render(socket, "index.json", restaurants: Feeders.list_restaurants())
     push(socket, "lobby", %{login_success: true, user_id: socket.assigns[:user_id]})
     {:noreply, socket}
   end
 
   def handle_info(:guest_join, socket) do
-    #restaurants = Phoenix.View.render(socket, "index.json", restaurants: Feeders.list_restaurants())
     push(socket, "lobby", %{guest_success: true, user_id: nil})
     {:noreply, socket}
   end
@@ -51,39 +49,45 @@ defmodule MatxWeb.Channels.RestaurantChannel do
     {:stop, :normal, socket}
   end
 
-  def handle_in("get", %{"id" => "all"}, socket) do
-    restaurants = Feeders.list_restaurants()
-    {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "index.json", restaurants: restaurants)}}, socket}
-  end
-  def handle_in("get", %{"id" => id}, socket) do
+  def handle_in("get", %{"restaurant_id" => id}, socket) do
     case Feeders.get_restaurant(id) do
-      {:error, _} ->
+      {:ok, restaurant} ->
+        menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_order)
+        {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "index.json", menus: menus)}}, socket}
+      {:error, :not_found} ->
         {:reply, 
           {:error, %{message: "Could not find restaurant"}},
           socket}
-      {:ok, restaurant} ->
-        {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}}, socket}
-      end
+    end
+  end
+  def handle_in("get", %{"menu_id" => id}, socket) do
+    case Feeders.get_menu(id) do
+      {:ok, menu} ->
+        {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)}}, socket}
+      {:error, :not_found} ->
+        {:reply, 
+          {:error, %{message: "Could not find menu"}},
+          socket}
+    end
   end
   def handle_in("get", _, socket) do
     {:reply, 
-    {:error, %{message: "Missing 'id'"}},
+    {:error, %{message: "Missing 'restaurant_id' or 'menu_id'"}},
     socket}
   end
 
-  def handle_in("create", restaurant_params, socket) do
+  def handle_in("create", menu_params, socket) do
     case socket.assigns[:user_id] do
       nil ->
         {:reply,
           {:error, %{message: "Unauthorized"}},
         socket}
       _user_id ->
-        case Feeders.create_restaurant(restaurant_params) do
-          {:ok, restaurant} ->
-            restaurant = Db.Repo.preload(restaurant, :menus)
-            MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
+        case Feeders.create_menu(menu_params) do
+          {:ok, menu} ->
+            MatxWeb.Endpoint.broadcast!("menus:lobby", "menu_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)})
             {:reply,
-            {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}},
+            {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)}},
             socket}
           {:error, %Ecto.Changeset{} = changeset} ->
             {:reply,
@@ -91,6 +95,11 @@ defmodule MatxWeb.Channels.RestaurantChannel do
             socket}
         end
     end
+  end
+  def handle_in("create", _, socket) do
+    {:reply, 
+    {:error, %{message: "Missing menu 'id'"}},
+    socket}
   end
 
   def handle_in("delete", %{"id" => id}, socket) do
@@ -100,16 +109,16 @@ defmodule MatxWeb.Channels.RestaurantChannel do
           {:error, %{message: "Unauthorized"}},
         socket}
       _user_id ->
-        case Feeders.get_restaurant(id) do
+        case Feeders.get_menu(id) do
           {:error, _} ->
             {:reply, 
-              {:error, %{message: "Could not find restaurant with id: " <> id}},
+              {:error, %{message: "Could not find menu with id: " <> id}},
               socket}
-          {:ok, restaurant} ->
-            {:ok, _} = Feeders.delete_restaurant(restaurant)
-            MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_deleted", %{message: "Deleted restaurant '#{restaurant.name}'", id: restaurant.id})
+          {:ok, menu} ->
+            {:ok, _} = Feeders.delete_menu(menu)
+            MatxWeb.Endpoint.broadcast!("menus:lobby", "menu_deleted", %{message: "Deleted menu '#{menu.name}'", id: menu.id})
             {:reply, 
-              {:ok, %{message: "Deleted restaurant '#{restaurant.name}' with id #{restaurant.id}"}}, 
+              {:ok, %{message: "Deleted menu '#{menu.name}' with id #{menu.id}"}}, 
               socket}
           end
       end
@@ -127,17 +136,17 @@ defmodule MatxWeb.Channels.RestaurantChannel do
           {:error, %{message: "Unauthorized"}},
         socket}
       _user_id ->
-        case Feeders.get_restaurant(id) do
+        case Feeders.get_menu(id) do
           {:error, _} ->
             {:reply, 
-              {:error, %{message: "Could not find restaurant with id: " <> id}},
+              {:error, %{message: "Could not find menu with id: " <> id}},
               socket}
-          {:ok, restaurant} ->
-            case Feeders.update_restaurant(restaurant, params) do
-              {:ok, restaurant} ->
-                MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_updated", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
+          {:ok, menu} ->
+            case Feeders.update_menu(menu, params) do
+              {:ok, menu} ->
+                MatxWeb.Endpoint.broadcast!("menus:lobby", "menu_updated", %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)})
                 {:reply, 
-                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}}, 
+                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)}}, 
                   socket}
               {:error, %Ecto.Changeset{} = changeset} ->
                 {:reply,

@@ -15,7 +15,8 @@ defmodule MatxWeb.Api.RestaurantView do
       created: restaurant.inserted_at,
       name: restaurant.name,
       address: restaurant.address,
-      url: restaurant.url
+      url: restaurant.url,
+      menus: restaurant.menus
     }
   end
 

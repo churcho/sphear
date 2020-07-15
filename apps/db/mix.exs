@@ -42,7 +42,8 @@ defmodule Db.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.0"},
-      {:phx_gen_auth, "~> 0.4.0", only: [:dev], runtime: false}
+      {:phx_gen_auth, "~> 0.4.0", only: [:dev], runtime: false},
+      {:ecto_list, "~> 0.1.2"}
     ]
   end
 
