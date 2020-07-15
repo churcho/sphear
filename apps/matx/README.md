@@ -29,21 +29,229 @@ The endpoint will reply with either:
 # Endpoints
 
 
-  * [channel restaurants](#channel-restaurants)
-    * [guest actions - ping](#channel-restaurants-guest-actions-ping)
-    * [guest actions - get all restaurants](#channel-restaurants-guest-actions-get-all-restaurants)
-    * [guest actions - get one restaurant](#channel-restaurants-guest-actions-get-one-restaurant)
-    * [user actions - ensure logged in correctly](#channel-restaurants-user-actions-ensure-logged-in-correctly)
-    * [user actions - create a restaurant](#channel-restaurants-user-actions-create-a-restaurant)
-    * [user actions - edit a restaurant](#channel-restaurants-user-actions-edit-a-restaurant)
-    * [user actions - delete a restaurant](#channel-restaurants-user-actions-delete-a-restaurant)
+  * [channel menus:lobby](#channel-menus-lobby)
+    * [guest actions - ping](#channel-menus-lobby-guest-actions-ping)
+    * [guest actions - get all menus from a restaurant](#channel-menus-lobby-guest-actions-get-all-menus-from-a-restaurant)
+    * [guest actions - get one menu](#channel-menus-lobby-guest-actions-get-one-menu)
+    * [user actions - ensure logged in correctly](#channel-menus-lobby-user-actions-ensure-logged-in-correctly)
+    * [user actions - create a menu](#channel-menus-lobby-user-actions-create-a-menu)
+    * [user actions - edit a menu](#channel-menus-lobby-user-actions-edit-a-menu)
+    * [user actions - delete a menu](#channel-menus-lobby-user-actions-delete-a-menu)
+  * [channel restaurants:lobby](#channel-restaurants-lobby)
+    * [guest actions - ping](#channel-restaurants-lobby-guest-actions-ping)
+    * [guest actions - get all restaurants](#channel-restaurants-lobby-guest-actions-get-all-restaurants)
+    * [guest actions - get one restaurant](#channel-restaurants-lobby-guest-actions-get-one-restaurant)
+    * [user actions - ensure logged in correctly](#channel-restaurants-lobby-user-actions-ensure-logged-in-correctly)
+    * [user actions - create a restaurant](#channel-restaurants-lobby-user-actions-create-a-restaurant)
+    * [user actions - edit a restaurant](#channel-restaurants-lobby-user-actions-edit-a-restaurant)
+    * [user actions - delete a restaurant](#channel-restaurants-lobby-user-actions-delete-a-restaurant)
   * [(REST) Register account](#rest-register-account)
     * [rest-register-account-create](#rest-register-account-create)
   * [(REST) Login account](#rest-login-account)
     * [rest-login-account-create](#rest-login-account-create)
 
-# channel restaurants
-## <a id=channel-restaurants-guest-actions-ping></a>guest actions - ping
+# <a id=channel-menus-lobby></a>channel menus:lobby
+## <a id=channel-menus-lobby-guest-actions-ping></a>guest actions - ping
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ ping
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "message": "pong"
+}
+```
+---
+## <a id=channel-menus-lobby-guest-actions-get-all-menus-from-a-restaurant></a>guest actions - get all menus from a restaurant
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ get
+* __Body:__
+```json
+{
+  "restaurant_id": 11777
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "menus": [
+      {
+        "created": "2020-07-15T15:01:48",
+        "id": 529,
+        "name": "test menu1",
+        "restaurant_id": 11777
+      },
+      {
+        "created": "2020-07-15T15:01:48",
+        "id": 530,
+        "name": "test menu2",
+        "restaurant_id": 11777
+      },
+      {
+        "created": "2020-07-15T15:01:48",
+        "id": 531,
+        "name": "test menu3",
+        "restaurant_id": 11777
+      }
+    ]
+  }
+}
+```
+---
+## <a id=channel-menus-lobby-guest-actions-get-one-menu></a>guest actions - get one menu
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ get
+* __Body:__
+```json
+{
+  "menu_id": 524
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "created": "2020-07-15T15:01:47",
+    "id": 524,
+    "name": "test menu1",
+    "restaurant_id": 11764
+  }
+}
+```
+---
+## <a id=channel-menus-lobby-user-actions-ensure-logged-in-correctly></a>user actions - ensure logged in correctly
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ logged_in
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "user_id": 28625
+}
+```
+---
+## <a id=channel-menus-lobby-user-actions-create-a-menu></a>user actions - create a menu
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ create
+* __Body:__
+```json
+{
+  "name": "test menu",
+  "restaurant_id": 11766
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "created": "2020-07-15T15:01:47",
+    "id": 525,
+    "name": "test menu",
+    "restaurant_id": 11766
+  }
+}
+```
+#### ← <ins>Broadcasted to all</ins>
+* __Topic:__ menus:lobby
+* __Event:__ menu_created
+* __Body:__
+```json
+{
+  "data": {
+    "created": "2020-07-15T15:01:47",
+    "id": 525,
+    "name": "test menu",
+    "restaurant_id": 11766
+  }
+}
+```
+---
+## <a id=channel-menus-lobby-user-actions-edit-a-menu></a>user actions - edit a menu
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ update
+* __Body:__
+```json
+{
+  "id": 523,
+  "params": {
+    "name": "some new name"
+  }
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "created": "2020-07-15T15:01:47",
+    "id": 523,
+    "name": "some new name",
+    "restaurant_id": 11755
+  }
+}
+```
+#### ← <ins>Broadcasted to all</ins>
+* __Topic:__ menus:lobby
+* __Event:__ menu_updated
+* __Body:__
+```json
+{
+  "data": {
+    "created": "2020-07-15T15:01:47",
+    "id": 523,
+    "name": "some new name",
+    "restaurant_id": 11755
+  }
+}
+```
+---
+## <a id=channel-menus-lobby-user-actions-delete-a-menu></a>user actions - delete a menu
+#### → <ins>Message to server</ins>
+* __Topic:__ menus:lobby
+* __Event:__ delete
+* __Body:__
+```json
+{
+  "id": 526
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "message": "Deleted menu 'test menu1' with id 526"
+}
+```
+#### ← <ins>Broadcasted to all</ins>
+* __Topic:__ menus:lobby
+* __Event:__ menu_deleted
+* __Body:__
+```json
+{
+  "id": 526,
+  "message": "Deleted menu 'test menu1'"
+}
+```
+---
+# <a id=channel-restaurants-lobby></a>channel restaurants:lobby
+## <a id=channel-restaurants-lobby-guest-actions-ping></a>guest actions - ping
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ ping
@@ -56,7 +264,7 @@ The endpoint will reply with either:
 }
 ```
 ---
-## <a id=channel-restaurants-guest-actions-get-all-restaurants></a>guest actions - get all restaurants
+## <a id=channel-restaurants-lobby-guest-actions-get-all-restaurants></a>guest actions - get all restaurants
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ get
@@ -74,39 +282,42 @@ The endpoint will reply with either:
   "data": {
     "restaurants": [
       {
-        "address": "trollvägen 677",
-        "created": "2020-07-14T07:10:18",
-        "id": 9929,
-        "name": "restaurant 741",
-        "url": "https://709.io"
+        "address": "trollvägen 661",
+        "created": "2020-07-15T15:01:48",
+        "id": 11787,
+        "menus": [],
+        "name": "restaurant 725",
+        "url": "https://693.io"
       },
       {
-        "address": "trollvägen 517",
-        "created": "2020-07-14T07:10:18",
-        "id": 9930,
-        "name": "restaurant 581",
-        "url": "https://549.io"
+        "address": "trollvägen 501",
+        "created": "2020-07-15T15:01:48",
+        "id": 11788,
+        "menus": [],
+        "name": "restaurant 565",
+        "url": "https://533.io"
       },
       {
-        "address": "trollvägen 421",
-        "created": "2020-07-14T07:10:18",
-        "id": 9931,
-        "name": "restaurant 485",
-        "url": "https://453.io"
+        "address": "trollvägen 405",
+        "created": "2020-07-15T15:01:48",
+        "id": 11789,
+        "menus": [],
+        "name": "restaurant 469",
+        "url": "https://437.io"
       }
     ]
   }
 }
 ```
 ---
-## <a id=channel-restaurants-guest-actions-get-one-restaurant></a>guest actions - get one restaurant
+## <a id=channel-restaurants-lobby-guest-actions-get-one-restaurant></a>guest actions - get one restaurant
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ get
 * __Body:__
 ```json
 {
-  "id": 9926
+  "id": 11799
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -115,16 +326,17 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 786",
-    "created": "2020-07-14T07:10:18",
-    "id": 9926,
-    "name": "restaurant 850",
-    "url": "https://818.io"
+    "address": "trollvägen 295",
+    "created": "2020-07-15T15:01:48",
+    "id": 11799,
+    "menus": [],
+    "name": "restaurant 359",
+    "url": "https://327.io"
   }
 }
 ```
 ---
-## <a id=channel-restaurants-user-actions-ensure-logged-in-correctly></a>user actions - ensure logged in correctly
+## <a id=channel-restaurants-lobby-user-actions-ensure-logged-in-correctly></a>user actions - ensure logged in correctly
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ logged_in
@@ -133,11 +345,11 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "user_id": 26086
+  "user_id": 28631
 }
 ```
 ---
-## <a id=channel-restaurants-user-actions-create-a-restaurant></a>user actions - create a restaurant
+## <a id=channel-restaurants-lobby-user-actions-create-a-restaurant></a>user actions - create a restaurant
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ create
@@ -156,8 +368,9 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-14T07:10:18",
-    "id": 9921,
+    "created": "2020-07-15T15:01:48",
+    "id": 11791,
+    "menus": [],
     "name": "test",
     "url": "some url"
   }
@@ -171,22 +384,23 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-14T07:10:18",
-    "id": 9921,
+    "created": "2020-07-15T15:01:48",
+    "id": 11791,
+    "menus": [],
     "name": "test",
     "url": "some url"
   }
 }
 ```
 ---
-## <a id=channel-restaurants-user-actions-edit-a-restaurant></a>user actions - edit a restaurant
+## <a id=channel-restaurants-lobby-user-actions-edit-a-restaurant></a>user actions - edit a restaurant
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ update
 * __Body:__
 ```json
 {
-  "id": 9934,
+  "id": 11782,
   "params": {
     "name": "new name",
     "url": "new url"
@@ -199,9 +413,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 402",
-    "created": "2020-07-14T07:10:18",
-    "id": 9934,
+    "address": "trollvägen 077",
+    "created": "2020-07-15T15:01:48",
+    "id": 11782,
+    "menus": [],
     "name": "new name",
     "url": "new url"
   }
@@ -214,23 +429,24 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 402",
-    "created": "2020-07-14T07:10:18",
-    "id": 9934,
+    "address": "trollvägen 077",
+    "created": "2020-07-15T15:01:48",
+    "id": 11782,
+    "menus": [],
     "name": "new name",
     "url": "new url"
   }
 }
 ```
 ---
-## <a id=channel-restaurants-user-actions-delete-a-restaurant></a>user actions - delete a restaurant
+## <a id=channel-restaurants-lobby-user-actions-delete-a-restaurant></a>user actions - delete a restaurant
 #### → <ins>Message to server</ins>
 * __Topic:__ restaurants:lobby
 * __Event:__ delete
 * __Body:__
 ```json
 {
-  "id": 9928
+  "id": 11793
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -238,7 +454,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'restaurant 940' with id 9928"
+  "message": "Deleted restaurant 'restaurant 322' with id 11793"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -247,12 +463,12 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 9928,
-  "message": "Deleted restaurant 'restaurant 940'"
+  "id": 11793,
+  "message": "Deleted restaurant 'restaurant 322'"
 }
 ```
 ---
-# (REST) Register account
+# <a id=rest-register-account></a>(REST) Register account
 ## <a id=rest-register-account-create></a>rest-register-account-create
 #
 ### POST /register - REGISTER SUCCESS
@@ -266,7 +482,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303420413@example.com",
+  "email": "user-576460752303423003@example.com",
   "password": "hello world!",
   "password_confirmation": "hello world!"
 }
@@ -278,14 +494,14 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiGM23MuMgBfUTwAAAwj
+x-request-id: FiH1KruO3YB_lSYAAAIF
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "email": "user-576460752303420413@example.com",
-    "token": "2MqA4h1IwVGsf5Av5BfeaC+5hsxcmMCpiqgReQlQktk="
+    "email": "user-576460752303423003@example.com",
+    "token": "nH+j3QYIMcq9/LDZ2qAhOZtZNpOmPdkER/DKmiMh9ZU="
   }
 }
 ```
@@ -314,7 +530,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiGM23FVLEC14ZgAAA9h
+x-request-id: FiH1KrfNj8D_ZKcAAAoh
 ```
 * __Response body:__
 ```json
@@ -333,7 +549,7 @@ x-request-id: FiGM23FVLEC14ZgAAA9h
 ```
 
 ---
-# (REST) Login account
+# <a id=rest-login-account></a>(REST) Login account
 ## <a id=rest-login-account-create></a>rest-login-account-create
 #
 ### POST /login - LOGIN SUCCESS
@@ -347,7 +563,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303419487@example.com",
+  "email": "user-576460752303420863@example.com",
   "password": "hello world!"
 }
 ```
@@ -358,13 +574,13 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiGM23MuMgDMDlYAAA_B
+x-request-id: FiH1KruO3YCWCEUAAAph
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "token": "yAsrZ/7IrC4gPPBQG6y6nMAc21ZEPCTVp8MRywKDpvs="
+    "token": "0KHn576z4tWn8NRpNOM9ZFooGSTAUt/wfyDfytdudic="
   }
 }
 ```
@@ -381,7 +597,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303419519@example.com",
+  "email": "user-576460752303423067@example.com",
   "password": "lol"
 }
 ```
@@ -392,7 +608,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiGM23FVLEBM2RIAAA7E
+x-request-id: FiH1KrfNj8BMC2EAAAHF
 ```
 * __Response body:__
 ```json

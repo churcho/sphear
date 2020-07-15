@@ -10,13 +10,14 @@ defmodule MatxWeb.Api.RestaurantView do
   end
 
   def render("restaurant.json", %{restaurant: restaurant}) do
+    menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_order)
     %{
       id: restaurant.id,
       created: restaurant.inserted_at,
       name: restaurant.name,
       address: restaurant.address,
       url: restaurant.url,
-      menus: restaurant.menus
+      menus: menus
     }
   end
 
