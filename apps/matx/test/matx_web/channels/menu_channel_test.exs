@@ -183,48 +183,47 @@ defmodule MatxWeb.Channels.MenuChannelTest do
 
     test "change order of menu", %{socket: socket} do
       restaurant = restaurant_fixture()
-      # Create some menus, sleep between to simulate order by insertion timestamp
-      {:ok, menu1} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
-      {:ok, menu2} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu2"})
-      {:ok, menu3} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu3"})
-      {:ok, menu4} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu4"})
+      [menu1, menu2, menu3, menu4] = create_menus(restaurant)
 
       {:ok, restaurant} = 
         restaurant
         |> Db.Repo.preload(:menus)
         |> Feeders.reset_order_list()
 
-      # First check: Menu 1 should be at slot 0
+      # First check: Menu 2 should be at index 1
       ref = doc_push(socket, "get", %{restaurant_id: restaurant.id})
       assert_reply(ref, :ok, %{data: data}) |> doc
       {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
-      # assert Slot 0 == Menu 1
-      menu_slot_0 = Enum.at(decoded_data["menus"], 0)
-      assert menu_slot_0["id"] == menu1.id
+      # assert index 1 == Menu 2
+      menu_slot_1 = Enum.at(decoded_data["menus"], 1)
+      assert menu_slot_1["id"] == menu2.id
 
-      # Insert menu4 to second slot
-      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu4.id, action: "insert_at_index", index: 0})
+      # Then, insert menu 4 to index 1
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu4.id, action: "insert_at_index", index: 1})
       assert_reply(ref, :ok, %{data: data}) |> doc
       {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
-      # assert Slot 0 == Menu 4
-      menu_slot_1 = Enum.at(decoded_data["menus"], 0)
+      # assert index 1 == Menu 4
+      menu_slot_1 = Enum.at(decoded_data["menus"], 1)
       assert menu_slot_1["id"] == menu4.id
 
-      # Push menu3 higher
+      # Now, we test methods: [:higher, :lower, :to_bottom, :to_top] after each other
+      # We start at (1-4-2-3)
+      # We put menu 3 one higher (->1-4-3-2)
+      # Then menu 1 one lower (->4-1-3-2)
+      # Then 3 to the top (->3-4-1-2)
+      # Then 4 to the bottom (->3-1-2-4)
       ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu3.id, action: "higher"})
       assert_reply(ref, :ok) |> doc
-      
-      # Push menu1 lower
       ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu1.id, action: "lower"})
       assert_reply(ref, :ok) |> doc
-      
-      # Push menu3 to the top
       ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu3.id, action: "to_top"})
       assert_reply(ref, :ok) |> doc
-      
-      # Push menu2 to the bottom
-      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu2.id, action: "to_bottom"})
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu4.id, action: "to_bottom"})
       assert_reply(ref, :ok) |> doc
+
+      # Last check: Menu order should now finally be ->3-1-2-4
+      {:ok, restaurant} = Feeders.get_restaurant(restaurant.id)
+      assert restaurant.menus_order == [menu3.id, menu1.id, menu2.id, menu4.id]
     end
   end
 

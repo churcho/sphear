@@ -225,20 +225,20 @@ defmodule MatxWeb.Channels.MenuChannel do
   defp changeset_menu_order(restaurant, menu_id, action, index) do
     case action do
       "higher" ->
-        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :higher)
-        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+        Feeders.change_menu_order(restaurant, menu_id, :higher)
+        |> Db.Repo.update()
       "lower" ->
-        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :lower)
-        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+        Feeders.change_menu_order(restaurant, menu_id, :lower)
+        |> Db.Repo.update()
       "to_top" ->
-        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :to_top)
-        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+        Feeders.change_menu_order(restaurant, menu_id, :to_top)
+        |> Db.Repo.update()
       "to_bottom" ->
-        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :to_bottom)
-        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+        Feeders.change_menu_order(restaurant, menu_id, :to_bottom)
+        |> Db.Repo.update()
       "insert_at_index" ->
-        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, index, :insert)
-        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+        Feeders.change_menu_order(restaurant, menu_id, index, :insert)
+        |> Db.Repo.update()
       _ ->
         {:error, :action_not_found}
     end

@@ -3,6 +3,7 @@ defmodule Db.RestaurantsFixtures do
   This module defines test helpers for creating
   entities via the `Db.Restaurants` context.
   """
+  alias Db.Feeders
 
 
   defp random_3() do
@@ -24,8 +25,16 @@ defmodule Db.RestaurantsFixtures do
         url: valid_url(),
         address: valid_address()
       })
-      |> Db.Feeders.create_restaurant()
+      |> Feeders.create_restaurant()
 
       restaurant
+  end
+
+  def create_menus(restaurant) do
+    {:ok, menu1} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
+    {:ok, menu2} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu2"})
+    {:ok, menu3} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu3"})
+    {:ok, menu4} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu4"})
+    [menu1, menu2, menu3, menu4]
   end
 end

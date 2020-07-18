@@ -72,7 +72,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "restaurant_id": 15140
+  "restaurant_id": 16370
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -83,22 +83,22 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1457,
+        "created": "2020-07-18T11:11:02",
+        "id": 1809,
         "name": "test menu1",
-        "restaurant_id": 15140
+        "restaurant_id": 16370
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1458,
+        "created": "2020-07-18T11:11:02",
+        "id": 1810,
         "name": "test menu2",
-        "restaurant_id": 15140
+        "restaurant_id": 16370
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1459,
+        "created": "2020-07-18T11:11:02",
+        "id": 1811,
         "name": "test menu3",
-        "restaurant_id": 15140
+        "restaurant_id": 16370
       }
     ]
   }
@@ -112,7 +112,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "menu_id": 1469
+  "menu_id": 1812
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -121,10 +121,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "created": "2020-07-18T01:33:54",
-    "id": 1469,
+    "created": "2020-07-18T11:11:02",
+    "id": 1812,
     "name": "test menu1",
-    "restaurant_id": 15160
+    "restaurant_id": 16375
   }
 }
 ```
@@ -138,7 +138,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "user_id": 31636
+  "user_id": 32810
 }
 ```
 ---
@@ -150,7 +150,7 @@ The endpoint will reply with either:
 ```json
 {
   "name": "test menu",
-  "restaurant_id": 15149
+  "restaurant_id": 16393
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -159,10 +159,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "created": "2020-07-18T01:33:54",
-    "id": 1463,
+    "created": "2020-07-18T11:11:03",
+    "id": 1819,
     "name": "test menu",
-    "restaurant_id": 15149
+    "restaurant_id": 16393
   }
 }
 ```
@@ -173,10 +173,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "created": "2020-07-18T01:33:54",
-    "id": 1463,
+    "created": "2020-07-18T11:11:03",
+    "id": 1819,
     "name": "test menu",
-    "restaurant_id": 15149
+    "restaurant_id": 16393
   }
 }
 ```
@@ -188,7 +188,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 1461,
+  "id": 1821,
   "params": {
     "name": "some new name"
   }
@@ -200,10 +200,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "created": "2020-07-18T01:33:54",
-    "id": 1461,
+    "created": "2020-07-18T11:11:03",
+    "id": 1821,
     "name": "some new name",
-    "restaurant_id": 15144
+    "restaurant_id": 16397
   }
 }
 ```
@@ -214,10 +214,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "created": "2020-07-18T01:33:54",
-    "id": 1461,
+    "created": "2020-07-18T11:11:03",
+    "id": 1821,
     "name": "some new name",
-    "restaurant_id": 15144
+    "restaurant_id": 16397
   }
 }
 ```
@@ -229,7 +229,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 1460
+  "id": 1813
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -237,7 +237,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted menu 'test menu1' with id 1460"
+  "message": "Deleted menu 'test menu1' with id 1813"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -246,7 +246,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 1460,
+  "id": 1813,
   "message": "Deleted menu 'test menu1'"
 }
 ```
@@ -258,7 +258,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "restaurant_id": 15152
+  "restaurant_id": 16385
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -269,28 +269,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1464,
+        "created": "2020-07-18T11:11:02",
+        "id": 1815,
         "name": "test menu1",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1465,
+        "created": "2020-07-18T11:11:02",
+        "id": 1816,
         "name": "test menu2",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1466,
+        "created": "2020-07-18T11:11:02",
+        "id": 1817,
         "name": "test menu3",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1467,
+        "created": "2020-07-18T11:11:02",
+        "id": 1818,
         "name": "test menu4",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       }
     ]
   }
@@ -303,9 +303,9 @@ The endpoint will reply with either:
 ```json
 {
   "action": "insert_at_index",
-  "index": 0,
-  "menu_id": 1467,
-  "restaurant_id": 15152
+  "index": 1,
+  "menu_id": 1818,
+  "restaurant_id": 16385
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -316,28 +316,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1467,
-        "name": "test menu4",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1464,
+        "created": "2020-07-18T11:11:02",
+        "id": 1815,
         "name": "test menu1",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1465,
+        "created": "2020-07-18T11:11:02",
+        "id": 1818,
+        "name": "test menu4",
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1816,
         "name": "test menu2",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1466,
+        "created": "2020-07-18T11:11:02",
+        "id": 1817,
         "name": "test menu3",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       }
     ]
   }
@@ -350,8 +350,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "higher",
-  "menu_id": 1466,
-  "restaurant_id": 15152
+  "menu_id": 1817,
+  "restaurant_id": 16385
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -362,28 +362,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1464,
+        "created": "2020-07-18T11:11:02",
+        "id": 1815,
         "name": "test menu1",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1466,
-        "name": "test menu3",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1465,
-        "name": "test menu2",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1467,
+        "created": "2020-07-18T11:11:02",
+        "id": 1818,
         "name": "test menu4",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1817,
+        "name": "test menu3",
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1816,
+        "name": "test menu2",
+        "restaurant_id": 16385
       }
     ]
   }
@@ -396,8 +396,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "lower",
-  "menu_id": 1464,
-  "restaurant_id": 15152
+  "menu_id": 1815,
+  "restaurant_id": 16385
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -408,28 +408,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1465,
-        "name": "test menu2",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1464,
-        "name": "test menu1",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1466,
-        "name": "test menu3",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1467,
+        "created": "2020-07-18T11:11:02",
+        "id": 1818,
         "name": "test menu4",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1815,
+        "name": "test menu1",
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1817,
+        "name": "test menu3",
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1816,
+        "name": "test menu2",
+        "restaurant_id": 16385
       }
     ]
   }
@@ -442,8 +442,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "to_top",
-  "menu_id": 1466,
-  "restaurant_id": 15152
+  "menu_id": 1817,
+  "restaurant_id": 16385
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -454,28 +454,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1466,
+        "created": "2020-07-18T11:11:02",
+        "id": 1817,
         "name": "test menu3",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1464,
-        "name": "test menu1",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1465,
-        "name": "test menu2",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1467,
+        "created": "2020-07-18T11:11:02",
+        "id": 1818,
         "name": "test menu4",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1815,
+        "name": "test menu1",
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1816,
+        "name": "test menu2",
+        "restaurant_id": 16385
       }
     ]
   }
@@ -488,8 +488,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "to_bottom",
-  "menu_id": 1465,
-  "restaurant_id": 15152
+  "menu_id": 1818,
+  "restaurant_id": 16385
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -500,28 +500,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1464,
-        "name": "test menu1",
-        "restaurant_id": 15152
-      },
-      {
-        "created": "2020-07-18T01:33:54",
-        "id": 1466,
+        "created": "2020-07-18T11:11:02",
+        "id": 1817,
         "name": "test menu3",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1467,
-        "name": "test menu4",
-        "restaurant_id": 15152
+        "created": "2020-07-18T11:11:02",
+        "id": 1815,
+        "name": "test menu1",
+        "restaurant_id": 16385
       },
       {
-        "created": "2020-07-18T01:33:54",
-        "id": 1465,
+        "created": "2020-07-18T11:11:02",
+        "id": 1816,
         "name": "test menu2",
-        "restaurant_id": 15152
+        "restaurant_id": 16385
+      },
+      {
+        "created": "2020-07-18T11:11:02",
+        "id": 1818,
+        "name": "test menu4",
+        "restaurant_id": 16385
       }
     ]
   }
@@ -560,28 +560,28 @@ The endpoint will reply with either:
   "data": {
     "restaurants": [
       {
-        "address": "trollvägen 524",
-        "created": "2020-07-18T01:33:55",
-        "id": 15187,
+        "address": "trollvägen 087",
+        "created": "2020-07-18T11:11:03",
+        "id": 16417,
         "menus": [],
-        "name": "restaurant 588",
-        "url": "https://556.io"
+        "name": "restaurant 151",
+        "url": "https://119.io"
       },
       {
-        "address": "trollvägen 995",
-        "created": "2020-07-18T01:33:55",
-        "id": 15188,
+        "address": "trollvägen 927",
+        "created": "2020-07-18T11:11:03",
+        "id": 16418,
         "menus": [],
-        "name": "restaurant 059",
-        "url": "https://027.io"
+        "name": "restaurant 991",
+        "url": "https://959.io"
       },
       {
-        "address": "trollvägen 899",
-        "created": "2020-07-18T01:33:55",
-        "id": 15189,
+        "address": "trollvägen 831",
+        "created": "2020-07-18T11:11:03",
+        "id": 16419,
         "menus": [],
-        "name": "restaurant 963",
-        "url": "https://931.io"
+        "name": "restaurant 895",
+        "url": "https://863.io"
       }
     ]
   }
@@ -595,7 +595,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 15182
+  "id": 16410
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -604,12 +604,12 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 164",
-    "created": "2020-07-18T01:33:55",
-    "id": 15182,
+    "address": "trollvägen 411",
+    "created": "2020-07-18T11:11:03",
+    "id": 16410,
     "menus": [],
-    "name": "restaurant 228",
-    "url": "https://196.io"
+    "name": "restaurant 475",
+    "url": "https://443.io"
   }
 }
 ```
@@ -623,7 +623,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "user_id": 31647
+  "user_id": 32818
 }
 ```
 ---
@@ -646,8 +646,8 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-18T01:33:54",
-    "id": 15166,
+    "created": "2020-07-18T11:11:03",
+    "id": 16416,
     "menus": [],
     "name": "test",
     "url": "some url"
@@ -662,8 +662,8 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-18T01:33:54",
-    "id": 15166,
+    "created": "2020-07-18T11:11:03",
+    "id": 16416,
     "menus": [],
     "name": "test",
     "url": "some url"
@@ -678,7 +678,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 15170,
+  "id": 16403,
   "params": {
     "name": "new name",
     "url": "new url"
@@ -691,9 +691,9 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 092",
-    "created": "2020-07-18T01:33:54",
-    "id": 15170,
+    "address": "trollvägen 726",
+    "created": "2020-07-18T11:11:03",
+    "id": 16403,
     "menus": [],
     "name": "new name",
     "url": "new url"
@@ -707,9 +707,9 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 092",
-    "created": "2020-07-18T01:33:54",
-    "id": 15170,
+    "address": "trollvägen 726",
+    "created": "2020-07-18T11:11:03",
+    "id": 16403,
     "menus": [],
     "name": "new name",
     "url": "new url"
@@ -724,7 +724,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 15177
+  "id": 16412
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -732,7 +732,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'restaurant 603' with id 15177"
+  "message": "Deleted restaurant 'restaurant 695' with id 16412"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -741,8 +741,8 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "id": 15177,
-  "message": "Deleted restaurant 'restaurant 603'"
+  "id": 16412,
+  "message": "Deleted restaurant 'restaurant 695'"
 }
 ```
 ---
@@ -760,7 +760,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303423481@example.com",
+  "email": "user-576460752303423258@example.com",
   "password": "hello world!",
   "password_confirmation": "hello world!"
 }
@@ -772,14 +772,14 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiK00lT0OAA7bFQAAAAn
+x-request-id: FiLUUOgJt4A7bFQAAAEG
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "email": "user-576460752303423481@example.com",
-    "token": "CjthjWwokSEDH4gy95sra5U+Q1keqkAQ4WtbOCXLX1Y="
+    "email": "user-576460752303423258@example.com",
+    "token": "cY+tCAiT+uiA8eye4cffFON1MadYZ3ajreTUjdHRF0Q="
   }
 }
 ```
@@ -808,7 +808,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiK00lInDkDpE5oAAAGE
+x-request-id: FiLUUOU8jcDpE5oAAAKi
 ```
 * __Response body:__
 ```json
@@ -841,7 +841,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303423068@example.com",
+  "email": "user-576460752303422782@example.com",
   "password": "hello world!"
 }
 ```
@@ -852,13 +852,13 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiK00lT0OAD8j9QAAAHE
+x-request-id: FiLUUOgJt4D8j9QAAALi
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "token": "SmhONTxabk2gHn95/q7z3wUKqnzZT2BnNBAxIJS2AdY="
+    "token": "u9iaY2k4my85/oBnkIV7Os3ddXkzA9m4vKGfkOowM80="
   }
 }
 ```
@@ -875,7 +875,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303423164@example.com",
+  "email": "user-576460752303422878@example.com",
   "password": "lol"
 }
 ```
@@ -886,7 +886,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiK00lInDkB3YwcAAAFk
+x-request-id: FiLUUOU8jcB3YwcAAAKC
 ```
 * __Response body:__
 ```json
