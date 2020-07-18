@@ -96,11 +96,6 @@ defmodule MatxWeb.Channels.MenuChannel do
         end
     end
   end
-  def handle_in("create", _, socket) do
-    {:reply, 
-    {:error, %{message: "Missing menu 'id'"}},
-    socket}
-  end
 
   def handle_in("delete", %{"id" => id}, socket) do
     case socket.assigns[:user_id] do
@@ -175,12 +170,77 @@ defmodule MatxWeb.Channels.MenuChannel do
     end
   end
 
+  def handle_in("change_menu_order", %{"restaurant_id" => _restaurant_id, "menu_id" => _menu_id, "action" => "insert", "insert" => nil}, socket) do
+    {:reply,
+    {:error, %{message: "Expected 'insert' param when action is 'insert'"}},
+    socket}
+  end
+  def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => "insert", "insert" => insert}, socket) do
+    change_menu_order(restaurant_id, menu_id, "insert", insert, socket)
+  end
+  def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => action}, socket) do
+    change_menu_order(restaurant_id, menu_id, action, nil, socket)
+  end
+  def handle_in("change_menu_order", _, socket) do
+    {:reply,
+    {:error, %{message: "Expected 'restaurant_id', 'menu_id' and 'action' params"}},
+    socket}
+  end
+
   def terminate(reason, _socket) do
     Logger.debug"> leave #{inspect reason}"
     :ok
   end
 
-    #def join("restaurants:" <> "private", _message, _socket) do
-  #  {:error, %{reason: "unauthorized"}}
-  #end
+  defp change_menu_order(restaurant_id, menu_id, action, insert, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Feeders.get_restaurant(restaurant_id) do
+          {:ok, restaurant} ->
+            case changeset_menu_order(restaurant, menu_id, action, insert) do
+              {:ok, restaurant} ->
+                menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_order)
+                {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "index.json", menus: menus)}}, socket}
+              {:error, :action_not_found} ->
+                {:reply,
+                  {:error, %{message: "Unknown action"}},
+                socket}
+              {:error, %Ecto.Changeset{} = changeset} ->
+                {:reply,
+                  {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+                socket}
+            end
+          {:error, _} ->
+            {:reply, 
+              {:error, %{message: "Could not find restaurant with id: " <> restaurant_id}},
+              socket}
+        end
+    end
+  end
+
+  defp changeset_menu_order(restaurant, menu_id, action, insert) do
+    case action do
+      "higher" ->
+        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :higher)
+        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+      "lower" ->
+        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :lower)
+        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+      "to_top" ->
+        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :to_top)
+        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+      "to_bottom" ->
+        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :to_bottom)
+        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+      "insert" ->
+        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, insert, :insert)
+        Ecto.Changeset.apply_action(changed_order_changeset, :update)
+      _ ->
+        {:error, :action_not_found}
+    end
+  end
 end

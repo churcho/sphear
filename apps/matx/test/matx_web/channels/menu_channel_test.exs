@@ -4,6 +4,7 @@ defmodule MatxWeb.Channels.MenuChannelTest do
   import Db.AccountsFixtures
   import Db.RestaurantsFixtures
   alias Db.Feeders
+  alias Bureaucrat.JSON
 
   setup do
     restaurant_fixture()
@@ -178,6 +179,53 @@ defmodule MatxWeb.Channels.MenuChannelTest do
       |> doc()
       assert_broadcast("menu_deleted", %{message: message, id: ^menu_id})
       |> doc()
+    end
+
+    test "change order of menu", %{socket: socket} do
+      restaurant = restaurant_fixture()
+      # Create some menus, sleep between to simulate order by insertion timestamp
+      {:ok, menu1} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
+      {:ok, menu2} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu2"})
+      {:ok, menu3} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu3"})
+      {:ok, menu4} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu4"})
+
+      {:ok, restaurant} = 
+        restaurant
+        |> Db.Repo.preload(:menus)
+        |> Feeders.reset_order_list()
+
+
+      # First check: Menu 2 should be at slot 1
+      ref = push(socket, "get", %{restaurant_id: restaurant.id})
+      assert_reply(ref, :ok, %{data: data})
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      # assert Slot 1 == Menu 2
+      menu_slot_1 = Enum.at(decoded_data["menus"], 1)
+      assert menu_slot_1["id"] == menu2.id
+
+      # Insert menu4 to second slot
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu4.id, action: "insert", insert: 2})
+      assert_reply(ref, :ok, %{data: data}) |> doc
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      # assert Slot 1 == Menu 4
+      menu_slot_1 = Enum.at(decoded_data["menus"], 1)
+      assert menu_slot_1["id"] == menu4.id
+
+      # Push menu3 higher
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu3.id, action: "higher"})
+      assert_reply(ref, :ok) |> doc
+      
+      # Push menu1 lower
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu1.id, action: "lower"})
+      assert_reply(ref, :ok) |> doc
+      
+      # Push menu3 to the top
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu3.id, action: "to_top"})
+      assert_reply(ref, :ok) |> doc
+      
+      # Push menu2 to the bottom
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu2.id, action: "to_bottom"})
+      assert_reply(ref, :ok) |> doc
     end
   end
 
