@@ -194,21 +194,20 @@ defmodule MatxWeb.Channels.MenuChannelTest do
         |> Db.Repo.preload(:menus)
         |> Feeders.reset_order_list()
 
-
-      # First check: Menu 2 should be at slot 1
-      ref = push(socket, "get", %{restaurant_id: restaurant.id})
-      assert_reply(ref, :ok, %{data: data})
-      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
-      # assert Slot 1 == Menu 2
-      menu_slot_1 = Enum.at(decoded_data["menus"], 1)
-      assert menu_slot_1["id"] == menu2.id
-
-      # Insert menu4 to second slot
-      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu4.id, action: "insert", insert: 2})
+      # First check: Menu 1 should be at slot 0
+      ref = doc_push(socket, "get", %{restaurant_id: restaurant.id})
       assert_reply(ref, :ok, %{data: data}) |> doc
       {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
-      # assert Slot 1 == Menu 4
-      menu_slot_1 = Enum.at(decoded_data["menus"], 1)
+      # assert Slot 0 == Menu 1
+      menu_slot_0 = Enum.at(decoded_data["menus"], 0)
+      assert menu_slot_0["id"] == menu1.id
+
+      # Insert menu4 to second slot
+      ref = doc_push(socket, "change_menu_order", %{restaurant_id: restaurant.id, menu_id: menu4.id, action: "insert_at_index", index: 0})
+      assert_reply(ref, :ok, %{data: data}) |> doc
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      # assert Slot 0 == Menu 4
+      menu_slot_1 = Enum.at(decoded_data["menus"], 0)
       assert menu_slot_1["id"] == menu4.id
 
       # Push menu3 higher

@@ -236,6 +236,7 @@ defmodule Db.Feeders do
       %Ecto.Changeset{%Restaurant{}}
   """
   def change_menu_order(restaurant, menu_item, index, :insert) do
+    index = index + 1
     new_order = EctoList.ListItem.insert_at(restaurant.menus_order, menu_item, index)
     Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
   end

@@ -77,11 +77,8 @@ defmodule Db.FeedersTest do
       restaurant = restaurant_fixture()
       # Create some menus, sleep between to simulate order by insertion timestamp
       {:ok, menu1} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
-      :timer.sleep(500)
       {:ok, menu2} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu2"})
-      :timer.sleep(500)
       {:ok, menu3} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu3"})
-      :timer.sleep(500)
       {:ok, menu4} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu4"})
 
       {:ok, restaurant} = 
@@ -89,16 +86,16 @@ defmodule Db.FeedersTest do
         |> Repo.preload(:menus)
         |> Feeders.reset_order_list()
 
-      # First check: Menu 2 should be at slot 1
+      # First check: Menu 2 should be at the second slot
       assert Enum.at(restaurant.menus_order, 1) == menu2.id
 
-      # Now, insert menu 4 before slot 2
+      # Now, insert menu 4 to the second slot
       restaurant = 
         restaurant 
-        |> Feeders.change_menu_order(menu4.id, 2, :insert)
+        |> Feeders.change_menu_order(menu4.id, 1, :insert)
         |> update_order
 
-      # Menu 4 should now be at slot 1
+      # Menu 4 should now be at the second slot
       assert Enum.at(restaurant.menus_order, 1) == menu4.id
 
       # Now, we test methods: [:higher, :lower, :to_bottom, :to_top] after each other

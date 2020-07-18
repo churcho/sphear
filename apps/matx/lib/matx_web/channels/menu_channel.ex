@@ -170,13 +170,13 @@ defmodule MatxWeb.Channels.MenuChannel do
     end
   end
 
-  def handle_in("change_menu_order", %{"restaurant_id" => _restaurant_id, "menu_id" => _menu_id, "action" => "insert", "insert" => nil}, socket) do
-    {:reply,
-    {:error, %{message: "Expected 'insert' param when action is 'insert'"}},
-    socket}
+  def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => "insert_at_index", "index" => index}, socket) do
+    change_menu_order(restaurant_id, menu_id, "insert_at_index", index, socket)
   end
-  def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => "insert", "insert" => insert}, socket) do
-    change_menu_order(restaurant_id, menu_id, "insert", insert, socket)
+  def handle_in("change_menu_order", %{"restaurant_id" => _restaurant_id, "menu_id" => _menu_id, "action" => "insert_at_index"}, socket) do
+    {:reply,
+    {:error, %{message: "Expected 'index' param when action is 'insert_at_index'"}},
+    socket}
   end
   def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => action}, socket) do
     change_menu_order(restaurant_id, menu_id, action, nil, socket)
@@ -192,7 +192,7 @@ defmodule MatxWeb.Channels.MenuChannel do
     :ok
   end
 
-  defp change_menu_order(restaurant_id, menu_id, action, insert, socket) do
+  defp change_menu_order(restaurant_id, menu_id, action, index, socket) do
     case socket.assigns[:user_id] do
       nil ->
         {:reply,
@@ -201,7 +201,7 @@ defmodule MatxWeb.Channels.MenuChannel do
       _user_id ->
         case Feeders.get_restaurant(restaurant_id) do
           {:ok, restaurant} ->
-            case changeset_menu_order(restaurant, menu_id, action, insert) do
+            case changeset_menu_order(restaurant, menu_id, action, index) do
               {:ok, restaurant} ->
                 menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_order)
                 {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "index.json", menus: menus)}}, socket}
@@ -222,7 +222,7 @@ defmodule MatxWeb.Channels.MenuChannel do
     end
   end
 
-  defp changeset_menu_order(restaurant, menu_id, action, insert) do
+  defp changeset_menu_order(restaurant, menu_id, action, index) do
     case action do
       "higher" ->
         changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :higher)
@@ -236,8 +236,8 @@ defmodule MatxWeb.Channels.MenuChannel do
       "to_bottom" ->
         changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, :to_bottom)
         Ecto.Changeset.apply_action(changed_order_changeset, :update)
-      "insert" ->
-        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, insert, :insert)
+      "insert_at_index" ->
+        changed_order_changeset = Feeders.change_menu_order(restaurant, menu_id, index, :insert)
         Ecto.Changeset.apply_action(changed_order_changeset, :update)
       _ ->
         {:error, :action_not_found}
