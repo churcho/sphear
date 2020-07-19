@@ -161,7 +161,7 @@ defmodule MatxWeb.Channels.RestaurantChannel do
   def handle_in("get_menus", %{"restaurant_id" => id}, socket) do
     case Feeders.get_restaurant(id) do
       {:ok, restaurant} ->
-        menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_order)
+        menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_sequence)
         {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "index.json", menus: menus)}}, socket}
       {:error, :not_found} ->
         {:reply, 
@@ -272,24 +272,24 @@ defmodule MatxWeb.Channels.RestaurantChannel do
     socket}
   end
 
-  def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => "insert_at", "index" => index}, socket) do
-    change_menu_order(restaurant_id, menu_id, "insert_at", index, socket)
+  def handle_in("change_menu_sequence", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => "insert_at", "index" => index}, socket) do
+    change_menu_sequence(restaurant_id, menu_id, "insert_at", index, socket)
   end
-  def handle_in("change_menu_order", %{"restaurant_id" => _restaurant_id, "menu_id" => _menu_id, "action" => "insert_at"}, socket) do
+  def handle_in("change_menu_sequence", %{"restaurant_id" => _restaurant_id, "menu_id" => _menu_id, "action" => "insert_at"}, socket) do
     {:reply,
     {:error, %{message: "Expected 'index' param when action is 'insert_at'"}},
     socket}
   end
-  def handle_in("change_menu_order", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => action}, socket) do
-    change_menu_order(restaurant_id, menu_id, action, nil, socket)
+  def handle_in("change_menu_sequence", %{"restaurant_id" => restaurant_id, "menu_id" => menu_id, "action" => action}, socket) do
+    change_menu_sequence(restaurant_id, menu_id, action, nil, socket)
   end
-  def handle_in("change_menu_order", _, socket) do
+  def handle_in("change_menu_sequence", _, socket) do
     {:reply,
     {:error, %{message: "Expected 'restaurant_id', 'menu_id' and 'action' params"}},
     socket}
   end
 
-  defp change_menu_order(restaurant_id, menu_id, action, index, socket) do
+  defp change_menu_sequence(restaurant_id, menu_id, action, index, socket) do
     case socket.assigns[:user_id] do
       nil ->
         {:reply,
@@ -298,9 +298,9 @@ defmodule MatxWeb.Channels.RestaurantChannel do
       _user_id ->
         case Feeders.get_restaurant(restaurant_id) do
           {:ok, restaurant} ->
-            case changeset_menu_order(restaurant, menu_id, action, index) do
+            case changeset_menu_sequence(restaurant, menu_id, action, index) do
               {:ok, restaurant} ->
-                menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_order)
+                menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_sequence)
                 {:reply, {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "index.json", menus: menus)}}, socket}
               {:error, :action_not_found} ->
                 {:reply,
@@ -319,22 +319,22 @@ defmodule MatxWeb.Channels.RestaurantChannel do
     end
   end
 
-  defp changeset_menu_order(restaurant, menu_id, action, index) do
+  defp changeset_menu_sequence(restaurant, menu_id, action, index) do
     case action do
       "higher" ->
-        Feeders.change_menu_order(restaurant, menu_id, :higher)
+        Feeders.change_menu_sequence(restaurant, menu_id, :higher)
         |> Db.Repo.update()
       "lower" ->
-        Feeders.change_menu_order(restaurant, menu_id, :lower)
+        Feeders.change_menu_sequence(restaurant, menu_id, :lower)
         |> Db.Repo.update()
       "to_top" ->
-        Feeders.change_menu_order(restaurant, menu_id, :to_top)
+        Feeders.change_menu_sequence(restaurant, menu_id, :to_top)
         |> Db.Repo.update()
       "to_bottom" ->
-        Feeders.change_menu_order(restaurant, menu_id, :to_bottom)
+        Feeders.change_menu_sequence(restaurant, menu_id, :to_bottom)
         |> Db.Repo.update()
       "insert_at" ->
-        Feeders.change_menu_order(restaurant, menu_id, index, :insert)
+        Feeders.change_menu_sequence(restaurant, menu_id, index, :insert)
         |> Db.Repo.update()
       _ ->
         {:error, :action_not_found}

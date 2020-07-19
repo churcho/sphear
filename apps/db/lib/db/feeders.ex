@@ -12,7 +12,7 @@ defmodule Db.Feeders do
     list: Restaurant,
     repo: Repo,
     list_items_key: :menus,
-    items_order_key: :menus_order
+    items_order_key: :menus_sequence
 
   @doc """
   Returns the list of restaurants.
@@ -229,34 +229,34 @@ defmodule Db.Feeders do
     Menu.changeset(menu, attrs)
   end
 
-  ## Order of menu, Restaurant context
+  ## Sequence of menu, Restaurant context
   @doc """
-    Returns an `%Ecto.Changeset{}` for tracking menu order changes.
+    Returns an `%Ecto.Changeset{}` for tracking menu sequence changes.
 
     ## Examples
 
-      iex> change_menu_order(restaurant, menu_item, (index), :action)
+      iex> change_menu_sequence(restaurant, menu_item, (index), :action)
       %Ecto.Changeset{%Restaurant{}}
   """
-  def change_menu_order(restaurant, menu_item, index, :insert) do
+  def change_menu_sequence(restaurant, menu_item, index, :insert) do
     index = index + 1
-    new_order = EctoList.ListItem.insert_at(restaurant.menus_order, menu_item, index)
-    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+    new_sequence = EctoList.ListItem.insert_at(restaurant.menus_sequence, menu_item, index)
+    Restaurant.changeset_menus_sequence(restaurant, %{menus_sequence: new_sequence})
   end
-  def change_menu_order(restaurant, menu_item, :lower) do
-    new_order = EctoList.ListItem.move_lower(restaurant.menus_order, menu_item)
-    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  def change_menu_sequence(restaurant, menu_item, :lower) do
+    new_sequence = EctoList.ListItem.move_lower(restaurant.menus_sequence, menu_item)
+    Restaurant.changeset_menus_sequence(restaurant, %{menus_sequence: new_sequence})
   end
-  def change_menu_order(restaurant, menu_item, :higher) do
-    new_order = EctoList.ListItem.move_higher(restaurant.menus_order, menu_item)
-    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  def change_menu_sequence(restaurant, menu_item, :higher) do
+    new_sequence = EctoList.ListItem.move_higher(restaurant.menus_sequence, menu_item)
+    Restaurant.changeset_menus_sequence(restaurant, %{menus_sequence: new_sequence})
   end
-  def change_menu_order(restaurant, menu_item, :to_bottom) do
-    new_order = EctoList.ListItem.move_to_bottom(restaurant.menus_order, menu_item)
-    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  def change_menu_sequence(restaurant, menu_item, :to_bottom) do
+    new_sequence = EctoList.ListItem.move_to_bottom(restaurant.menus_sequence, menu_item)
+    Restaurant.changeset_menus_sequence(restaurant, %{menus_sequence: new_sequence})
   end
-  def change_menu_order(restaurant, menu_item, :to_top) do
-    new_order = EctoList.ListItem.move_to_top(restaurant.menus_order, menu_item)
-    Restaurant.changeset_menus_order(restaurant, %{menus_order: new_order})
+  def change_menu_sequence(restaurant, menu_item, :to_top) do
+    new_sequence = EctoList.ListItem.move_to_top(restaurant.menus_sequence, menu_item)
+    Restaurant.changeset_menus_sequence(restaurant, %{menus_sequence: new_sequence})
   end
 end

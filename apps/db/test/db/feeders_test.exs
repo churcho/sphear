@@ -73,9 +73,9 @@ defmodule Db.FeedersTest do
       assert {:error, %Ecto.Changeset{}} = Feeders.create_menu(%{restaurant_id: restaurant.id})
     end
 
-    test "change order of menu" do
+    test "change sequence of menu" do
       restaurant = restaurant_fixture()
-      # Create some menus, sleep between to simulate order by insertion timestamp
+      # Create some menus, sleep between to simulate sequence by insertion timestamp
       {:ok, menu1} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
       {:ok, menu2} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu2"})
       {:ok, menu3} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu3"})
@@ -87,16 +87,16 @@ defmodule Db.FeedersTest do
         |> Feeders.reset_order_list()
 
       # First check: Menu 2 should be at the second slot
-      assert Enum.at(restaurant.menus_order, 1) == menu2.id
+      assert Enum.at(restaurant.menus_sequence, 1) == menu2.id
 
       # Now, insert menu 4 to the second slot
       restaurant = 
         restaurant 
-        |> Feeders.change_menu_order(menu4.id, 1, :insert)
-        |> update_order
+        |> Feeders.change_menu_sequence(menu4.id, 1, :insert)
+        |> update_sequence
 
       # Menu 4 should now be at the second slot
-      assert Enum.at(restaurant.menus_order, 1) == menu4.id
+      assert Enum.at(restaurant.menus_sequence, 1) == menu4.id
 
       # Now, we test methods: [:higher, :lower, :to_bottom, :to_top] after each other
       # We start at (1-4-2-3)
@@ -106,21 +106,21 @@ defmodule Db.FeedersTest do
       # Then 4 to the bottom (->3-1-2-4)
       restaurant = 
         restaurant 
-        |> Feeders.change_menu_order(menu3.id, :higher)
-        |> update_order
-        |> Feeders.change_menu_order(menu1.id, :lower)
-        |> update_order
-        |> Feeders.change_menu_order(menu3.id, :to_top)
-        |> update_order
-        |> Feeders.change_menu_order(menu4.id, :to_bottom)
-        |> update_order
+        |> Feeders.change_menu_sequence(menu3.id, :higher)
+        |> update_sequence
+        |> Feeders.change_menu_sequence(menu1.id, :lower)
+        |> update_sequence
+        |> Feeders.change_menu_sequence(menu3.id, :to_top)
+        |> update_sequence
+        |> Feeders.change_menu_sequence(menu4.id, :to_bottom)
+        |> update_sequence
 
-      # Last check: Menu order should now finally be 3->1->2->4
-      assert restaurant.menus_order == [menu3.id, menu1.id, menu2.id, menu4.id]
+      # Last check: Menu sequence should now finally be 3->1->2->4
+      assert restaurant.menus_sequence == [menu3.id, menu1.id, menu2.id, menu4.id]
     end
   end
 
-  defp update_order(changeset) do
+  defp update_sequence(changeset) do
     {:ok, restaurant} = Repo.update(changeset)
     restaurant
   end

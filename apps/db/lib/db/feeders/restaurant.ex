@@ -8,7 +8,7 @@ defmodule Db.Feeders.Restaurant do
     field :address, :string
     field :name, :string
     field :url, :string
-    field :menus_order, {:array, :id}, default: []
+    field :menus_sequence, {:array, :id}, default: []
 
     has_many :menus, Menu
 
@@ -18,12 +18,12 @@ defmodule Db.Feeders.Restaurant do
   @doc false
   def changeset(restaurant, attrs) do
     restaurant
-    |> cast(attrs, [:name, :url, :address, :menus_order])
+    |> cast(attrs, [:name, :url, :address, :menus_sequence])
     |> validate_required([:name, :url, :address])
   end
 
-  def changeset_menus_order(restaurant, attrs) do
+  def changeset_menus_sequence(restaurant, attrs) do
     restaurant
-    |> cast(attrs, [:menus_order])
+    |> cast(attrs, [:menus_sequence])
   end
 end
