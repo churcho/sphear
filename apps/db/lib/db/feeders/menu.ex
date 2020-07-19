@@ -4,6 +4,7 @@ defmodule Db.Feeders.Menu do
 
   alias Db.Feeders.Restaurant
 
+  @derive {Jason.Encoder, only: [:name, :id]}
   schema "menus" do
     field :name, :string
 

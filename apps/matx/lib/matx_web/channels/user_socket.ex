@@ -3,7 +3,6 @@ defmodule MatxWeb.UserSocket do
   
   ## Channels
   channel "restaurants:*", MatxWeb.Channels.RestaurantChannel
-  channel "menus:*", MatxWeb.Channels.MenuChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

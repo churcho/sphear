@@ -43,8 +43,11 @@ defmodule Db.Feeders do
   """
   def get_restaurant(id) do
     case Repo.get(Restaurant, id) do
-      nil -> {:error, :not_found}
-      restaurant -> {:ok, restaurant |> Repo.preload(:menus)}
+      nil -> 
+        {:error, :not_found}
+      restaurant -> 
+        restaurant = Repo.preload(restaurant, :menus)
+        {:ok, restaurant}
     end
   end
 

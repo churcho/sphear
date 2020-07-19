@@ -3,7 +3,6 @@ Bureaucrat.start(
  default_path: "README.md",
  paths: [],
  titles: [
-   {MatxWeb.Channels.MenuChannel, "channel menus:lobby"}, 
    {MatxWeb.Channels.RestaurantChannel, "channel restaurants:lobby"}, 
    {MatxWeb.Api.UserRegistrationController, "(REST) Register account"}, 
    {MatxWeb.Api.UserSessionController, "(REST) Login account"}
