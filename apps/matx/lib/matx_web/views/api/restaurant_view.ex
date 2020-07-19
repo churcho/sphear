@@ -17,7 +17,7 @@ defmodule MatxWeb.Api.RestaurantView do
       name: restaurant.name,
       address: restaurant.address,
       url: restaurant.url,
-      menus: menus
+      menus: menus #render_many(menus, MatxWeb.Api.MenuView, "menu.json")
     }
   end
 

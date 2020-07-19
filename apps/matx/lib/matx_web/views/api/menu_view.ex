@@ -12,9 +12,7 @@ defmodule MatxWeb.Api.MenuView do
   def render("menu.json", %{menu: menu}) do
     %{
       id: menu.id,
-      created: menu.inserted_at,
-      name: menu.name,
-      restaurant_id: menu.restaurant_id
+      name: menu.name
     }
   end
 
