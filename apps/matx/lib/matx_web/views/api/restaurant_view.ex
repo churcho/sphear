@@ -9,6 +9,17 @@ defmodule MatxWeb.Api.RestaurantView do
     render_one(restaurant, MatxWeb.Api.RestaurantView, "restaurant.json")
   end
 
+  def render("restaurant.json", %{restaurant: %{menus: %Ecto.Association.NotLoaded{}} = restaurant}) do
+    %{
+      id: restaurant.id,
+      created: restaurant.inserted_at,
+      name: restaurant.name,
+      address: restaurant.address,
+      url: restaurant.url,
+      menus: [] #render_many(menus, MatxWeb.Api.MenuView, "menu.json")
+    }
+  end
+
   def render("restaurant.json", %{restaurant: restaurant}) do
     menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_sequence)
     %{
@@ -17,7 +28,7 @@ defmodule MatxWeb.Api.RestaurantView do
       name: restaurant.name,
       address: restaurant.address,
       url: restaurant.url,
-      menus: menus #render_many(menus, MatxWeb.Api.MenuView, "menu.json")
+      menus: render_many(menus, MatxWeb.Api.MenuView, "menu.json")
     }
   end
 

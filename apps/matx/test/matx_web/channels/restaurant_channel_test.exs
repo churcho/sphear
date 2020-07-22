@@ -3,8 +3,10 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
   import Db.AccountsFixtures
   import Db.RestaurantsFixtures
+  import Db.MerchandiseFixtures
   alias Bureaucrat.JSON
   alias Db.Feeders
+  alias Db.Repo
 
   setup do
     restaurant_fixture()
@@ -101,7 +103,12 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
     test "get one restaurant", %{socket: socket} do
       restaurant_fixture()
-      restaurant = restaurant_fixture() |> Db.Repo.preload(:menus)
+      restaurant = restaurant_fixture()
+      menu = menu_fixture(restaurant_id: restaurant.id)
+      create_products(menu)
+
+      restaurant = Repo.preload(restaurant, :menus)
+
       restaurant_json = Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)
       data = %{data: restaurant_json}
   

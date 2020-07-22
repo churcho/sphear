@@ -29,6 +29,14 @@ The endpoint will reply with either:
 # Endpoints
 
 
+  * [channel merchandise:lobby](#channel-merchandise-lobby)
+    * [test actions - ping](#channel-merchandise-lobby-test-actions-ping)
+    * [test actions - ensure logged in correctly](#channel-merchandise-lobby-test-actions-ensure-logged-in-correctly)
+    * [test actions - get products from menu](#channel-merchandise-lobby-test-actions-get-products-from-menu)
+    * [user actions - create a product](#channel-merchandise-lobby-user-actions-create-a-product)
+    * [user actions - update a product](#channel-merchandise-lobby-user-actions-update-a-product)
+    * [user actions - delete a product](#channel-merchandise-lobby-user-actions-delete-a-product)
+    * [user actions - change sequence of product](#channel-merchandise-lobby-user-actions-change-sequence-of-product)
   * [channel restaurants:lobby](#channel-restaurants-lobby)
     * [test actions - ping](#channel-restaurants-lobby-test-actions-ping)
     * [test actions - ensure logged in correctly](#channel-restaurants-lobby-test-actions-ensure-logged-in-correctly)
@@ -48,6 +56,595 @@ The endpoint will reply with either:
   * [(REST) Login account](#rest-login-account)
     * [rest-login-account-create](#rest-login-account-create)
 
+# <a id=channel-merchandise-lobby></a>channel merchandise:lobby
+## <a id=channel-merchandise-lobby-test-actions-ping></a>test actions - ping
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ ping
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "message": "pong"
+}
+```
+---
+## <a id=channel-merchandise-lobby-test-actions-ensure-logged-in-correctly></a>test actions - ensure logged in correctly
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ logged_in
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "user_id": 40478
+}
+```
+---
+## <a id=channel-merchandise-lobby-test-actions-get-products-from-menu></a>test actions - get products from menu
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ get_products
+* __Body:__
+```json
+{
+  "menu_id": 5392
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 990,
+        "menu_id": 5392,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 991,
+        "menu_id": 5392,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      },
+      {
+        "id": 992,
+        "menu_id": 5392,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      },
+      {
+        "id": 993,
+        "menu_id": 5392,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      }
+    ]
+  }
+}
+```
+---
+## <a id=channel-merchandise-lobby-user-actions-create-a-product></a>user actions - create a product
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ create_product
+* __Body:__
+```json
+{
+  "menu_id": 5405,
+  "name": "test product 99",
+  "price": 9900
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "id": 999,
+    "menu_id": 5405,
+    "name": "test product 99",
+    "price": {
+      "amount": 9900,
+      "currency": "SEK"
+    },
+    "price_to_string": "99:-"
+  }
+}
+```
+#### ← <ins>Broadcasted to all</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ product_created
+* __Body:__
+```json
+{
+  "data": {
+    "id": 999,
+    "menu_id": 5405,
+    "name": "test product 99",
+    "price": {
+      "amount": 9900,
+      "currency": "SEK"
+    },
+    "price_to_string": "99:-"
+  }
+}
+```
+---
+## <a id=channel-merchandise-lobby-user-actions-update-a-product></a>user actions - update a product
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ update_product
+* __Body:__
+```json
+{
+  "params": {
+    "name": "new product name",
+    "price": 133700
+  },
+  "product_id": 988
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "id": 988,
+    "menu_id": 5388,
+    "name": "new product name",
+    "price": {
+      "amount": 133700,
+      "currency": "SEK"
+    },
+    "price_to_string": "1.337:-"
+  }
+}
+```
+#### ← <ins>Broadcasted to all</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ product_updated
+* __Body:__
+```json
+{
+  "data": {
+    "id": 988,
+    "menu_id": 5388,
+    "name": "new product name",
+    "price": {
+      "amount": 133700,
+      "currency": "SEK"
+    },
+    "price_to_string": "1.337:-"
+  }
+}
+```
+---
+## <a id=channel-merchandise-lobby-user-actions-delete-a-product></a>user actions - delete a product
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ delete_product
+* __Body:__
+```json
+{
+  "product_id": 1000
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "message": "Deleted product 'product 509' with id 1000"
+}
+```
+#### ← <ins>Broadcasted to all</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ product_deleted
+* __Body:__
+```json
+{
+  "message": "Deleted product 'product 509'",
+  "product_id": 1000
+}
+```
+---
+## <a id=channel-merchandise-lobby-user-actions-change-sequence-of-product></a>user actions - change sequence of product
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ get_products
+* __Body:__
+```json
+{
+  "menu_id": 5397
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 994,
+        "menu_id": 5397,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 995,
+        "menu_id": 5397,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      },
+      {
+        "id": 996,
+        "menu_id": 5397,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      },
+      {
+        "id": 997,
+        "menu_id": 5397,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      }
+    ]
+  }
+}
+```
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ change_product_sequence
+* __Body:__
+```json
+{
+  "action": "insert_at",
+  "index": 1,
+  "menu_id": 5397,
+  "product_id": 997
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 994,
+        "menu_id": 5397,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 997,
+        "menu_id": 5397,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      },
+      {
+        "id": 995,
+        "menu_id": 5397,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      },
+      {
+        "id": 996,
+        "menu_id": 5397,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      }
+    ]
+  }
+}
+```
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ change_product_sequence
+* __Body:__
+```json
+{
+  "action": "higher",
+  "menu_id": 5397,
+  "product_id": 996
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 994,
+        "menu_id": 5397,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 997,
+        "menu_id": 5397,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      },
+      {
+        "id": 996,
+        "menu_id": 5397,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      },
+      {
+        "id": 995,
+        "menu_id": 5397,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      }
+    ]
+  }
+}
+```
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ change_product_sequence
+* __Body:__
+```json
+{
+  "action": "lower",
+  "menu_id": 5397,
+  "product_id": 994
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 997,
+        "menu_id": 5397,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      },
+      {
+        "id": 994,
+        "menu_id": 5397,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 996,
+        "menu_id": 5397,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      },
+      {
+        "id": 995,
+        "menu_id": 5397,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      }
+    ]
+  }
+}
+```
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ change_product_sequence
+* __Body:__
+```json
+{
+  "action": "to_top",
+  "menu_id": 5397,
+  "product_id": 996
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 996,
+        "menu_id": 5397,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      },
+      {
+        "id": 997,
+        "menu_id": 5397,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      },
+      {
+        "id": 994,
+        "menu_id": 5397,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 995,
+        "menu_id": 5397,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      }
+    ]
+  }
+}
+```
+#### → <ins>Message to server</ins>
+* __Topic:__ merchandise:lobby
+* __Event:__ change_product_sequence
+* __Body:__
+```json
+{
+  "action": "to_bottom",
+  "menu_id": 5397,
+  "product_id": 997
+}
+```
+#### ← <ins>Reply to you</ins>
+* __Status:__ ok
+* __Body:__
+```json
+{
+  "data": {
+    "products": [
+      {
+        "id": 996,
+        "menu_id": 5397,
+        "name": "test product 3",
+        "price": {
+          "amount": 19900,
+          "currency": "SEK"
+        },
+        "price_to_string": "199:-"
+      },
+      {
+        "id": 994,
+        "menu_id": 5397,
+        "name": "test product 1",
+        "price": {
+          "amount": 9990,
+          "currency": "SEK"
+        },
+        "price_to_string": "99,90:-"
+      },
+      {
+        "id": 995,
+        "menu_id": 5397,
+        "name": "test product 2",
+        "price": {
+          "amount": 4990,
+          "currency": "SEK"
+        },
+        "price_to_string": "49,90:-"
+      },
+      {
+        "id": 997,
+        "menu_id": 5397,
+        "name": "test product 4",
+        "price": {
+          "amount": 99990,
+          "currency": "SEK"
+        },
+        "price_to_string": "999,90:-"
+      }
+    ]
+  }
+}
+```
+---
 # <a id=channel-restaurants-lobby></a>channel restaurants:lobby
 ## <a id=channel-restaurants-lobby-test-actions-ping></a>test actions - ping
 #### → <ins>Message to server</ins>
@@ -71,7 +668,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "user_id": 33908
+  "user_id": 40470
 }
 ```
 ---
@@ -87,28 +684,28 @@ The endpoint will reply with either:
   "data": {
     "restaurants": [
       {
-        "address": "trollvägen 733",
-        "created": "2020-07-19T18:05:17",
-        "id": 17517,
+        "address": "trollvägen 638",
+        "created": "2020-07-22T18:27:03",
+        "id": 26161,
         "menus": [],
-        "name": "restaurant 797",
-        "url": "https://765.io"
+        "name": "restaurant 702",
+        "url": "https://670.io"
       },
       {
-        "address": "trollvägen 583",
-        "created": "2020-07-19T18:05:17",
-        "id": 17518,
+        "address": "trollvägen 478",
+        "created": "2020-07-22T18:27:03",
+        "id": 26162,
         "menus": [],
-        "name": "restaurant 647",
-        "url": "https://615.io"
+        "name": "restaurant 542",
+        "url": "https://510.io"
       },
       {
-        "address": "trollvägen 487",
-        "created": "2020-07-19T18:05:17",
-        "id": 17519,
+        "address": "trollvägen 382",
+        "created": "2020-07-22T18:27:03",
+        "id": 26163,
         "menus": [],
-        "name": "restaurant 551",
-        "url": "https://519.io"
+        "name": "restaurant 446",
+        "url": "https://414.io"
       }
     ]
   }
@@ -122,7 +719,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "restaurant_id": 17540
+  "restaurant_id": 26134
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -131,12 +728,19 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 422",
-    "created": "2020-07-19T18:05:17",
-    "id": 17540,
-    "menus": [],
-    "name": "restaurant 486",
-    "url": "https://454.io"
+    "address": "trollvägen 523",
+    "created": "2020-07-22T18:27:02",
+    "id": 26134,
+    "menus": [
+      {
+        "id": 5369,
+        "name": "menu 395",
+        "products": [],
+        "restaurant_id": 26134
+      }
+    ],
+    "name": "restaurant 587",
+    "url": "https://555.io"
   }
 }
 ```
@@ -148,7 +752,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "restaurant_id": 17512
+  "restaurant_id": 26176
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -159,20 +763,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "id": 2191,
-        "name": "test menu1"
+        "id": 5379,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26176
       },
       {
-        "id": 2192,
-        "name": "test menu2"
+        "id": 5380,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26176
       },
       {
-        "id": 2193,
-        "name": "test menu3"
+        "id": 5381,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26176
       },
       {
-        "id": 2194,
-        "name": "test menu4"
+        "id": 5382,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26176
       }
     ]
   }
@@ -186,7 +798,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "menu_id": 2198
+  "menu_id": 5378
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -195,8 +807,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "id": 2198,
-    "name": "test menu1"
+    "id": 5378,
+    "name": "test menu1",
+    "products": [],
+    "restaurant_id": 26170
   }
 }
 ```
@@ -220,8 +834,8 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-19T18:05:17",
-    "id": 17535,
+    "created": "2020-07-22T18:27:03",
+    "id": 26147,
     "menus": [],
     "name": "test",
     "url": "some url"
@@ -236,8 +850,8 @@ The endpoint will reply with either:
 {
   "data": {
     "address": "some address",
-    "created": "2020-07-19T18:05:17",
-    "id": 17535,
+    "created": "2020-07-22T18:27:03",
+    "id": 26147,
     "menus": [],
     "name": "test",
     "url": "some url"
@@ -256,7 +870,7 @@ The endpoint will reply with either:
     "name": "new name",
     "url": "new url"
   },
-  "restaurant_id": 17533
+  "restaurant_id": 26157
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -265,9 +879,9 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 998",
-    "created": "2020-07-19T18:05:17",
-    "id": 17533,
+    "address": "trollvägen 830",
+    "created": "2020-07-22T18:27:03",
+    "id": 26157,
     "menus": [],
     "name": "new name",
     "url": "new url"
@@ -281,9 +895,9 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 998",
-    "created": "2020-07-19T18:05:17",
-    "id": 17533,
+    "address": "trollvägen 830",
+    "created": "2020-07-22T18:27:03",
+    "id": 26157,
     "menus": [],
     "name": "new name",
     "url": "new url"
@@ -298,7 +912,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "restaurant_id": 17509
+  "restaurant_id": 26165
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -306,7 +920,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'restaurant 245' with id 17509"
+  "message": "Deleted restaurant 'restaurant 263' with id 26165"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -315,8 +929,8 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'restaurant 245'",
-  "restaurant_id": 17509
+  "message": "Deleted restaurant 'restaurant 263'",
+  "restaurant_id": 26165
 }
 ```
 ---
@@ -328,7 +942,7 @@ The endpoint will reply with either:
 ```json
 {
   "name": "test menu",
-  "restaurant_id": 17504
+  "restaurant_id": 26153
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -337,8 +951,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "id": 2190,
-    "name": "test menu"
+    "id": 5376,
+    "name": "test menu",
+    "products": [],
+    "restaurant_id": 26153
   }
 }
 ```
@@ -349,8 +965,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "id": 2190,
-    "name": "test menu"
+    "id": 5376,
+    "name": "test menu",
+    "products": [],
+    "restaurant_id": 26153
   }
 }
 ```
@@ -362,7 +980,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "menu_id": 2196,
+  "menu_id": 5375,
   "params": {
     "name": "some new name"
   }
@@ -374,8 +992,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "id": 2196,
-    "name": "some new name"
+    "id": 5375,
+    "name": "some new name",
+    "products": [],
+    "restaurant_id": 26151
   }
 }
 ```
@@ -386,8 +1006,10 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "id": 2196,
-    "name": "some new name"
+    "id": 5375,
+    "name": "some new name",
+    "products": [],
+    "restaurant_id": 26151
   }
 }
 ```
@@ -399,7 +1021,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "menu_id": 2197
+  "menu_id": 5383
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -407,7 +1029,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "message": "Deleted menu 'test menu1' with id 2197"
+  "message": "Deleted menu 'test menu1' with id 5383"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -416,7 +1038,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "menu_id": 2197,
+  "menu_id": 5383,
   "message": "Deleted menu 'test menu1'"
 }
 ```
@@ -428,7 +1050,7 @@ The endpoint will reply with either:
 * __Body:__
 ```json
 {
-  "restaurant_id": 17501
+  "restaurant_id": 26189
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -437,29 +1059,37 @@ The endpoint will reply with either:
 ```json
 {
   "data": {
-    "address": "trollvägen 598",
-    "created": "2020-07-19T18:05:16",
-    "id": 17501,
+    "address": "trollvägen 294",
+    "created": "2020-07-22T18:27:03",
+    "id": 26189,
     "menus": [
       {
-        "id": 2186,
-        "name": "test menu1"
+        "id": 5384,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2187,
-        "name": "test menu2"
+        "id": 5385,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2188,
-        "name": "test menu3"
+        "id": 5386,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2189,
-        "name": "test menu4"
+        "id": 5387,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26189
       }
     ],
-    "name": "restaurant 662",
-    "url": "https://630.io"
+    "name": "restaurant 358",
+    "url": "https://326.io"
   }
 }
 ```
@@ -471,8 +1101,8 @@ The endpoint will reply with either:
 {
   "action": "insert_at",
   "index": 1,
-  "menu_id": 2189,
-  "restaurant_id": 17501
+  "menu_id": 5387,
+  "restaurant_id": 26189
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -483,20 +1113,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "id": 2186,
-        "name": "test menu1"
+        "id": 5384,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2189,
-        "name": "test menu4"
+        "id": 5387,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2187,
-        "name": "test menu2"
+        "id": 5385,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2188,
-        "name": "test menu3"
+        "id": 5386,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26189
       }
     ]
   }
@@ -509,8 +1147,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "higher",
-  "menu_id": 2188,
-  "restaurant_id": 17501
+  "menu_id": 5386,
+  "restaurant_id": 26189
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -521,20 +1159,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "id": 2186,
-        "name": "test menu1"
+        "id": 5384,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2189,
-        "name": "test menu4"
+        "id": 5387,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2188,
-        "name": "test menu3"
+        "id": 5386,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2187,
-        "name": "test menu2"
+        "id": 5385,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26189
       }
     ]
   }
@@ -547,8 +1193,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "lower",
-  "menu_id": 2186,
-  "restaurant_id": 17501
+  "menu_id": 5384,
+  "restaurant_id": 26189
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -559,20 +1205,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "id": 2189,
-        "name": "test menu4"
+        "id": 5387,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2186,
-        "name": "test menu1"
+        "id": 5384,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2188,
-        "name": "test menu3"
+        "id": 5386,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2187,
-        "name": "test menu2"
+        "id": 5385,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26189
       }
     ]
   }
@@ -585,8 +1239,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "to_top",
-  "menu_id": 2188,
-  "restaurant_id": 17501
+  "menu_id": 5386,
+  "restaurant_id": 26189
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -597,20 +1251,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "id": 2188,
-        "name": "test menu3"
+        "id": 5386,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2189,
-        "name": "test menu4"
+        "id": 5387,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2186,
-        "name": "test menu1"
+        "id": 5384,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2187,
-        "name": "test menu2"
+        "id": 5385,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26189
       }
     ]
   }
@@ -623,8 +1285,8 @@ The endpoint will reply with either:
 ```json
 {
   "action": "to_bottom",
-  "menu_id": 2189,
-  "restaurant_id": 17501
+  "menu_id": 5387,
+  "restaurant_id": 26189
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -635,20 +1297,28 @@ The endpoint will reply with either:
   "data": {
     "menus": [
       {
-        "id": 2188,
-        "name": "test menu3"
+        "id": 5386,
+        "name": "test menu3",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2186,
-        "name": "test menu1"
+        "id": 5384,
+        "name": "test menu1",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2187,
-        "name": "test menu2"
+        "id": 5385,
+        "name": "test menu2",
+        "products": [],
+        "restaurant_id": 26189
       },
       {
-        "id": 2189,
-        "name": "test menu4"
+        "id": 5387,
+        "name": "test menu4",
+        "products": [],
+        "restaurant_id": 26189
       }
     ]
   }
@@ -669,7 +1339,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303423482@example.com",
+  "email": "user-576460752303422173@example.com",
   "password": "hello world!",
   "password_confirmation": "hello world!"
 }
@@ -681,14 +1351,14 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiM5gEDqlMDbwzAAAAAm
+x-request-id: FiQmbfr6WgA3NIAAAAVD
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "email": "user-576460752303423482@example.com",
-    "token": "JII4oRy9xSYs+o5imb7R0bpubEgAbuPdzvJRjQJgZuw="
+    "email": "user-576460752303422173@example.com",
+    "token": "eXCWw0DmkNcXZL0Ib3kKuJuFaBZ5R4jIIvHSY2JPfs0="
   }
 }
 ```
@@ -717,7 +1387,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiM5gD4dawChQM8AAAVC
+x-request-id: FiQmbf24QYA53v4AAAvB
 ```
 * __Response body:__
 ```json
@@ -750,7 +1420,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303422110@example.com",
+  "email": "user-576460752303421020@example.com",
   "password": "hello world!"
 }
 ```
@@ -761,13 +1431,13 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiM5gEHPdoD_ZKcAAAJl
+x-request-id: FiQmbfr6WgCO-SMAAAVj
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "token": "XcT8HGSY87H72CEDC7ymkA39i+okdb3VsapL85Y9ycg="
+    "token": "Ap0H5jrZCJaKtyB8xDKJ9UmnbodE77fYi4zMlsGbZPU="
   }
 }
 ```
@@ -784,7 +1454,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303421183@example.com",
+  "email": "user-576460752303422682@example.com",
   "password": "lol"
 }
 ```
@@ -795,7 +1465,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiM5gD4dawBhzi4AAAkh
+x-request-id: FiQmbf24QYBUYDEAAANG
 ```
 * __Response body:__
 ```json

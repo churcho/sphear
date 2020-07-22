@@ -155,13 +155,22 @@ defmodule Db.Feeders do
       ** (Ecto.NoResultsError)
 
   """
-  def get_menu!(id), do: Repo.get!(Menu, id)
-
   def get_menu(id) do
     case Repo.get(Menu, id) do
       nil -> {:error, :not_found}
-      menu -> {:ok, menu}
+      menu -> 
+        menu = Repo.preload(menu, :products)
+        {:ok, menu}
     end
+  end
+
+  defp preload_products({:ok, menu}) do
+    menu
+    |> Repo.preload(:products)
+    {:ok, menu}
+  end
+  defp preload_products(error) do
+    error
   end
 
   @doc """
@@ -180,6 +189,7 @@ defmodule Db.Feeders do
     %Menu{}
     |> Menu.changeset(attrs)
     |> Repo.insert()
+    |> preload_products
   end
 
   @doc """
@@ -198,6 +208,7 @@ defmodule Db.Feeders do
     menu
     |> Menu.changeset(attrs)
     |> Repo.update()
+    |> preload_products
   end
 
   @doc """

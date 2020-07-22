@@ -69,6 +69,20 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Money type configs
+config :money,
+  custom_currencies: [
+    SEK: %{name: "Krona", symbol: ":-", exponent: 2},
+  ],
+  default_currency: :SEK,
+  separator: ".",
+  delimiter: ",",
+  symbol: true,
+  symbol_on_right: true,
+  symbol_space: false,
+  fractional_unit: true,
+  strip_insignificant_zeros: false
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
