@@ -3,28 +3,33 @@ defmodule Db.RestaurantsFixtures do
   This module defines test helpers for creating
   entities via the `Db.Restaurants` context.
   """
+
   alias Db.Feeders
-  alias Db.Merchandise
 
-  defp random_3() do
-    last_3(System.unique_integer())
+  def menu_name, do: Faker.Pizza.combo()
+
+  def restaurant_name() do
+    Faker.Pizza.company()
   end
-  defp last_3(integer) do
-    String.slice(Integer.to_string(integer), -3, 3)
+  def valid_url(name) do
+    name =
+      name
+      |> String.downcase
+      |> String.replace(" ", "-")
+      |> String.replace("’", "")
+      |> String.replace("'", "")
+    "https://#{name}.se"
   end
-
-  def menu_name, do: "menu #{random_3()}"
-
-  def restaurant_name, do: "restaurant #{random_3()}"
-  def valid_url, do: "https://#{random_3()}.io"
-  def valid_address, do: "trollvägen #{random_3()}"
+  def valid_address, do: Faker.Address.street_address()
 
   def restaurant_fixture(attrs \\ %{}) do
-    {:ok, restaurant} =
+    name = restaurant_name()
+    
+    {:ok, restaurant} =  
       attrs
       |> Enum.into(%{
-        name: restaurant_name(),
-        url: valid_url(),
+        name: name,
+        url: valid_url(name),
         address: valid_address()
       })
       |> Feeders.create_restaurant()
@@ -47,10 +52,10 @@ defmodule Db.RestaurantsFixtures do
   end
 
   def create_menus(restaurant) do
-    menu1 = menu_fixture(%{restaurant_id: restaurant.id, name: "test menu1"})
-    menu2 = menu_fixture(%{restaurant_id: restaurant.id, name: "test menu2"})
-    menu3 = menu_fixture(%{restaurant_id: restaurant.id, name: "test menu3"})
-    menu4 = menu_fixture(%{restaurant_id: restaurant.id, name: "test menu4"})
+    menu1 = menu_fixture(%{restaurant_id: restaurant.id, name: menu_name()})
+    menu2 = menu_fixture(%{restaurant_id: restaurant.id, name: menu_name()})
+    menu3 = menu_fixture(%{restaurant_id: restaurant.id, name: menu_name()})
+    menu4 = menu_fixture(%{restaurant_id: restaurant.id, name: menu_name()})
     [menu1, menu2, menu3, menu4]
   end
 end

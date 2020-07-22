@@ -60,27 +60,6 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       assert_reply(ref, :ok, %{user_id: ^user_id})
       |> doc()
     end
-
-    test "get products from menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
-      create_products(menu)
-
-      menu = Repo.preload(menu, :products)
-
-      products = EctoList.ordered_items_list(menu.products, menu.products_sequence)
-      products_json = Phoenix.View.render_to_string(MatxWeb.Api.ProductView, "index.json", products: products)
-      data = %{data: products_json}
-  
-      ref = doc_push(socket, "get_products", %{"menu_id" => menu.id})
-      assert_reply(ref, :ok, ^data)
-      |> doc()
-    end
-
-    test "get non existing products from menu", %{socket: socket} do
-      ref = push socket, "get_products", %{"menu_id" => 343}
-      assert_reply ref, :error
-    end
   end
 
   describe "guest actions -" do
@@ -112,6 +91,27 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     test "logged in? as a guest", %{socket: socket} do
       ref = push socket, "logged_in", %{}
       refute_reply ref, :ok, %{user_id: _}
+    end
+
+    test "get products from menu", %{socket: socket} do
+      restaurant = restaurant_fixture()
+      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      create_products(menu)
+
+      menu = Repo.preload(menu, :products)
+
+      products = EctoList.ordered_items_list(menu.products, menu.products_sequence)
+      products_json = Phoenix.View.render_to_string(MatxWeb.Api.ProductView, "index.json", products: products)
+      data = %{data: products_json}
+  
+      ref = doc_push(socket, "get_products", %{"menu_id" => menu.id})
+      assert_reply(ref, :ok, ^data)
+      |> doc()
+    end
+
+    test "get non existing products from menu", %{socket: socket} do
+      ref = push socket, "get_products", %{"menu_id" => 343}
+      assert_reply ref, :error
     end
   end
 

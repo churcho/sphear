@@ -46,7 +46,7 @@ defmodule Db.Feeders do
       nil -> 
         {:error, :not_found}
       restaurant -> 
-        restaurant = Repo.preload(restaurant, :menus)
+        restaurant = Repo.preload(restaurant, menus: :products)
         {:ok, restaurant}
     end
   end

@@ -104,10 +104,15 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     test "get one restaurant", %{socket: socket} do
       restaurant_fixture()
       restaurant = restaurant_fixture()
-      menu = menu_fixture(restaurant_id: restaurant.id)
+      restaurant_id = restaurant.id
+
+      menu = menu_fixture(restaurant_id: restaurant_id)
       create_products(menu)
 
-      restaurant = Repo.preload(restaurant, :menus)
+      {:ok, restaurant} = 
+        restaurant
+        |> Db.Repo.preload(menus: :products)
+        |> Feeders.reset_order_list()
 
       restaurant_json = Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)
       data = %{data: restaurant_json}
@@ -142,7 +147,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
     test "get one menu", %{socket: socket} do
       restaurant = restaurant_fixture()
-      {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
+      menu = menu_fixture(%{restaurant_id: restaurant.id})
       
       menu_json = Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)
       data = %{data: menu_json}

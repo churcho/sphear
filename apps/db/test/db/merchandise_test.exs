@@ -21,7 +21,7 @@ defmodule Db.MerchandiseTest do
     end
 
     test "create_product/1 with valid data creates a product" do
-      product = product_fixture()
+      product = product_fixture(%{price: 133700})
       assert Merchandise.price_to_string(product) == "1.337:-"
     end
 

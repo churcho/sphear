@@ -41,7 +41,7 @@ defmodule MatxWeb.MarkdownWriter do
       anchor = to_anchor(controller)
       puts(file, "  * [#{controller}](##{anchor})")
 
-      Enum.each(actions, fn {action, _} ->
+      Enum.each(Enum.reverse(actions), fn {action, _} ->
         anchor = to_anchor(controller, action)
         case action do
           :create ->
@@ -59,7 +59,7 @@ defmodule MatxWeb.MarkdownWriter do
     anchor = to_anchor(controller)
     puts(file, "# <a id=#{anchor}></a>#{controller}")
 
-    Enum.each(records, fn {action, records} ->
+    Enum.each(Enum.reverse(records), fn {action, records} ->
       write_action(action, controller, records, file)
     end)
   end
@@ -72,7 +72,7 @@ defmodule MatxWeb.MarkdownWriter do
       _ ->
         puts(file, "## <a id=#{anchor}></a>#{action}")
     end
-    Enum.each(records, &write_example(&1, file))
+    Enum.each(Enum.reverse(records), &write_example(&1, file))
     file
     |> puts("---")
   end
@@ -241,8 +241,26 @@ defmodule MatxWeb.MarkdownWriter do
     |> String.replace_trailing("-", "")
   end
 
+  def stable_group_by(enumerable, key_fun, value_fun \\ fn x -> x end)
+      when is_function(key_fun, 1) and is_function(value_fun, 1) do
+    Enum.reduce(enumerable, [], fn entry, categories ->
+      key = key_fun.(entry)
+      value = value_fun.(entry)
+
+      case categories do
+        # key matches previous key -> add value to previous list
+        [{^key, values} | tail] ->
+          [{key, [value | values]} | tail]
+
+        # otherwise -> start a new list with this value
+        _ ->
+          [{key, [value]} | categories]
+      end
+    end)
+  end
+
   defp group_records(records) do
-    by_controller = Bureaucrat.Util.stable_group_by(records, &get_controller/1)
+    by_controller = stable_group_by(records, &get_controller/1)
 
     Enum.map(by_controller, fn {c, recs} ->
       {c, Bureaucrat.Util.stable_group_by(recs, &get_action/1)}

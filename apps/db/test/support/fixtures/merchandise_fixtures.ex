@@ -3,20 +3,11 @@ defmodule Db.MerchandiseFixtures do
   This module defines test helpers for creating
   entities via the `Db.Merchandise` context.
   """
-  alias Db.Feeders
   alias Db.Merchandise
-
   import Db.RestaurantsFixtures
 
-  defp random_3() do
-    last_3(System.unique_integer())
-  end
-  defp last_3(integer) do
-    String.slice(Integer.to_string(integer), -3, 3)
-  end
-
-  def product_name, do: "product #{random_3()}"
-  def valid_price, do: 1337_00
+  def product_name, do: Faker.Pizza.pizza()
+  def valid_price, do: Faker.random_between(7000, 10000)
 
   def product_fixture(attrs \\ %{}) do
     restaurant = restaurant_fixture()
@@ -35,10 +26,10 @@ defmodule Db.MerchandiseFixtures do
   end
 
   def create_products(menu) do
-    product1 = product_fixture(%{menu_id: menu.id, name: "test product 1", price: 99_90})
-    product2 = product_fixture(%{menu_id: menu.id, name: "test product 2", price: 49_90})
-    product3 = product_fixture(%{menu_id: menu.id, name: "test product 3", price: 199_00})
-    product4 = product_fixture(%{menu_id: menu.id, name: "test product 4", price: 999_90})
+    product1 = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
+    product2 = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
+    product3 = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
+    product4 = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
     [product1, product2, product3, product4]
   end
 end

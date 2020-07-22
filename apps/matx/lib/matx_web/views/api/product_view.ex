@@ -17,7 +17,8 @@ defmodule MatxWeb.Api.ProductView do
       menu_id: product.menu_id,
       name: product.name,
       price: Map.from_struct(product.price),
-      price_to_string: Merchandise.price_to_string(product)
+      price_to_string: Merchandise.price_to_string(product),
+      inserted_at: product.inserted_at
     }
   end
 end
