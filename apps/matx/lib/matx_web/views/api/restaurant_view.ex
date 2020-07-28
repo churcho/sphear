@@ -30,7 +30,7 @@ defmodule MatxWeb.Api.RestaurantView do
       address: restaurant.address,
       url: restaurant.url,
       menus: render_many(menus, MatxWeb.Api.MenuView, "menu.json"),
-      unlisted_products: render_many(restaurant.unlisted_products, MatxWeb.Api.ProductView, "index.json")
+      unlisted_products: render_many(restaurant.unlisted_products, MatxWeb.Api.ProductView, "show.json")
     }
   end
 

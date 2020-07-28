@@ -10,6 +10,7 @@ defmodule Db.MerchandiseFixtures do
   def product_extra_name, do: Faker.Pizza.sauce()
   def valid_price, do: Faker.random_between(7000, 10000)
   def valid_extra_price, do: Faker.random_between(1000, 3000)
+  def valid_unlisted_price, do: Faker.random_between(3000, 5000)
 
   def product_fixture(attrs \\ %{}) do
     menu_id =
@@ -45,16 +46,16 @@ defmodule Db.MerchandiseFixtures do
     |> Enum.into(%{
       name: product_extra_name(),
       restaurant_id: restaurant_id,
-      price: valid_extra_price()
+      price: valid_unlisted_price()
     })
     |> Merchandise.create_unlisted_product()
   end
 
   def create_products(menu) do
-    {:ok, product1} = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
-    {:ok, product2} = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
-    {:ok, product3} = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
-    {:ok, product4} = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
+    {:ok, product1} = product_fixture(%{menu_id: menu.id})
+    {:ok, product2} = product_fixture(%{menu_id: menu.id})
+    {:ok, product3} = product_fixture(%{menu_id: menu.id})
+    {:ok, product4} = product_fixture(%{menu_id: menu.id})
     [product1, product2, product3, product4]
   end
 
@@ -65,7 +66,7 @@ defmodule Db.MerchandiseFixtures do
         nil ->
           {:ok, restaurant} = restaurant_fixture()
           {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
-          {:ok, product} = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
+          {:ok, product} = product_fixture(%{menu_id: menu.id})
           product.id
         product_id ->
           product_id
@@ -89,12 +90,11 @@ defmodule Db.MerchandiseFixtures do
   # Product Extra
   def product_extra_fixture(attrs \\ %{}) do
     {:ok, restaurant} = restaurant_fixture()
-
     product_extra_menu_id =
       case attrs[:product_extra_menu_id] do
         nil ->
           {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
-          {:ok, product} = product_fixture(%{menu_id: menu.id, name: product_name(), price: valid_price()})
+          {:ok, product} = product_fixture(%{menu_id: menu.id})
           {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id})
           product_extra_menu.id
         product_extra_menu_id ->
@@ -104,7 +104,7 @@ defmodule Db.MerchandiseFixtures do
     product_id =
       case attrs[:product_id] do
         nil ->
-          {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant.id, name: product_extra_name(), price: valid_extra_price()})
+          {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant.id, name: product_extra_name()})
           unlisted_product.id
         product_id ->
           product_id
@@ -120,11 +120,13 @@ defmodule Db.MerchandiseFixtures do
     |> Merchandise.create_product_extra()
   end
 
-  def create_product_extras(product_extra_menu) do
-    {:ok, product_extra_1} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id, new_name: product_extra_name(), new_price: valid_extra_price()})
-    {:ok, product_extra_2} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id, new_name: product_extra_name(), new_price: valid_extra_price()})
-    {:ok, product_extra_3} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id, new_name: product_extra_name(), new_price: valid_extra_price()})
-    {:ok, product_extra_4} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id, new_name: product_extra_name(), new_price: valid_extra_price()})
+  def create_pommes_extras(restaurant_id, product_extra_menu_id) do
+    {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant_id, name: "Pommes"})
+
+    {:ok, product_extra_1} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu_id, product_id: unlisted_product.id, new_name: "Small Pommes", new_price: Faker.random_between(1000, 2000)})
+    {:ok, product_extra_2} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu_id, product_id: unlisted_product.id, new_name: "Medium Pommes", new_price: Faker.random_between(3000, 5000)})
+    {:ok, product_extra_3} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu_id, product_id: unlisted_product.id, new_name: "Big Pommes", new_price: Faker.random_between(5000, 6000)})
+    {:ok, product_extra_4} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu_id, product_id: unlisted_product.id, new_name: "Huge Pommes", new_price: Faker.random_between(6000, 9000)})
     [product_extra_1, product_extra_2, product_extra_3, product_extra_4]
   end
 end

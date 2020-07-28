@@ -18,8 +18,12 @@ defmodule Db.Feeders do
   defp preload_restaurant({:ok, restaurant}) do
     restaurant =
       restaurant
-      |> Repo.preload([:unlisted_products, menus: [products: [product_extra_menus: [product_extras: :product]]]])
+      |> Repo.preload([unlisted_products: [product_extra_menus: [product_extras: :product]], menus: [products: [product_extra_menus: [product_extras: :product]]]])
     {:ok, restaurant}
+  end
+  defp preload_restaurant([restaurants]) do
+    [restaurants]
+    |> Repo.preload([unlisted_products: [product_extra_menus: [product_extras: :product]], menus: [products: [product_extra_menus: [product_extras: :product]]]])
   end
   defp preload_restaurant(error) do
     error
@@ -36,7 +40,7 @@ defmodule Db.Feeders do
   """
   def list_restaurants do
     Repo.all(Restaurant) 
-    |> Repo.preload([:unlisted_products, menus: [products: [product_extra_menus: [product_extras: :product]]]])
+    |> preload_restaurant()
   end
 
   @doc """
@@ -183,6 +187,10 @@ defmodule Db.Feeders do
       menu
       |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
     {:ok, menu}
+  end
+  defp preload_menus([menus]) do
+    [menus]
+    |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
   end
   defp preload_menus(error) do
     error

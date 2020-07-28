@@ -108,7 +108,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
       [product1, _, _, _] = create_products(menu)
 
       {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product1.id})
-      create_product_extras(product_extra_menu)
+      create_pommes_extras(restaurant_id, product_extra_menu.id)
 
       {:ok, restaurant} = 
         Feeders.get_restaurant(restaurant.id)

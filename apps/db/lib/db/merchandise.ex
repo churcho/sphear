@@ -25,6 +25,10 @@ defmodule Db.Merchandise do
       |> Repo.preload([product_extra_menus: [product_extras: :product]])
     {:ok, product}
   end
+  defp preload_products([products]) do
+    [products]
+    |> Repo.preload([product_extra_menus: [product_extras: :product]])
+  end
   defp preload_products(error) do
     error
   end
@@ -180,6 +184,10 @@ defmodule Db.Merchandise do
       |> Repo.preload(:product)
     {:ok, product_extra}
   end
+  defp preload_product_extras([product_extras]) do
+    [product_extras]
+    |> Repo.preload(:product)
+  end
   defp preload_product_extras(error) do
     error
   end
@@ -285,6 +293,10 @@ defmodule Db.Merchandise do
       product_extra_menu
       |> Repo.preload([product_extras: :product])
     {:ok, product_extra_menu}
+  end
+  defp preload_product_extra_menus([product_extra_menus]) do
+    [product_extra_menus]
+    |> Repo.preload([product_extras: :product])
   end
   defp preload_product_extra_menus(error) do
     error
