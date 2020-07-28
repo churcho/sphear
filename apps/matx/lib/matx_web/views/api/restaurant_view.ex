@@ -16,7 +16,8 @@ defmodule MatxWeb.Api.RestaurantView do
       name: restaurant.name,
       address: restaurant.address,
       url: restaurant.url,
-      menus: [] #render_many(menus, MatxWeb.Api.MenuView, "menu.json")
+      menus: [], #render_many(menus, MatxWeb.Api.MenuView, "menu.json")
+      unlisted_products: []
     }
   end
 
@@ -28,7 +29,8 @@ defmodule MatxWeb.Api.RestaurantView do
       name: restaurant.name,
       address: restaurant.address,
       url: restaurant.url,
-      menus: render_many(menus, MatxWeb.Api.MenuView, "menu.json")
+      menus: render_many(menus, MatxWeb.Api.MenuView, "menu.json"),
+      unlisted_products: render_many(restaurant.unlisted_products, MatxWeb.Api.ProductView, "index.json")
     }
   end
 

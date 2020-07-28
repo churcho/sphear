@@ -81,7 +81,6 @@ defmodule MatxWeb.Channels.RestaurantChannel do
       _user_id ->
         case Feeders.create_restaurant(restaurant_params) do
           {:ok, restaurant} ->
-            restaurant = Db.Repo.preload(restaurant, :menus)
             MatxWeb.Endpoint.broadcast!("restaurants:lobby", "restaurant_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)})
             {:reply,
             {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)}},

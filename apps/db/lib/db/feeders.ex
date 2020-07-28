@@ -14,6 +14,17 @@ defmodule Db.Feeders do
     list_items_key: :menus,
     items_order_key: :menus_sequence
 
+
+  defp preload_restaurant({:ok, restaurant}) do
+    restaurant =
+      restaurant
+      |> Repo.preload([:unlisted_products, menus: [products: [product_extra_menus: [product_extras: :product]]]])
+    {:ok, restaurant}
+  end
+  defp preload_restaurant(error) do
+    error
+  end
+
   @doc """
   Returns the list of restaurants.
 
@@ -24,7 +35,8 @@ defmodule Db.Feeders do
 
   """
   def list_restaurants do
-    Repo.all(Restaurant) |> Repo.preload(:menus)
+    Repo.all(Restaurant) 
+    |> Repo.preload([:unlisted_products, menus: [products: [product_extra_menus: [product_extras: :product]]]])
   end
 
   @doc """
@@ -46,8 +58,8 @@ defmodule Db.Feeders do
       nil -> 
         {:error, :not_found}
       restaurant -> 
-        restaurant = Repo.preload(restaurant, menus: :products)
         {:ok, restaurant}
+        |> preload_restaurant
     end
   end
 
@@ -67,6 +79,7 @@ defmodule Db.Feeders do
     %Restaurant{}
     |> Restaurant.changeset(attrs)
     |> Repo.insert()
+    |> preload_restaurant
   end
 
   @doc """
@@ -85,6 +98,7 @@ defmodule Db.Feeders do
     restaurant
     |> Restaurant.changeset(attrs)
     |> Repo.update()
+    |> preload_restaurant
   end
 
   @doc """
@@ -159,17 +173,18 @@ defmodule Db.Feeders do
     case Repo.get(Menu, id) do
       nil -> {:error, :not_found}
       menu -> 
-        menu = Repo.preload(menu, :products)
         {:ok, menu}
+        |> preload_menus()
     end
   end
 
-  defp preload_products({:ok, menu}) do
-    menu
-    |> Repo.preload(:products)
+  defp preload_menus({:ok, menu}) do
+    menu =
+      menu
+      |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
     {:ok, menu}
   end
-  defp preload_products(error) do
+  defp preload_menus(error) do
     error
   end
 
@@ -189,7 +204,7 @@ defmodule Db.Feeders do
     %Menu{}
     |> Menu.changeset(attrs)
     |> Repo.insert()
-    |> preload_products
+    |> preload_menus
   end
 
   @doc """
@@ -208,7 +223,7 @@ defmodule Db.Feeders do
     menu
     |> Menu.changeset(attrs)
     |> Repo.update()
-    |> preload_products
+    |> preload_menus
   end
 
   @doc """

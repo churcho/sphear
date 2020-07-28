@@ -4,7 +4,7 @@ defmodule MatxWeb.Api.UserSessionControllerTest do
 
   describe "POST /login -" do
     test "LOGIN SUCCESS", %{conn: conn} do
-      account = user_fixture()
+      {:ok, account} = user_fixture()
 
       conn =
         post(conn, ApiRoutes.api_user_session_path(conn, :create), 
@@ -16,7 +16,7 @@ defmodule MatxWeb.Api.UserSessionControllerTest do
     end
 
     test "LOGIN FAIL", %{conn: conn} do
-      account = user_fixture()
+      {:ok, account} = user_fixture()
 
       conn =
         post(conn, ApiRoutes.api_user_session_path(conn, :create), 

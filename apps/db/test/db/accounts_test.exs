@@ -11,7 +11,8 @@ defmodule Db.AccountsTest do
     end
 
     test "returns the user if the email exists" do
-      %{id: id} = user = user_fixture()
+      {:ok, user} = user_fixture()
+      id = user.id
       assert %User{id: ^id} = Accounts.get_user_by_email(user.email)
     end
   end
@@ -22,12 +23,13 @@ defmodule Db.AccountsTest do
     end
 
     test "does not return the user if the password is not valid" do
-      user = user_fixture()
+      {:ok, user} = user_fixture()
       refute Accounts.get_user_by_email_and_password(user.email, "fail")
     end
 
     test "returns the user if the email and password are valid" do
-      %{id: id} = user = user_fixture()
+      {:ok, user} = user_fixture()
+      id = user.id
 
       assert %User{id: ^id} =
                Accounts.get_user_by_email_and_password(user.email, valid_user_password())
@@ -42,7 +44,8 @@ defmodule Db.AccountsTest do
     end
 
     test "returns the user with the given id" do
-      %{id: id} = user = user_fixture()
+      {:ok, user} = user_fixture()
+      id = user.id
       assert %User{id: ^id} = Accounts.get_user!(user.id)
     end
   end
@@ -75,7 +78,8 @@ defmodule Db.AccountsTest do
     end
 
     test "validates e-mail uniqueness" do
-      %{email: email} = user_fixture()
+      {:ok, new_user} = user_fixture()
+      email = new_user.email
       {:error, changeset} = Accounts.register_user(%{email: email})
       assert "has already been taken" in errors_on(changeset).email
 
@@ -110,7 +114,8 @@ defmodule Db.AccountsTest do
 
   describe "apply_user_email/3" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "requires email to change", %{user: user} do
@@ -135,7 +140,8 @@ defmodule Db.AccountsTest do
     end
 
     test "validates e-mail uniqueness", %{user: user} do
-      %{email: email} = user_fixture()
+      {:ok, new_user} = user_fixture()
+      email = new_user.email
 
       {:error, changeset} =
         Accounts.apply_user_email(user, valid_user_password(), %{email: email})
@@ -160,7 +166,8 @@ defmodule Db.AccountsTest do
 
   describe "deliver_update_email_instructions/3" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "sends token through notification", %{user: user} do
@@ -179,7 +186,7 @@ defmodule Db.AccountsTest do
 
   describe "update_user_email/2" do
     setup do
-      user = user_fixture()
+      {:ok, user} = user_fixture()
       email = unique_user_email()
 
       token =
@@ -229,7 +236,8 @@ defmodule Db.AccountsTest do
 
   describe "update_user_password/3" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "validates password", %{user: user} do
@@ -285,7 +293,8 @@ defmodule Db.AccountsTest do
 
   describe "generate_user_session_token/1" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "generates a token", %{user: user} do
@@ -294,10 +303,12 @@ defmodule Db.AccountsTest do
       assert user_token.context == "session"
 
       # Creating the same token for another user should fail
+      {:ok, user2} = user_fixture()
+
       assert_raise Ecto.ConstraintError, fn ->
         Repo.insert!(%UserToken{
           token: user_token.token,
-          user_id: user_fixture().id,
+          user_id: user2.id,
           context: "session"
         })
       end
@@ -306,7 +317,7 @@ defmodule Db.AccountsTest do
 
   describe "get_user_by_session_token/1" do
     setup do
-      user = user_fixture()
+      {:ok, user} = user_fixture()
       token = Accounts.generate_user_session_token(user)
       %{user: user, token: token}
     end
@@ -328,7 +339,7 @@ defmodule Db.AccountsTest do
 
   describe "delete_session_token/1" do
     test "deletes the token" do
-      user = user_fixture()
+      {:ok, user} = user_fixture()
       token = Accounts.generate_user_session_token(user)
       assert Accounts.delete_session_token(token) == :ok
       refute Accounts.get_user_by_session_token(token)
@@ -337,7 +348,8 @@ defmodule Db.AccountsTest do
 
   describe "deliver_user_confirmation_instructions/2" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "sends token through notification", %{user: user} do
@@ -356,7 +368,7 @@ defmodule Db.AccountsTest do
 
   describe "confirm_user/2" do
     setup do
-      user = user_fixture()
+      {:ok, user} = user_fixture()
 
       token =
         extract_user_token(fn url ->
@@ -390,7 +402,8 @@ defmodule Db.AccountsTest do
 
   describe "deliver_user_reset_password_instructions/2" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "sends token through notification", %{user: user} do
@@ -409,7 +422,7 @@ defmodule Db.AccountsTest do
 
   describe "get_user_by_reset_password_token/2" do
     setup do
-      user = user_fixture()
+      {:ok, user} = user_fixture()
 
       token =
         extract_user_token(fn url ->
@@ -438,7 +451,8 @@ defmodule Db.AccountsTest do
 
   describe "reset_user_password/3" do
     setup do
-      %{user: user_fixture()}
+      {:ok, user} = user_fixture()
+      %{user: user}
     end
 
     test "validates password", %{user: user} do

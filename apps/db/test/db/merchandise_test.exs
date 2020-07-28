@@ -5,24 +5,19 @@ defmodule Db.MerchandiseTest do
   alias Db.Merchandise
 
   describe "products" do
-    alias Db.Merchandise.Product
+    alias Db.Merchandise.{Product, ProductExtra, ProductExtraMenu}
 
     @update_attrs %{name: "an updated product name", price: 99_00}
     @invalid_attrs %{name: nil, price: nil}
 
     test "list_products/0 returns all products" do
-      product = product_fixture()
+      {:ok, product} = product_fixture()
       assert Merchandise.list_products() == [product]
     end
 
-    test "get_product!/1 returns the product with given id" do
-      product = product_fixture()
-      assert Merchandise.get_product!(product.id) == product
-    end
-
     test "create_product/1 with valid data creates a product" do
-      product = product_fixture(%{price: 133700})
-      assert Merchandise.price_to_string(product) == "1.337:-"
+      {:ok, product} = product_fixture(%{price: 133700})
+      assert Merchandise.price_to_string(product.price) == "1.337:-"
     end
 
     test "create_product/1 with invalid data returns error changeset" do
@@ -30,27 +25,74 @@ defmodule Db.MerchandiseTest do
     end
 
     test "update_product/2 with valid data updates the product" do
-      product = product_fixture()
+      {:ok, product} = product_fixture()
       assert {:ok, %Product{} = product} = Merchandise.update_product(product, @update_attrs)
       assert product.name == "an updated product name"
-      assert Merchandise.price_to_string(product) == "99:-"
+      assert Merchandise.price_to_string(product.price) == "99:-"
     end
 
     test "update_product/2 with invalid data returns error changeset" do
-      product = product_fixture()
+      {:ok, product} = product_fixture()
       assert {:error, %Ecto.Changeset{}} = Merchandise.update_product(product, @invalid_attrs)
-      assert product == Merchandise.get_product!(product.id)
     end
 
     test "delete_product/1 deletes the product" do
-      product = product_fixture()
+      {:ok, product} = product_fixture()
       assert {:ok, %Product{}} = Merchandise.delete_product(product)
-      assert_raise Ecto.NoResultsError, fn -> Merchandise.get_product!(product.id) end
     end
 
     test "change_product/1 returns a product changeset" do
-      product = product_fixture()
+      {:ok, product} = product_fixture()
       assert %Ecto.Changeset{} = Merchandise.change_product(product)
+    end
+
+    test "change_product_extra_menu/1 returns a product extra menu changeset" do
+      {:ok, product_extra_menu} = product_extra_menu_fixture()
+      # Returns changeset correctly
+      assert %Ecto.Changeset{} = Merchandise.change_product_extra_menu(product_extra_menu)
+    end
+
+    test "change_product_extra/1 returns a product extra changeset" do
+      {:ok, product_extra} = product_extra_fixture()
+      # Returns changeset correctly
+      assert %Ecto.Changeset{} = Merchandise.change_product_extra(product_extra)
+    end
+
+    test "product extra menu" do
+      # Try but fail to create a product extra menu with a nonexisting product_id
+      assert {:error, %Ecto.Changeset{}} = product_extra_menu_fixture(%{product_id: 133337})
+      
+      # Create a product
+      {:ok, product} = product_fixture()
+      # Create a extra menu for the product
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{name: "Sauces", product_id: product.id})
+
+      # Check default values
+      assert product_extra_menu.name == "Sauces"
+      assert product_extra_menu.mandatory == false
+      assert product_extra_menu.pick_only_one == false
+
+      # Update the menu
+      changes = %{mandatory: true, pick_only_one: true, name: "New Sauces"}
+      assert {:ok, %ProductExtraMenu{} = updated_product_extra_menu} = Merchandise.update_product_extra_menu(product_extra_menu, changes)
+      assert updated_product_extra_menu.name == "New Sauces"
+      assert updated_product_extra_menu.mandatory == true
+      assert updated_product_extra_menu.pick_only_one == true
+
+      # Delete the menu
+      assert {:ok, %ProductExtraMenu{}} = Merchandise.delete_product_extra_menu(product_extra_menu)
+    end
+
+    test "product extra" do
+      # Try but fail to create a product extra with a nonexisting product_extra_menu_id
+      assert {:error, %Ecto.Changeset{}} = product_extra_menu_fixture(%{product_id: 133337})
+
+      # Create a product
+      {:ok, product} = product_fixture()
+      # Create a extra menu for the product
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{name: "Sauces", product_id: product.id})
+      # Create a product extra to the product extra menu
+      assert {:ok, %ProductExtra{} = product_extra} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id})
     end
   end
 end

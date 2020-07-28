@@ -5,6 +5,7 @@ defmodule MatxWeb.Channels.MerchandiseChannel do
 
   alias Db.Merchandise
   alias Db.Feeders
+  alias Db.Repo
 
   @doc """
   Authorize socket to subscribe and broadcast events on this channel & topic
@@ -81,6 +82,26 @@ defmodule MatxWeb.Channels.MerchandiseChannel do
         case Merchandise.create_product(product_params) do
           {:ok, product} ->
             MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductView, "show.json", product: product)})
+            {:reply,
+            {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductView, "show.json", product: product)}},
+            socket}
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:reply,
+              {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+            socket}
+        end
+    end
+  end
+
+  def handle_in("create_unlisted_product", product_params, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.create_unlisted_product(product_params) do
+          {:ok, product} ->
             {:reply,
             {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductView, "show.json", product: product)}},
             socket}
@@ -221,7 +242,189 @@ defmodule MatxWeb.Channels.MerchandiseChannel do
     end
   end
 
-  ################
+  # # # # # # # # # # # #
+  # PRODUCT EXTRA MENU #
+  # # # # # # # # # # # 
+
+  def handle_in("create_product_extra_menu", %{"product_id" => product_id, "name" => name}, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.get_product(product_id) do
+          {:ok, product} ->
+            case Merchandise.create_product_extra_menu(%{name: name, product_id: product_id}) do
+              {:ok, product_extra_menu} ->
+                MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_menu_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)})
+                {:reply, 
+                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)}}, 
+                  socket}
+              {:error, %Ecto.Changeset{} = changeset} ->
+                {:reply,
+                  {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+                socket}
+            end
+          {:error, _} ->
+            {:reply, 
+              {:error, %{message: "Could not find product with id: " <> product_id}},
+              socket}
+        end
+    end
+  end
+  def handle_in("create_product_extra_menu", _, socket) do
+    {:reply,
+    {:error, %{message: "Expected 'product_id' and 'name'"}},
+    socket}
+  end
+
+  def handle_in("update_product_extra_menu", %{"product_extra_menu_id" => id, "params" => params}, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.get_product_extra_menu(id) do
+          {:error, _} ->
+            {:reply, 
+              {:error, %{message: "Could not find product extra menu with id: " <> id}},
+              socket}
+          {:ok, product_extra_menu} ->
+            case Merchandise.update_product_extra_menu(product_extra_menu, params) do
+              {:ok, product_extra_menu} ->
+                MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_menu_updated", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)})
+                {:reply, 
+                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)}}, 
+                  socket}
+              {:error, %Ecto.Changeset{} = changeset} ->
+                {:reply,
+                  {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+                  socket}
+            end
+        end
+    end
+  end
+  def handle_in("update_product_extra_menu", _, socket) do
+    {:reply,
+    {:error, %{message: "Missing 'product_extra_menu_id' or 'params'"}},
+    socket}
+  end
+
+  def handle_in("delete_product_extra_menu", %{"product_extra_menu_id" => id}, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.get_product_extra_menu(id) do
+          {:ok, product_extra_menu} ->
+            {:ok, _} = Merchandise.delete_product_extra_menu(product_extra_menu)
+            MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_menu_deleted", %{message: "Deleted product extra menu: '#{product_extra_menu.name}'", product_extra_menu_id: product_extra_menu.id})
+            {:reply, 
+              {:ok, %{message: "Deleted product extra menu: '#{product_extra_menu.name}' with id #{product_extra_menu.id}"}}, 
+              socket}
+          {:error, _} ->
+            {:reply, 
+              {:error, %{message: "Could not find product extra menu with id: " <> id}},
+              socket}
+          end
+      end
+  end
+  def handle_in("delete_product_extra_menu", _, socket) do
+    {:reply, 
+    {:error, %{message: "Missing 'product_extra_menu_id'"}},
+    socket}
+  end
+
+  # # # # # # # # #
+  # PRODUCT EXTRA #
+  # # # # # # # # # 
+
+  def handle_in("create_product_extra", params, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.create_product_extra(params) do
+          {:ok, product_extra} ->
+            MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraView, "show.json", product_extra: product_extra)})
+            {:reply, 
+              {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraView, "show.json", product_extra: product_extra)}}, 
+              socket}
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:reply,
+              {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+            socket}
+        end  
+    end
+  end
+
+  def handle_in("update_product_extra", %{"product_extra_id" => id, "params" => params}, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.get_product_extra(id) do
+          {:error, _} ->
+            {:reply, 
+              {:error, %{message: "Could not find product extra with id: " <> id}},
+              socket}
+          {:ok, product_extra} ->
+            case Merchandise.update_product_extra(product_extra, params) do
+              {:ok, product_extra} ->
+                MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_updated", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraView, "show.json", product_extra: product_extra)})
+                {:reply, 
+                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraView, "show.json", product_extra: product_extra)}}, 
+                  socket}
+              {:error, %Ecto.Changeset{} = changeset} ->
+                {:reply,
+                  {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+                  socket}
+            end
+        end
+    end
+  end
+  def handle_in("update_product_extra", _, socket) do
+    {:reply,
+    {:error, %{message: "Missing 'product_extra_id' or 'params'"}},
+    socket}
+  end
+
+  def handle_in("delete_product_extra", %{"product_extra_id" => id}, socket) do
+    case socket.assigns[:user_id] do
+      nil ->
+        {:reply,
+          {:error, %{message: "Unauthorized"}},
+        socket}
+      _user_id ->
+        case Merchandise.get_product_extra(id) do
+          {:ok, product_extra} ->
+            {:ok, _} = Merchandise.delete_product_extra(product_extra)
+            MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_deleted", %{message: "Deleted product extra: '#{product_extra.new_name}'", product_extra_id: product_extra.id})
+            {:reply, 
+              {:ok, %{message: "Deleted product extra: '#{product_extra.new_name}' with id #{product_extra.id}"}}, 
+              socket}
+          {:error, _} ->
+            {:reply, 
+              {:error, %{message: "Could not find product extra with id: " <> id}},
+              socket}
+          end
+      end
+  end
+  def handle_in("delete_product_extra", _, socket) do
+    {:reply, 
+    {:error, %{message: "Missing 'product_extra_id'"}},
+    socket}
+  end
+
+  ##########################
 
   def handle_in("logged_in", _, socket) do
     case socket.assigns[:user_id] do

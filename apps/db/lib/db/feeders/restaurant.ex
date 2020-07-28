@@ -3,6 +3,7 @@ defmodule Db.Feeders.Restaurant do
   import Ecto.Changeset
 
   alias Db.Feeders.Menu
+  alias Db.Merchandise.Product
 
   schema "restaurants" do
     field :address, :string
@@ -11,6 +12,7 @@ defmodule Db.Feeders.Restaurant do
     field :menus_sequence, {:array, :id}, default: []
 
     has_many :menus, Menu
+    has_many :unlisted_products, Product
 
     timestamps()
   end

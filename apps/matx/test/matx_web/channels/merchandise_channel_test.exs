@@ -8,6 +8,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
   alias Db.Feeders
   alias Db.Merchandise
   alias Db.Repo
+  alias Db.Feeders.Menu
 
   setup do
     :ok
@@ -23,7 +24,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
 
   defp login(_context) do
     # Create user
-    user = user_fixture()
+    {:ok, user} = user_fixture()
     conn = Phoenix.ConnTest.build_conn()
     # Login with the user credentials
     conn =
@@ -94,11 +95,14 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     end
 
     test "get products from menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       create_products(menu)
 
-      menu = Repo.preload(menu, :products)
+      {:ok, menu} =
+        Repo.get(Menu, menu.id) 
+        |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
+        |> Merchandise.reset_order_list()
 
       products = EctoList.ordered_items_list(menu.products, menu.products_sequence)
       products_json = Phoenix.View.render_to_string(MatxWeb.Api.ProductView, "index.json", products: products)
@@ -124,8 +128,8 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     end
 
     test "create a product", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       
       ref = doc_push(socket, "create_product", %{menu_id: menu.id, name: "test product 99", price: 99_00})
       assert_reply(ref, :ok)
@@ -138,9 +142,21 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       assert created_product.name == "test product 99"
     end
 
+    test "create a unlisted product", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      
+      ref = doc_push(socket, "create_unlisted_product", %{restaurant_id: restaurant.id, name: "test product 29", price: 29_00, hidden: true})
+      assert_reply(ref, :ok, %{data: data})
+      |> doc()
+
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      {:ok, created_product} = Merchandise.get_product(decoded_data["id"])
+      assert created_product.name == "test product 29"
+    end
+
     test "create a non-complete product", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
 
       ref = push(socket, "create_product", %{menu_id: menu.id, name: nil, price: 99_00})
       assert_reply ref, :error
@@ -153,9 +169,9 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     end
 
     test "update a product", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
-      product = product_fixture(%{menu_id: menu.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
 
       params = %{name: "new product name", price: 1337_00}
       ref = doc_push(socket, "update_product", %{product_id: product.id, params: params})
@@ -167,13 +183,13 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
       {:ok, updated_product} = Merchandise.get_product(decoded_data["id"])
       assert updated_product.name == "new product name"
-      assert Merchandise.price_to_string(updated_product) == "1.337:-"
+      assert Merchandise.price_to_string(updated_product.price) == "1.337:-"
     end
 
     test "delete a product", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
-      product = product_fixture(%{menu_id: menu.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
 
       product_id = product.id
 
@@ -188,14 +204,14 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     end
 
     test "change sequence of product", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
 
       [product1, product2, product3, product4] = create_products(menu)
 
       {:ok, menu} = 
-        menu
-        |> Db.Repo.preload(:products)
+        Repo.get(Menu, menu.id)
+        |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
         |> Merchandise.reset_order_list()
 
       # First check: Product 2 should be at index 1
@@ -233,23 +249,138 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, menu} = Feeders.get_menu(menu.id)
       assert menu.products_sequence == [product3.id, product1.id, product2.id, product4.id]
     end
+
+    test "create a product extra menu", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
+      
+      ref = doc_push(socket, "create_product_extra_menu", %{product_id: product.id, name: "Sauces"})
+      assert_reply(ref, :ok)
+      |> doc()
+      assert_broadcast("product_extra_menu_created", %{data: data})
+      |> doc()
+
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      {:ok, created_product_extra_menu} = Merchandise.get_product_extra_menu(decoded_data["id"])
+      assert created_product_extra_menu.name == "Sauces"
+    end
+
+    test "update a product extra menu", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id})
+
+      params = %{name: "New Sauces", mandatory: true, pick_only_one: true}
+      ref = doc_push(socket, "update_product_extra_menu", %{product_extra_menu_id: product_extra_menu.id, params: params})
+      assert_reply(ref, :ok)
+      |> doc()
+      assert_broadcast("product_extra_menu_updated", %{data: data})
+      |> doc()
+
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      {:ok, updated_product_extra_menu} = Merchandise.get_product_extra_menu(decoded_data["id"])
+      assert updated_product_extra_menu.name == "New Sauces"
+      assert updated_product_extra_menu.mandatory == true
+      assert updated_product_extra_menu.pick_only_one == true
+    end
+
+    test "delete a product extra menu", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id})
+
+      product_extra_menu_id = product_extra_menu.id
+
+      ref = doc_push(socket, "delete_product_extra_menu", %{product_extra_menu_id: product_extra_menu.id})
+      assert_reply(ref, :ok)
+      |> doc()
+      assert_broadcast("product_extra_menu_deleted", %{message: message, product_extra_menu_id: ^product_extra_menu_id})
+      |> doc()
+
+      deleted_product_extra_menu = Merchandise.get_product_extra_menu(product_extra_menu_id)
+      assert ^deleted_product_extra_menu = {:error, :not_found}
+    end
+
+    test "create a product extra", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id, name: "Sauces"})
+
+      {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant.id, new_name: "Sauce Y"})
+      
+      ref = doc_push(socket, "create_product_extra", %{product_extra_menu_id: product_extra_menu.id, new_name: unlisted_product.name, new_price: 1000, product_id: unlisted_product.id})
+      assert_reply(ref, :ok)
+      |> doc()
+      assert_broadcast("product_extra_created", %{data: data})
+      |> doc()
+
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      {:ok, created_product_extra} = Merchandise.get_product_extra(decoded_data["id"])
+      assert Merchandise.price_to_string(created_product_extra.new_price) == "10:-"
+    end
+
+    test "update a product extra", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id})
+      {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant.id})
+
+      {:ok, product_extra} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id, product_id: unlisted_product.id, new_name: "Sauce Y", new_price: 900})
+
+      params = %{new_name: "Sauce X"}
+      ref = doc_push(socket, "update_product_extra", %{product_extra_id: product_extra.id, params: params})
+      assert_reply(ref, :ok)
+      |> doc()
+      assert_broadcast("product_extra_updated", %{data: data})
+      |> doc()
+
+      {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
+      {:ok, updated_product_extra} = Merchandise.get_product_extra(decoded_data["id"])
+      assert updated_product_extra.new_name == "Sauce X"
+    end
+
+    test "delete a product extra", %{socket: socket} do
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id})
+      {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant.id})
+
+      {:ok, product_extra} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id, product_id: unlisted_product.id, new_name: "Sauce Y", new_price: 900})
+
+      product_extra_id = product_extra.id
+
+      ref = doc_push(socket, "delete_product_extra", %{product_extra_id: product_extra.id})
+      assert_reply(ref, :ok)
+      |> doc()
+      assert_broadcast("product_extra_deleted", %{message: message, product_extra_id: ^product_extra_id})
+      |> doc()
+
+      deleted_product_extra = Merchandise.get_product_extra(product_extra_id)
+      assert ^deleted_product_extra = {:error, :not_found}
+    end
   end
 
   describe "try to do user actions as a guest -" do
     setup :guest
 
     test "create a product without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       
       ref = push(socket, "create_product", %{menu_id: menu.id, name: "test product 99", price: 99_00})
       assert_reply ref, :error, %{message: "Unauthorized"}
     end
 
     test "update a product without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
-      product = product_fixture(%{menu_id: menu.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
 
       params = %{name: "some new name"}
       ref = push(socket, "update_product", %{product_id: product.id, params: params})
@@ -258,9 +389,9 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     end
 
     test "delete a product without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
-      product = product_fixture(%{menu_id: menu.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, product} = product_fixture(%{menu_id: menu.id})
       product_id = product.id
 
       ref = push(socket, "delete_product", %{product_id: product.id})

@@ -6,7 +6,6 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
   import Db.MerchandiseFixtures
   alias Bureaucrat.JSON
   alias Db.Feeders
-  alias Db.Repo
 
   setup do
     restaurant_fixture()
@@ -23,7 +22,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
   defp login(_context) do
     # Create user
-    user = user_fixture()
+    {:ok, user} = user_fixture()
     conn = Phoenix.ConnTest.build_conn()
     # Login with the user credentials
     conn =
@@ -102,16 +101,19 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "get one restaurant", %{socket: socket} do
-      restaurant_fixture()
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       restaurant_id = restaurant.id
 
-      menu = menu_fixture(restaurant_id: restaurant_id)
-      create_products(menu)
+      {:ok, menu} = menu_fixture(restaurant_id: restaurant_id)
+      [product1, _, _, _] = create_products(menu)
+
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product1.id})
+      create_product_extras(product_extra_menu)
 
       {:ok, restaurant} = 
+        Feeders.get_restaurant(restaurant.id)
+      {:ok, restaurant} =
         restaurant
-        |> Db.Repo.preload(menus: :products)
         |> Feeders.reset_order_list()
 
       restaurant_json = Phoenix.View.render_to_string(MatxWeb.Api.RestaurantView, "show.json", restaurant: restaurant)
@@ -128,12 +130,13 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "get all menus from a restaurant", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       create_menus(restaurant)
 
       {:ok, restaurant} = 
+        Feeders.get_restaurant(restaurant.id)
+      {:ok, restaurant}
         restaurant
-        |> Db.Repo.preload(:menus)
         |> Feeders.reset_order_list()
 
       menus = EctoList.ordered_items_list(restaurant.menus, restaurant.menus_sequence)
@@ -146,8 +149,8 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "get one menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
-      menu = menu_fixture(%{restaurant_id: restaurant.id})
+      {:ok, restaurant} = restaurant_fixture()
+      {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       
       menu_json = Phoenix.View.render_to_string(MatxWeb.Api.MenuView, "show.json", menu: menu)
       data = %{data: menu_json}
@@ -196,7 +199,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "update a restaurant", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       params = %{name: "new name", url: "new url"}
       ref = doc_push(socket, "update_restaurant", %{restaurant_id: restaurant.id, params: params})
       assert_reply(ref, :ok)
@@ -206,7 +209,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "delete a restaurant", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       restaurant_id = restaurant.id
       ref = doc_push(socket, "delete_restaurant", %{restaurant_id: restaurant.id})
       assert_reply(ref, :ok)
@@ -216,7 +219,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "create a menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       ref = doc_push(socket, "create_menu", %{restaurant_id: restaurant.id, name: "test menu"})
       assert_reply(ref, :ok)
       |> doc()
@@ -233,7 +236,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
       ref = push socket, "create_menu", %{restaurant_id: 2323}
       assert_reply ref, :error
 
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
 
       # Correct restaurant id, but missing name param
       ref = push socket, "create_menu", %{restaurant_id: restaurant.id}
@@ -241,7 +244,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "update a menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
 
       params = %{name: "some new name"}
@@ -253,7 +256,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "delete a menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
       menu_id = menu.id
 
@@ -265,12 +268,13 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "change sequence of menu", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       [menu1, menu2, menu3, menu4] = create_menus(restaurant)
 
       {:ok, restaurant} = 
+        Feeders.get_restaurant(restaurant.id)
+      {:ok, restaurant} =
         restaurant
-        |> Db.Repo.preload(:menus)
         |> Feeders.reset_order_list()
 
       # First check: Menu 2 should be at index 1
@@ -324,7 +328,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "edit a restaurant without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       params = %{name: "new name", url: "new url"}
       ref = push(socket, "update_restaurant", %{restaurant_id: restaurant.id, params: params})
       refute_reply(ref, :ok)
@@ -332,7 +336,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "delete a restaurant without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       restaurant_id = restaurant.id
       ref = push(socket, "delete_restaurant", %{restaurant_id: restaurant.id})
       refute_reply(ref, :ok)
@@ -340,14 +344,14 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "create a menu without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
 
       ref = push(socket, "create_menu", %{restaurant_id: restaurant.id, name: "test menu"})
       assert_reply ref, :error, %{message: "Unauthorized"}
     end
 
     test "update a menu without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
 
       params = %{name: "some new name"}
@@ -357,7 +361,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "delete a menu without logging in", %{socket: socket} do
-      restaurant = restaurant_fixture()
+      {:ok, restaurant} = restaurant_fixture()
       restaurant_id = restaurant.id
       {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant_id, name: "test menu1"})
 

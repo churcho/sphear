@@ -82,8 +82,9 @@ defmodule Db.FeedersTest do
       {:ok, menu4} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu4"})
 
       {:ok, restaurant} = 
+        Feeders.get_restaurant(restaurant.id)
+      {:ok, restaurant} =
         restaurant
-        |> Repo.preload(:menus)
         |> Feeders.reset_order_list()
 
       # First check: Menu 2 should be at the second slot
