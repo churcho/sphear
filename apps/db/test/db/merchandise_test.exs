@@ -73,9 +73,9 @@ defmodule Db.MerchandiseTest do
       assert product_extra_menu.pick_only_one == false
 
       # Update the menu
-      changes = %{mandatory: true, pick_only_one: true, name: "New Sauces"}
+      changes = %{mandatory: true, pick_only_one: true, name: "Must Pick One Sauce"}
       assert {:ok, %ProductExtraMenu{} = updated_product_extra_menu} = Merchandise.update_product_extra_menu(product_extra_menu, changes)
-      assert updated_product_extra_menu.name == "New Sauces"
+      assert updated_product_extra_menu.name == "Must Pick One Sauce"
       assert updated_product_extra_menu.mandatory == true
       assert updated_product_extra_menu.pick_only_one == true
 

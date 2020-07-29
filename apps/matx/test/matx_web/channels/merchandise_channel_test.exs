@@ -272,7 +272,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, product} = product_fixture(%{menu_id: menu.id})
       {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product.id})
 
-      params = %{name: "New Sauces", mandatory: true, pick_only_one: true}
+      params = %{name: "Must Pick One Sauce", mandatory: true, pick_only_one: true}
       ref = doc_push(socket, "update_product_extra_menu", %{product_extra_menu_id: product_extra_menu.id, params: params})
       assert_reply(ref, :ok)
       |> doc()
@@ -281,7 +281,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
 
       {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
       {:ok, updated_product_extra_menu} = Merchandise.get_product_extra_menu(decoded_data["id"])
-      assert updated_product_extra_menu.name == "New Sauces"
+      assert updated_product_extra_menu.name == "Must Pick One Sauce"
       assert updated_product_extra_menu.mandatory == true
       assert updated_product_extra_menu.pick_only_one == true
     end
