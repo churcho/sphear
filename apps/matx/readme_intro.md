@@ -6,8 +6,14 @@ In this API spec, each endpoint is a channel and each channel might need authent
 
 When subscribing to a endpoint, connect and subscribe to the topic "lobby" with or without a token.
 
+#### Expected input if logging in with token
+```json
+{
+  "token": "3X4MpLeT0k3n1337"
+}
+```
 The endpoint will reply with either:
-#### Subscribed to lobby without a token
+#### Subscribed to the lobby without a token
 ```json
 {
   "guest_success": true,
@@ -15,7 +21,7 @@ The endpoint will reply with either:
 }
 ```
 ## or 
-#### Subscribed to lobby with a token
+#### Subscribed and authenticated to the lobby successfully
 ```json
 {
   "login_success": true,
