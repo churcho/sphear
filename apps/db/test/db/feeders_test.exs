@@ -7,7 +7,7 @@ defmodule Db.FeedersTest do
     alias Db.Feeders.Restaurant
 
     @valid_attrs %{address: "some address", name: "some name", url: "some url"}
-    @update_attrs %{address: "some updated address", name: "some updated name", url: "some updated url"}
+    @update_attrs %{address: "some updated address", name: "some updated name", url: "some updated url", hidden: false}
     @invalid_attrs %{address: nil, name: nil, url: nil}
 
     def restaurant_fixture(attrs \\ %{}) do

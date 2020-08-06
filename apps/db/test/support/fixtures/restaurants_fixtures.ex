@@ -26,7 +26,8 @@ defmodule Db.RestaurantsFixtures do
     |> Enum.into(%{
       name: name,
       url: valid_url(name),
-      address: valid_address()
+      address: valid_address(),
+      hidden: false
     })
     |> Feeders.create_restaurant()
   end
@@ -44,7 +45,8 @@ defmodule Db.RestaurantsFixtures do
     attrs
     |> Enum.into(%{
       name: menu_name(),
-      restaurant_id: restaurant_id
+      restaurant_id: restaurant_id,
+      hidden: false
     })
     |> Feeders.create_menu()
   end

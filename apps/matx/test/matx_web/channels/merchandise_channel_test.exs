@@ -131,7 +131,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, restaurant} = restaurant_fixture()
       {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       
-      ref = doc_push(socket, "create_product", %{menu_id: menu.id, name: "test product 99", price: 99_00})
+      ref = doc_push(socket, "create_product", %{menu_id: menu.id, name: "test product 99", price: 99_00, hidden: false})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("product_created", %{data: data})
@@ -255,7 +255,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       {:ok, product} = product_fixture(%{menu_id: menu.id})
       
-      ref = doc_push(socket, "create_product_extra_menu", %{product_id: product.id, name: "Sauces"})
+      ref = doc_push(socket, "create_product_extra_menu", %{product_id: product.id, name: "Sauces", hidden: false})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("product_extra_menu_created", %{data: data})
@@ -312,7 +312,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
 
       {:ok, unlisted_product} = unlisted_product_fixture(%{restaurant_id: restaurant.id, new_name: "Sauce Y"})
       
-      ref = doc_push(socket, "create_product_extra", %{product_extra_menu_id: product_extra_menu.id, new_name: unlisted_product.name, new_price: 1000, product_id: unlisted_product.id})
+      ref = doc_push(socket, "create_product_extra", %{product_extra_menu_id: product_extra_menu.id, new_name: unlisted_product.name, new_price: 1000, product_id: unlisted_product.id, hidden: false})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("product_extra_created", %{data: data})

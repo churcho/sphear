@@ -46,7 +46,8 @@ defmodule Db.MerchandiseFixtures do
     |> Enum.into(%{
       name: product_extra_name(),
       restaurant_id: restaurant_id,
-      price: valid_unlisted_price()
+      price: valid_unlisted_price(),
+      hidden: false
     })
     |> Merchandise.create_unlisted_product()
   end
@@ -77,6 +78,7 @@ defmodule Db.MerchandiseFixtures do
       name: "Sauces",
       pick_only_one: false,
       product_id: product_id,
+      hidden: false
     })
     |> Merchandise.create_product_extra_menu()
   end
@@ -115,7 +117,8 @@ defmodule Db.MerchandiseFixtures do
       new_name: product_extra_name(),
       new_price: valid_extra_price(),
       product_extra_menu_id: product_extra_menu_id,
-      product_id: product_id
+      product_id: product_id,
+      hidden: false
     })
     |> Merchandise.create_product_extra()
   end

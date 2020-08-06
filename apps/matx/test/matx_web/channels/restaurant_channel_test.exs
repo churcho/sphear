@@ -107,7 +107,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
       {:ok, menu} = menu_fixture(restaurant_id: restaurant_id)
       [product1, _, _, _] = create_products(menu)
 
-      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product1.id})
+      {:ok, product_extra_menu} = product_extra_menu_fixture(%{product_id: product1.id, name: "Extras"})
       create_pommes_extras(restaurant_id, product_extra_menu.id)
 
       {:ok, restaurant} = 
@@ -180,7 +180,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "create a restaurant", %{socket: socket} do
-      ref = doc_push(socket, "create_restaurant", %{name: "test", url: "some url", address: "some address"})
+      ref = doc_push(socket, "create_restaurant", %{name: "test", url: "some url", address: "some address", hidden: false})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("restaurant_created", %{data: data})
@@ -220,7 +220,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
     test "create a menu", %{socket: socket} do
       {:ok, restaurant} = restaurant_fixture()
-      ref = doc_push(socket, "create_menu", %{restaurant_id: restaurant.id, name: "test menu"})
+      ref = doc_push(socket, "create_menu", %{restaurant_id: restaurant.id, name: "test menu", hidden: false})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("menu_created", %{data: data})
@@ -245,10 +245,10 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
 
     test "update a menu", %{socket: socket} do
       {:ok, restaurant} = restaurant_fixture()
-      {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1"})
+      {:ok, menu} = Feeders.create_menu(%{restaurant_id: restaurant.id, name: "test menu1", hidden: true})
 
       params = %{name: "some new name"}
-      ref = doc_push(socket, "update_menu", %{menu_id: menu.id, params: params})
+      ref = doc_push(socket, "update_menu", %{menu_id: menu.id, params: params, hidden: false})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("menu_updated", %{data: data})
