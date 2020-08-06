@@ -83,7 +83,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303422653@example.com",
+  "email": "user-576460752303423070@example.com",
   "password": "hello world!"
 }
 ```
@@ -94,13 +94,13 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiiHFu9CvwC1_LcAAAri
+x-request-id: FiisDGuAW4BeTHsAAAFF
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "token": "nUm7DzchJo9ZfDJeou5SH948JmeCKM7ZB1CzL/fN1jk="
+    "token": "Dq40oJBkwsaHHAQ5jWUEZfwyql60GiVSmIXZIwP8pdU="
   }
 }
 ```
@@ -117,7 +117,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303420638@example.com",
+  "email": "user-576460752303421855@example.com",
   "password": "lol"
 }
 ```
@@ -128,7 +128,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiiHFvTN0EDe6igAAAbB
+x-request-id: FiisDGfOUAC1_LcAAAaB
 ```
 * __Response body:__
 ```json
@@ -152,7 +152,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 * __Request body:__
 ```json
 {
-  "email": "user-576460752303423322@example.com",
+  "email": "user-576460752303421759@example.com",
   "password": "hello world!",
   "password_confirmation": "hello world!"
 }
@@ -164,14 +164,14 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiiHFu9CvwBfUTwAAArC
+x-request-id: FiisDGuAW4DOkysAAAbh
 ```
 * __Response body:__
 ```json
 {
   "success": {
-    "email": "user-576460752303423322@example.com",
-    "token": "edXhY4wOoTgjJRna5mLHIeqEb8QR5wPT6lkdxrgspFY="
+    "email": "user-576460752303421759@example.com",
+    "token": "AKxbkUzQV/lNrW75O3GAEp2yrFg6bqrZFgrL4UrzeFs="
   }
 }
 ```
@@ -200,7 +200,7 @@ content-type: multipart/mixed; boundary=plug_conn_test
 ```
 content-type: application/json; charset=utf-8
 cache-control: max-age=0, private, must-revalidate
-x-request-id: FiiHFvTN0EBeTHsAAAsC
+x-request-id: FiisDGfOUABfUTwAAAah
 ```
 * __Response body:__
 ```json
@@ -242,7 +242,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "user_id": 50409
+  "user_id": 51198
 }
 ```
 ---
@@ -258,34 +258,34 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
   "data": {
     "restaurants": [
       {
-        "address": "83 Miller Meadow",
-        "created": "2020-08-06T00:43:23",
+        "address": "1 Bahringer Rest",
+        "created": "2020-08-06T12:00:39",
         "hidden": false,
-        "id": 40288,
+        "id": 41233,
         "menus": [],
-        "name": "Pizza Joe’s",
+        "name": "Pizza Planet",
         "unlisted_products": [],
-        "url": "https://pizza-joes.se"
+        "url": "https://pizza-planet.se"
       },
       {
-        "address": "5292 Spinka Heights",
-        "created": "2020-08-06T00:43:23",
+        "address": "934 Bernie Mill",
+        "created": "2020-08-06T12:00:39",
         "hidden": false,
-        "id": 40289,
+        "id": 41234,
         "menus": [],
-        "name": "Mona Pizza",
+        "name": "Paisanos",
         "unlisted_products": [],
-        "url": "https://mona-pizza.se"
+        "url": "https://paisanos.se"
       },
       {
-        "address": "7552 Walter Key",
-        "created": "2020-08-06T00:43:23",
+        "address": "4176 Boyer Well",
+        "created": "2020-08-06T12:00:39",
         "hidden": false,
-        "id": 40290,
+        "id": 41235,
         "menus": [],
-        "name": "Thin Crust or Bust",
+        "name": "Little Nero's Pizza",
         "unlisted_products": [],
-        "url": "https://thin-crust-or-bust.se"
+        "url": "https://little-neros-pizza.se"
       }
     ]
   }
@@ -299,7 +299,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "restaurant_id": 40252
+  "restaurant_id": 41259
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -308,211 +308,211 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "data": {
-    "address": "46 Janice Light",
-    "created": "2020-08-06T00:43:22",
+    "address": "55668 Schultz Corner",
+    "created": "2020-08-06T12:00:40",
     "hidden": false,
-    "id": 40252,
+    "id": 41259,
     "menus": [
       {
         "hidden": false,
-        "id": 11784,
-        "name": "Meatball ",
+        "id": 12293,
+        "name": "Bolognese",
         "products": [
           {
             "hidden": true,
-            "id": 5439,
-            "inserted_at": "2020-08-06T00:43:22",
-            "menu_id": 11784,
-            "name": "Medium with Mango and Gorgonzola",
+            "id": 5879,
+            "inserted_at": "2020-08-06T12:00:40",
+            "menu_id": 12293,
+            "name": "Personal Deep Dish Romana",
             "price": {
-              "amount": 7158,
+              "amount": 8482,
               "currency": "SEK"
             },
-            "price_to_string": "71,58:-",
+            "price_to_string": "84,82:-",
             "product_extra_menus": [
               {
                 "default_extra": null,
                 "hidden": false,
-                "id": 850,
-                "inserted_at": "2020-08-06T00:43:22",
+                "id": 984,
+                "inserted_at": "2020-08-06T12:00:40",
                 "mandatory": false,
                 "name": "Extras",
                 "pick_only_one": false,
                 "product_extras": [
                   {
                     "hidden": false,
-                    "id": 616,
-                    "inserted_at": "2020-08-06T00:43:22",
+                    "id": 715,
+                    "inserted_at": "2020-08-06T12:00:40",
                     "new_name": "Huge Pommes",
                     "new_price": {
-                      "amount": 7973,
+                      "amount": 6422,
                       "currency": "SEK"
                     },
-                    "new_price_to_string": "79,73:-",
+                    "new_price_to_string": "64,22:-",
                     "product": {
                       "hidden": false,
-                      "id": 5443,
-                      "inserted_at": "2020-08-06T00:43:22",
+                      "id": 5883,
+                      "inserted_at": "2020-08-06T12:00:40",
                       "menu_id": null,
                       "name": "Pommes",
                       "price": {
-                        "amount": 4401,
+                        "amount": 4489,
                         "currency": "SEK"
                       },
-                      "price_to_string": "44,01:-",
-                      "restaurant_id": 40252
+                      "price_to_string": "44,89:-",
+                      "restaurant_id": 41259
                     },
-                    "product_extra_menu_id": 850,
-                    "product_id": 5443
+                    "product_extra_menu_id": 984,
+                    "product_id": 5883
                   },
                   {
                     "hidden": false,
-                    "id": 615,
-                    "inserted_at": "2020-08-06T00:43:22",
+                    "id": 714,
+                    "inserted_at": "2020-08-06T12:00:40",
                     "new_name": "Big Pommes",
                     "new_price": {
-                      "amount": 5160,
+                      "amount": 5454,
                       "currency": "SEK"
                     },
-                    "new_price_to_string": "51,60:-",
+                    "new_price_to_string": "54,54:-",
                     "product": {
                       "hidden": false,
-                      "id": 5443,
-                      "inserted_at": "2020-08-06T00:43:22",
+                      "id": 5883,
+                      "inserted_at": "2020-08-06T12:00:40",
                       "menu_id": null,
                       "name": "Pommes",
                       "price": {
-                        "amount": 4401,
+                        "amount": 4489,
                         "currency": "SEK"
                       },
-                      "price_to_string": "44,01:-",
-                      "restaurant_id": 40252
+                      "price_to_string": "44,89:-",
+                      "restaurant_id": 41259
                     },
-                    "product_extra_menu_id": 850,
-                    "product_id": 5443
+                    "product_extra_menu_id": 984,
+                    "product_id": 5883
                   },
                   {
                     "hidden": false,
-                    "id": 614,
-                    "inserted_at": "2020-08-06T00:43:22",
+                    "id": 713,
+                    "inserted_at": "2020-08-06T12:00:40",
                     "new_name": "Medium Pommes",
                     "new_price": {
-                      "amount": 3504,
+                      "amount": 3208,
                       "currency": "SEK"
                     },
-                    "new_price_to_string": "35,04:-",
+                    "new_price_to_string": "32,08:-",
                     "product": {
                       "hidden": false,
-                      "id": 5443,
-                      "inserted_at": "2020-08-06T00:43:22",
+                      "id": 5883,
+                      "inserted_at": "2020-08-06T12:00:40",
                       "menu_id": null,
                       "name": "Pommes",
                       "price": {
-                        "amount": 4401,
+                        "amount": 4489,
                         "currency": "SEK"
                       },
-                      "price_to_string": "44,01:-",
-                      "restaurant_id": 40252
+                      "price_to_string": "44,89:-",
+                      "restaurant_id": 41259
                     },
-                    "product_extra_menu_id": 850,
-                    "product_id": 5443
+                    "product_extra_menu_id": 984,
+                    "product_id": 5883
                   },
                   {
                     "hidden": false,
-                    "id": 613,
-                    "inserted_at": "2020-08-06T00:43:22",
+                    "id": 712,
+                    "inserted_at": "2020-08-06T12:00:40",
                     "new_name": "Small Pommes",
                     "new_price": {
-                      "amount": 1812,
+                      "amount": 1823,
                       "currency": "SEK"
                     },
-                    "new_price_to_string": "18,12:-",
+                    "new_price_to_string": "18,23:-",
                     "product": {
                       "hidden": false,
-                      "id": 5443,
-                      "inserted_at": "2020-08-06T00:43:22",
+                      "id": 5883,
+                      "inserted_at": "2020-08-06T12:00:40",
                       "menu_id": null,
                       "name": "Pommes",
                       "price": {
-                        "amount": 4401,
+                        "amount": 4489,
                         "currency": "SEK"
                       },
-                      "price_to_string": "44,01:-",
-                      "restaurant_id": 40252
+                      "price_to_string": "44,89:-",
+                      "restaurant_id": 41259
                     },
-                    "product_extra_menu_id": 850,
-                    "product_id": 5443
+                    "product_extra_menu_id": 984,
+                    "product_id": 5883
                   }
                 ],
-                "product_id": 5439
+                "product_id": 5879
               }
             ],
             "restaurant_id": null
           },
           {
             "hidden": true,
-            "id": 5440,
-            "inserted_at": "2020-08-06T00:43:22",
-            "menu_id": 11784,
-            "name": "14\" Fajita",
+            "id": 5880,
+            "inserted_at": "2020-08-06T12:00:40",
+            "menu_id": 12293,
+            "name": "26\" Taco",
             "price": {
-              "amount": 9672,
+              "amount": 9235,
               "currency": "SEK"
             },
-            "price_to_string": "96,72:-",
+            "price_to_string": "92,35:-",
             "product_extra_menus": [],
             "restaurant_id": null
           },
           {
             "hidden": true,
-            "id": 5441,
-            "inserted_at": "2020-08-06T00:43:22",
-            "menu_id": 11784,
-            "name": "16\" Pizza Frittata with Philly Steak, Philly Steak, and Mango",
+            "id": 5881,
+            "inserted_at": "2020-08-06T12:00:40",
+            "menu_id": 12293,
+            "name": "Personal Meat Feast",
             "price": {
-              "amount": 9356,
+              "amount": 7295,
               "currency": "SEK"
             },
-            "price_to_string": "93,56:-",
+            "price_to_string": "72,95:-",
             "product_extra_menus": [],
             "restaurant_id": null
           },
           {
             "hidden": true,
-            "id": 5442,
-            "inserted_at": "2020-08-06T00:43:22",
-            "menu_id": 11784,
-            "name": "Family Caprese",
+            "id": 5882,
+            "inserted_at": "2020-08-06T12:00:40",
+            "menu_id": 12293,
+            "name": "Personal Grandma",
             "price": {
-              "amount": 8545,
+              "amount": 7627,
               "currency": "SEK"
             },
-            "price_to_string": "85,45:-",
+            "price_to_string": "76,27:-",
             "product_extra_menus": [],
             "restaurant_id": null
           }
         ],
-        "restaurant_id": 40252
+        "restaurant_id": 41259
       }
     ],
-    "name": "Freddy Fazbear's Pizza",
+    "name": "Pizza Forest",
     "unlisted_products": [
       {
         "hidden": false,
-        "id": 5443,
-        "inserted_at": "2020-08-06T00:43:22",
+        "id": 5883,
+        "inserted_at": "2020-08-06T12:00:40",
         "menu_id": null,
         "name": "Pommes",
         "price": {
-          "amount": 4401,
+          "amount": 4489,
           "currency": "SEK"
         },
-        "price_to_string": "44,01:-",
+        "price_to_string": "44,89:-",
         "product_extra_menus": [],
-        "restaurant_id": 40252
+        "restaurant_id": 41259
       }
     ],
-    "url": "https://freddy-fazbears-pizza.se"
+    "url": "https://pizza-forest.se"
   }
 }
 ```
@@ -524,7 +524,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "restaurant_id": 40293
+  "restaurant_id": 41249
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -536,31 +536,31 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "menus": [
       {
         "hidden": false,
-        "id": 11793,
-        "name": "Pesto Chicken",
+        "id": 12288,
+        "name": "Canadian",
         "products": [],
-        "restaurant_id": 40293
+        "restaurant_id": 41249
       },
       {
         "hidden": false,
-        "id": 11794,
-        "name": "Loaded",
+        "id": 12289,
+        "name": "Thai Chicken",
         "products": [],
-        "restaurant_id": 40293
+        "restaurant_id": 41249
       },
       {
         "hidden": false,
-        "id": 11795,
-        "name": "Veggie Korma",
+        "id": 12290,
+        "name": "Quattro Formaggio",
         "products": [],
-        "restaurant_id": 40293
+        "restaurant_id": 41249
       },
       {
         "hidden": false,
-        "id": 11796,
-        "name": "Maltija",
+        "id": 12291,
+        "name": "Shrimp Club",
         "products": [],
-        "restaurant_id": 40293
+        "restaurant_id": 41249
       }
     ]
   }
@@ -574,7 +574,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "menu_id": 11791
+  "menu_id": 12279
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -584,10 +584,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 11791,
-    "name": "Hot & Spicy",
+    "id": 12279,
+    "name": "Africana",
     "products": [],
-    "restaurant_id": 40277
+    "restaurant_id": 41218
   }
 }
 ```
@@ -612,9 +612,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "address": "some address",
-    "created": "2020-08-06T00:43:22",
+    "created": "2020-08-06T12:00:39",
     "hidden": false,
-    "id": 40250,
+    "id": 41229,
     "menus": [],
     "name": "test",
     "unlisted_products": [],
@@ -630,9 +630,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "address": "some address",
-    "created": "2020-08-06T00:43:22",
+    "created": "2020-08-06T12:00:39",
     "hidden": false,
-    "id": 40250,
+    "id": 41229,
     "menus": [],
     "name": "test",
     "unlisted_products": [],
@@ -652,7 +652,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "name": "new name",
     "url": "new url"
   },
-  "restaurant_id": 40266
+  "restaurant_id": 41256
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -661,10 +661,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "data": {
-    "address": "63003 Aisha Lock",
-    "created": "2020-08-06T00:43:23",
+    "address": "8819 Angeline Square",
+    "created": "2020-08-06T12:00:40",
     "hidden": false,
-    "id": 40266,
+    "id": 41256,
     "menus": [],
     "name": "new name",
     "unlisted_products": [],
@@ -679,10 +679,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "data": {
-    "address": "63003 Aisha Lock",
-    "created": "2020-08-06T00:43:23",
+    "address": "8819 Angeline Square",
+    "created": "2020-08-06T12:00:40",
     "hidden": false,
-    "id": 40266,
+    "id": 41256,
     "menus": [],
     "name": "new name",
     "unlisted_products": [],
@@ -698,7 +698,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "restaurant_id": 40279
+  "restaurant_id": 41220
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -706,7 +706,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'Maria’s Pasta and Pizza' with id 40279"
+  "message": "Deleted restaurant 'Dinosaur Pizza' with id 41220"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -715,8 +715,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted restaurant 'Maria’s Pasta and Pizza'",
-  "restaurant_id": 40279
+  "message": "Deleted restaurant 'Dinosaur Pizza'",
+  "restaurant_id": 41220
 }
 ```
 ---
@@ -729,7 +729,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "hidden": false,
   "name": "test menu",
-  "restaurant_id": 40295
+  "restaurant_id": 41246
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -739,10 +739,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 11797,
+    "id": 12287,
     "name": "test menu",
     "products": [],
-    "restaurant_id": 40295
+    "restaurant_id": 41246
   }
 }
 ```
@@ -754,10 +754,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 11797,
+    "id": 12287,
     "name": "test menu",
     "products": [],
-    "restaurant_id": 40295
+    "restaurant_id": 41246
   }
 }
 ```
@@ -770,7 +770,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "hidden": false,
-  "menu_id": 11792,
+  "menu_id": 12292,
   "params": {
     "name": "some new name"
   }
@@ -783,10 +783,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": true,
-    "id": 11792,
+    "id": 12292,
     "name": "some new name",
     "products": [],
-    "restaurant_id": 40287
+    "restaurant_id": 41254
   }
 }
 ```
@@ -798,10 +798,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": true,
-    "id": 11792,
+    "id": 12292,
     "name": "some new name",
     "products": [],
-    "restaurant_id": 40287
+    "restaurant_id": 41254
   }
 }
 ```
@@ -813,7 +813,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "menu_id": 11798
+  "menu_id": 12286
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -821,7 +821,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted menu 'test menu1' with id 11798"
+  "message": "Deleted menu 'test menu1' with id 12286"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -830,7 +830,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "menu_id": 11798,
+  "menu_id": 12286,
   "message": "Deleted menu 'test menu1'"
 }
 ```
@@ -842,7 +842,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "restaurant_id": 40260
+  "restaurant_id": 41224
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -851,43 +851,43 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "data": {
-    "address": "7 Shaun Motorway",
-    "created": "2020-08-06T00:43:22",
+    "address": "41 Boehm Corner",
+    "created": "2020-08-06T12:00:39",
     "hidden": false,
-    "id": 40260,
+    "id": 41224,
     "menus": [
       {
         "hidden": false,
-        "id": 11786,
-        "name": "Veggie Korma",
+        "id": 12281,
+        "name": "Meat Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11787,
-        "name": "Bolognese",
+        "id": 12282,
+        "name": "Vegetarian Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11788,
-        "name": "Mockba",
+        "id": 12283,
+        "name": "Chicken Pesto",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11789,
-        "name": "Viennese",
+        "id": 12284,
+        "name": "Meatball ",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       }
     ],
-    "name": "Pete’s Pizza",
+    "name": "Sid’s Pizza Parlor",
     "unlisted_products": [],
-    "url": "https://petes-pizza.se"
+    "url": "https://sids-pizza-parlor.se"
   }
 }
 ```
@@ -899,8 +899,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "action": "insert_at",
   "index": 1,
-  "menu_id": 11789,
-  "restaurant_id": 40260
+  "menu_id": 12284,
+  "restaurant_id": 41224
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -912,31 +912,31 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "menus": [
       {
         "hidden": false,
-        "id": 11786,
-        "name": "Veggie Korma",
+        "id": 12281,
+        "name": "Meat Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11789,
-        "name": "Viennese",
+        "id": 12284,
+        "name": "Meatball ",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11787,
-        "name": "Bolognese",
+        "id": 12282,
+        "name": "Vegetarian Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11788,
-        "name": "Mockba",
+        "id": 12283,
+        "name": "Chicken Pesto",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       }
     ]
   }
@@ -949,8 +949,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "higher",
-  "menu_id": 11788,
-  "restaurant_id": 40260
+  "menu_id": 12283,
+  "restaurant_id": 41224
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -962,31 +962,31 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "menus": [
       {
         "hidden": false,
-        "id": 11786,
-        "name": "Veggie Korma",
+        "id": 12281,
+        "name": "Meat Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11789,
-        "name": "Viennese",
+        "id": 12284,
+        "name": "Meatball ",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11788,
-        "name": "Mockba",
+        "id": 12283,
+        "name": "Chicken Pesto",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11787,
-        "name": "Bolognese",
+        "id": 12282,
+        "name": "Vegetarian Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       }
     ]
   }
@@ -999,8 +999,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "lower",
-  "menu_id": 11786,
-  "restaurant_id": 40260
+  "menu_id": 12281,
+  "restaurant_id": 41224
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1012,31 +1012,31 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "menus": [
       {
         "hidden": false,
-        "id": 11789,
-        "name": "Viennese",
+        "id": 12284,
+        "name": "Meatball ",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11786,
-        "name": "Veggie Korma",
+        "id": 12281,
+        "name": "Meat Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11788,
-        "name": "Mockba",
+        "id": 12283,
+        "name": "Chicken Pesto",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11787,
-        "name": "Bolognese",
+        "id": 12282,
+        "name": "Vegetarian Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       }
     ]
   }
@@ -1049,8 +1049,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "to_top",
-  "menu_id": 11788,
-  "restaurant_id": 40260
+  "menu_id": 12283,
+  "restaurant_id": 41224
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1062,31 +1062,31 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "menus": [
       {
         "hidden": false,
-        "id": 11788,
-        "name": "Mockba",
+        "id": 12283,
+        "name": "Chicken Pesto",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11789,
-        "name": "Viennese",
+        "id": 12284,
+        "name": "Meatball ",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11786,
-        "name": "Veggie Korma",
+        "id": 12281,
+        "name": "Meat Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11787,
-        "name": "Bolognese",
+        "id": 12282,
+        "name": "Vegetarian Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       }
     ]
   }
@@ -1099,8 +1099,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "to_bottom",
-  "menu_id": 11789,
-  "restaurant_id": 40260
+  "menu_id": 12284,
+  "restaurant_id": 41224
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1112,31 +1112,31 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "menus": [
       {
         "hidden": false,
-        "id": 11788,
-        "name": "Mockba",
+        "id": 12283,
+        "name": "Chicken Pesto",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11786,
-        "name": "Veggie Korma",
+        "id": 12281,
+        "name": "Meat Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11787,
-        "name": "Bolognese",
+        "id": 12282,
+        "name": "Vegetarian Lovers",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       },
       {
         "hidden": false,
-        "id": 11789,
-        "name": "Viennese",
+        "id": 12284,
+        "name": "Meatball ",
         "products": [],
-        "restaurant_id": 40260
+        "restaurant_id": 41224
       }
     ]
   }
@@ -1166,7 +1166,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "user_id": 50402
+  "user_id": 51176
 }
 ```
 ---
@@ -1177,7 +1177,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "menu_id": 11769
+  "menu_id": 12271
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1189,57 +1189,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5416,
-        "inserted_at": "2020-08-06T00:43:21",
-        "menu_id": 11769,
-        "name": "12\" with Green Peppers, Black Olives, and Mutton",
+        "id": 5864,
+        "inserted_at": "2020-08-06T12:00:38",
+        "menu_id": 12271,
+        "name": "Extra-Large Margherita",
         "price": {
-          "amount": 8640,
+          "amount": 7776,
           "currency": "SEK"
         },
-        "price_to_string": "86,40:-",
+        "price_to_string": "77,76:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5417,
-        "inserted_at": "2020-08-06T00:43:21",
-        "menu_id": 11769,
-        "name": "10\" Kebab",
+        "id": 5865,
+        "inserted_at": "2020-08-06T12:00:38",
+        "menu_id": 12271,
+        "name": "Large Deep Dish Breakfast",
         "price": {
-          "amount": 7544,
+          "amount": 9913,
           "currency": "SEK"
         },
-        "price_to_string": "75,44:-",
+        "price_to_string": "99,13:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5418,
-        "inserted_at": "2020-08-06T00:43:21",
-        "menu_id": 11769,
-        "name": "16\" Sweet Potato Crust Pesto Chicken",
+        "id": 5866,
+        "inserted_at": "2020-08-06T12:00:38",
+        "menu_id": 12271,
+        "name": "Small Grandma",
         "price": {
-          "amount": 7740,
+          "amount": 9731,
           "currency": "SEK"
         },
-        "price_to_string": "77,40:-",
+        "price_to_string": "97,31:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5419,
-        "inserted_at": "2020-08-06T00:43:21",
-        "menu_id": 11769,
-        "name": "Medium with Philly Steak, Pulled Pork, Chili Sauce, Anchovies, and Hamburger",
+        "id": 5867,
+        "inserted_at": "2020-08-06T12:00:38",
+        "menu_id": 12271,
+        "name": "18\" Quattro Formaggi",
         "price": {
-          "amount": 9809,
+          "amount": 7854,
           "currency": "SEK"
         },
-        "price_to_string": "98,09:-",
+        "price_to_string": "78,54:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1256,7 +1256,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "hidden": false,
-  "menu_id": 11770,
+  "menu_id": 12268,
   "name": "test product 99",
   "price": 9900
 }
@@ -1268,9 +1268,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 5420,
-    "inserted_at": "2020-08-06T00:43:21",
-    "menu_id": 11770,
+    "id": 5860,
+    "inserted_at": "2020-08-06T12:00:38",
+    "menu_id": 12268,
     "name": "test product 99",
     "price": {
       "amount": 9900,
@@ -1290,9 +1290,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 5420,
-    "inserted_at": "2020-08-06T00:43:21",
-    "menu_id": 11770,
+    "id": 5860,
+    "inserted_at": "2020-08-06T12:00:38",
+    "menu_id": 12268,
     "name": "test product 99",
     "price": {
       "amount": 9900,
@@ -1315,7 +1315,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
   "hidden": true,
   "name": "test product 29",
   "price": 2900,
-  "restaurant_id": 40243
+  "restaurant_id": 41215
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1325,8 +1325,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": true,
-    "id": 5433,
-    "inserted_at": "2020-08-06T00:43:22",
+    "id": 5878,
+    "inserted_at": "2020-08-06T12:00:39",
     "menu_id": null,
     "name": "test product 29",
     "price": {
@@ -1335,7 +1335,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     },
     "price_to_string": "29:-",
     "product_extra_menus": [],
-    "restaurant_id": 40243
+    "restaurant_id": 41215
   }
 }
 ```
@@ -1351,7 +1351,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "name": "new product name",
     "price": 133700
   },
-  "product_id": 5432
+  "product_id": 5856
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1361,9 +1361,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": true,
-    "id": 5432,
-    "inserted_at": "2020-08-06T00:43:22",
-    "menu_id": 11778,
+    "id": 5856,
+    "inserted_at": "2020-08-06T12:00:38",
+    "menu_id": 12264,
     "name": "new product name",
     "price": {
       "amount": 133700,
@@ -1383,9 +1383,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": true,
-    "id": 5432,
-    "inserted_at": "2020-08-06T00:43:22",
-    "menu_id": 11778,
+    "id": 5856,
+    "inserted_at": "2020-08-06T12:00:38",
+    "menu_id": 12264,
     "name": "new product name",
     "price": {
       "amount": 133700,
@@ -1405,7 +1405,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "product_id": 5437
+  "product_id": 5872
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1413,7 +1413,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted product 'Family Sweet Potato Crust with Venison, Coconut, and Shellfish' with id 5437"
+  "message": "Deleted product 'Family Spooning Pizza Vegetariana' with id 5872"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -1422,8 +1422,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted product 'Family Sweet Potato Crust with Venison, Coconut, and Shellfish'",
-  "product_id": 5437
+  "message": "Deleted product 'Family Spooning Pizza Vegetariana'",
+  "product_id": 5872
 }
 ```
 ---
@@ -1434,7 +1434,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "menu_id": 11777
+  "menu_id": 12276
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1446,57 +1446,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5428,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Pepperoni & Mushroom",
+        "id": 5873,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "14\" Veggie Korma",
         "price": {
-          "amount": 9150,
+          "amount": 9620,
           "currency": "SEK"
         },
-        "price_to_string": "91,50:-",
+        "price_to_string": "96,20:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5429,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "Large Meat Feast",
+        "id": 5874,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Extra-Large Funghi",
         "price": {
-          "amount": 7275,
+          "amount": 9747,
           "currency": "SEK"
         },
-        "price_to_string": "72,75:-",
+        "price_to_string": "97,47:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5430,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Italian Deli",
+        "id": 5875,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Small Grilled with Classic Tomato Sauce, Shrimps, Mutton, and Canadian Bacon",
         "price": {
-          "amount": 9003,
+          "amount": 8735,
           "currency": "SEK"
         },
-        "price_to_string": "90,03:-",
+        "price_to_string": "87,35:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5431,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "11\" Hand Tossed with Emmental, Capicola, Eel, Salsa, and Broccoli",
+        "id": 5876,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Family Bacon Cheeseburger ",
         "price": {
-          "amount": 8159,
+          "amount": 8053,
           "currency": "SEK"
         },
-        "price_to_string": "81,59:-",
+        "price_to_string": "80,53:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1512,8 +1512,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "action": "insert_at",
   "index": 1,
-  "menu_id": 11777,
-  "product_id": 5431
+  "menu_id": 12276,
+  "product_id": 5876
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1525,57 +1525,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5428,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Pepperoni & Mushroom",
+        "id": 5873,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "14\" Veggie Korma",
         "price": {
-          "amount": 9150,
+          "amount": 9620,
           "currency": "SEK"
         },
-        "price_to_string": "91,50:-",
+        "price_to_string": "96,20:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5431,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "11\" Hand Tossed with Emmental, Capicola, Eel, Salsa, and Broccoli",
+        "id": 5876,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Family Bacon Cheeseburger ",
         "price": {
-          "amount": 8159,
+          "amount": 8053,
           "currency": "SEK"
         },
-        "price_to_string": "81,59:-",
+        "price_to_string": "80,53:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5429,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "Large Meat Feast",
+        "id": 5874,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Extra-Large Funghi",
         "price": {
-          "amount": 7275,
+          "amount": 9747,
           "currency": "SEK"
         },
-        "price_to_string": "72,75:-",
+        "price_to_string": "97,47:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5430,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Italian Deli",
+        "id": 5875,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Small Grilled with Classic Tomato Sauce, Shrimps, Mutton, and Canadian Bacon",
         "price": {
-          "amount": 9003,
+          "amount": 8735,
           "currency": "SEK"
         },
-        "price_to_string": "90,03:-",
+        "price_to_string": "87,35:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1590,8 +1590,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "higher",
-  "menu_id": 11777,
-  "product_id": 5430
+  "menu_id": 12276,
+  "product_id": 5875
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1603,57 +1603,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5428,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Pepperoni & Mushroom",
+        "id": 5873,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "14\" Veggie Korma",
         "price": {
-          "amount": 9150,
+          "amount": 9620,
           "currency": "SEK"
         },
-        "price_to_string": "91,50:-",
+        "price_to_string": "96,20:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5431,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "11\" Hand Tossed with Emmental, Capicola, Eel, Salsa, and Broccoli",
+        "id": 5876,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Family Bacon Cheeseburger ",
         "price": {
-          "amount": 8159,
+          "amount": 8053,
           "currency": "SEK"
         },
-        "price_to_string": "81,59:-",
+        "price_to_string": "80,53:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5430,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Italian Deli",
+        "id": 5875,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Small Grilled with Classic Tomato Sauce, Shrimps, Mutton, and Canadian Bacon",
         "price": {
-          "amount": 9003,
+          "amount": 8735,
           "currency": "SEK"
         },
-        "price_to_string": "90,03:-",
+        "price_to_string": "87,35:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5429,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "Large Meat Feast",
+        "id": 5874,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Extra-Large Funghi",
         "price": {
-          "amount": 7275,
+          "amount": 9747,
           "currency": "SEK"
         },
-        "price_to_string": "72,75:-",
+        "price_to_string": "97,47:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1668,8 +1668,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "lower",
-  "menu_id": 11777,
-  "product_id": 5428
+  "menu_id": 12276,
+  "product_id": 5873
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1681,57 +1681,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5431,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "11\" Hand Tossed with Emmental, Capicola, Eel, Salsa, and Broccoli",
+        "id": 5876,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Family Bacon Cheeseburger ",
         "price": {
-          "amount": 8159,
+          "amount": 8053,
           "currency": "SEK"
         },
-        "price_to_string": "81,59:-",
+        "price_to_string": "80,53:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5428,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Pepperoni & Mushroom",
+        "id": 5873,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "14\" Veggie Korma",
         "price": {
-          "amount": 9150,
+          "amount": 9620,
           "currency": "SEK"
         },
-        "price_to_string": "91,50:-",
+        "price_to_string": "96,20:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5430,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Italian Deli",
+        "id": 5875,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Small Grilled with Classic Tomato Sauce, Shrimps, Mutton, and Canadian Bacon",
         "price": {
-          "amount": 9003,
+          "amount": 8735,
           "currency": "SEK"
         },
-        "price_to_string": "90,03:-",
+        "price_to_string": "87,35:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5429,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "Large Meat Feast",
+        "id": 5874,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Extra-Large Funghi",
         "price": {
-          "amount": 7275,
+          "amount": 9747,
           "currency": "SEK"
         },
-        "price_to_string": "72,75:-",
+        "price_to_string": "97,47:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1746,8 +1746,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "to_top",
-  "menu_id": 11777,
-  "product_id": 5430
+  "menu_id": 12276,
+  "product_id": 5875
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1759,57 +1759,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5430,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Italian Deli",
+        "id": 5875,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Small Grilled with Classic Tomato Sauce, Shrimps, Mutton, and Canadian Bacon",
         "price": {
-          "amount": 9003,
+          "amount": 8735,
           "currency": "SEK"
         },
-        "price_to_string": "90,03:-",
+        "price_to_string": "87,35:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5431,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "11\" Hand Tossed with Emmental, Capicola, Eel, Salsa, and Broccoli",
+        "id": 5876,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Family Bacon Cheeseburger ",
         "price": {
-          "amount": 8159,
+          "amount": 8053,
           "currency": "SEK"
         },
-        "price_to_string": "81,59:-",
+        "price_to_string": "80,53:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5428,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Pepperoni & Mushroom",
+        "id": 5873,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "14\" Veggie Korma",
         "price": {
-          "amount": 9150,
+          "amount": 9620,
           "currency": "SEK"
         },
-        "price_to_string": "91,50:-",
+        "price_to_string": "96,20:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5429,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "Large Meat Feast",
+        "id": 5874,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Extra-Large Funghi",
         "price": {
-          "amount": 7275,
+          "amount": 9747,
           "currency": "SEK"
         },
-        "price_to_string": "72,75:-",
+        "price_to_string": "97,47:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1824,8 +1824,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "action": "to_bottom",
-  "menu_id": 11777,
-  "product_id": 5431
+  "menu_id": 12276,
+  "product_id": 5876
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1837,57 +1837,57 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "products": [
       {
         "hidden": true,
-        "id": 5430,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Italian Deli",
+        "id": 5875,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Small Grilled with Classic Tomato Sauce, Shrimps, Mutton, and Canadian Bacon",
         "price": {
-          "amount": 9003,
+          "amount": 8735,
           "currency": "SEK"
         },
-        "price_to_string": "90,03:-",
+        "price_to_string": "87,35:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5428,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "20\" Pepperoni & Mushroom",
+        "id": 5873,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "14\" Veggie Korma",
         "price": {
-          "amount": 9150,
+          "amount": 9620,
           "currency": "SEK"
         },
-        "price_to_string": "91,50:-",
+        "price_to_string": "96,20:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5429,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "Large Meat Feast",
+        "id": 5874,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Extra-Large Funghi",
         "price": {
-          "amount": 7275,
+          "amount": 9747,
           "currency": "SEK"
         },
-        "price_to_string": "72,75:-",
+        "price_to_string": "97,47:-",
         "product_extra_menus": [],
         "restaurant_id": null
       },
       {
         "hidden": true,
-        "id": 5431,
-        "inserted_at": "2020-08-06T00:43:22",
-        "menu_id": 11777,
-        "name": "11\" Hand Tossed with Emmental, Capicola, Eel, Salsa, and Broccoli",
+        "id": 5876,
+        "inserted_at": "2020-08-06T12:00:39",
+        "menu_id": 12276,
+        "name": "Family Bacon Cheeseburger ",
         "price": {
-          "amount": 8159,
+          "amount": 8053,
           "currency": "SEK"
         },
-        "price_to_string": "81,59:-",
+        "price_to_string": "80,53:-",
         "product_extra_menus": [],
         "restaurant_id": null
       }
@@ -1903,9 +1903,11 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "hidden": false,
-  "name": "Sauces",
-  "product_id": 5434
+  "params": {
+    "hidden": false,
+    "name": "Sauces",
+    "product_id": 5877
+  }
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1915,14 +1917,14 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "default_extra": null,
-    "hidden": true,
-    "id": 847,
-    "inserted_at": "2020-08-06T00:43:22",
+    "hidden": false,
+    "id": 983,
+    "inserted_at": "2020-08-06T12:00:39",
     "mandatory": false,
     "name": "Sauces",
     "pick_only_one": false,
     "product_extras": [],
-    "product_id": 5434
+    "product_id": 5877
   }
 }
 ```
@@ -1934,14 +1936,14 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "default_extra": null,
-    "hidden": true,
-    "id": 847,
-    "inserted_at": "2020-08-06T00:43:22",
+    "hidden": false,
+    "id": 983,
+    "inserted_at": "2020-08-06T12:00:39",
     "mandatory": false,
     "name": "Sauces",
     "pick_only_one": false,
     "product_extras": [],
-    "product_id": 5434
+    "product_id": 5877
   }
 }
 ```
@@ -1958,7 +1960,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "name": "Must Pick One Sauce",
     "pick_only_one": true
   },
-  "product_extra_menu_id": 849
+  "product_extra_menu_id": 980
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -1969,13 +1971,13 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
   "data": {
     "default_extra": null,
     "hidden": false,
-    "id": 849,
-    "inserted_at": "2020-08-06T00:43:22",
+    "id": 980,
+    "inserted_at": "2020-08-06T12:00:38",
     "mandatory": true,
     "name": "Must Pick One Sauce",
     "pick_only_one": true,
     "product_extras": [],
-    "product_id": 5438
+    "product_id": 5863
   }
 }
 ```
@@ -1988,13 +1990,13 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
   "data": {
     "default_extra": null,
     "hidden": false,
-    "id": 849,
-    "inserted_at": "2020-08-06T00:43:22",
+    "id": 980,
+    "inserted_at": "2020-08-06T12:00:38",
     "mandatory": true,
     "name": "Must Pick One Sauce",
     "pick_only_one": true,
     "product_extras": [],
-    "product_id": 5438
+    "product_id": 5863
   }
 }
 ```
@@ -2006,7 +2008,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "product_extra_menu_id": 844
+  "product_extra_menu_id": 978
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -2014,7 +2016,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted product extra menu: 'Sauces' with id 844"
+  "message": "Deleted product extra menu: 'Sauces' with id 978"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -2024,7 +2026,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "message": "Deleted product extra menu: 'Sauces'",
-  "product_extra_menu_id": 844
+  "product_extra_menu_id": 978
 }
 ```
 ---
@@ -2036,10 +2038,10 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "hidden": false,
-  "new_name": "Salsa",
+  "new_name": "Marinara Sauce",
   "new_price": 1000,
-  "product_extra_menu_id": 848,
-  "product_id": 5436
+  "product_extra_menu_id": 981,
+  "product_id": 5869
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -2049,9 +2051,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 612,
-    "inserted_at": "2020-08-06T00:43:22",
-    "new_name": "Salsa",
+    "id": 710,
+    "inserted_at": "2020-08-06T12:00:38",
+    "new_name": "Marinara Sauce",
     "new_price": {
       "amount": 1000,
       "currency": "SEK"
@@ -2059,19 +2061,19 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "new_price_to_string": "10:-",
     "product": {
       "hidden": false,
-      "id": 5436,
-      "inserted_at": "2020-08-06T00:43:22",
+      "id": 5869,
+      "inserted_at": "2020-08-06T12:00:38",
       "menu_id": null,
-      "name": "Salsa",
+      "name": "Marinara Sauce",
       "price": {
-        "amount": 3243,
+        "amount": 4945,
         "currency": "SEK"
       },
-      "price_to_string": "32,43:-",
-      "restaurant_id": 40245
+      "price_to_string": "49,45:-",
+      "restaurant_id": 41207
     },
-    "product_extra_menu_id": 848,
-    "product_id": 5436
+    "product_extra_menu_id": 981,
+    "product_id": 5869
   }
 }
 ```
@@ -2083,9 +2085,9 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 612,
-    "inserted_at": "2020-08-06T00:43:22",
-    "new_name": "Salsa",
+    "id": 710,
+    "inserted_at": "2020-08-06T12:00:38",
+    "new_name": "Marinara Sauce",
     "new_price": {
       "amount": 1000,
       "currency": "SEK"
@@ -2093,19 +2095,19 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "new_price_to_string": "10:-",
     "product": {
       "hidden": false,
-      "id": 5436,
-      "inserted_at": "2020-08-06T00:43:22",
+      "id": 5869,
+      "inserted_at": "2020-08-06T12:00:38",
       "menu_id": null,
-      "name": "Salsa",
+      "name": "Marinara Sauce",
       "price": {
-        "amount": 3243,
+        "amount": 4945,
         "currency": "SEK"
       },
-      "price_to_string": "32,43:-",
-      "restaurant_id": 40245
+      "price_to_string": "49,45:-",
+      "restaurant_id": 41207
     },
-    "product_extra_menu_id": 848,
-    "product_id": 5436
+    "product_extra_menu_id": 981,
+    "product_id": 5869
   }
 }
 ```
@@ -2120,7 +2122,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
   "params": {
     "new_name": "Sauce X"
   },
-  "product_extra_id": 611
+  "product_extra_id": 711
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -2130,8 +2132,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 611,
-    "inserted_at": "2020-08-06T00:43:22",
+    "id": 711,
+    "inserted_at": "2020-08-06T12:00:38",
     "new_name": "Sauce X",
     "new_price": {
       "amount": 900,
@@ -2140,19 +2142,19 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "new_price_to_string": "9:-",
     "product": {
       "hidden": false,
-      "id": 5427,
-      "inserted_at": "2020-08-06T00:43:22",
+      "id": 5871,
+      "inserted_at": "2020-08-06T12:00:38",
       "menu_id": null,
-      "name": "Chili Sauce",
+      "name": "Chimichurri Sauce",
       "price": {
-        "amount": 4961,
+        "amount": 4371,
         "currency": "SEK"
       },
-      "price_to_string": "49,61:-",
-      "restaurant_id": 40238
+      "price_to_string": "43,71:-",
+      "restaurant_id": 41209
     },
-    "product_extra_menu_id": 846,
-    "product_id": 5427
+    "product_extra_menu_id": 982,
+    "product_id": 5871
   }
 }
 ```
@@ -2164,8 +2166,8 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 {
   "data": {
     "hidden": false,
-    "id": 611,
-    "inserted_at": "2020-08-06T00:43:22",
+    "id": 711,
+    "inserted_at": "2020-08-06T12:00:38",
     "new_name": "Sauce X",
     "new_price": {
       "amount": 900,
@@ -2174,19 +2176,19 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
     "new_price_to_string": "9:-",
     "product": {
       "hidden": false,
-      "id": 5427,
-      "inserted_at": "2020-08-06T00:43:22",
+      "id": 5871,
+      "inserted_at": "2020-08-06T12:00:38",
       "menu_id": null,
-      "name": "Chili Sauce",
+      "name": "Chimichurri Sauce",
       "price": {
-        "amount": 4961,
+        "amount": 4371,
         "currency": "SEK"
       },
-      "price_to_string": "49,61:-",
-      "restaurant_id": 40238
+      "price_to_string": "43,71:-",
+      "restaurant_id": 41209
     },
-    "product_extra_menu_id": 846,
-    "product_id": 5427
+    "product_extra_menu_id": 982,
+    "product_id": 5871
   }
 }
 ```
@@ -2198,7 +2200,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "product_extra_id": 610
+  "product_extra_id": 709
 }
 ```
 #### ← <ins>Reply to you</ins>
@@ -2206,7 +2208,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 * __Body:__
 ```json
 {
-  "message": "Deleted product extra: 'Sauce Y' with id 610"
+  "message": "Deleted product extra: 'Sauce Y' with id 709"
 }
 ```
 #### ← <ins>Broadcasted to all</ins>
@@ -2216,7 +2218,7 @@ x-request-id: FiiHFvTN0EBeTHsAAAsC
 ```json
 {
   "message": "Deleted product extra: 'Sauce Y'",
-  "product_extra_id": 610
+  "product_extra_id": 709
 }
 ```
 ---

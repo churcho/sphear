@@ -255,7 +255,8 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
       {:ok, product} = product_fixture(%{menu_id: menu.id})
       
-      ref = doc_push(socket, "create_product_extra_menu", %{product_id: product.id, name: "Sauces", hidden: false})
+      params = %{product_id: product.id, name: "Sauces", hidden: false}
+      ref = doc_push(socket, "create_product_extra_menu", %{params: params})
       assert_reply(ref, :ok)
       |> doc()
       assert_broadcast("product_extra_menu_created", %{data: data})
@@ -264,6 +265,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
       {:ok, decoded_data} = JSON.decode(data, [strings: :copy])
       {:ok, created_product_extra_menu} = Merchandise.get_product_extra_menu(decoded_data["id"])
       assert created_product_extra_menu.name == "Sauces"
+      assert created_product_extra_menu.hidden == false
     end
 
     test "update a product extra menu", %{socket: socket} do

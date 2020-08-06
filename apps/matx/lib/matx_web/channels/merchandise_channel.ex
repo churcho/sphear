@@ -246,36 +246,29 @@ defmodule MatxWeb.Channels.MerchandiseChannel do
   # PRODUCT EXTRA MENU #
   # # # # # # # # # # # 
 
-  def handle_in("create_product_extra_menu", %{"product_id" => product_id, "name" => name}, socket) do
+  def handle_in("create_product_extra_menu", %{"params" => params}, socket) do
     case socket.assigns[:user_id] do
       nil ->
         {:reply,
           {:error, %{message: "Unauthorized"}},
         socket}
       _user_id ->
-        case Merchandise.get_product(product_id) do
-          {:ok, product} ->
-            case Merchandise.create_product_extra_menu(%{name: name, product_id: product_id}) do
-              {:ok, product_extra_menu} ->
-                MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_menu_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)})
-                {:reply, 
-                  {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)}}, 
-                  socket}
-              {:error, %Ecto.Changeset{} = changeset} ->
-                {:reply,
-                  {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
-                socket}
-            end
-          {:error, _} ->
+        case Merchandise.create_product_extra_menu(params) do
+          {:ok, product_extra_menu} ->
+            MatxWeb.Endpoint.broadcast!("merchandise:lobby", "product_extra_menu_created", %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)})
             {:reply, 
-              {:error, %{message: "Could not find product with id: " <> product_id}},
+              {:ok, %{data: Phoenix.View.render_to_string(MatxWeb.Api.ProductExtraMenuView, "show.json", product_extra_menu: product_extra_menu)}}, 
               socket}
+          {:error, %Ecto.Changeset{} = changeset} ->
+            {:reply,
+              {:error, %{errors: Ecto.Changeset.traverse_errors(changeset, &MatxWeb.ErrorHelpers.translate_error/1)}},
+            socket}
         end
     end
   end
   def handle_in("create_product_extra_menu", _, socket) do
     {:reply,
-    {:error, %{message: "Expected 'product_id' and 'name'"}},
+    {:error, %{message: "Expected 'params'"}},
     socket}
   end
 
