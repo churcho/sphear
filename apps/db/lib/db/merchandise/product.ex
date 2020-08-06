@@ -8,7 +8,7 @@ defmodule Db.Merchandise.Product do
   schema "products" do
     field :name, :string
     field :price, Money.Ecto.Amount.Type
-    field :hidden, :boolean, default: false
+    field :hidden, :boolean, default: true
     
     belongs_to :restaurant, Restaurant
     belongs_to :menu, Menu

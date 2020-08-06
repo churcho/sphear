@@ -9,6 +9,7 @@ defmodule Db.Merchandise.ProductExtraMenu do
     field :mandatory, :boolean, default: false
     field :pick_only_one, :boolean, default: false
     field :default_extra, :integer
+    field :hidden, :boolean, default: true
     
     belongs_to :product, Product
     has_many :product_extras, ProductExtra
@@ -19,7 +20,7 @@ defmodule Db.Merchandise.ProductExtraMenu do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :mandatory, :pick_only_one, :default_extra, :product_id])
+    |> cast(attrs, [:name, :mandatory, :pick_only_one, :default_extra, :product_id, :hidden])
     |> validate_required([:name, :product_id])
     |> assoc_constraint(:product)
   end

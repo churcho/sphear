@@ -14,6 +14,7 @@ defmodule MatxWeb.Api.MenuView do
       id: menu.id,
       restaurant_id: menu.restaurant_id,
       name: menu.name,
+      hidden: menu.hidden,
       products: []
     }
   end
@@ -23,6 +24,7 @@ defmodule MatxWeb.Api.MenuView do
       id: menu.id,
       restaurant_id: menu.restaurant_id,
       name: menu.name,
+      hidden: menu.hidden,
       products: EctoList.ordered_items_list(render_many(menu.products, MatxWeb.Api.ProductView, "show.json"), menu.products_sequence)
     }
   end

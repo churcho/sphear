@@ -16,6 +16,7 @@ defmodule MatxWeb.Api.ProductExtraMenuView do
       id: pex.id,
       product_id: pex.product_id,
       name: pex.name,
+      hidden: pex.hidden,
       mandatory: pex.mandatory,
       pick_only_one: pex.pick_only_one,
       default_extra: pex.default_extra,

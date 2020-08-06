@@ -14,6 +14,7 @@ defmodule MatxWeb.Api.RestaurantView do
       id: restaurant.id,
       created: restaurant.inserted_at,
       name: restaurant.name,
+      hidden: restaurant.hidden,
       address: restaurant.address,
       url: restaurant.url,
       menus: [], #render_many(menus, MatxWeb.Api.MenuView, "menu.json")
@@ -27,6 +28,7 @@ defmodule MatxWeb.Api.RestaurantView do
       id: restaurant.id,
       created: restaurant.inserted_at,
       name: restaurant.name,
+      hidden: restaurant.hidden,
       address: restaurant.address,
       url: restaurant.url,
       menus: render_many(menus, MatxWeb.Api.MenuView, "menu.json"),

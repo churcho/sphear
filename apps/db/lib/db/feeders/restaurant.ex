@@ -10,6 +10,7 @@ defmodule Db.Feeders.Restaurant do
     field :name, :string
     field :url, :string
     field :menus_sequence, {:array, :id}, default: []
+    field :hidden, :boolean, default: true
 
     has_many :menus, Menu
     has_many :unlisted_products, Product
@@ -20,7 +21,7 @@ defmodule Db.Feeders.Restaurant do
   @doc false
   def changeset(restaurant, attrs) do
     restaurant
-    |> cast(attrs, [:name, :url, :address, :menus_sequence])
+    |> cast(attrs, [:name, :url, :address, :menus_sequence, :hidden])
     |> validate_required([:name, :url, :address])
   end
 
