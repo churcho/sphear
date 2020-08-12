@@ -45,7 +45,8 @@ defmodule Db.MixProject do
       {:phx_gen_auth, "~> 0.4.0", only: [:dev], runtime: false},
       {:ecto_list, "~> 0.1.2"},
       {:money, "~> 1.4"},
-      {:faker, "~> 0.14", only: :test}
+      {:faker, "~> 0.14", only: :test},
+      {:fsmx, "~> 0.2.0"}
     ]
   end
 

@@ -1,10 +1,11 @@
-defmodule MatxWeb.Channels.OrderChannel do
+defmodule MatxWeb.Channels.SaleChannel do
   use Phoenix.Channel
   require Logger
   import MatxWeb.UserAuth
 
   alias Db.Merchandise
-  #alias Db.Orders
+  alias Db.Orders
+  alias Db.Carts
   alias Db.Feeders
   alias Db.Repo
 
@@ -15,7 +16,7 @@ defmodule MatxWeb.Channels.OrderChannel do
   `:ignore` to deny subscription/broadcast on this channel
   for the requested topic
   """
-  def join("order:lobby", %{"token" => token}, socket) do
+  def join("sale:lobby", %{"token" => token}, socket) do
     case auth_token(socket, token) do
       {:ok, user} ->
         socket = assign(socket, :user_id, user.id)
@@ -25,7 +26,7 @@ defmodule MatxWeb.Channels.OrderChannel do
         {:error, error_message}
     end
   end
-  def join("order:lobby", _, socket) do
+  def join("sale:lobby", _, socket) do
     send(self(), :guest_join)
     {:ok, socket}
   end

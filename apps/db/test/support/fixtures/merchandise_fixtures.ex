@@ -63,21 +63,27 @@ defmodule Db.MerchandiseFixtures do
   # Product Extra Menu
   def product_extra_menu_fixture(attrs \\ %{}) do
     product_id =
-      case attrs[:product_id] do
+      case attrs[:menu_id] do
         nil ->
-          {:ok, restaurant} = restaurant_fixture()
-          {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
-          {:ok, product} = product_fixture(%{menu_id: menu.id})
-          product.id
-        product_id ->
-          product_id
+          case attrs[:product_id] do
+            nil ->
+              {:ok, restaurant} = restaurant_fixture()
+              {:ok, menu} = menu_fixture(%{restaurant_id: restaurant.id})
+              {:ok, product} = product_fixture(%{menu_id: menu.id})
+              product.id
+            product_id ->
+              product_id
+          end
+        _menu_id ->
+          nil
       end
-    
+
     attrs
     |> Enum.into(%{
       name: "Sauces",
       pick_only_one: false,
       product_id: product_id,
+      menu_id: attrs[:menu_id] || nil,
       hidden: false
     })
     |> Merchandise.create_product_extra_menu()

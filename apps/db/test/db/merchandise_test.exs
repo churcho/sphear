@@ -2,7 +2,9 @@ defmodule Db.MerchandiseTest do
   use Db.DataCase
 
   import Db.MerchandiseFixtures
+  import Db.RestaurantsFixtures
   alias Db.Merchandise
+  alias Db.Feeders.Menu
 
   describe "products" do
     alias Db.Merchandise.{Product, ProductExtra, ProductExtraMenu}
@@ -81,6 +83,13 @@ defmodule Db.MerchandiseTest do
 
       # Delete the menu
       assert {:ok, %ProductExtraMenu{}} = Merchandise.delete_product_extra_menu(product_extra_menu)
+  
+      # Create a product extra menu for a menu
+      {:ok, menu} = menu_fixture()
+      assert {:ok, product_extra_menu} = product_extra_menu_fixture(%{menu_id: menu.id})
+      
+      # Error when providing both menu and product
+      assert {:error, %Ecto.Changeset{}} = product_extra_menu_fixture(%{menu_id: menu.id, product_id: product.id})
     end
 
     test "product extra" do
@@ -93,6 +102,10 @@ defmodule Db.MerchandiseTest do
       {:ok, product_extra_menu} = product_extra_menu_fixture(%{name: "Sauces", product_id: product.id})
       # Create a product extra to the product extra menu
       assert {:ok, %ProductExtra{} = product_extra} = product_extra_fixture(%{product_extra_menu_id: product_extra_menu.id})
+    
+      # Create a product extra without a product to override
+      assert {:ok, product_extra} = Merchandise.create_product_extra(%{product_extra_menu_id: product_extra_menu.id, new_name: "Tabasco", new_price: 10_00})
+      assert product_extra.product == nil
     end
   end
 end

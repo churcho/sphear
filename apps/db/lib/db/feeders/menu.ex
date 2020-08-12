@@ -2,8 +2,8 @@ defmodule Db.Feeders.Menu do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Db.Feeders.Restaurant
-  alias Db.Merchandise.Product
+  alias Db.Feeders.{Restaurant}
+  alias Db.Merchandise.{Product, ProductExtraMenu}
 
   schema "menus" do
     field :name, :string
@@ -12,6 +12,7 @@ defmodule Db.Feeders.Menu do
 
     belongs_to :restaurant, Restaurant
     has_many :products, Product
+    has_many :product_extra_menus, ProductExtraMenu
 
     timestamps()
   end

@@ -7,6 +7,7 @@ defmodule Db.Feeders do
   alias Db.Repo
 
   alias Db.Feeders.Restaurant
+  alias Db.Feeders.Menu
 
   use EctoList.Context,
     list: Restaurant,
@@ -18,12 +19,12 @@ defmodule Db.Feeders do
   defp preload_restaurant({:ok, restaurant}) do
     restaurant =
       restaurant
-      |> Repo.preload([unlisted_products: [product_extra_menus: [product_extras: :product]], menus: [products: [product_extra_menus: [product_extras: :product]]]])
+      |> Repo.preload([unlisted_products: [product_extra_menus: [product_extras: :product]], menus: [product_extra_menus: [product_extras: :product], products: [product_extra_menus: [product_extras: :product]]]])
     {:ok, restaurant}
   end
   defp preload_restaurant([restaurants]) do
     [restaurants]
-    |> Repo.preload([unlisted_products: [product_extra_menus: [product_extras: :product]], menus: [products: [product_extra_menus: [product_extras: :product]]]])
+    |> Repo.preload([unlisted_products: [product_extra_menus: [product_extras: :product]], menus: [product_extra_menus: [product_extras: :product], products: [product_extra_menus: [product_extras: :product]]]])
   end
   defp preload_restaurant(error) do
     error
@@ -162,15 +163,13 @@ defmodule Db.Feeders do
   @doc """
   Gets a single menu.
 
-  Raises `Ecto.NoResultsError` if the Menu does not exist.
-
   ## Examples
 
-      iex> get_menu!(123)
-      %Menu{}
+      iex> get_menu(123)
+      {:ok, %Menu{}}
 
-      iex> get_menu!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_menu(456)
+      {:error, %Ecto.Changeset{}}
 
   """
   def get_menu(id) do
@@ -185,12 +184,12 @@ defmodule Db.Feeders do
   defp preload_menus({:ok, menu}) do
     menu =
       menu
-      |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
+      |> Repo.preload([product_extra_menus: [product_extras: :product], products: [product_extra_menus: [product_extras: :product]]])
     {:ok, menu}
   end
   defp preload_menus([menus]) do
     [menus]
-    |> Repo.preload([products: [product_extra_menus: [product_extras: :product]]])
+    |> Repo.preload([product_extra_menus: [product_extras: :product], products: [product_extra_menus: [product_extras: :product]]])
   end
   defp preload_menus(error) do
     error

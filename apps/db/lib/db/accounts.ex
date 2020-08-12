@@ -9,6 +9,20 @@ defmodule Db.Accounts do
 
   ## Database getters
 
+  defp preload_user({:ok, user}) do
+    user =
+      user
+      |> Repo.preload([:orders, :user_tokens])
+    {:ok, user}
+  end
+  defp preload_user([user]) do
+    [user]
+    |> Repo.preload([:orders, :user_tokens])
+  end
+  defp preload_user(error) do
+    error
+  end
+
   @doc """
   Gets a user by email.
 
@@ -23,6 +37,7 @@ defmodule Db.Accounts do
   """
   def get_user_by_email(email) when is_binary(email) do
     Repo.get_by(User, email: email)
+    |> preload_user
   end
 
   @doc """
@@ -46,18 +61,23 @@ defmodule Db.Accounts do
   @doc """
   Gets a single user.
 
-  Raises `Ecto.NoResultsError` if the User does not exist.
-
   ## Examples
 
-      iex> get_user!(123)
-      %User{}
+      iex> get_user(123)
+      {:ok, %User{}}
 
-      iex> get_user!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_user(456)
+      {:error, %Ecto.Changeset{}}
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user(id) do
+    case Repo.get(User, id) do
+      nil -> {:error, :not_found}
+      user -> 
+        {:ok, user}
+        |> preload_user()
+    end
+  end
 
   ## User registration
 

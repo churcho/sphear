@@ -36,7 +36,7 @@ defmodule Db.RestaurantsFixtures do
     restaurant_id =
       case attrs[:restaurant_id] do
         nil ->
-          restaurant = restaurant_fixture()
+          {:ok, restaurant} = restaurant_fixture()
           restaurant.id
         restaurant_id ->
           restaurant_id

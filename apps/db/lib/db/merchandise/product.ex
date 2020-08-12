@@ -33,4 +33,9 @@ defmodule Db.Merchandise.Product do
     |> validate_required([:name, :price, :restaurant_id])
     |> assoc_constraint(:restaurant)
   end
+
+  def changeset_edit(product, attrs) do
+    product
+    |> cast(attrs, [:name, :price, :hidden])
+  end
 end

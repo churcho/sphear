@@ -2,13 +2,19 @@ defmodule Db.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Inspect, except: [:password]}
+  alias Db.Sales.{Order, Cart}
+  alias Db.Accounts.UserToken
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+
+    has_many :carts, Cart
+    has_many :orders, Order
+    has_many :user_tokens, UserToken
 
     timestamps()
   end

@@ -9,23 +9,14 @@ defmodule MatxWeb.Api.MenuView do
     render_one(menu, MatxWeb.Api.MenuView, "menu.json")
   end
 
-  def render("menu.json", %{menu: %{products: %Ecto.Association.NotLoaded{}} = menu}) do
-    %{
-      id: menu.id,
-      restaurant_id: menu.restaurant_id,
-      name: menu.name,
-      hidden: menu.hidden,
-      products: []
-    }
-  end
-
   def render("menu.json", %{menu: menu}) do
     %{
       id: menu.id,
       restaurant_id: menu.restaurant_id,
       name: menu.name,
       hidden: menu.hidden,
-      products: EctoList.ordered_items_list(render_many(menu.products, MatxWeb.Api.ProductView, "show.json"), menu.products_sequence)
+      products: EctoList.ordered_items_list(render_many(menu.products, MatxWeb.Api.ProductView, "show.json"), menu.products_sequence),
+      product_extra_menus: render_many(menu.product_extra_menus, MatxWeb.Api.ProductExtraMenuView, "show.json")
     }
   end
 

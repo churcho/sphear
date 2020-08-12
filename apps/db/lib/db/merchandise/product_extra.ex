@@ -1,6 +1,7 @@
 defmodule Db.Merchandise.ProductExtra do
   use Ecto.Schema
   import Ecto.Changeset
+  import SphearUtils.Ecto.Changeset, only: [validate_if_present: 2]
 
   alias Db.Merchandise.{Product, ProductExtraMenu}
 
@@ -19,8 +20,14 @@ defmodule Db.Merchandise.ProductExtra do
   def changeset(product_extra, attrs) do
     product_extra
     |> cast(attrs, [:new_price, :new_name, :hidden, :product_id, :product_extra_menu_id, :hidden])
-    |> validate_required([:product_id, :product_extra_menu_id])
+    |> validate_required(:product_extra_menu_id)
     |> assoc_constraint(:product_extra_menu)
-    |> assoc_constraint(:product)
+    |> validate_if_present(:product_id)
+  end
+
+  def changeset_edit(product_extra, attrs) do
+    product_extra
+    |> cast(attrs, [:new_price, :new_name, :hidden, :product_id])
+    |> validate_if_present(:product_id)
   end
 end

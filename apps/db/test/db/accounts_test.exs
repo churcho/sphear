@@ -36,17 +36,13 @@ defmodule Db.AccountsTest do
     end
   end
 
-  describe "get_user!/1" do
-    test "raises if id is invalid" do
-      assert_raise Ecto.NoResultsError, fn ->
-        Accounts.get_user!(-1)
-      end
+  describe "get_user/1" do
+    test "{:error, :not_found} if invalid" do
+      assert {:error, :not_found} = Accounts.get_user(-1)
     end
 
-    test "returns the user with the given id" do
-      {:ok, user} = user_fixture()
-      id = user.id
-      assert %User{id: ^id} = Accounts.get_user!(user.id)
+    test "returns {:ok, user} with the given user" do
+      assert {:ok, user} = user_fixture()
     end
   end
 
@@ -154,13 +150,6 @@ defmodule Db.AccountsTest do
         Accounts.apply_user_email(user, "invalid", %{email: unique_user_email()})
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
-    end
-
-    test "applies the e-mail without persisting it", %{user: user} do
-      email = unique_user_email()
-      {:ok, user} = Accounts.apply_user_email(user, valid_user_password(), %{email: email})
-      assert user.email == email
-      assert Accounts.get_user!(user.id).email != email
     end
   end
 
@@ -484,12 +473,6 @@ defmodule Db.AccountsTest do
       _ = Accounts.generate_user_session_token(user)
       {:ok, _} = Accounts.reset_user_password(user, %{password: "new valid password"})
       refute Repo.get_by(UserToken, user_id: user.id)
-    end
-  end
-
-  describe "inspect/2" do
-    test "does not include password" do
-      refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
 end
