@@ -3,6 +3,7 @@ defmodule Db.SalesFixtures do
   This module defines test helpers for creating
   entities via the `Db.Sales` context.
   """
+  alias Db.Repo
   alias Db.Sales
   import Db.MerchandiseFixtures
   import Db.AccountsFixtures
@@ -45,7 +46,7 @@ defmodule Db.SalesFixtures do
         product_id ->
           product_id
       end  
-
+      
     attrs
     |> Enum.into(%{
       cart_id: cart_id,
@@ -89,5 +90,32 @@ defmodule Db.SalesFixtures do
       percentage_discount: attrs[:percentage_discount] || 0
     })
     |> Sales.create_discount()
+  end
+
+  def order_fixture(attrs \\ %{}) do
+    user_id =
+      case attrs[:user_id] do
+        nil ->
+          {:ok, user} = user_fixture()
+          user.id
+        user_id ->
+          user_id
+      end
+    
+    cart_id =
+      case attrs[:cart_id] do
+        nil ->
+          {:ok, cart} = cart_fixture(%{user_id: user_id})
+          cart.id
+        cart_id ->
+          cart_id
+      end
+
+    attrs
+    |> Enum.into(%{
+      cart_id: cart_id,
+      user_id: user_id
+    })
+    |> Sales.create_order()
   end
 end

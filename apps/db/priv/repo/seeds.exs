@@ -9,6 +9,14 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+#
+# Enter iex console:
+# _build/prod/rel/sphear/bin/sphear remote 
+#
+# Then run seeds.exs like this
+# :code.priv_dir(:db)
+# |> Path.join("repo/seeds.exs") 
+# |> Code.require_file()
 
 alias Db.Repo
 alias Db.Feeders.{Restaurant, Menu}

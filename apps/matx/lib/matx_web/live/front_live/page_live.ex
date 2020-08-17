@@ -136,18 +136,18 @@ defmodule MatxWeb.PageLive do
   defp button_colors(:map, map_open) do
     case map_open do
       true ->
-        "text-white bg-red-600"
+        "text-white bg-orange-400"
       false ->
-        "text-red-700 bg-white hover:text-white hover:bg-red-500 bg-opacity-25"
+        "text-orange-400 bg-white hover:text-white hover:bg-orange-500 bg-opacity-25"
     end
   end
 
   defp button_colors(:list, map_open) do
     case map_open do
       false ->
-        "text-white bg-red-600"
+        "text-white bg-orange-400"
       true ->
-        "text-red-700 bg-white hover:text-white hover:bg-red-500 bg-opacity-25"
+        "text-orange-400 bg-white hover:text-white hover:bg-orange-500 bg-opacity-25"
     end
   end
 

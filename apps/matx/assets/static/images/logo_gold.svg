@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="272.000000pt" height="297.000000pt" viewBox="0 0 272.000000 297.000000"
+ preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,297.000000) scale(0.100000,-0.100000)"
+fill="url(#skyGradient)" stroke="none">
+<path d="M2157 2864 c-85 -115 -373 -547 -403 -604 -26 -49 -29 -65 -29 -145
+0 -83 3 -96 34 -157 l34 -66 -48 -79 c-51 -82 -317 -484 -375 -565 -18 -26
+-37 -45 -41 -42 -4 2 -160 210 -345 462 -447 605 -776 1043 -801 1065 -20 17
+-21 17 -50 -20 -44 -55 -71 -114 -89 -190 -39 -166 1 -253 380 -823 226 -341
+372 -549 391 -557 15 -5 33 6 165 103 47 35 98 67 112 73 35 13 48 1 131 -109
+l64 -85 -242 -360 c-250 -372 -396 -598 -434 -674 -21 -40 -21 -45 -7 -59 15
+-15 18 -15 35 3 10 11 146 207 301 435 353 518 389 570 400 570 5 0 143 -179
+306 -397 382 -512 456 -603 490 -603 48 0 1 70 -478 719 -150 203 -267 369
+-264 377 3 7 92 141 198 296 106 156 211 311 233 346 l40 62 110 0 c87 0 119
+5 152 20 82 37 164 140 402 507 149 231 159 249 144 264 -29 29 -77 -33 -390
+-488 l-69 -102 -50 29 c-27 16 -59 37 -71 47 l-23 18 166 250 c208 314 237
+369 203 391 -20 12 -71 -51 -229 -286 -87 -129 -171 -250 -187 -269 -28 -33
+-29 -33 -58 -18 -17 8 -47 30 -68 49 l-38 33 134 200 c174 260 237 366 244
+409 9 59 -24 46 -80 -30z m-1807 -476 c225 -301 454 -612 598 -813 l114 -160
+-49 -45 c-27 -25 -75 -63 -107 -85 l-58 -40 -30 35 c-77 91 -444 630 -576 845
+-105 172 -117 204 -117 320 0 73 5 110 17 138 9 20 21 37 26 37 4 0 87 -105
+182 -232z"/>
+</g>
+<defs>
+        <linearGradient id="skyGradient" x1="100%" y1="100%">
+          <stop offset="0%" stop-color="gold" stop-opacity=".5">
+            <animate attributeName="stop-color" values="gold;goldenrod;darkgoldenrod;goldenrod;gold;orange;palegoldenrod;orange;gold;" dur="6s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stop-color="gold" stop-opacity=".5">
+            <animate attributeName="stop-color" values="darkgoldenrod;goldenrod;gold;orange;palegoldenrod;orange;gold;" dur="6s" repeatCount="indefinite" />
+            <animate attributeName="offset" values=".95;.80;.60;.40;.20;0;.20;.40;.60;.80;.95" dur="14s" repeatCount="indefinite" />
+          </stop>
+        </linearGradient>
+</defs>
+</svg>

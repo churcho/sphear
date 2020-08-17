@@ -110,12 +110,12 @@ defmodule Db.Sales do
   defp preload_cart_item({:ok, cart_item}) do
     cart_item =
       cart_item
-      |> Repo.preload(:product, :product_extra)
+      |> Repo.preload([:product, :product_extra])
     {:ok, cart_item}
   end
   defp preload_cart_item([cart_items]) do
     [cart_items]
-    |> Repo.preload(:product, :product_extra)
+    |> Repo.preload([:product, :product_extra])
   end
   defp preload_cart_item(error) do
     error
@@ -236,7 +236,7 @@ defmodule Db.Sales do
       iex> create_order(%{field: value})
       {:ok, %Order{}}
 
-      iex> create_product_extra_menu(%{field: bad_value})
+      iex> create_order(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """

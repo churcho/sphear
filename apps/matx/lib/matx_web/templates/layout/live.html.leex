@@ -48,7 +48,7 @@
   <% end %>
 
   <%= live_component @socket, MatxWeb.HeaderLive, id: "header", email: @email, open: false, opened_once: false, hide: assigns[:searching] %>
-  <div class="md:pt-24">
+  <div>
     <%= @inner_content %>
   </div>
 </main>

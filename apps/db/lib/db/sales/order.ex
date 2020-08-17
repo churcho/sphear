@@ -23,7 +23,8 @@ defmodule Db.Sales.Order do
     order
     |> cast(attrs, [:user_id, :cart_id])
     |> validate_required([:user_id, :cart_id])
-    |> assoc_constraint(:user, :cart)
+    |> assoc_constraint(:user)
+    |> assoc_constraint(:cart)
   end
 
   @doc false
