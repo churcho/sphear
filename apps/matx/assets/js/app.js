@@ -12,6 +12,7 @@ import "../css/app.css"
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
+import "alpinejs"
 import "phoenix_html"
 import { Socket } from "phoenix"
 import NProgress from "nprogress"
@@ -340,7 +341,17 @@ Hooks.googleMap = {
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, { hooks: Hooks, params: { _csrf_token: csrfToken } })
+let liveSocket = new LiveSocket("/live", Socket, {
+    dom: {
+        onBeforeElUpdated(from, to) {
+            if (from.__x) {
+                window.Alpine.clone(from.__x, to)
+            }
+        }
+    },
+    hooks: Hooks,
+    params: { _csrf_token: csrfToken }
+})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())
