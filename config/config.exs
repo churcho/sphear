@@ -23,10 +23,6 @@ config :proxy,
       phoenix_endpoint: MatxWeb.Endpoint
     },
     %{
-      host: ~r{synapsit\.(se|nu)$},
-      phoenix_endpoint: SynapsitWeb.Endpoint
-    },
-    %{
       host: ~r/localhost/,
       phoenix_endpoint: MatxWeb.Endpoint
     }
