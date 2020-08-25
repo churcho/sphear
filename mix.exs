@@ -13,7 +13,6 @@ defmodule Sphear.MixProject do
         sphear: [
           applications: [
             matx: :permanent,
-            synapsit: :permanent,
             proxy: :permanent,
             db: :permanent
           ]
