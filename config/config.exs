@@ -23,8 +23,8 @@ config :proxy,
       phoenix_endpoint: MatxWeb.Endpoint
     },
     %{
-      host: ~r{blippx\.(se|nu)$},
-      phoenix_endpoint: BlippxWeb.Endpoint
+      host: ~r{synapsit\.(se|nu)$},
+      phoenix_endpoint: SynapsitWeb.Endpoint
     },
     %{
       host: ~r/localhost/,
@@ -49,7 +49,7 @@ config :matx,
   ecto_repos: [Db.Repo],
   generators: [context_app: :db]
 
-config :blippx,
+config :synapsit,
   ecto_repos: [Db.Repo],
   generators: [context_app: :db]
 

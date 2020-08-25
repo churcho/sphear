@@ -21,7 +21,7 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-blippx_key_base =
+synapsit_key_base =
   System.get_env("BLIPPX_SECRET_KEY_BASE") ||
     raise """
     environment variable BLIPPX_SECRET_KEY_BASE is missing.
@@ -44,11 +44,11 @@ config :matx, MatxWeb.Endpoint,
   secret_key_base: matx_key_base,
   server: false
 
-config :blippx, BlippxWeb.Endpoint,
+config :synapsit, SynapsitWeb.Endpoint,
   http: [
     transport_options: [socket_opts: [:inet6]]
   ],
-  secret_key_base: blippx_key_base,
+  secret_key_base: synapsit_key_base,
   server: false
 
 # ## Using releases (Elixir v1.9+)
