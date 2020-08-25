@@ -25,7 +25,7 @@ defmodule Proxy.Cowboy2Handler do
       backends = Application.get_env(:proxy, :backends)
   
       backend = choose_backend(conn, backends)
-      log_request(agent, "Backend chosen: #{inspect(backend)}")
+      log_request(agent, "Backend chosen: #{inspect(backend.phoenix_endpoint)}")
 
       #save_request(req)
   
