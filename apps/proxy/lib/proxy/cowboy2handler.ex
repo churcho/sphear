@@ -13,8 +13,8 @@ defmodule Proxy.Cowboy2Handler do
       end
     end
   
-    @not_found_backend %{
-      plug: Proxy.Plug.NotFound
+    @default %{
+      phoenix_endpoint: MatxWeb.Endpoint
     }
   
     # endpoint and opts are not passed in because they
@@ -45,7 +45,7 @@ defmodule Proxy.Cowboy2Handler do
     end
 
     defp choose_backend(conn, backends) do
-      Enum.find(backends, @not_found_backend, fn backend ->
+      Enum.find(backends, @default, fn backend ->
         backend_matches?(conn, backend)
       end)
     end

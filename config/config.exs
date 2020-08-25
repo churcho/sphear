@@ -29,12 +29,11 @@ config :proxy,
     %{
       host: ~r/localhost/,
       phoenix_endpoint: MatxWeb.Endpoint
-    },
-    %{
-      host: ~r/192.\d{1,3}.\d{1}.\d{1,3}/,
-      phoenix_endpoint: MatxWeb.Endpoint
     }
-  ]
+  ],
+  default_endpoint: %{
+    phoenix_endpoint: MatxWeb.Endpoint
+  }
 
 # Configure ecto_repo and generators
 config :db,
