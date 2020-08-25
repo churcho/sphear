@@ -13,10 +13,6 @@ defmodule Proxy.Cowboy2Handler do
       end
     end
   
-    @default %{
-      phoenix_endpoint: MatxWeb.Endpoint
-    }
-  
     # endpoint and opts are not passed in because they
     # are dynamically chosen
     def init(req, {_endpoint, _opts}) do
@@ -45,7 +41,8 @@ defmodule Proxy.Cowboy2Handler do
     end
 
     defp choose_backend(conn, backends) do
-      Enum.find(backends, @default, fn backend ->
+      default = Application.get_env(:proxy, :default_backend)
+      Enum.find(backends, default, fn backend ->
         backend_matches?(conn, backend)
       end)
     end

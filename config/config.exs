@@ -27,7 +27,7 @@ config :proxy,
       phoenix_endpoint: MatxWeb.Endpoint
     }
   ],
-  default_endpoint: %{
+  default_backend: %{
     phoenix_endpoint: MatxWeb.Endpoint
   }
 
