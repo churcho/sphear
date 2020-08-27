@@ -15,7 +15,9 @@ defmodule Proxy.Application do
       Proxy.Cowboy2Handler,
       {
         MatxWeb.Endpoint,
-        {MatxWeb.UserSocket, :websocket}
+        {MatxWeb.UserSocket, :websocket},
+        SynapsWeb.Endpoint,
+        {SynapsWeb.UserSocket, :websocket}
       }
     }
   end

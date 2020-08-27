@@ -10,6 +10,10 @@ MIX_ENV=prod mix compile
 npm install --prefix apps/matx/assets
 npm run deploy --prefix apps/matx/assets
 
+# Compile assets
+npm install --prefix apps/synaps/assets
+npm run deploy --prefix apps/synaps/assets
+
 mix phx.digest
 
 # Remove the existing release directory and build the release
