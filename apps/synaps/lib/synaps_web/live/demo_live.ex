@@ -1,4 +1,4 @@
-defmodule SynapsWeb.PageLive do
+defmodule SynapsWeb.DemoLive do
   use SynapsWeb, :live_view
 
   @impl true
