@@ -1,3 +1,13 @@
-<div class="mt-16">
-  Troll
+<div class="absolute hidden sm:block w-full fullscreen-bg h-screen">
+  <video autoplay loop muted playsinline webkit-playsinline poster="/images/stockholm.webp" class="w-full h-full object-fill lg:object-cover">
+      <source src="/images/stockholm.webm" type="video/webm">
+      <source src="/images/stockholm.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="absolute block sm:hidden w-full h-screen">
+  <video id="stockholm_video" autoplay loop muted playsinline webkit-playsinline poster="/images/stockholm_mobile.webp" class="w-full h-full object-fill">
+      <source src="/images/stockholm_mobile.webm" type="video/webm">
+      <source src="/images/stockholm_mobile.mp4" type="video/mp4">
+  </video>
 </div>
