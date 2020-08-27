@@ -14,6 +14,7 @@ defmodule Sphear.MixProject do
           applications: [
             matx: :permanent,
             proxy: :permanent,
+            synaps: :permanent,
             db: :permanent
           ]
         ]
