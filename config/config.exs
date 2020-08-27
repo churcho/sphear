@@ -23,6 +23,10 @@ config :proxy,
       phoenix_endpoint: MatxWeb.Endpoint
     },
     %{
+      host: ~r{synapsit\.(se|nu)$},
+      phoenix_endpoint: SynapsWeb.Endpoint
+    },
+    %{
       host: ~r/localhost/,
       phoenix_endpoint: MatxWeb.Endpoint
     }
@@ -44,7 +48,7 @@ config :matx,
   ecto_repos: [Db.Repo],
   generators: [context_app: :db]
 
-config :synapsit,
+config :synaps,
   ecto_repos: [Db.Repo],
   generators: [context_app: :db]
 
