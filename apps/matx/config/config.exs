@@ -9,10 +9,6 @@ use Mix.Config
 
 run_server? = System.get_env("RENDER_HOSTNAME") == nil || true
 
-config :matx,
-  ecto_repos: [Db.Repo],
-  generators: [context_app: :db]
-
 # Configures the endpoint
 config :matx, MatxWeb.Endpoint,
   url: [host: "www.matx.se"],

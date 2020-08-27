@@ -21,10 +21,10 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-synapsit_key_base =
-  System.get_env("SYNAPSIT_SECRET_KEY_BASE") ||
+synaps_key_base =
+  System.get_env("SYNAPS_SECRET_KEY_BASE") ||
     raise """
-    environment variable SYNAPSIT_SECRET_KEY_BASE is missing.
+    environment variable SYNAPS_SECRET_KEY_BASE is missing.
     You can generate one by calling: mix phx.gen.secret
     """
 
@@ -44,11 +44,11 @@ config :matx, MatxWeb.Endpoint,
   secret_key_base: matx_key_base,
   server: false
 
-config :synapsit, SynapsitWeb.Endpoint,
+config :synaps, SynapsWeb.Endpoint,
   http: [
     transport_options: [socket_opts: [:inet6]]
   ],
-  secret_key_base: synapsit_key_base,
+  secret_key_base: synaps_key_base,
   server: false
 
 # ## Using releases (Elixir v1.9+)
