@@ -50,7 +50,7 @@
                 <img src="/images/magnifying-glass.svg" class="flex-shrink-0 mr-1.5 h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
               </div>
               <input name="search" value="<%= @search_model.search %>" phx-blur="search_blur" phx-focus="search_focus"
-              placeholder="Hitta take-away för..." autocomplete="off" class='pr-12 pl-12 appearance-none block w-full px-3 py-3 border-gray-300 text-base leading-6 rounded-full placeholder-gray-500 shadow-sm focus:outline-none focus:placeholder-gray-400 transition duration-150 ease-in-out sm:flex-1 <%= if (@search_model.search != "" and @search_model.restaurants == [] and !@search_model.loading), do: "focus:shadow-outline-red border-red-500 border border-solid" %>'>
+              placeholder="Hitta take-away för..." autocomplete="off" class='pr-12 pl-12 appearance-none block w-full px-3 py-3 text-base leading-6 rounded-full placeholder-gray-500 shadow-sm focus:outline-none focus:placeholder-gray-400 transition duration-150 ease-in-out sm:flex-1 <%= if (@search_model.search != "" and @search_model.restaurants == [] and !@search_model.loading), do: "focus:shadow-outline-red border-red-500 border border-solid" %>'>
               <div phx-click="reset_search" phx-value-search="<%= @search_model.search %>" class='<%= if @search_model.search == "", do: "hidden" %> z-50 text-gray absolute inset-y-0 right-0 pr-3 flex items-center'>
                 <img src="/images/x.svg" for="search" class="flex-shrink-0 mr-1.5 h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
               </div>

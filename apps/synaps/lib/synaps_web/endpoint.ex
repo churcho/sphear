@@ -24,7 +24,7 @@ defmodule SynapsWeb.Endpoint do
     at: "/",
     from: :synaps,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt particlesjs-config.json)
 
 # Render health checks
   plug HealthCheckPlug, path: "/health"
