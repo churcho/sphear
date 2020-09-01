@@ -12,18 +12,11 @@ canvas {
 /* ---- particles.js container ---- */
 
 #particles-js {
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 10;
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-}
-
-#particle {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    background-image: linear-gradient(120deg, #4d7ece 0%, #77cef7 100%);
 }
 
 .filterLogo {
