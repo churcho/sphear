@@ -158,7 +158,7 @@
   </div>
 
   <div class="relative z-10 h-screen">
-    <div phx-update="ignore" class="z-30 absolute bottom-0 w-full h-64 sm:h-72 md:h-96">
+    <div x-on:click="gsap.to(window, {duration: 0, scrollTo:'#digsynaps'});" phx-update="ignore" class="z-30 absolute bottom-0 w-full h-64 sm:h-72 md:h-96">
       <svg id="lava" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
         <defs>
           <path id="gridBox" d="M281,328.39l30-109.16M518.73,328.89,281,328.39m30-109.16H489m0,0,29.74,109.66" fill="none" stroke-miterlimit="10" stroke-width="0.75" />
@@ -256,7 +256,7 @@
         </p>
         <div class="mt-10 flex justify-around max-w-xl m-auto">
           <div class="rounded-full shadow">
-            <a href="#digsynaps" style="background-color: #5f0606cc;" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
+            <a x-on:click="gsap.to(window, {duration: 0, scrollTo:'#digsynaps'});" style="background-color: #5f0606cc;" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
               Get started
             </a>
           </div>
