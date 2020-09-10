@@ -29,156 +29,128 @@
 
 
   -->
-  <div class="z-20 fixed top-0 left-0 w-full transition ease-in-out duration-500" x-bind.transition.in.opacity.duration.750ms:class="{ 'bg-white shadow-xl': !atTop }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+  <div class="z-20 fixed top-0 left-0 w-full transition ease-in-out duration-500" x-bind.transition.in.opacity.duration.500ms:class="{ 'bg-white shadow-xl': !atTop }">
+    <div class="max-w-7xl mx-4 sm:mx-6">
       <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
         <div class="flex-1 flex">
           <a href="#" class="inline-flex">
             <img class="h-8 w-auto sm:h-10" x-bind:class="{ 'md:noFilterLogo': !atTop, 'filterLogo': atTop }" src="/images/synaps.png" alt="">
           </a>
         </div>
-        
-          <!--<a href="#digsynaps" x-bind:class="{ 'text-gray-600': !atTop, 'text-gray-200': atTop }" class="inline-flex items-center space-x-2 text-base leading-6 font-medium hover:text-gray-900 transition ease-in-out duration-150">
-            Digital Synaps
-          </a>
-          <a href="#cases" x-bind:class="{ 'text-gray-600': !atTop, 'text-gray-200': atTop }" class="text-base leading-6 font-medium hover:text-gray-900 transition ease-in-out duration-150">
-            Cases
-          </a>
-          <a href="#kontakt" x-bind:class="{ 'text-gray-600': !atTop, 'text-gray-200': atTop }" class="text-base leading-6 font-medium hover:text-gray-900 transition ease-in-out duration-150">
-            Kontakt
-          </a>
-          <a href="#synapsus" x-bind:class="{ 'text-gray-600': !atTop, 'text-gray-200': atTop }" class="inline-flex items-center space-x-2 text-base leading-6 font-medium hover:text-gray-900 transition ease-in-out duration-150">
-            Synapsus
-          </a>
-        </nav>
-        <div class="hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
-          <a href="#" class="whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150">
-            Sign in
-          </a>
-          <span class="inline-flex rounded-md shadow-sm">
-            <a href="#" class="whitespace-no-wrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-              Sign up
-            </a>
-          </span>-->
-        <nav phx-update="ignore" class="hidden md:flex flex-1 space-x-10 mr-20">
-          
-        </nav>
-        <div class="flex flex-1">
-        </div>
       </div>
     </div>
+  </div>
 
-    <!--
-      Mobile menu, show/hide based on mobile menu state.
+  <!--
+    Mobile menu, show/hide based on mobile menu state.
 
-      Entering: "duration-200 ease-out"
-        From: "opacity-0 scale-95"
-        To: "opacity-100 scale-100"
-      Leaving: "duration-100 ease-in"
-        From: "opacity-100 scale-100"
-        To: "opacity-0 scale-95"
-    -->
-    <div class="absolute top-0 inset-x-0 z-10 p-2 transition transform origin-top-right md:hidden" x-show-transition="openModal" x-bind:class="{ 'bg-white shadow-xl': openModal }">
-      <div class="rounded-lg shadow-lg">
-        <div class="rounded-lg shadow-xs bg-white divide-y-2 divide-gray-50">
-          <div class="pt-5 pb-6 px-5 space-y-6">
-            <div class="flex items-center justify-between">
-              <div>
-                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg" alt="Workflow">
-              </div>
-              <div class="-mr-2">
-                <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+    Entering: "duration-200 ease-out"
+      From: "opacity-0 scale-95"
+      To: "opacity-100 scale-100"
+    Leaving: "duration-100 ease-in"
+      From: "opacity-100 scale-100"
+      To: "opacity-0 scale-95"
+  -->
+  <div class="top-0 inset-x-0 z-10 p-2 transition transform origin-top-right hidden" x-show="openModal" x-bind:class="{ 'bg-white shadow-xl': openModal }">
+    <div class="rounded-lg shadow-lg">
+      <div class="rounded-lg shadow-xs bg-white divide-y-2 divide-gray-50">
+        <div class="pt-5 pb-6 px-5 space-y-6">
+          <div class="flex items-center justify-between">
             <div>
-              <nav class="grid row-gap-8">
-                <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                  <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                  <div class="text-base leading-6 font-medium text-gray-900">
-                    Analytics
-                  </div>
-                </a>
-                <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                  <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                  </svg>
-                  <div class="text-base leading-6 font-medium text-gray-900">
-                    Engagement
-                  </div>
-                </a>
-                <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                  <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                  <div class="text-base leading-6 font-medium text-gray-900">
-                    Security
-                  </div>
-                </a>
-                <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                  <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                  <div class="text-base leading-6 font-medium text-gray-900">
-                    Integrations
-                  </div>
-                </a>
-                <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
-                  <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                  <div class="text-base leading-6 font-medium text-gray-900">
-                    Automations
-                  </div>
-                </a>
-              </nav>
+              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg" alt="Workflow">
+            </div>
+            <div class="-mr-2">
+              <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
           </div>
-          <div class="py-6 px-5 space-y-6">
-            <div class="grid grid-cols-2 row-gap-4 col-gap-8">
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Pricing
+          <div>
+            <nav class="grid row-gap-8">
+              <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <div class="text-base leading-6 font-medium text-gray-900">
+                  Analytics
+                </div>
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Docs
+              <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                </svg>
+                <div class="text-base leading-6 font-medium text-gray-900">
+                  Engagement
+                </div>
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Enterprise
+              <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <div class="text-base leading-6 font-medium text-gray-900">
+                  Security
+                </div>
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Blog
+              <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                <div class="text-base leading-6 font-medium text-gray-900">
+                  Integrations
+                </div>
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Help Center
+              <a href="#" class="-m-3 p-3 flex items-center space-x-3 rounded-md hover:bg-gray-50 transition ease-in-out duration-150">
+                <svg class="flex-shrink-0 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <div class="text-base leading-6 font-medium text-gray-900">
+                  Automations
+                </div>
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Guides
+            </nav>
+          </div>
+        </div>
+        <div class="py-6 px-5 space-y-6">
+          <div class="grid grid-cols-2 row-gap-4 col-gap-8">
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Pricing
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Docs
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Enterprise
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Blog
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Help Center
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Guides
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Security
+            </a>
+            <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
+              Events
+            </a>
+          </div>
+          <div class="space-y-6">
+            <span class="w-full flex rounded-md shadow-sm">
+              <a href="#" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                Sign up
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Security
+            </span>
+            <p class="text-center text-base leading-6 font-medium text-gray-500">
+              Existing customer?
+              <a href="#" class="text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">
+                Sign in
               </a>
-              <a href="#" class="text-base leading-6 font-medium text-gray-900 hover:text-gray-700 transition ease-in-out duration-150">
-                Events
-              </a>
-            </div>
-            <div class="space-y-6">
-              <span class="w-full flex rounded-md shadow-sm">
-                <a href="#" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
-                  Sign up
-                </a>
-              </span>
-              <p class="text-center text-base leading-6 font-medium text-gray-500">
-                Existing customer?
-                <a href="#" class="text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">
-                  Sign in
-                </a>
-              </p>
-            </div>
+            </p>
           </div>
         </div>
       </div>
@@ -186,93 +158,85 @@
   </div>
 
   <div class="relative z-10 h-screen">
-    <div phx-update="ignore" class="z-30 absolute bottom-0 w-screen h-64 sm:h-72 md:h-96">
-    <svg id="mainSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
-      <defs>
-        <path id="gridBox" d="M281,328.39l30-109.16M518.73,328.89,281,328.39m30-109.16H489m0,0,29.74,109.66" fill="none" stroke-miterlimit="10" stroke-width="0.75" />
+    <div x-on:click="gsap.to(window, {duration: 0, scrollTo:'#digsynaps'});" phx-update="ignore" class="z-30 absolute bottom-0 w-full h-64 sm:h-72 md:h-96">
+      <svg id="lava" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+        <defs>
+          <path id="gridBox" d="M281,328.39l30-109.16M518.73,328.89,281,328.39m30-109.16H489m0,0,29.74,109.66" fill="none" stroke-miterlimit="10" stroke-width="0.75" />
 
-        <filter id="glow" x="-100%" y="-200%" width="250%" height="350%">
-          <feGaussianBlur stdDeviation="12" result="coloredBlur" />
-          <feOffset dx="0" dy="-5" result="offsetblur"></feOffset>
-          <feFlood id="glowAlpha" flood-color="#4d1308" flood-opacity="1"></feFlood>
-          <feComposite in2="offsetblur" operator="in"></feComposite>
-          <feMerge>
-            <feMergeNode />
-            <feMergeNode in="SourceGraphic"></feMergeNode>
-          </feMerge>
-        </filter>
+          <filter id="glow" x="-100%" y="-200%" width="250%" height="350%">
+            <feGaussianBlur stdDeviation="12" result="coloredBlur" />
+            <feOffset dx="0" dy="-5" result="offsetblur"></feOffset>
+            <feFlood id="glowAlpha" flood-color="#000" flood-opacity="1"></feFlood>
+            <feComposite in2="offsetblur" operator="in"></feComposite>
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
 
-        <filter id="glow2" x="-100%" y="-100%" width="250%" height="250%">
-          <feGaussianBlur stdDeviation="12" result="coloredBlur" />
-          <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
-          <feFlood id="glowAlpha" flood-color="#dfa59b" flood-opacity="1"></feFlood>
-          <feComposite in2="offsetblur" operator="in"></feComposite>
-          <feMerge>
-            <feMergeNode />
-            <feMergeNode in="SourceGraphic"></feMergeNode>
-          </feMerge>
-        </filter>
+          <filter id="glow2" x="-100%" y="-100%" width="250%" height="250%">
+            <feGaussianBlur stdDeviation="10" result="coloredBlur" />
+            <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
+            <feFlood id="glowAlpha" flood-color="#fff" flood-opacity="1"></feFlood>
+            <feComposite in2="offsetblur" operator="in"></feComposite>
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
 
-        <filter id="goo" color-interpolation-filters="sRGB">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 100 -9" result="cm" />
-          <feBlend />
-        </filter>
+          <filter id="goo" color-interpolation-filters="sRGB">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 100 -9" result="cm" />
+            <feBlend />
+          </filter>
 
-        <filter id="bevel" color-interpolation-filters="sRGB" filterUnits="objectBoundingBox" x="-10%" y="-10%" width="150%" height="150%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
-          <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" specularExponent="80" result="specOut" lighting-color="#4356D7">
-            <fePointLight x="-5000" y="10000" z="10000" />
-          </feSpecularLighting>
-          <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2" />
-          <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint" />
-        </filter>
+          <filter id="bevel" color-interpolation-filters="sRGB" filterUnits="objectBoundingBox" x="-10%" y="-10%" width="150%" height="150%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
+            <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" specularExponent="80" result="specOut" lighting-color="#4356D7">
+              <fePointLight x="-5000" y="10000" z="10000" />
+            </feSpecularLighting>
+            <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut2" />
+            <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint" />
+          </filter>
 
-        <g id="container" filter="url(#goo)" />
+          <g id="container" filter="url(#goo)" />
 
-        <radialGradient id="blobGrad" cx="397.6124" cy="190" r="22.6488" gradientUnits="userSpaceOnUse">
-          <stop offset="0.4" style="stop-color:#000" />
+          <radialGradient id="blobGrad" cx="397.6124" cy="190" r="22.6488" gradientUnits="userSpaceOnUse">
+            <stop offset="0.4" style="stop-color:#000" />
 
-          <stop offset="1" style="stop-color:#5f0606cc" />
-        </radialGradient>
-        <linearGradient id="refGrad" x1="400" y1="393.43" x2="400" y2="274.67" gradientUnits="userSpaceOnUse">
-          <stop offset="0" />
-          <stop offset="0.5" stop-color="#fff" />
-        </linearGradient>
+            <stop offset="1" style="stop-color:#5f0606cc" />
+          </radialGradient>
+          <linearGradient id="refGrad" x1="400" y1="393.43" x2="400" y2="274.67" gradientUnits="userSpaceOnUse">
+            <stop offset="0" />
+            <stop offset="0.5" stop-color="#fff" />
+          </linearGradient>
+        </defs>
 
-      </defs>
+        <mask id="blobRefMask">
+          <rect class="refGradRect" y="204.67" width="800" height="288.76" fill="url(#refGrad)" />
+        </mask>
 
-      <mask id="blobRefMask">
-        <rect class="refGradRect" y="204.67" width="800" height="288.76" fill="url(#refGrad)" />
-      </mask>
-
-      <g fill="#E93F21" mask="url(#blobRefMask)">
-        <use xlink:href="#container" id="reflection" filter="url(#bevel)" />
-
-      </g>
-        
-        
-
+        <g fill="#E93F21" mask="url(#blobRefMask)">
+          <use xlink:href="#container" id="reflection" filter="url(#bevel)" />
+        </g>
+          
         <g filter="url(#glow2)">
           <g filter="url(#glow)" stroke="#E93F21" stroke-miterlimit="10" fill="none" stroke-width="2">
-
             <use class="gridBox" xlink:href="#gridBox" y="50" opacity="0.3" />
             <use class="gridBox" xlink:href="#gridBox" y="20" opacity="0.6" />
             <use class="gridBox" xlink:href="#gridBox" />
-
             <path id="ring" stroke="none" d="M397.61,281.93a39.25,39.25,0,0,1-8.35-.88,27.13,27.13,0,0,1-6.72-2.35,13.46,13.46,0,0,1-4.38-3.43,6,6,0,0,1-1.4-4.11,6.54,6.54,0,0,1,1.87-4A14.76,14.76,0,0,1,383.2,264a28.44,28.44,0,0,1,6.53-2.12,40.19,40.19,0,0,1,15.76,0A28.53,28.53,0,0,1,412,264a14.83,14.83,0,0,1,4.56,3.21,6.56,6.56,0,0,1,1.88,4,6.06,6.06,0,0,1-1.41,4.11,13.42,13.42,0,0,1-4.37,3.43,27.36,27.36,0,0,1-6.73,2.35,39.25,39.25,0,0,1-8.35.88m0-35.5a96.57,96.57,0,0,0-19.05,1.85,69.64,69.64,0,0,0-15.86,5.12,36.54,36.54,0,0,0-11.15,7.73,16.24,16.24,0,0,0-4.7,9.72,14.56,14.56,0,0,0,3.27,10,32.23,32.23,0,0,0,10.59,8.43,66.06,66.06,0,0,0,16.42,5.8,98.17,98.17,0,0,0,41,0,66.06,66.06,0,0,0,16.42-5.8,32.13,32.13,0,0,0,10.59-8.43,14.46,14.46,0,0,0,3.27-10,16.22,16.22,0,0,0-4.69-9.72,36.72,36.72,0,0,0-11.16-7.73,69.48,69.48,0,0,0-15.86-5.12,96.49,96.49,0,0,0-19.05-1.85" fill="#DFE3FF" />
           </g>
         </g>
         
         <g transform='translate(0, -210)' filter="url(#glow2)">
           <g filter="url(#glow)" stroke="#E93F21" stroke-miterlimit="10" fill="none" stroke-width="2">
-
             <path id="ring2" stroke="none" d="M397.61,281.93a39.25,39.25,0,0,1-8.35-.88,27.13,27.13,0,0,1-6.72-2.35,13.46,13.46,0,0,1-4.38-3.43,6,6,0,0,1-1.4-4.11,6.54,6.54,0,0,1,1.87-4A14.76,14.76,0,0,1,383.2,264a28.44,28.44,0,0,1,6.53-2.12,40.19,40.19,0,0,1,15.76,0A28.53,28.53,0,0,1,412,264a14.83,14.83,0,0,1,4.56,3.21,6.56,6.56,0,0,1,1.88,4,6.06,6.06,0,0,1-1.41,4.11,13.42,13.42,0,0,1-4.37,3.43,27.36,27.36,0,0,1-6.73,2.35,39.25,39.25,0,0,1-8.35.88m0-35.5a96.57,96.57,0,0,0-19.05,1.85,69.64,69.64,0,0,0-15.86,5.12,36.54,36.54,0,0,0-11.15,7.73,16.24,16.24,0,0,0-4.7,9.72,14.56,14.56,0,0,0,3.27,10,32.23,32.23,0,0,0,10.59,8.43,66.06,66.06,0,0,0,16.42,5.8,98.17,98.17,0,0,0,41,0,66.06,66.06,0,0,0,16.42-5.8,32.13,32.13,0,0,0,10.59-8.43,14.46,14.46,0,0,0,3.27-10,16.22,16.22,0,0,0-4.69-9.72,36.72,36.72,0,0,0-11.16-7.73,69.48,69.48,0,0,0-15.86-5.12,96.49,96.49,0,0,0-19.05-1.85" fill="#DFE3FF" />
           </g>
         </g>
         
         <g id="wrapper" filter="url(#bevel)" opacity="0.76">
-
           <use xlink:href="#container" fill='url(#blobGrad)' />
         </g>
       </svg>
@@ -290,8 +254,8 @@
         </p>
         <div class="mt-10 flex justify-around max-w-xl m-auto">
           <div class="rounded-full shadow">
-            <a href="#digsynaps" style="background-color: #5f0606cc;" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-              synapsa
+            <a x-on:click="gsap.to(window, {duration: 0, scrollTo:'#digsynaps'});" style="background-color: #5f0606cc;" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
+              Get started
             </a>
           </div>
           <div class="rounded-full shadow">
@@ -360,7 +324,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <h5 class="text-lg leading-6 font-medium text-gray-900">Competitive exchange rates</h5>
+                  <h5 class="text-lg leading-6 font-medium text-gray-900">Globalt IT-paket</h5>
                   <p class="mt-2 text-base leading-6 text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
                 </div>
               </div>
@@ -375,7 +339,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <h5 class="text-lg leading-6 font-medium text-gray-900">No hidden fees</h5>
+                  <h5 class="text-lg leading-6 font-medium text-gray-900">Analysera din data</h5>
                   <p class="mt-2 text-base leading-6 text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
                 </div>
               </div>
@@ -390,7 +354,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <h5 class="text-lg leading-6 font-medium text-gray-900">Transfers are instant</h5>
+                  <h5 class="text-lg leading-6 font-medium text-gray-900">Ändringar reflekteras live</h5>
                   <p class="mt-2 text-base leading-6 text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
                 </div>
               </div>
@@ -399,14 +363,14 @@
         </div>
         <div class="mt-10 -mx-4 relative lg:mt-0">
           <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404"><defs><pattern id="ca9667ae-9f92-4be7-abcb-9e3d727f2941" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="784" height="404" fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)"></rect></svg>
-          <img class="relative mx-auto" width="490" src="https://tailwindui.com/img/features/feature-example-1.png" alt="">
+          <img class="relative mx-auto" width="490" src="https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="">
         </div>
       </div>
       <svg class="hidden lg:block absolute right-full transform translate-x-1/2 translate-y-12" width="404" height="784" fill="none" viewBox="0 0 404 784"><defs><pattern id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="784" fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)"></rect></svg>
       <div class="relative mt-12 sm:mt-16 lg:mt-24">
         <div class="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
           <div class="lg:col-start-2">
-            <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">Always in the loop</h4>
+            <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">Redo för tandläkar-klinik</h4>
             <p class="mt-3 text-lg leading-7 text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.</p>
             <ul class="mt-10">
               <li>
@@ -419,7 +383,7 @@
                     </div>
                   </div>
                   <div class="ml-4">
-                    <h5 class="text-lg leading-6 font-medium text-gray-900">Mobile notifications</h5>
+                    <h5 class="text-lg leading-6 font-medium text-gray-900">Optimerad för alla enheter</h5>
                     <p class="mt-2 text-base leading-6 text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
                   </div>
                 </div>
@@ -434,7 +398,7 @@
                     </div>
                   </div>
                   <div class="ml-4">
-                    <h5 class="text-lg leading-6 font-medium text-gray-900">Reminder emails</h5>
+                    <h5 class="text-lg leading-6 font-medium text-gray-900">Smarta påminnelser</h5>
                     <p class="mt-2 text-base leading-6 text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p>
                   </div>
                 </div>
@@ -443,10 +407,12 @@
           </div>
           <div class="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
             <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404"><defs><pattern id="e80155a9-dfde-425a-b5ea-1f6fadd20131" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="784" height="404" fill="url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)"></rect></svg>
-            <img class="relative mx-auto" width="490" src="https://tailwindui.com/img/features/feature-example-2.png" alt="">
+            <img class="relative mx-auto" width="490" src="https://images.unsplash.com/photo-1504701928770-fce1b9e47dc1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="">
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div id="footer" class="h-32 w-full bg-gray-200 mt-12 p-12"></div>
 </div>
