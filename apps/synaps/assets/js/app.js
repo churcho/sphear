@@ -49,17 +49,17 @@ particlesJS.load('particles-js', 'particlesjs-config.json', function() {
     console.log('callback - particles.js config loaded');
 });
 
-/* Menu */
 
 let select = s => document.querySelector(s),
     selectAll = s => document.querySelectorAll(s);
+/* Circles */
 
 gsap.set('svg', {
     visibility: 'visible'
 })
 
 let svgns = "http://www.w3.org/2000/svg";
-let container = select("#container");
+let container = select("#lava_container");
 let twoPi = Math.PI * 2;
 
 for (let i = 0; i < 25; i++) {
@@ -143,4 +143,73 @@ gsap.to('#ring2', {
     duration: 1.4,
     stagger: 0.5
 })
+
+
+/* Menu */
+const tl = gsap.timeline();
+const menus = selectAll(".menu");
+menus.forEach(function(menu) {
+    const allLinks = menu.querySelectorAll(".link");
+    const allDivs = selectAll(".menuDiv");
+    const slider = menu.querySelector(".slider");
+    const focus = slider.querySelector(".focus");
+
+    //   remove previous active classes
+    const removeActiveClass = () => {
+        allLinks.forEach(function(item) {
+            item.classList.remove("active");
+        });
+        allDivs.forEach(function(item) {
+            gsap.to(item, {
+                css: { opacity: 0, display: "none" },
+                duration: 0.2,
+                ease: Power4.easeOut
+            })
+        });
+    };
+
+    const addActiveState = (activeElement) => {
+        // removeActiveClass();
+
+        const icon = activeElement.querySelector(".icon");
+        const div = select("." + activeElement.id);
+        const sliderPos = activeElement.offsetLeft + icon.offsetWidth * 0.75;
+
+        if (!tl.isActive()) {
+
+            tl
+                .to(focus, {
+                    height: 0,
+                    duration: 0.2,
+                    ease: Power4.easeIn,
+                    onComplete: removeActiveClass
+                })
+                .to(slider, {
+                    css: { width: icon.offsetWidth, left: sliderPos },
+                    duration: 0.8,
+                    ease: Power4.easeInOut
+                })
+                .to(focus, {
+                    height: activeElement.offsetHeight * 1.4,
+                    duration: 0.2,
+                    ease: Power4.easeOut,
+                    onComplete: () => activeElement.classList.add("active")
+                })
+                .to(div, {
+                    css: { opacity: 1, display: "block" },
+                    ease: Power4.easeInOut
+                })
+                .play()
+        }
+    };
+
+    allLinks.forEach((link) =>
+        link.addEventListener("click", () => {
+            addActiveState(link);
+        })
+    );
+
+    addActiveState(allLinks[0]);
+});
+
 gsap.globalTimeline.timeScale(0.75)

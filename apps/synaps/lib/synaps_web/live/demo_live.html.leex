@@ -18,8 +18,8 @@
 
 
 
-<div x-data="{ atTop: true, openModal: false }",
-      x-on:scroll.window="atTop = (window.pageYOffset > 700) ? false : true;",
+<div x-data="{ atTop: true, openModal: false, atCases: false }",
+      x-on:scroll.window="atTop = (window.pageYOffset > 700) ? false : true; atCases = (window.pageYOffset > 1400) ? true : false;",
       x-on:keydown.escape="openModal = openModal ? false : true">
   <div phx-update="ignore" id="particles-js"></div>
   
@@ -29,13 +29,119 @@
 
 
   -->
-  <div class="z-20 fixed top-0 left-0 w-full transition ease-in-out duration-500" x-bind.transition.in.opacity.duration.500ms:class="{ 'bg-white shadow-xl': !atTop }">
+  <div class="z-20 fixed bottom-0 md:top-0 left-0 w-full" style="height: 106px;" x-bind.transition.opacity.duration.500ms:class="{ 'md:bg-white md:shadow-xl': !atTop }">
     <div class="max-w-7xl mx-4 sm:mx-6">
-      <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-        <div class="flex-1 flex">
-          <a href="#" class="inline-flex">
+      <div class="flex justify-between items-center md:justify-start" x-bind:class="{ 'py-6': (atTop || atCases) }">
+        <div class="flex">
+          <a href="#" class="hidden md:inline-flex">
             <img class="h-8 w-auto sm:h-10" x-bind:class="{ 'md:noFilterLogo': !atTop, 'filterLogo': atTop }" src="/images/synaps.png" alt="">
           </a>
+        </div>
+        <div class="flex-1 flex origin-left md:origin-center transform ease-in-out duration-500 md:mr-32 scale-60 md:scale-75 lg:scale-100" x-show.transition.in.opacity.duration.250ms="!atTop && !atCases">
+          <div class="menu m-auto">
+            <div class="slider">
+              <div class="focus"></div>
+            </div>
+            <a class="link" id="menu1" href="#digsynaps">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <title>ionicons-v5-i</title>
+                  <path d="M80,212V448a16,16,0,0,0,16,16h96V328a24,24,0,0,1,24-24h80a24,24,0,0,1,24,24V464h96a16,16,0,0,0,16-16V212" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                  <path d="M480,256,266.89,52c-5-5.28-16.69-5.34-21.78,0L32,256" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                  <polyline points="400 179 400 64 352 64 352 133" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                </svg>
+              </div>
+            </a><a class="link" id="menu2" href="#digsynaps">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <title>ionicons-v5-f</title>
+                  <path d="M352.92,80C288,80,256,144,256,144s-32-64-96.92-64C106.32,80,64.54,124.14,64,176.81c-1.1,109.33,86.73,187.08,183,252.42a16,16,0,0,0,18,0c96.26-65.34,184.09-143.09,183-252.42C447.46,124.14,405.68,80,352.92,80Z" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                </svg>
+              </div>
+            </a><a class="link" id="menu3" href="#digsynaps">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <title>ionicons-v5-a</title>
+                  <path d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-miterlimit: 10;
+                          stroke-width: 32px;
+                        " />
+                  <line x1="256" y1="176" x2="256" y2="336" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                  <line x1="336" y1="256" x2="176" y2="256" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                </svg>
+              </div>
+            </a><a class="link" id="menu4" href="#digsynaps">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <title>ionicons-v5-j</title>
+                  <path d="M344,144c-3.92,52.87-44,96-88,96s-84.15-43.12-88-96c-4-55,35-96,88-96S348,90,344,144Z" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                  <path d="M256,304c-87,0-175.3,48-191.64,138.6C62.39,453.52,68.57,464,80,464H432c11.44,0,17.62-10.48,15.65-21.4C431.3,352,343,304,256,304Z" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-miterlimit: 10;
+                          stroke-width: 32px;
+                        " />
+                </svg>
+              </div>
+            </a><a class="link" id="menu5" href="#digsynaps">
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <title>ionicons-v5-q</title>
+                  <path d="M262.29,192.31a64,64,0,1,0,57.4,57.4A64.13,64.13,0,0,0,262.29,192.31ZM416.39,256a154.34,154.34,0,0,1-1.53,20.79l45.21,35.46A10.81,10.81,0,0,1,462.52,326l-42.77,74a10.81,10.81,0,0,1-13.14,4.59l-44.9-18.08a16.11,16.11,0,0,0-15.17,1.75A164.48,164.48,0,0,1,325,400.8a15.94,15.94,0,0,0-8.82,12.14l-6.73,47.89A11.08,11.08,0,0,1,298.77,470H213.23a11.11,11.11,0,0,1-10.69-8.87l-6.72-47.82a16.07,16.07,0,0,0-9-12.22,155.3,155.3,0,0,1-21.46-12.57,16,16,0,0,0-15.11-1.71l-44.89,18.07a10.81,10.81,0,0,1-13.14-4.58l-42.77-74a10.8,10.8,0,0,1,2.45-13.75l38.21-30a16.05,16.05,0,0,0,6-14.08c-.36-4.17-.58-8.33-.58-12.5s.21-8.27.58-12.35a16,16,0,0,0-6.07-13.94l-38.19-30A10.81,10.81,0,0,1,49.48,186l42.77-74a10.81,10.81,0,0,1,13.14-4.59l44.9,18.08a16.11,16.11,0,0,0,15.17-1.75A164.48,164.48,0,0,1,187,111.2a15.94,15.94,0,0,0,8.82-12.14l6.73-47.89A11.08,11.08,0,0,1,213.23,42h85.54a11.11,11.11,0,0,1,10.69,8.87l6.72,47.82a16.07,16.07,0,0,0,9,12.22,155.3,155.3,0,0,1,21.46,12.57,16,16,0,0,0,15.11,1.71l44.89-18.07a10.81,10.81,0,0,1,13.14,4.58l42.77,74a10.8,10.8,0,0,1-2.45,13.75l-38.21,30a16.05,16.05,0,0,0-6.05,14.08C416.17,247.67,416.39,251.83,416.39,256Z" style="
+                          fill: none;
+                          stroke: inherit;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          stroke-width: 32px;
+                        " />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -166,7 +272,7 @@
           <filter id="glow" x="-100%" y="-200%" width="250%" height="350%">
             <feGaussianBlur stdDeviation="12" result="coloredBlur" />
             <feOffset dx="0" dy="-5" result="offsetblur"></feOffset>
-            <feFlood id="glowAlpha" flood-color="#000" flood-opacity="1"></feFlood>
+            <feFlood id="glowAlpha" flood-color="#5f0606cc" flood-opacity="1"></feFlood>
             <feComposite in2="offsetblur" operator="in"></feComposite>
             <feMerge>
               <feMergeNode />
@@ -177,7 +283,7 @@
           <filter id="glow2" x="-100%" y="-100%" width="250%" height="250%">
             <feGaussianBlur stdDeviation="10" result="coloredBlur" />
             <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
-            <feFlood id="glowAlpha" flood-color="#fff" flood-opacity="1"></feFlood>
+            <feFlood id="glowAlpha" flood-color="#5f0606cc" flood-opacity="1"></feFlood>
             <feComposite in2="offsetblur" operator="in"></feComposite>
             <feMerge>
               <feMergeNode />
@@ -200,7 +306,7 @@
             <feComposite in="SourceGraphic" in2="specOut2" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litPaint" />
           </filter>
 
-          <g id="container" filter="url(#goo)" />
+          <g id="lava_container" filter="url(#goo)" />
 
           <radialGradient id="blobGrad" cx="397.6124" cy="190" r="22.6488" gradientUnits="userSpaceOnUse">
             <stop offset="0.4" style="stop-color:#000" />
@@ -218,7 +324,7 @@
         </mask>
 
         <g fill="#E93F21" mask="url(#blobRefMask)">
-          <use xlink:href="#container" id="reflection" filter="url(#bevel)" />
+          <use xlink:href="#lava_container" id="reflection" filter="url(#bevel)" />
         </g>
           
         <g filter="url(#glow2)">
@@ -237,12 +343,12 @@
         </g>
         
         <g id="wrapper" filter="url(#bevel)" opacity="0.76">
-          <use xlink:href="#container" fill='url(#blobGrad)' />
+          <use xlink:href="#lava_container" fill='url(#blobGrad)' />
         </g>
       </svg>
     </div>
 
-    <div class="z-20 mx-auto max-w-7xl w-full pt-32 pb-20 py-48 text-center">
+    <div class="z-10 mx-auto max-w-7xl w-full pt-32 pb-20 py-48 text-center">
       <div class="px-8 sm:px-32 md:px-48">
         <h2 class="md:ml-3 text-5xl tracking-normal font-mono leading-10 font-extrabold text-gray-900 sm:leading-none lg:text-6xl">
           Nya <br class="md:hidden">Digitala
@@ -250,7 +356,7 @@
           <span class="text-red-500 font-extrabold text-shadow-xl">Möjligheter</span>
         </h2>
         <p class="px-12 m-auto pt-8 text-base md:text-lg text-gray-200 max-w-2xl md:max-w-2xl">
-          Bli ett digitalt företag, i en digitaliserad värld. <span class="text-red-500 font-extrabold text-shadow-xl">digitaliserad</span> värld, <br class="hidden md:block"><span class="text-red-500 font-extrabold text-shadow-xl"></span>
+          Bli ett digitalt företag, i en <span class="text-red-500 font-extrabold text-shadow-xl">digitaliserad</span> värld.
         </p>
         <div class="mt-10 flex justify-around max-w-xl m-auto">
           <div class="rounded-full shadow">
@@ -300,7 +406,40 @@
 
       <div id="digsynaps" class="relative">
         <h3 class="py-32 text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">Digital Synaps</h3>
-        <div style="height: 700px;" class="bg-gray-300"></div>
+        
+        <!-- DIVS -->
+        <div class="w-full min-h-screen">
+          <div class="menu1 menuDiv hidden">
+            <img class="m-auto" src="https://placekitten.com/g/1000/600" />
+            <div class="text-center text-3xl mt-12">
+              Lorem ipsum kattisar very good yes
+            </div>
+          </div>
+          <div class="menu2 menuDiv hidden">
+            <img class="m-auto" src="https://placekitten.com/g/1001/601" />
+            <div class="text-center text-3xl mt-12">
+              Shoo bre katt ye ye 
+            </div>
+          </div>
+          <div class="menu3 menuDiv hidden">
+            <img class="m-auto" src="https://placekitten.com/g/1002/602" />
+            <div class="text-center text-3xl mt-12">
+              Katt is the greatest thing
+            </div>
+          </div>
+          <div class="menu4 menuDiv hidden">
+            <img class="m-auto" src="https://placekitten.com/g/1003/603" />
+            <div class="text-center text-3xl mt-12">
+              For sureeeee
+            </div>
+          </div>
+          <div class="menu5 menuDiv hidden">
+            <img class="m-auto" src="https://placekitten.com/g/1004/604" />
+            <div class="text-center text-3xl mt-12">
+              Boyaah
+            </div>
+          </div>
+        </div>
       </div>
 
       <svg class="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4" width="404" height="784" fill="none" viewBox="0 0 404 784"><defs><pattern id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="784" fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)"></rect></svg>
