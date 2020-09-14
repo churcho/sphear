@@ -19,6 +19,8 @@ defmodule SynapsWeb.Router do
 
     live "/", PageLive, :index
     live "/demo", DemoLive, :index
+    live "/chat", ChatLive, :index
+    live "/demo2", Demo2Live, :index
   end
 
   # Other scopes may use custom stacks.
