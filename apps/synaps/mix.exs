@@ -49,6 +49,8 @@ defmodule Synaps.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:plug_health, "~> 0.1.0"},
+      {:ex_bank_id, "~> 0.2.0", hex: :exBankID},
+      {:httpoison, "~> 1.7"},
       {:db, in_umbrella: true}
     ]
   end

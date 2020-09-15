@@ -82,6 +82,24 @@ config :money,
   fractional_unit: true,
   strip_insignificant_zeros: false
 
+# BankID configs
+config :ex_bank_id,
+  # Using a custom http client. Should be a module that implements ExBankID.Http.Client.
+  # Defaults to ExBankID.Http.Default
+  #http_client: MyApp.Http.Client
+
+  # Using a custom json handler. Should be a module that implements ExBankID.Json.Handler.
+  # Defaults to ExBankID.Json.Default
+  json_handler: :jason
+
+  # The path to the client cert file used to authenticate with the BankID API
+  # Defaults to the test cert in the assets directory.
+  # cert_file: "/path/to/cert/file.pem"
+
+  # BankID API url
+  # Defaults to "https://appapi2.test.bankid.com/rp/v5.1/"
+  #url: "https://appapi2.bankid.com/rp/<api version 5 or 5.1>/"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
