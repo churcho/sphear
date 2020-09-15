@@ -333,3 +333,8 @@ const touchSlide = (() => {
         // call mobile on touch end
     slider.addEventListener("touchend", mobile)
 })()
+
+//reset scrollbar position after refresh
+window.onbeforeunload = function() {
+    window.scrollTo(0, 0);
+}
