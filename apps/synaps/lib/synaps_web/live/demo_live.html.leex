@@ -1,9 +1,9 @@
 <!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-<div>
+<div class="fixed top-0 h-full w-full">
   <div phx-update="ignore" id="particles-js2"></div>
-  <div class="z-20 fixed top-0 left-0 w-full">
+  <div class="fixed top-0 left-0 w-full">
     <div class="max-w-7xl m-4 sm:m-6">
       <div class="flex justify-between items-center md:justify-start">
         <div class="flex">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div phx-update="ignore" class="hideMe z-30 relative h-screen top-0 bg-transparent">
+  <div phx-update="ignore" class="hideMe relative h-full top-0 bg-transparent">
     <svg id="downArrow" class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <g stroke-linejoin="round" stroke-linecap="round" >
         <circle r="46" cx="50" cy="50" />
@@ -28,10 +28,10 @@
         <polyline points="25 60, 50 30, 75 60" ></polyline>
       </g>
     </svg>
-    <div id="masterWrap" class="z-40">
+    <div id="masterWrap" class="z-20 top-0 left-0">
       <div id="panelWrap">
         <section>
-          <div class="z-10 mx-auto max-w-7xl w-full pt-32 pb-20 py-48 text-center">
+          <div class="mx-auto max-w-7xl w-full pt-32 pb-20 py-48 text-center">
             <div class="px-8 sm:px-32 md:px-48">
               <h2 class="md:ml-3 text-5xl tracking-normal font-mono leading-10 font-extrabold text-gray-900 sm:leading-none lg:text-6xl">
                 Nya <br class="md:hidden">Digitala
@@ -41,9 +41,9 @@
               <p class="px-12 m-auto pt-8 text-base md:text-lg text-gray-200 max-w-2xl md:max-w-2xl">
                 Bli ett digitalt företag, i en <span class="text-red-500 text-lg font-extrabold text-shadow-xl">digitaliserad</span> värld.
               </p>
-              <div class="mt-10 flex justify-around max-w-xl m-auto z-50">
-                <div class="rounded-full shadow h-32 w-32 z-50">
-                  <a id="goto_cell" href="#" style="background-color: #5f0606cc;" class="z-50 p-16 h-full w-full flex items-center justify-center border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
+              <div class="mt-10 flex justify-around max-w-xl m-auto">
+                <div id="goto_cell" class="rounded-full shadow h-32 w-32">
+                  <a href="#" style="background-color: #5f0606cc;" class="p-16 h-full w-full flex items-center justify-center border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
                     Get started
                   </a>
                 </div>
@@ -56,9 +56,9 @@
             </div>
           </div>
         </section>
-        <section>
-          <div phx-update="ignore" class="w-full flex items-start flex-col md:flex-row h-screen p-10 rounded-full overflow-hidden">
-            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+        <section class="relative z-20">
+          <div phx-update="ignore" class="z-20 w-full flex relative items-start flex-col md:flex-row h-screen p-10 rounded-full overflow-hidden">
+            <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
                 <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
                 <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
@@ -69,7 +69,7 @@
                 </div>
               </div>
             </div>
-            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-orange-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+            <div class="hover-trigger flex box relative  w-full md:w-1/5 h-full hover:bg-orange-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
                 <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
                 <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
@@ -80,7 +80,7 @@
                 </div>
               </div>
             </div>
-            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-yellow-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+            <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-yellow-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
                 <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
                 <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
@@ -91,7 +91,7 @@
                 </div>
               </div>
             </div>
-            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-green-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+            <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-green-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
                 <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));"  focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
                 <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
@@ -102,7 +102,7 @@
                 </div>
               </div>
             </div>
-            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-blue-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+            <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-blue-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
                 <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
                 <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
@@ -117,7 +117,7 @@
         </section>
         <section>
           <div class="flex m-auto h-full ">
-            <div class="z-20 space-y-6 m-auto">
+            <div class="space-y-6 m-auto">
               <span class="w-full flex rounded-md shadow-sm">
                 <a href="/demo3" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
                   Demo

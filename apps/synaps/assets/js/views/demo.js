@@ -128,9 +128,9 @@ export default class Demo2 extends MainView {
             onThrowUpdate: tweenDot,
             snap: offsets,
             inertia: true,
-            zIndexBoost: false,
+            zIndexBoost: true,
             allowNativeTouchScrolling: false,
-            bounds: "#masterWrap"
+            bounds: "#masterWrap",
         });
 
         dragMe[0].id = "dragger";
