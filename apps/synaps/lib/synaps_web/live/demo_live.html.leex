@@ -1,38 +1,13 @@
-<!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-<!--
-<div class="absolute hidden sm:block w-full fullscreen-bg h-screen">
-  <video autoplay loop muted playsinline webkit-playsinline poster="/images/stockholm.webp" class="w-full h-full object-fill lg:object-cover">
-      <source src="/images/stockholm.webm" type="video/webm">
-      <source src="/images/stockholm.mp4" type="video/mp4">
-  </video>
-</div>
-
-<div class="absolute block sm:hidden w-full h-screen">
-  <video id="stockholm_video" autoplay loop muted playsinline webkit-playsinline poster="/images/stockholm_mobile.webp" class="w-full h-full object-fill">
-      <source src="/images/stockholm_mobile.webm" type="video/webm">
-      <source src="/images/stockholm_mobile.mp4" type="video/mp4">
-  </video>
-</div>
--->
-
-
-
-<div x-data="{ atTop: true, openModal: false, atCases: false }",
-      x-on:keydown.escape="openModal = openModal ? false : true">
-  <div phx-update="ignore" id="particles-js"></div>
-  
-  <!-- 
-  <a href="#" aria-label="Home"></a>
-  x-on:click="openModal = !openModal">
-
-
-  -->
-  <div class="z-20 fixed bottom-0 md:top-0 left-0 w-full" style="height: 50px;">
+<div>
+  <div phx-update="ignore" id="particles-js2"></div>
+  <div class="z-20 fixed top-0 left-0 w-full">
     <div class="max-w-7xl m-4 sm:m-6">
       <div class="flex justify-between items-center md:justify-start">
         <div class="flex">
-          <a href="#" class="hidden md:inline-flex">
+          <a href="#" class="inline-flex">
             <img class="h-8 w-auto sm:h-12 filterLogo" src="/images/synaps.png" alt="">
           </a>
         </div>
@@ -40,145 +15,217 @@
     </div>
   </div>
 
-  <div class="relative z-10 h-screen">
-    <div class="z-10 mx-auto max-w-7xl w-full pt-32 pb-20 py-48 text-center">
-      <div class="px-8 sm:px-32 md:px-48">
-        <h2 class="md:ml-3 text-5xl tracking-normal font-mono leading-10 font-extrabold text-gray-900 sm:leading-none lg:text-6xl">
-          Nya <br class="md:hidden">Digitala
-          <br>
-          <span class="text-red-500 font-extrabold text-shadow-xl">Möjligheter</span>
-        </h2>
-        <p class="px-12 m-auto pt-8 text-base md:text-lg text-gray-200 max-w-2xl md:max-w-2xl">
-          Bli ett digitalt företag, i en <span class="text-red-500 font-extrabold text-shadow-xl">digitaliserad</span> värld.
-        </p>
-        <div class="mt-10 flex justify-around max-w-xl m-auto">
-          <div class="rounded-full shadow">
-            <a x-on:click="gsap.to(window, {duration: 0, scrollTo:'#digsynaps'});" style="background-color: #5f0606cc;" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-              Get started
-            </a>
-          </div>
-          <div class="rounded-full shadow">
-            <a href="#" class="blinking w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-indigo-600 hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-              Live demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
-      <!--<div class="flex justify-around w-full my-8">
-        <div class="rounded-full shadow">
-          <a href="#" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-            Bokningssystem
-          </a>
-        </div>
-        <div class="rounded-full shadow">
-          <a href="#" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-            Betalsystem
-          </a>
-        </div>
-        <div class="rounded-full shadow">
-          <a href="#" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-            Trollsystem
-          </a>
-        </div>
-        <div class="rounded-full shadow">
-          <a href="#" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-            Lainensystem
-          </a>
-        </div>
-        <div class="rounded-full shadow">
-          <a href="#" class="w-full flex items-center justify-center px-4 py-12 border border-transparent text-base leading-6 font-medium rounded-full text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
-            Get started
-          </a>
-        </div>
-      </div>-->
-
-  <div id="digsynaps" class="z-30 relative">
-    <div class="z-30 h-screen top-0">
-      <div phx-update="ignore" class="flex items-start flex-col md:flex-row h-screen p-10 rounded-full overflow-hidden">
-        <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
-          <div class="flex flex-col m-auto text-center">
-            <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
-            <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
-              Röd
-            </div>
-            <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
-              Lite text blablabla
+  <div phx-update="ignore" class="hideMe z-30 relative h-screen top-0 bg-transparent">
+    <svg id="downArrow" class="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <g stroke-linejoin="round" stroke-linecap="round" >
+        <circle r="46" cx="50" cy="50" />
+        <polyline points="25 40, 50 70, 75 40" ></polyline>
+      </g>
+    </svg>
+    <svg id="upArrow" class="arrow" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100">
+      <g stroke-linejoin="round" stroke-linecap="round" >
+        <circle r="46" cx="50" cy="50" />
+        <polyline points="25 60, 50 30, 75 60" ></polyline>
+      </g>
+    </svg>
+    <div id="masterWrap" class="z-40">
+      <div id="panelWrap">
+        <section>
+          <div class="z-10 mx-auto max-w-7xl w-full pt-32 pb-20 py-48 text-center">
+            <div class="px-8 sm:px-32 md:px-48">
+              <h2 class="md:ml-3 text-5xl tracking-normal font-mono leading-10 font-extrabold text-gray-900 sm:leading-none lg:text-6xl">
+                Nya <br class="md:hidden">Digitala
+                <br>
+                <span class="text-red-500 font-extrabold text-shadow-xl">Möjligheter</span>
+              </h2>
+              <p class="px-12 m-auto pt-8 text-base md:text-lg text-gray-200 max-w-2xl md:max-w-2xl">
+                Bli ett digitalt företag, i en <span class="text-red-500 text-lg font-extrabold text-shadow-xl">digitaliserad</span> värld.
+              </p>
+              <div class="mt-10 flex justify-around max-w-xl m-auto z-50">
+                <div class="rounded-full shadow h-32 w-32 z-50">
+                  <a id="goto_cell" href="#" style="background-color: #5f0606cc;" class="z-50 p-16 h-full w-full flex items-center justify-center border border-transparent text-base leading-6 font-medium rounded-full text-white hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
+                    Get started
+                  </a>
+                </div>
+                <div class="rounded-full shadow h-32 w-32">
+                  <a id="goto_demo" href="#" class="p-16 blinking h-full w-full flex items-center justify-center border border-transparent text-base leading-6 font-medium rounded-full text-indigo-600 hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:text-lg">
+                    Live demo
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-orange-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
-          <div class="flex flex-col m-auto text-center">
-            <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
-            <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
-              Orange
+        </section>
+        <section>
+          <div phx-update="ignore" class="w-full flex items-start flex-col md:flex-row h-screen p-10 rounded-full overflow-hidden">
+            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+              <div class="flex flex-col m-auto text-center">
+                <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                  Röd
+                </div>
+                <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+                  Lite text blablabla
+                </div>
+              </div>
             </div>
-            <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
-              Lite text blablabla
+            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-orange-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+              <div class="flex flex-col m-auto text-center">
+                <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                  Orange
+                </div>
+                <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+                  Lite text blablabla
+                </div>
+              </div>
+            </div>
+            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-yellow-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+              <div class="flex flex-col m-auto text-center">
+                <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                  Gul
+                </div>
+                <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+                  Lite text blablabla
+                </div>
+              </div>
+            </div>
+            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-green-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+              <div class="flex flex-col m-auto text-center">
+                <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));"  focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                  Grön
+                </div>
+                <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+                  Lite text blablabla
+                </div>
+              </div>
+            </div>
+            <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-blue-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
+              <div class="flex flex-col m-auto text-center">
+                <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                  Blå
+                </div>
+                <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+                  Lite text blablabla
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-yellow-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
-          <div class="flex flex-col m-auto text-center">
-            <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
-            <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
-              Gul
-            </div>
-            <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
-              Lite text blablabla
-            </div>
-          </div>
-        </div>
-        <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-green-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
-          <div class="flex flex-col m-auto text-center">
-            <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));"  focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
-            <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
-              Grön
-            </div>
-            <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
-              Lite text blablabla
+        </section>
+        <section>
+          <div class="flex m-auto h-full ">
+            <div class="z-20 space-y-6 m-auto">
+              <span class="w-full flex rounded-md shadow-sm">
+                <a href="/demo3" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
+                  Demo
+                </a>
+              </span>
+              <p class="text-center text-base leading-6 font-medium text-gray-500">
+                Eller kontakta oss direkt
+                <a href="#" class="text-red-600 hover:text-red-500 transition ease-in-out duration-150">
+                  Här
+                </a>
+              </p>
             </div>
           </div>
+        </section>
         </div>
-        <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-blue-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
-          <div class="flex flex-col m-auto text-center">
-            <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
-            <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
-              Blå
-            </div>
-            <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
-              Lite text blablabla
-            </div>
           </div>
+        <div class="dots">
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="cases" class="z-30 relative">
-    <div class="z-20 h-screen top-0">
-      <div class="flex m-auto h-full ">
-        <div class="z-20 space-y-6 m-auto">
-          <span class="w-full flex rounded-md shadow-sm">
-            <a href="/demo3" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
+        <div class="toolTips text-white">
+          <div class="toolTip">
+              Framsida
+          </div>
+          <div class="toolTip">
+              Digitalt Piller
+          </div>
+          <div class="toolTip">
               Demo
-            </a>
-          </span>
-          <p class="text-center text-base leading-6 font-medium text-gray-500">
-            Eller kontakta oss direkt
-            <a href="#" class="text-red-600 hover:text-red-500 transition ease-in-out duration-150">
-              Här
-            </a>
-          </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="footer" class="h-32 w-full bg-gray-200 p-12 text-center">
-    Synapsus 2020
+<!--<div class="z-20 panel h-screen top-0">
+    <div phx-update="ignore" class="flex items-start flex-col md:flex-row h-screen p-10 rounded-full overflow-hidden">
+      <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out">
+        <div class="flex flex-col m-auto text-center">
+          <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+          <div class="w-full mt-3 text-2xl font-extrabold">
+            Röd
+          </div>
+          <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+            Lite text blablabla
+          </div>
+        </div>
+      </div>
+      <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-orange-500 transition-all duration-500 text-white opacity-75 ease-in-out">
+        <div class="flex flex-col m-auto text-center">
+          <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto transition-colors" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+          <div class="w-full mt-3 text-2xl font-extrabold">
+            Orange
+          </div>
+          <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+            Lite text blablabla
+          </div>
+        </div>
+      </div>
+      <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-yellow-500 transition-all duration-500 text-white opacity-75 ease-in-out">
+        <div class="flex flex-col m-auto text-center">
+          <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+          <div class="w-full mt-3 text-2xl font-extrabold">
+            Gul
+          </div>
+          <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+            Lite text blablabla
+          </div>
+        </div>
+      </div>
+      <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-green-500 transition-all duration-500 text-white opacity-75 ease-in-out">
+        <div class="flex flex-col m-auto text-center">
+          <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+          <div class="w-full mt-3 text-2xl font-extrabold">
+            Grön
+          </div>
+          <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+            Lite text blablabla
+          </div>
+        </div>
+      </div>
+      <div class="hover-trigger flex box relative z-30 w-full md:w-1/5 h-full hover:bg-blue-500 transition-all duration-500 text-white opacity-75 ease-in-out">
+        <div class="flex flex-col m-auto text-center">
+          <svg class="fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"></path></svg>
+          <div class="w-full mt-3 text-2xl font-extrabold">
+            Blå
+          </div>
+          <div class="hover-target hidden w-full mt-8 text-2xl font-medium">
+            Lite text blablabla
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="z-20 panel h-screen top-0">
+    <div class="flex m-auto h-full ">
+      <div class="z-20 space-y-6 m-auto">
+        <span class="w-full flex rounded-md shadow-sm">
+          <a href="/demo3" class="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
+            Demo
+          </a>
+        </span>
+        <p class="text-center text-base leading-6 font-medium text-gray-500">
+          Eller kontakta oss direkt
+          <a href="#" class="text-red-600 hover:text-red-500 transition ease-in-out duration-150">
+            Här
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>-->
 </div>
