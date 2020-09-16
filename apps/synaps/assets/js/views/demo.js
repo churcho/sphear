@@ -4,11 +4,13 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
+import { Physics2DPlugin } from "gsap/Physics2DPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Draggable);
 gsap.registerPlugin(InertiaPlugin);
+gsap.registerPlugin(Physics2DPlugin);
 
 export default class Demo2 extends MainView {
     mount() {
@@ -129,8 +131,6 @@ export default class Demo2 extends MainView {
                     if ((lastSlide + 1000) < Date.now()) {
                         lastSlide = Date.now();
                         activeSlide = e.deltaY > 0 ? (activeSlide += 1) : (activeSlide -= 1);
-                        console.log("sliding");
-                        console.log(Date.now())
                     }
                 }
             }
@@ -190,6 +190,66 @@ export default class Demo2 extends MainView {
                 time: Math.abs(gsap.getProperty(container, "y") / ih) + 1
             });
         }
+
+        /* demo button */
+
+        let tl_demo = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                tl_demo.pause();
+                tl_demo.seek(0);
+            }
+        })
+
+        let demo_dots = [],
+            bg = document.querySelector("#featureBackground"),
+            j, demo_dot;
+
+        // create 80 dot elements and put them in an array
+        for (j = 0; j < 80; j++) {
+            demo_dot = document.createElement("div");
+            demo_dot.setAttribute("class", "demo_dot");
+            bg.appendChild(demo_dot);
+            demo_dots.push(demo_dot);
+        }
+
+        //set the initial position of all the dots, and pick a random color for each from an array of colors
+        tl_demo.set(demo_dots, {
+            backgroundColor: "random([#663399,#84d100,#cc9900,#0066cc,#993333])",
+            scale: "random(0.2, 0.5)",
+            transformOrigin: "0% -0.5rem",
+            x: 0,
+            y: 0
+        });
+
+        tl_demo.to("#demo_button", {
+            duration: 0,
+            scale: 0.85
+        });
+        tl_demo.to("#demo_button", {
+            duration: 0.7,
+            ease: "elastic",
+            scale: 1
+        });
+        tl_demo.to(demo_dots, {
+            duration: 1.5,
+            physics2D: {
+                velocity: "random(200, 550)",
+                angle: "random(0, 360)",
+                friction: 0.05
+            },
+            delay: "random(0, 0.2)"
+        }, "-=0.7");
+        tl_demo.to(demo_dots, {
+            duration: 1,
+            opacity: 0
+        }, "-=1");
+
+        document.getElementById("demo_button").addEventListener("click", (event) => {
+            tl_demo.seek(0);
+            tl_demo.play();
+        })
+
 
         super.mount();
     }
