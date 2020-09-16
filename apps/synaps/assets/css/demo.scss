@@ -9,6 +9,10 @@
 
 /* demo 2 */
 
+body {
+    overscroll-behavior-y: contain;
+}
+
 #masterWrap {
     width: 100%;
     height: 100%;
