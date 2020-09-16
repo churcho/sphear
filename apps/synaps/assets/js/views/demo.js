@@ -42,6 +42,7 @@ export default class Demo2 extends MainView {
         let toolTips = document.querySelectorAll(".toolTip");
         let oldSlide = 0;
         let activeSlide = 0;
+        let lastSlide = 0;
         let navDots = [];
         let dura = 0.6;
         let offsets = [];
@@ -105,7 +106,14 @@ export default class Demo2 extends MainView {
             oldSlide = activeSlide;
             // dragging the panels
             if (this.id === "dragger") {
-                activeSlide = offsets.indexOf(this.endY);
+                if ((lastSlide + 1000) < Date.now()) {
+                    lastSlide = Date.now();
+                    if (this.endY > offsets[oldSlide]) {
+                        activeSlide = activeSlide -= 1;
+                    } else if (this.endY < offsets[oldSlide]) {
+                        activeSlide = activeSlide += 1;
+                    }
+                }
             } else {
                 if (gsap.isTweening(container)) {
                     return;
@@ -118,7 +126,12 @@ export default class Demo2 extends MainView {
                     activeSlide = this.index;
                     // scrollwheel
                 } else {
-                    activeSlide = e.deltaY > 0 ? (activeSlide += 1) : (activeSlide -= 1);
+                    if ((lastSlide + 1000) < Date.now()) {
+                        lastSlide = Date.now();
+                        activeSlide = e.deltaY > 0 ? (activeSlide += 1) : (activeSlide -= 1);
+                        console.log("sliding");
+                        console.log(Date.now())
+                    }
                 }
             }
             // make sure we're not past the end or beginning slide
@@ -127,7 +140,7 @@ export default class Demo2 extends MainView {
             if (oldSlide === activeSlide) {
                 return;
             }
-            // Restart pill
+            // Restart pill if slide 1
             if (activeSlide == 1) {
                 tl.restart();
             }
@@ -148,9 +161,8 @@ export default class Demo2 extends MainView {
             onDragEnd: slideAnim,
             onDrag: tweenDot,
             onThrowUpdate: tweenDot,
-            snap: offsets,
             inertia: true,
-            zIndexBoost: true,
+            zIndexBoost: false,
             allowNativeTouchScrolling: false,
             bounds: "#masterWrap",
             dragClickables: false,
