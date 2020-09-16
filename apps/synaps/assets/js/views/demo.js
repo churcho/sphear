@@ -17,6 +17,24 @@ export default class Demo2 extends MainView {
             console.log('Demo2 - Particles loaded');
         });
 
+        /* Battery Pill */
+        var colors = ['#B83280', '#E53E3E', '#ED8936', '#FAF089', '#48BB78', '#4299E1'];
+
+        var dur = 1.2;
+        var orientation = '';
+
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            orientation = 'bottom';
+        } else {
+            orientation = 'right';
+        }
+
+        var tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+        gsap.utils.toArray(".box").forEach((box, i) => {
+            tl.to(box, dur, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] } }, '+=' + dur / 2)
+        });
+        tl.play();
+
         /* demo 2 */
         const slides = document.querySelectorAll("section");
         const container = document.querySelector("#panelWrap");
@@ -109,6 +127,10 @@ export default class Demo2 extends MainView {
             if (oldSlide === activeSlide) {
                 return;
             }
+            // Restart pill
+            if (activeSlide == 1) {
+                tl.restart();
+            }
             // if we're dragging we don't animate the container
             if (this.id != "dragger") {
                 gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
@@ -156,24 +178,6 @@ export default class Demo2 extends MainView {
                 time: Math.abs(gsap.getProperty(container, "y") / ih) + 1
             });
         }
-
-        /* Battery Pill */
-        var colors = ['#B83280', '#E53E3E', '#ED8936', '#FAF089', '#48BB78', '#4299E1'];
-
-        var dur = 1.2;
-        var orientation = '';
-
-        if (window.matchMedia("(max-width: 767px)").matches) {
-            orientation = 'bottom';
-        } else {
-            orientation = 'right';
-        }
-
-        var tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
-        gsap.utils.toArray(".box").forEach((box, i) => {
-            tl.to(box, dur, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] } }, '+=' + dur / 2)
-        });
-        tl.play();
 
         super.mount();
     }
