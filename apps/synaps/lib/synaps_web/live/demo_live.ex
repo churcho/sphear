@@ -5,4 +5,8 @@ defmodule SynapsWeb.DemoLive do
   def mount(_params, _session, socket) do
     {:ok, socket}
   end
+
+  def handle_event("demo_button", _, socket) do
+    {:noreply, redirect(socket, to: "/demo3")}
+  end
 end

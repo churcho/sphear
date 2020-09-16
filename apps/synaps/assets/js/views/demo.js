@@ -16,7 +16,7 @@ export default class Demo2 extends MainView {
     mount() {
         /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
         particlesJS.load('particles-js2', 'particlesjs-config.json', function() {
-            console.log('Demo2 - Particles loaded');
+            console.log('Demo - Particles loaded');
         });
 
         /* Battery Pill */

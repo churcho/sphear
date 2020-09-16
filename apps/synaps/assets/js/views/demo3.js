@@ -12,6 +12,11 @@ gsap.registerPlugin(InertiaPlugin);
 
 export default class Demo3 extends MainView {
     mount() {
+        /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+        particlesJS.load('particles-js2', 'particlesjs-config.json', function() {
+            console.log('Demo3 - Particles loaded');
+        });
+
         // Slider(all Slides in a container)
         const slider = document.querySelector(".slider3")
             // All trails 
