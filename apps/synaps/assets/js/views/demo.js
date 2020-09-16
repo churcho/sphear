@@ -131,6 +131,7 @@ export default class Demo2 extends MainView {
             zIndexBoost: true,
             allowNativeTouchScrolling: false,
             bounds: "#masterWrap",
+            dragClickables: false,
         });
 
         dragMe[0].id = "dragger";
