@@ -5,7 +5,7 @@
     width: 100%;
     height: 100vh;
     z-index: 0;
-    background-image: linear-gradient(0deg, #4d7ece 0%, #243aa5 100%);
+    background-image: linear-gradient(0deg, #3769f1 0%, #020d44 100%);
 }
 
 $b1cd: #500033;
@@ -99,6 +99,7 @@ $grey: #B5B4B4;
             }
         }
         .details {
+            margin-bottom: 5rem;
             padding: 5rem;
             padding-left: 10rem;
             z-index: 100;
@@ -109,7 +110,7 @@ $grey: #B5B4B4;
                 grid-column: 1 / -1;
                 text-align: center;
                 padding: 2rem;
-                transform: translateY(-9rem);
+                transform: translateY(-11rem);
             }
             h1 {
                 font-size: 3.5rem;

@@ -32,15 +32,15 @@ export default class Demo3 extends MainView {
         // Function to slide forward
         const slide = (condition) => {
             // CLear interval
-            clearInterval(start)
-                // update value and trailValue
+            //// clearInterval(start)
+            // update value and trailValue
             condition === "increase" ? initiateINC() : initiateDEC()
                 // move slide
             move(value, trailValue)
                 // Restart Animation
             animate()
                 // start interal for slides back 
-            start = setInterval(() => slide("increase"), interval);
+                ////start = setInterval(() => slide("increase"), interval);
         }
 
         // function for increase(forward, next) configuration
@@ -96,7 +96,7 @@ export default class Demo3 extends MainView {
         }
 
         // Start interval for slides
-        let start = setInterval(() => slide("increase"), interval)
+        ////let start = setInterval(() => slide("increase"), interval)
 
         // Next  and  Previous button function (SVG icon with different classes)
         document.querySelectorAll("svg").forEach(cur => {
@@ -107,8 +107,8 @@ export default class Demo3 extends MainView {
         // function to slide when trail is clicked
         const clickCheck = (e) => {
             // CLear interval
-            clearInterval(start)
-                // remove active class from all trails
+            ////clearInterval(start)
+            // remove active class from all trails
             trail.forEach(cur => cur.classList.remove("active"))
                 // Get selected trail
             const check = e.target
@@ -134,7 +134,7 @@ export default class Demo3 extends MainView {
                 // start animation
             animate()
                 // start interval
-            start = setInterval(() => slide("increase"), interval)
+                ////start = setInterval(() => slide("increase"), interval)
         }
 
         // Add function to all trails

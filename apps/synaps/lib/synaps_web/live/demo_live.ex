@@ -7,6 +7,7 @@ defmodule SynapsWeb.DemoLive do
   end
 
   def handle_event("demo_button", _, socket) do
-    {:noreply, redirect(socket, to: "/demo3")}
+    #{:noreply, redirect(socket, to: "/demo3")}
+    {:noreply, socket}
   end
 end

@@ -5,12 +5,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { Physics2DPlugin } from "gsap/Physics2DPlugin";
+import { TextPlugin } from "gsap/TextPlugin";
+import { EasePack } from "gsap/EasePack";
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Draggable);
 gsap.registerPlugin(InertiaPlugin);
 gsap.registerPlugin(Physics2DPlugin);
+gsap.registerPlugin(TextPlugin);
+gsap.registerPlugin(EasePack);
 
 export default class Demo2 extends MainView {
     mount() {
@@ -18,6 +22,20 @@ export default class Demo2 extends MainView {
         particlesJS.load('particles-js2', 'particlesjs-config.json', function() {
             console.log('Demo - Particles loaded');
         });
+
+        /* Front page text */
+        const words = ["Möjligheter.", "Kanaler.", "Rutiner.", "Lösningar.", "🚀"]
+
+        let cursor = gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
+        let masterTl = gsap.timeline({ repeat: -1 }).pause()
+        let boxTl = gsap.timeline()
+
+        words.forEach(word => {
+            let tl_text = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
+            tl_text.to('.text', { duration: 1.5, text: word })
+            masterTl.add(tl_text)
+        });
+        masterTl.play();
 
         /* Battery Pill */
         var colors = ['#B83280', '#E53E3E', '#ED8936', '#FAF089', '#48BB78', '#4299E1'];
@@ -74,6 +92,7 @@ export default class Demo2 extends MainView {
             newDot.addEventListener("click", slideAnim);
             newDot.addEventListener("mouseenter", dotHover);
             newDot.addEventListener("mouseleave", dotHover);
+            newDot.addEventListener("touchleave", dotHover);
             dots.appendChild(newDot);
             offsets.push(-slides[i].offsetTop);
             tl.to(toolTips[i], 0.25, { opacity: 1, ease: "none" });
@@ -205,8 +224,8 @@ export default class Demo2 extends MainView {
             bg = document.querySelector("#featureBackground"),
             j, demo_dot;
 
-        // create 80 dot elements and put them in an array
-        for (j = 0; j < 80; j++) {
+        // create 60 dot elements and put them in an array
+        for (j = 0; j < 60; j++) {
             demo_dot = document.createElement("div");
             demo_dot.setAttribute("class", "demo_dot");
             bg.appendChild(demo_dot);
@@ -215,8 +234,8 @@ export default class Demo2 extends MainView {
 
         //set the initial position of all the dots, and pick a random color for each from an array of colors
         tl_demo.set(demo_dots, {
-            backgroundColor: "random([#663399,#84d100,#cc9900,#0066cc,#993333])",
-            scale: "random(0.2, 0.5)",
+            backgroundColor: '#ffffff', //"random([#663399,#84d100,#cc9900,#0066cc,#993333])",
+            scale: "random(0.05, 0.2)",
             transformOrigin: "0% -0.5rem",
             x: 0,
             y: 0

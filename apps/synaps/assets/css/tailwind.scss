@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import "../node_modules/nprogress/nprogress.css";
 @import "./app.scss";
+.text-shadow-none {
+    text-shadow: none;
+}
+
 
 /* LiveView specific classes for your customizations */
 
