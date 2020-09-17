@@ -16,7 +16,7 @@ gsap.registerPlugin(Physics2DPlugin);
 gsap.registerPlugin(TextPlugin);
 gsap.registerPlugin(EasePack);
 
-export default class Demo2 extends MainView {
+export default class Demo extends MainView {
     mount() {
         /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
         particlesJS.load('particles-js2', 'particlesjs-config.json', function() {
@@ -95,7 +95,7 @@ export default class Demo2 extends MainView {
             newDot.addEventListener("touchleave", dotHover);
             dots.appendChild(newDot);
             offsets.push(-slides[i].offsetTop);
-            tl.to(toolTips[i], 0.25, { x: -55, opacity: 1, ease: "none" });
+            tl.to(toolTips[i], 0.25, { opacity: 1, ease: "none" });
             toolTipAnims.push(tl);
         }
 
@@ -123,7 +123,6 @@ export default class Demo2 extends MainView {
 
         // figure out which of the 4 nav controls called the function
         function slideAnim(e) {
-
             oldSlide = activeSlide;
             // dragging the panels
             if (this.id === "dragger") {
@@ -134,6 +133,10 @@ export default class Demo2 extends MainView {
                     } else if (this.endY < offsets[oldSlide]) {
                         activeSlide = activeSlide += 1;
                     }
+                }
+                if (e.pointerType == "touch") {
+                    // Dispatch a fake click after each drag event (FIX FOR BLOCKED BUTTONS BUG)
+                    container.dispatchEvent(new PointerEvent("pointerdown"));
                 }
             } else {
                 if (gsap.isTweening(container)) {
@@ -180,13 +183,13 @@ export default class Demo2 extends MainView {
             onDragEnd: slideAnim,
             onDrag: tweenDot,
             onThrowUpdate: tweenDot,
-            clickableTest: allowClick,
             inertia: true,
             zIndexBoost: true,
             allowNativeTouchScrolling: false,
             bounds: "#masterWrap",
             dragClickables: false,
-            minimumMovement: 8
+            allowNativeTouchScrolling: false,
+            allowContextMenu: false
         });
 
         dragMe[0].id = "dragger";
@@ -210,19 +213,6 @@ export default class Demo2 extends MainView {
             gsap.set(dotAnim, {
                 time: Math.abs(gsap.getProperty(container, "y") / ih) + 1
             });
-        }
-
-        function allowClick() {
-            if (this.pointerEvent.path != null) {
-                for (let i = 0; i < 3; i++) {
-                    if (this.pointerEvent.path[i].classList != null) {
-                        if (this.pointerEvent.path[i].classList.contains("box") || this.pointerEvent.path[i].classList.contains("box-icon")) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
         }
 
         /* demo button */

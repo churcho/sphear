@@ -107,19 +107,18 @@ span {
 .toolTips {
     position: absolute;
     top: 50%;
-    right: 30px;
+    right: 50px;
+    z-index: 1000;
 }
 
 .toolTip {
     opacity: 0;
-    transform: translateX(100px);
     text-align: right;
     height: 12px;
     margin: 12px 0;
     line-height: 12px;
     left: 10px;
     top: 10px;
-    z-index: 30;
 }
 
 h3,
@@ -281,6 +280,7 @@ p {
 }
 
 .demo_button {
+    -webkit-tap-highlight-color: transparent;
     color: #FF3333;
     border: none;
     font-size: 1rem;
@@ -304,6 +304,7 @@ p {
         background-size: 250%;
         transition: background-position 600ms;
         transform: rotate(180deg);
+        -webkit-tap-highlight-color: transparent;
     }
     &:hover,
     &:focus {

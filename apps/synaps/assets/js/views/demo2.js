@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(Draggable);
 gsap.registerPlugin(InertiaPlugin);
 
-export default class Demo extends MainView {
+export default class Demo2 extends MainView {
     mount() {
         /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
         particlesJS.load('particles-js', 'particlesjs-config.json', function() {
