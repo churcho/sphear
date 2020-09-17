@@ -95,7 +95,7 @@ export default class Demo2 extends MainView {
             newDot.addEventListener("touchleave", dotHover);
             dots.appendChild(newDot);
             offsets.push(-slides[i].offsetTop);
-            tl.to(toolTips[i], 0.25, { opacity: 1, ease: "none" });
+            tl.to(toolTips[i], 0.25, { x: -55, opacity: 1, ease: "none" });
             toolTipAnims.push(tl);
         }
 
@@ -180,11 +180,13 @@ export default class Demo2 extends MainView {
             onDragEnd: slideAnim,
             onDrag: tweenDot,
             onThrowUpdate: tweenDot,
+            clickableTest: allowClick,
             inertia: true,
-            zIndexBoost: false,
+            zIndexBoost: true,
             allowNativeTouchScrolling: false,
             bounds: "#masterWrap",
             dragClickables: false,
+            minimumMovement: 8
         });
 
         dragMe[0].id = "dragger";
@@ -208,6 +210,19 @@ export default class Demo2 extends MainView {
             gsap.set(dotAnim, {
                 time: Math.abs(gsap.getProperty(container, "y") / ih) + 1
             });
+        }
+
+        function allowClick() {
+            if (this.pointerEvent.path != null) {
+                for (let i = 0; i < 3; i++) {
+                    if (this.pointerEvent.path[i].classList != null) {
+                        if (this.pointerEvent.path[i].classList.contains("box") || this.pointerEvent.path[i].classList.contains("box-icon")) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         /* demo button */

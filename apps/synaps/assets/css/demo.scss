@@ -107,18 +107,19 @@ span {
 .toolTips {
     position: absolute;
     top: 50%;
-    right: 50px;
-    z-index: 1000;
+    right: 30px;
 }
 
 .toolTip {
     opacity: 0;
+    transform: translateX(100px);
     text-align: right;
     height: 12px;
     margin: 12px 0;
     line-height: 12px;
     left: 10px;
     top: 10px;
+    z-index: 30;
 }
 
 h3,
