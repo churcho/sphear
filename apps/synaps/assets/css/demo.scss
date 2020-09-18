@@ -279,6 +279,10 @@ p {
     z-index: 50;
 }
 
+.no_touch_outline {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .demo_button {
     -webkit-tap-highlight-color: transparent;
     color: #FF3333;
