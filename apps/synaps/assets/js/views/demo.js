@@ -26,9 +26,8 @@ export default class Demo extends MainView {
         /* Front page text */
         const words = ["Möjligheter.", "Kanaler.", "Rutiner.", "Lösningar.", "🚀"]
 
-        let cursor = gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
+        gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
         let masterTl = gsap.timeline({ repeat: -1 }).pause()
-        let boxTl = gsap.timeline()
 
         words.forEach(word => {
             let tl_text = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
@@ -126,18 +125,7 @@ export default class Demo extends MainView {
             oldSlide = activeSlide;
             // dragging the panels
             if (this.id === "dragger") {
-                if ((lastSlide + 1000) < Date.now()) {
-                    lastSlide = Date.now();
-                    if (this.endY > offsets[oldSlide]) {
-                        activeSlide = activeSlide -= 1;
-                    } else if (this.endY < offsets[oldSlide]) {
-                        activeSlide = activeSlide += 1;
-                    }
-                }
-                if (e.pointerType == "touch") {
-                    // Dispatch a fake click after each drag event (FIX FOR BLOCKED BUTTONS BUG)
-                    container.dispatchEvent(new PointerEvent("pointerdown"));
-                }
+                activeSlide = offsets.indexOf(this.endY);
             } else {
                 if (gsap.isTweening(container)) {
                     return;
@@ -185,15 +173,14 @@ export default class Demo extends MainView {
             onThrowUpdate: tweenDot,
             inertia: true,
             zIndexBoost: true,
-            allowNativeTouchScrolling: false,
             bounds: "#masterWrap",
             dragClickables: false,
-            allowNativeTouchScrolling: false,
-            allowContextMenu: false
+            snap: offsets
         });
 
         dragMe[0].id = "dragger";
         newSize();
+        gsap.to(container, 0, { y: offsets[0] });
 
         // resize all panels and refigure draggable snap array
         function newSize() {
