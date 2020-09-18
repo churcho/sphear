@@ -216,8 +216,8 @@ export default class Demo extends MainView {
             bg = document.querySelector("#featureBackground"),
             j, demo_dot;
 
-        // create 60 dot elements and put them in an array
-        for (j = 0; j < 60; j++) {
+        // create 90 dot elements and put them in an array
+        for (j = 0; j < 90; j++) {
             demo_dot = document.createElement("div");
             demo_dot.setAttribute("class", "demo_dot");
             bg.appendChild(demo_dot);
@@ -226,8 +226,8 @@ export default class Demo extends MainView {
 
         //set the initial position of all the dots, and pick a random color for each from an array of colors
         tl_demo.set(demo_dots, {
-            backgroundColor: '#ffffff', //"random([#663399,#84d100,#cc9900,#0066cc,#993333])",
-            scale: "random(0.05, 0.2)",
+            backgroundColor: '#828282', //"random([#663399,#84d100,#cc9900,#0066cc,#993333])",
+            scale: "random(0.05, 0.1)",
             transformOrigin: "0% -0.5rem",
             x: 0,
             y: 0
