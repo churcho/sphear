@@ -146,7 +146,7 @@ export default class Demo extends MainView {
                 }
                 for (let ii = 0; ii < order_body_fills.length; ii++) {
                     const g = document.querySelector("#order_body_" + (ii + 1));
-                    tl.to(g, dur, { css: { 'fill': order_body_fills[ii] } }, 'order+=1.4');
+                    tl.to(g, dur / 2, { css: { 'fill': order_body_fills[ii] } }, 'order+=1.4');
                 }
             }
             if (i == 2) {
