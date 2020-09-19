@@ -16,36 +16,42 @@
   </div>
 
   <div phx-update="ignore" class="hideMe relative h-full top-0 bg-transparent">
-    <svg id="downArrow" class="arrow no_touch_outline outline-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-      <g stroke-linejoin="round" stroke-linecap="round" >
-        <circle r="46" cx="50" cy="50" />
-        <polyline points="25 40, 50 70, 75 40" ></polyline>
-      </g>
-    </svg>
-    <svg id="upArrow" class="arrow no_touch_outline outline-none" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100">
-      <g stroke-linejoin="round" stroke-linecap="round" >
-        <circle r="46" cx="50" cy="50" />
-        <polyline points="25 60, 50 30, 75 60" ></polyline>
-      </g>
-    </svg>
+    <!-- Arrows
+      <svg id="downArrow" class="arrow no_touch_outline outline-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <g stroke-linejoin="round" stroke-linecap="round" >
+          <circle r="46" cx="50" cy="50" />
+          <polyline points="25 40, 50 70, 75 40" ></polyline>
+        </g>
+      </svg>
+    
+      <svg id="upArrow" class="arrow no_touch_outline outline-none" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100">
+        <g stroke-linejoin="round" stroke-linecap="round" >
+          <circle r="46" cx="50" cy="50" />
+          <polyline points="25 60, 50 30, 75 60" ></polyline>
+        </g>
+      </svg>
+    -->
     <div id="masterWrap" class="z-20 top-0 left-0">
       <div id="panelWrap">
         <section>
-          <div class="mx-auto max-w-7xl w-full pt-24 pb-20 text-center">
+          <div class="m-auto absolute top-0 pt-16 text-base md:text-3xl font-thin teko" style="text-shadow: -0.1px -0.1px 11px rgba(255,255,255,0.6);">
+            SYNAPSUS INFORMATIONSTEKNIK
+          </div>
+          <div class="mx-auto max-w-7xl w-full pt-32 pb-20 text-center">
             <div class="px-8 sm:px-32 md:px-48">
-              <h2 class="font-extrabold text-black leading-tight">
-                <div class="tracking-wide md:tracking-widest teko text-6xl" style="text-shadow: -0.1px -0.1px 11px rgba(200,200,200,1);">
-                  NYA <br class="md:hidden">DIGITALA
+              <h2 class="font-extrabold teko text-black leading-tight tracking-wide md:tracking-widest text-3xl lg:text-6xl">
+                <div style="text-shadow: -0.1px -0.1px 11px rgba(255,255,255,0.6);">
+                  VI <br class="md:hidden">ERBJUDER
                 </div>
-                <div class="lato font-extrabold text-5xl flex m-auto justify-center">
-                  <span class="text-red-500 font-extrabold text-shadow-xl text ml-3"> </span>
-                  <span class="text-red-500 font-extrabold text-shadow-md cursor">_</span>
+                <div class="flex m-auto justify-center text-2xl lg:text-5xl">
+                  <span class="text-red-500 text ml-3 font-normal"> </span>
+                  <span class="text-red-500 cursor">_</span>
                 </div>
               </h2>
-              <p class="teko tracking-wide px-12 m-auto pt-8 font-extrabold text-2xl md:text-4xl text-black max-w-2xl md:max-w-2xl" style="text-shadow: -1px -1px 3px rgba(242, 241, 241, 0.16), 1px -1px 3px rgba(242, 241, 241, 0.16), -1px 1px 3px rgba(242, 241, 241, 0.16), 1px 1px 3px rgba(242, 241, 241, 0.16);">
-                Bli ett digitalt företag, i en <span class="text-red-500 text-3xl md:text-4xl md:leading-8 text-shadow-none shadow-none">digitaliserad</span> värld.
+              <p class="lato tracking-wide px-12 m-auto py-8 font-extrabold text-1xl md:text-4xl text-black max-w-1xl md:max-w-2xl" style="text-shadow: -1px -1px 3px rgba(242, 241, 241, 0.16), 1px -1px 3px rgba(242, 241, 241, 0.16), -1px 1px 3px rgba(242, 241, 241, 0.16), 1px 1px 3px rgba(242, 241, 241, 0.16);">
+                Vi tar verksamheter <span class="text-green-700 text-1xl">online</span> och <span class="text-green-700">tillgängliga</span>, så att du kan <span class="text-green-700">effektivisera</span> din tid
               </p>
-              <div class="mt-10 flex justify-around max-w-xl m-auto">
+              <div class="mt-32 flex justify-around max-w-xl m-auto">
                 <div class="rounded-full h-24 w-24 md:h-32 md:w-32 no_touch_outline outline-none" style="box-shadow: 0px 0px 16px rgba(0,0,0,0.5);">
                   <a id="goto_cell" class="p-5 teko md:p-16 h-full w-full flex items-center justify-center border border-transparent text-2xl leading-6 font-normal hover:font-normal rounded-full blood-red text-white hover:text-red-800 hover:bg-white focus:outline-none transition duration-150 ease-in-out md:text-3xl">
                     LÄS MER
@@ -64,7 +70,7 @@
           <div class="z-50 w-full m-5 flex relative items-start flex-col md:flex-row h-screen p-10 rounded-full overflow-hidden">
             <div href="#" class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
-                <svg class="box-icon pt-2 fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 501 501" xmlns="http://www.w3.org/2000/svg">
+                <svg class="box-icon pt-2 fill-current visible h-16 w-16 md:h-28 md:w-28 lg:h-40 lg:w-40 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 501 501" xmlns="http://www.w3.org/2000/svg">
                   <g>
                     <g class="booking_bg" fill-rule="nonzero">
                       <path d="m40.844 382.835c-22.817-37.636-35.786-81.907-35.332-129.238 1.294-135.017 110.494-242.882 245.517-242.596 135.067.285 244.471 109.866 244.471 244.999 0 43.495-11.334 84.343-31.21 119.751-5.659 10.081-16.395 16.249-27.956 16.249h-379.166c-6.667 0-12.868-3.465-16.324-9.165z"/>
@@ -93,17 +99,17 @@
                     </g>
                   </g>
                 </svg>
-                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                <div class="w-full mt-3 text-1xl lg:text-2xl font-bold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
                   Bokningssystem
                 </div>
-                <div class="hover-target lato hidden w-full my-4 px-6 text-lg text-black font-semibold">
+                <div class="hover-target lato hidden w-full my-2 px-6 text-base lg:text-lg text-black font-semibold">
                   Vi erbjuder bokningsservice 24/7 för din verksamhet till era besökare via våran plattform
                 </div>
               </div>
             </div>
             <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-orange-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
-                <svg class="box-icon pt-2 fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 512 512"xmlns="http://www.w3.org/2000/svg">
+                <svg class="box-icon pt-2 fill-current visible h-16 w-16 md:h-28 md:w-28 lg:h-40 lg:w-40 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 512 512"xmlns="http://www.w3.org/2000/svg">
                   <g>
                     <g>
                       <path id="order_body_1" clip-rule="evenodd" d="m36.823 115.6h68.712c20.24 0 36.823 16.555 36.823 36.822v69.308c-.936 5.244-5.074 9.41-10.347 10.317h-121.693c-5.244-.907-9.382-5.073-10.318-10.317v-69.308c0-20.268 16.583-36.822 36.823-36.822z" fill-rule="evenodd"/>
@@ -151,17 +157,17 @@
                     </g>
                   </g>
                 </svg>
-                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                <div class="w-full mt-3 text-1xl lg:text-2xl font-bold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
                   Personalsystem
                 </div>
-                <div class="hover-target lato hidden w-full my-4 px-6 text-lg text-black font-semibold">
+                <div class="hover-target lato hidden w-full my-2 px-6 text-base lg:text-lg text-black font-semibold">
                   Via våran plattform kan du och er personal utföra all grundläggande verksamhet
                 </div>
               </div>
             </div>
             <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-yellow-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
-                <svg class="box-icon pt-2 fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <svg class="box-icon pt-2 fill-current visible h-16 w-16 md:h-28 md:w-28 lg:h-40 lg:w-40 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                   <g>
                     <path id="stats_dude_16" clip-rule="evenodd" d="m162.514 511.943v-45.695h9.383c0-25.682 37.643-46.489 84.104-46.489s84.132 20.807 84.132 46.489h9.354v45.695z" fill-rule="evenodd"/>
                     <path id="stats_dude_17" clip-rule="evenodd" d="m172.123 466.305v45.695h-153.241c-7.88-.878-14.144-7.115-14.995-14.995v-30.7c0-25.654 37.645-46.489 84.104-46.489s84.132 20.835 84.132 46.489z" fill-rule="evenodd"/>
@@ -193,17 +199,17 @@
                     <path id="stats_graph" d="m3.632 109.702 80.306 50.401 109.87-91.588c2.75-2.268 6.605-2.381 9.439-.482l108.198 72.086 55.531-70.555c2.692-3.459 7.682-4.054 11.111-1.333.426.34.822.709 1.162 1.105l22.819 25.116 78.576-78.578h-25.059c-4.365 0-7.937-3.544-7.937-7.937 0-4.394 3.571-7.937 7.937-7.937h44.845c4.394 0 7.937 3.543 7.937 7.937v44.845c0 4.395-3.543 7.938-7.937 7.938-4.365 0-7.938-3.543-7.938-7.938v-26.306c-27.522 27.524-56.917 59.471-85.348 85.323-3.231 2.948-8.249 2.693-11.197-.538l-22.309-24.549-54.028 68.657c-2.466 3.515-7.285 4.421-10.857 2.012l-109.389-72.908-109.39 91.164c-2.551 2.381-6.491 2.863-9.609.907l-76.733-48.161z"/>
                   </g>
                 </svg>
-                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                <div class="w-full mt-3 text-1xl lg:text-2xl font-bold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
                   Statistik
                 </div>
-                <div class="hover-target lato hidden w-full my-4 px-6 text-lg text-black font-semibold">
+                <div class="hover-target lato hidden w-full my-2 px-6 text-base lg:text-lg text-black font-semibold">
                   Plattformen samlar in och presenterar viktiga nyckeltal för er verksamhet
                 </div>
               </div>
             </div>
             <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-green-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
-                <svg class="box-icon pt-2 fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="transition: fill 0.5s linear; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 420 566" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="box-icon pt-2 fill-current visible h-16 w-16 md:h-28 md:w-28 lg:h-40 lg:w-40 m-auto" style="transition: fill 0.5s linear; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 420 566" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <defs>
                     <!-- white gradients -->
                     <linearGradient x1="80.8150544%" y1="59.6365716%" x2="59.8678229%" y2="8.14952521%" id="whiteGradient1">
@@ -268,17 +274,17 @@
                     </g>
                   </g>
                 </svg>
-                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                <div class="w-full mt-3 text-1xl lg:text-2xl font-bold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
                   Betalning
                 </div>
-                <div class="hover-target lato hidden w-full my-4 px-6 text-lg text-black font-semibold">
+                <div class="hover-target lato hidden w-full my-2 px-6 text-base lg:text-lg text-black font-semibold">
                   Via Swish kan era besökare betala för service snabbt och smidigt innan besöket
                 </div>
               </div>
             </div>
             <div class="hover-trigger flex box relative w-full md:w-1/5 h-full hover:bg-blue-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-white">
               <div class="flex flex-col m-auto text-center">
-                <svg class="box-icon pt-2 fill-current visible h-12 w-12 md:h-24 md:w-24 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><style></style>
+                <svg class="box-icon pt-2 fill-current visible h-16 w-16 md:h-28 md:w-28 lg:h-40 lg:w-40 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><style></style>
                   <path d="M161.6 266.7l21.4-134.8c-8.4 0-22.9 0-22.9 0 -10.7 0-24.5-6-28.5-17 -1.3-3.7-4.4-16.5 13.3-29 6.3-4.4 10.4-9.2 11.2-13 0.8-3.9-0.2-7.3-2.9-9.9 -3.9-3.7-11.5-5.8-21.2-5.8 -16.4 0-27.9 9.4-29 16.2 -0.8 5 3.1 9.1 6.5 11.7 10.2 7.6 12.6 18.6 6.3 29 -6.5 10.7-20.6 17.7-35.7 17.8 0 0-14.9 0-23.3 0 -1.9 13.1-33.7 214.4-36.1 230.3H147.2c1.1-7.1 7-45.2 14.9-95.5H161.6L161.6 266.7z" class="bankid_left"/>
                   <path d="M331.1 13.9H202.3l-17.2 109.1h21.9c12 0 23.3-5.5 28.2-13.5 1.6-2.6 2.3-4.9 2.3-7 0-4.5-3.1-7.9-6.2-10.2 -8.4-6.3-10.2-13-10.2-17.7 0-1 0-1.8 0.2-2.6 1.8-11.5 17.3-24 37.9-24 12.3 0 21.7 2.9 27.4 8.3 5 4.7 7 11.3 5.5 18.3 -1.8 8.3-10 15.1-14.7 18.5 -12.5 8.8-10.9 16.4-10.1 18.6 2.6 6.8 12.5 11.2 20.1 11.2h33.2c0 0 0 0 0 0.2 45.4 0.3 69.7 21.2 62.1 69.9 -7.1 45.2-41.8 64.7-83.1 65l-16.4 104.4h24.1c101.9 0 185.2-65.5 201.6-168.9C529.2 65.1 447.8 13.9 331.1 13.9z" class="bankid_right"/>
                   <g class="bankid_text" fill-rule="nonzero">
@@ -290,10 +296,10 @@
                     <path d="M418.3 408.7h44.2c34.2 0 44.1 24.8 40.8 45.4 -3.1 20.1-19 42.9-48.9 42.9h-49.9L418.3 408.7zM447 475.9c15.1 0 23.3-7.5 25.8-23.2 1.8-11.7-1.8-23.2-18.5-23.2h-8.3l-7.1 46.4H447z" />
                   </g>
                 </svg>
-                <div class="w-full mt-3 text-2xl font-extrabold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
+                <div class="w-full mt-3 text-1xl lg:text-2xl font-bold" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));">
                   Identifikation
                 </div>
-                <div class="hover-target lato hidden w-full my-4 px-6 text-lg text-black font-semibold">
+                <div class="hover-target lato hidden w-full my-2 px-6 text-base lg:text-lg text-black font-semibold">
                   Extra säkerhet såsom BankID är tätt integrerat i plattformen
                 </div>
               </div>

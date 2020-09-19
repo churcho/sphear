@@ -24,7 +24,7 @@ export default class Demo extends MainView {
         });
 
         /* Front page text */
-        const words = ["Möjligheter.", "Kanaler.", "Rutiner.", "Lösningar.", "🚀"]
+        const words = ["Digitalisering", "Design och känsla", "Effektiva rutiner", "Automatiserade lösningar", "Statistik och diagnostik"]
 
         gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
         let masterTl = gsap.timeline({ repeat: -1 }).pause()
@@ -128,39 +128,39 @@ export default class Demo extends MainView {
                 tl.to(booking_cal_h, dur / 4, { css: { 'fill': '#fff5f5' } }, 'cal+=' + dur)
             }
             if (i == 1) {
-                tl.to(order_board_1, dur / 2, { css: { 'fill': '#e1f1ff' } }, "order");
-                tl.to(order_board_2, dur / 2, { css: { 'fill': '#e1f1ff' } });
-                tl.to(order_board_3, dur / 2, { css: { 'fill': '#e1f1ff' } });
+                tl.to(order_board_1, dur / 2, { css: { 'fill': '#e1f1ff' } }, "order+=0.0");
+                tl.to(order_board_2, dur / 2, { css: { 'fill': '#e1f1ff' } }, "order+=0.0");
+                tl.to(order_board_3, dur / 2, { css: { 'fill': '#e1f1ff' } }, "order+=0.0");
                 for (let ii = 3; ii < order_board_fills.length + 3; ii++) {
                     /* skip first harcoded 3 */
                     const g = document.querySelector("#order_board_" + (ii + 1));
-                    tl.to(g, dur / 4, { css: { 'fill': order_board_fills[ii - 3] } }, 'order+=0.2');
+                    tl.to(g, dur / 4, { css: { 'fill': order_board_fills[ii - 3] } }, 'order+=0.0');
                 }
                 for (let ii = 0; ii < order_info_fills.length; ii++) {
                     const g = document.querySelector("#order_info_" + (ii + 1));
-                    tl.to(g, dur / 2, { css: { 'fill': order_info_fills[ii] } }, 'order+=0.3');
+                    tl.to(g, dur / 2, { css: { 'fill': order_info_fills[ii] } }, 'order+=0.2');
                 }
                 for (let ii = 0; ii < order_head_fills.length; ii++) {
                     const g = document.querySelector("#order_head_" + (ii + 1));
-                    tl.to(g, dur / 2, { css: { 'fill': order_head_fills[ii] } }, 'order+=1');
+                    tl.to(g, dur / 4, { css: { 'fill': order_head_fills[ii] } }, 'order+=1.0');
                 }
                 for (let ii = 0; ii < order_body_fills.length; ii++) {
                     const g = document.querySelector("#order_body_" + (ii + 1));
-                    tl.to(g, dur / 2, { css: { 'fill': order_body_fills[ii] } }, 'order+=1.4');
+                    tl.to(g, dur / 2, { css: { 'fill': order_body_fills[ii] } }, 'order+=1.0');
                 }
             }
             if (i == 2) {
                 tl.to(stats_bg_1, dur / 2, { css: { 'fill': "#e1f1ff", 'opacity': 0 } }, "stats")
                 for (let ii = 0; ii < stats_dude_fills.length; ii++) {
                     const g = document.querySelector("#stats_dude_" + (ii + 1));
-                    tl.to(g, dur / 2, { css: { 'fill': stats_dude_fills[ii] } }, 'stats+=0.2');
+                    tl.to(g, dur / 4, { css: { 'fill': stats_dude_fills[ii] } }, 'stats+=0.2');
                 }
-                tl.to(stats_bar_1, dur / 2, { css: { 'fill': "#3eba0d", 'opacity': 1 } }, "stats+=1")
-                tl.to(stats_bar_2, dur / 2, { css: { 'fill': "#3eba0d", 'opacity': 1 } }, "stats+=1")
-                tl.to(stats_bar_3, dur / 2, { css: { 'fill': "#3eba0d", 'opacity': 1 } }, "stats+=1")
-                tl.to(stats_bar_4, dur / 2, { css: { 'fill': "#3eba0d", 'opacity': 1 } }, "stats+=1")
+                tl.to(stats_bar_1, dur / 2, { css: { 'fill': "#90ee90", 'opacity': 1 } }, "stats+=1")
+                tl.to(stats_bar_2, dur / 2, { css: { 'fill': "#90ee90", 'opacity': 1 } }, "stats+=1")
+                tl.to(stats_bar_3, dur / 2, { css: { 'fill': "#90ee90", 'opacity': 1 } }, "stats+=1")
+                tl.to(stats_bar_4, dur / 2, { css: { 'fill': "#90ee90", 'opacity': 1 } }, "stats+=1")
 
-                tl.to(stats_graph, dur / 2, { css: { 'fill': "#90ee90" } }, "stats+=1.3")
+                tl.to(stats_graph, dur / 2, { css: { 'fill': "#3eba0d" } }, "stats+=1.5")
             }
             if (i == 3) {
                 tl.to(swish_text, dur / 2, { css: { 'fill': '#000' } }, "swish")
@@ -190,8 +190,10 @@ export default class Demo extends MainView {
         let offsets = [];
         let toolTipAnims = [];
         let ih = window.innerHeight;
-        document.querySelector("#upArrow").addEventListener("click", slideAnim);
-        document.querySelector("#downArrow").addEventListener("click", slideAnim);
+
+        // Arrows
+        // document.querySelector("#upArrow").addEventListener("click", slideAnim);
+        // document.querySelector("#downArrow").addEventListener("click", slideAnim);
 
         document.querySelector("#goto_cell").addEventListener("click", function() {
             activeSlide = 1;
