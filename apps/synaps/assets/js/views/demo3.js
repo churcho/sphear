@@ -104,6 +104,12 @@ export default class Demo3 extends MainView {
             cur.addEventListener("click", () => cur.classList.contains("next") ? slide("increase") : slide("decrease"))
         })
 
+        // Next  and  Previous button function (buttons with different classes)
+        document.querySelectorAll(".next_slide").forEach(cur => {
+            // Assign function based on the class Name("next" and "prev")
+            cur.addEventListener("click", () => slide("increase"))
+        })
+
         // function to slide when trail is clicked
         const clickCheck = (e) => {
             // CLear interval
