@@ -202,11 +202,6 @@ export default class Demo extends MainView {
             tl.restart();
         });
 
-        document.querySelector("#goto_demo").addEventListener("click", function() {
-            activeSlide = 2;
-            gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
-        });
-
         // create nev dots and add tooltip listeners
         for (let i = 0; i < slides.length; i++) {
             let tl = gsap.timeline({ paused: true, reversed: true });

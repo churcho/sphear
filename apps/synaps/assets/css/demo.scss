@@ -251,6 +251,24 @@ p {
     z-index: 3000;
 }
 
+@media only screen and (max-height: 550px) {
+    .box-content svg {
+        height: 2rem;
+        width: 2rem;
+        padding: 0px;
+    }
+    .box-content {
+        padding: 5px;
+    }
+    .box-content div {
+        font-size: 0.5rem;
+        font-weight: 400;
+    }
+    .hover-target {
+        font-size: 0.5rem;
+    }
+}
+
 .hover-trigger:hover .hover-target {
     display: block;
 }
