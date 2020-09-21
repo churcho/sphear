@@ -46,6 +46,9 @@ module.exports = (env, options) => {
                         'sass-loader',
                         'postcss-loader'
                     ]
+                },
+                {
+                    loader: 'postcss-loader'
                 }
             ]
         },
