@@ -1,8 +1,7 @@
 module.exports = {
     plugins: [
         require('tailwindcss'),
-        require('autoprefixer'),
-        require('postcss-fail-on-warn')
+        require('autoprefixer')
     ],
     options: {
         from: "tailwind.css"
