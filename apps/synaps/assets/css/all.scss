@@ -1,0 +1,20 @@
+/* This file is for your main application css. */
+
+canvas {
+    display: block;
+}
+
+
+/* ---- Header styling ---- */
+
+.headerShadow {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.00) 100%);
+}
+
+.filterLogo {
+    filter: invert(100%) sepia(24%) saturate(339%) hue-rotate(154deg) brightness(113%) contrast(102%) drop-shadow(1px 1px 2px black);
+}
+
+.noFilterLogo {
+    filter: none;
+}
