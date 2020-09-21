@@ -19,7 +19,6 @@ module.exports = (env, options) => {
         entry: {
             'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js']),
             'views': glob.sync('./js/views/*.js'),
-            'tailwind': './css/tailwind.scss',
             'demo': './css/demo.scss',
             'demo2': './css/demo2.scss',
             'demo3': './css/demo3.scss'
