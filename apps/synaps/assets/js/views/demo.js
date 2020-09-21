@@ -198,8 +198,6 @@ export default class Demo extends MainView {
         document.querySelector("#goto_cell").addEventListener("click", function() {
             activeSlide = 1;
             gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
-            // Restart pill
-            tl.restart();
         });
 
         // create nev dots and add tooltip listeners
@@ -216,7 +214,7 @@ export default class Demo extends MainView {
             newDot.addEventListener("touchleave", dotHover);
             dots.appendChild(newDot);
             offsets.push(-slides[i].offsetTop);
-            tl.to(toolTips[i], 0.25, { opacity: 1, ease: "none" });
+            tl.to(toolTips[i], 0.25, { zIndex: 1000, opacity: 1, ease: "none" });
             toolTipAnims.push(tl);
         }
 
@@ -273,7 +271,7 @@ export default class Demo extends MainView {
                 return;
             }
             // Restart pill if slide 1
-            if (activeSlide == 1) {
+            if (activeSlide == 2) {
                 tl.restart();
             }
             // if we're dragging we don't animate the container
