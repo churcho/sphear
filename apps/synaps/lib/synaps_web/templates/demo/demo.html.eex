@@ -82,7 +82,7 @@
           </div>
         </section>
         <section class="relative z-50 h-screen">
-          <div class="z-50 h-full w-full md:m-5 flex flex-col md:flex-row p-10 md:h-screen rounded-full overflow-hidden">
+          <div class="z-50 h-full w-full md:m-5 flex flex-col md:flex-row p-10 md:h-screen rounded-full overflow-hidden no_touch_outline">
             <div class="hover-trigger flex flex-grow box w-full md:w-1/5 md:hover:bg-red-500 transition-all duration-500 text-white opacity-75 ease-in-out bg-gray-200">
               <div class="flex flex-col m-auto p-1 text-center box-content transition-transform duration-800">
                 <svg class="transition-transform duration-300 box-icon pt-1 fill-current visible md:h-32 md:w-32 lg:h-40 lg:w-40 m-auto" style="filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));" focusable="false" viewBox="0 0 501 501" xmlns="http://www.w3.org/2000/svg">
