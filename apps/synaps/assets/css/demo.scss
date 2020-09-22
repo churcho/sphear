@@ -312,6 +312,17 @@ p {
     .hover-target {
         font-size: 0.8rem;
     }
+    .hover-arrow {
+        height: 0.9rem;
+        width: 0.9rem;
+    }
+    #why-svg-1,
+    #why-svg-2,
+    #why-svg-3,
+    #why-svg-4 {
+        height: 4rem;
+        width: 4rem;
+    }
 }
 
 @media only screen and (max-height: 542px) and (max-width: 766px) {
