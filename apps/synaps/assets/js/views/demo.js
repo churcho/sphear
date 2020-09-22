@@ -7,6 +7,7 @@ import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { Physics2DPlugin } from "gsap/Physics2DPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 import { EasePack } from "gsap/EasePack";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +16,7 @@ gsap.registerPlugin(InertiaPlugin);
 gsap.registerPlugin(Physics2DPlugin);
 gsap.registerPlugin(TextPlugin);
 gsap.registerPlugin(EasePack);
+gsap.registerPlugin(MorphSVGPlugin);
 
 export default class Demo extends MainView {
     mount() {
@@ -31,7 +33,7 @@ export default class Demo extends MainView {
 
         words.forEach(word => {
             let tl_text = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-            tl_text.to('.text', { duration: 1.5, text: word })
+            tl_text.to('.text', { duration: 2.2, text: word })
             masterTl.add(tl_text)
         });
         masterTl.play();
@@ -174,6 +176,15 @@ export default class Demo extends MainView {
                 tl.to(bankid_left, dur / 3, { css: { 'fill': '#479CBE' } }, 'bankid+=' + dur / 3)
                 tl.to(bankid_right, dur / 3, { css: { 'fill': '#235971' } }, 'bankid+=' + dur / 2)
             }
+            /* hovers */
+            box.addEventListener("mouseover", function(e) {
+                gsap.to('#hover-arrow-' + i, { morphSVG: "M5 15l7-7 7 7", duration: 0.5 });
+            });
+            box.addEventListener("mouseout", function(e) {
+                gsap.to('#hover-arrow-' + i, { morphSVG: "M19 9l-7 7-7-7", duration: 0.5 });
+            });
+            /* pulse arrows */
+            gsap.to('#hover-arrow-' + i, { y: -4, ease: "Sine.easeIn", duration: 1.5, repeat: -1, repeatDelay: 0, yoyo: true });
         });
         tl.play();
 
@@ -346,7 +357,7 @@ export default class Demo extends MainView {
 
         //set the initial position of all the dots, and pick a random color for each from an array of colors
         tl_demo.set(demo_dots, {
-            backgroundColor: '#828282', //"random([#663399,#84d100,#cc9900,#0066cc,#993333])",
+            backgroundColor: '#DC143C', //"random([#663399,#84d100,#cc9900,#0066cc,#993333])",
             scale: "random(0.05, 0.1)",
             transformOrigin: "0% -0.5rem",
             x: 0,
@@ -381,7 +392,7 @@ export default class Demo extends MainView {
             tl_demo.play();
         })
 
-        gsap.globalTimeline.timeScale(1.1);
+        gsap.globalTimeline.timeScale(1.4);
         super.mount();
     }
 

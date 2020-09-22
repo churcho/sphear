@@ -277,7 +277,7 @@ p {
 }
 
 @media only screen and (max-height: 770px) and (max-width: 766px) {
-    .box-content svg {
+    .box-icon {
         height: 4rem;
         width: 4rem;
         padding: 0px;
@@ -285,7 +285,7 @@ p {
 }
 
 @media only screen and (max-height: 656px) and (max-width: 766px) {
-    .box-content svg {
+    .box-icon {
         height: 3rem;
         width: 3rem;
         padding: 0px;
@@ -315,7 +315,7 @@ p {
 }
 
 @media only screen and (max-height: 542px) and (max-width: 766px) {
-    .box-content svg {
+    .box-icon {
         height: 2.5rem;
         width: 2.5rem;
         padding: 0px;
@@ -323,7 +323,7 @@ p {
 }
 
 @media only screen and (max-height: 480px) and (max-width: 766px) {
-    .box-content svg {
+    .box-icon {
         height: 1.5rem;
         width: 1.5rem;
         padding: 0px;
