@@ -26,7 +26,7 @@ export default class Demo extends MainView {
         });
 
         /* Front page text */
-        const words = ["Digitalisering", "Design och känsla", "Effektiva rutiner", "Automatiserade lösningar", "Statistik och diagnostik"]
+        const words = ["Digitalisering", "Design och känsla", "Effektiva rutiner", "Automatiserade lösningar", "Statistik och diagnostik"];
 
         gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
         let masterTl = gsap.timeline({ repeat: -1 }).pause()
@@ -37,6 +37,21 @@ export default class Demo extends MainView {
             masterTl.add(tl_text)
         });
         masterTl.play();
+
+        /* why page */
+        const msg = ["Vi lever i en global och digital värld", "Bli inte utspelad av de största aktörerna", "Digitalisera din verksamhet via vår plattform", "Ta din verksamhet till nya nivåer"];
+        let whyTl = gsap.timeline().pause();
+        whyTl.to(document.querySelector("#why-svg-1"), { duration: 4, opacity: 1 }, ">1")
+        whyTl.to(document.querySelector("#why-text-1"), { duration: 2, text: msg[0] }, "-=4")
+
+        whyTl.to(document.querySelector("#why-svg-2"), { duration: 4, opacity: 1 }, ">1")
+        whyTl.to(document.querySelector("#why-text-2"), { duration: 2, text: msg[1] }, "-=4")
+
+        whyTl.to(document.querySelector("#why-svg-3"), { duration: 4, opacity: 1 }, ">1")
+        whyTl.to(document.querySelector("#why-text-3"), { duration: 2, text: msg[2] }, "-=4")
+
+        whyTl.to(document.querySelector("#why-svg-4"), { duration: 4, opacity: 1 }, ">1")
+        whyTl.to(document.querySelector("#why-text-4"), { duration: 2, text: msg[3] }, "-=4")
 
         /* Battery Pill */
         var colors = ['#B83280', '#E53E3E', '#ED8936', '#FAF089', '#48BB78', '#4299E1'];
@@ -209,6 +224,7 @@ export default class Demo extends MainView {
         document.querySelector("#goto_cell").addEventListener("click", function() {
             activeSlide = 1;
             gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
+            whyTl.play();
         });
 
         // create nev dots and add tooltip listeners
@@ -280,6 +296,9 @@ export default class Demo extends MainView {
             activeSlide = activeSlide > slides.length - 1 ? slides.length - 1 : activeSlide;
             if (oldSlide === activeSlide) {
                 return;
+            }
+            if (activeSlide == 1) {
+                whyTl.play();
             }
             // Restart pill if slide 1
             if (activeSlide == 2) {
