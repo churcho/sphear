@@ -284,7 +284,7 @@ p {
     }
 }
 
-@media only screen and (max-height: 656px) and (max-width: 766px) {
+@media only screen and (max-height: 668px) and (max-width: 766px) {
     .box-icon {
         height: 3rem;
         width: 3rem;
@@ -316,13 +316,6 @@ p {
         height: 0.9rem;
         width: 0.9rem;
     }
-    #why-svg-1,
-    #why-svg-2,
-    #why-svg-3,
-    #why-svg-4 {
-        height: 4rem;
-        width: 4rem;
-    }
 }
 
 @media only screen and (max-height: 542px) and (max-width: 766px) {
@@ -341,23 +334,22 @@ p {
     }
 }
 
+.hover-target {
+    height: 0;
+    overflow: hidden;
+    max-height: 0px;
+    transition: max-height 0.6s ease-in;
+}
+
 .hover-trigger:hover .hover-target {
-    display: block;
+    max-height: 200px;
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 
 /* Button */
-
-#featureAnimation {
-    height: 262px;
-    position: relative;
-    max-width: 500px;
-    width: 100%;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 #featureBackground {
     position: absolute;
@@ -378,10 +370,10 @@ p {
 
 .demo_button {
     -webkit-tap-highlight-color: transparent;
-    color: #FF3333;
+    color: white;
     border: none;
     font-size: 1rem;
-    background-color: white;
+    background-color: black;
     z-index: 1;
     padding: 1rem 3rem;
     border-radius: 2rem;

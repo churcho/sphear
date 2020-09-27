@@ -40,18 +40,35 @@ export default class Demo extends MainView {
 
         /* why page */
         const msg = ["Vi lever i en global och digital värld", "Bli inte utspelad av de största aktörerna", "Digitalisera din verksamhet via vår plattform", "Ta din verksamhet till nya nivåer"];
-        let whyTl = gsap.timeline().pause();
-        whyTl.to(document.querySelector("#why-svg-1"), { duration: 4, opacity: 1 }, ">1")
-        whyTl.to(document.querySelector("#why-text-1"), { duration: 2, text: msg[0] }, "-=4")
+        let whyTl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
 
-        whyTl.to(document.querySelector("#why-svg-2"), { duration: 4, opacity: 1 }, ">1")
-        whyTl.to(document.querySelector("#why-text-2"), { duration: 2, text: msg[1] }, "-=4")
+        let whyTl1 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
+        whyTl1.to(document.querySelector("#why-svg-1"), { duration: 3, opacity: 1 }, ">0")
+        whyTl1.to(document.querySelector("#why-text"), { duration: 3, text: msg[0], ease: "power2.out" }, "-=2.5")
+        whyTl.add(whyTl1);
 
-        whyTl.to(document.querySelector("#why-svg-3"), { duration: 4, opacity: 1 }, ">1")
-        whyTl.to(document.querySelector("#why-text-3"), { duration: 2, text: msg[2] }, "-=4")
+        let whyTl2 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
+        whyTl2.to(document.querySelector("#why-svg-2"), { duration: 3, opacity: 1 }, ">0")
+        whyTl2.to(document.querySelector("#why-text"), { duration: 3, text: msg[1], ease: "power2.out" }, "-=2.5")
+        whyTl.add(whyTl2);
 
-        whyTl.to(document.querySelector("#why-svg-4"), { duration: 4, opacity: 1 }, ">1")
-        whyTl.to(document.querySelector("#why-text-4"), { duration: 2, text: msg[3] }, "-=4")
+        let whyTl3 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
+        whyTl3.to(document.querySelector("#why-svg-3"), { duration: 3, opacity: 1 }, ">0")
+        whyTl3.to(document.querySelector("#why-text"), { duration: 3, text: msg[2], ease: "power2.out" }, "-=2.5")
+        whyTl.add(whyTl3);
+
+        let whyTl4 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
+        whyTl4.to(document.querySelector("#why-svg-4"), { duration: 3, opacity: 1 }, ">0")
+        whyTl4.to(document.querySelector("#why-text"), { duration: 3, text: msg[3], ease: "power2.out" }, "-=2.5")
+        whyTl.add(whyTl4);
+
+        whyTl.play();
+
+        // whyTl.to(document.querySelector("#why-svg-3"), { duration: 2, opacity: 1, yoyo: true }, ">1")
+        // whyTl.to(document.querySelector("#why-text-3"), { duration: 2, text: msg[2], yoyo: true }, "-=4")
+
+        // whyTl.to(document.querySelector("#why-svg-4"), { duration: 4, opacity: 1 }, ">1")
+        // whyTl.to(document.querySelector("#why-text-4"), { duration: 4, text: msg[3] }, "-=4")
 
         /* Battery Pill */
         var colors = ['#B83280', '#E53E3E', '#ED8936', '#FAF089', '#48BB78', '#4299E1'];
@@ -118,9 +135,10 @@ export default class Demo extends MainView {
         const bankid_left = document.querySelector(".bankid_left");
         const bankid_right = document.querySelector(".bankid_right");
 
-        var tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+        var tl = gsap.timeline({ repeat: -1, repeatDelay: 6 });
         gsap.utils.toArray(".box").forEach((box, i) => {
-            tl.to(box, dur / 2, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] } }, '+=' + dur / 3)
+            /* change colors to rainbow on repeated timeline */
+            tl.to(box, dur / 2, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] + ')' } }, '+=' + dur / 3)
             if (i == 0) {
                 tl.to(booking_bg, dur / 4, { css: { 'fill': '#55a4f9' } }, "bg")
                 tl.to(booking_mobile_a, dur / 4, { css: { 'fill': '#453d83' } }, 'bg+=' + dur / 5)
@@ -224,7 +242,19 @@ export default class Demo extends MainView {
         document.querySelector("#goto_cell").addEventListener("click", function() {
             activeSlide = 1;
             gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
-            whyTl.play();
+            whyTl.restart();
+            gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
+        });
+
+        document.querySelector("#goto_pill").addEventListener("click", function() {
+            activeSlide = 2;
+            gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
+            tl.restart();
+        });
+
+        document.querySelector("#logo").addEventListener("click", function() {
+            activeSlide = 0;
+            gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
         });
 
         // create nev dots and add tooltip listeners
@@ -241,7 +271,7 @@ export default class Demo extends MainView {
             newDot.addEventListener("touchleave", dotHover);
             dots.appendChild(newDot);
             offsets.push(-slides[i].offsetTop);
-            tl.to(toolTips[i], 0.25, { zIndex: 1000, opacity: 1, ease: "none" });
+            tl.to(toolTips[i], 0.25, { zIndex: 2000, opacity: 1, ease: "none" });
             toolTipAnims.push(tl);
         }
 
@@ -298,7 +328,8 @@ export default class Demo extends MainView {
                 return;
             }
             if (activeSlide == 1) {
-                whyTl.play();
+                whyTl.restart();
+                gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
             }
             // Restart pill if slide 1
             if (activeSlide == 2) {
@@ -318,9 +349,13 @@ export default class Demo extends MainView {
         let dragMe = Draggable.create(container, {
             type: "y",
             edgeResistance: 1,
+            dragResistance: 0,
+            throwResistance: 1,
+            force3D: true,
             onDragEnd: slideAnim,
             onDrag: tweenDot,
             onThrowUpdate: tweenDot,
+            maxDuration: 1,
             inertia: true,
             zIndexBoost: true,
             bounds: "#masterWrap",
@@ -406,7 +441,7 @@ export default class Demo extends MainView {
             opacity: 0
         }, "-=1");
 
-        document.getElementById("demo_button").addEventListener("click", (event) => {
+        document.getElementById("demo_button").addEventListener("click", (e) => {
             tl_demo.seek(0);
             tl_demo.play();
         })

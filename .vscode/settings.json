@@ -1,0 +1,8 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html",
+    "HTML (Eex)": "html",
+    "Eex": "html"
+  },
+  "merge-conflict.autoNavigateNextConflict.enabled": true
+}
