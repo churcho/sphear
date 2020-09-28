@@ -5,6 +5,7 @@ defmodule Db.Release do
     @app :db
   
     def create_and_migrate do
+      Application.ensure_all_started(:ssl)
       createdb()
       migrate()
     end
