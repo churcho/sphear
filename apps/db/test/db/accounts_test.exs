@@ -11,38 +11,39 @@ defmodule Db.AccountsTest do
     end
 
     test "returns the user if the email exists" do
-      {:ok, user} = user_fixture()
-      id = user.id
+      %{id: id} = user = user_fixture!()
       assert %User{id: ^id} = Accounts.get_user_by_email(user.email)
     end
   end
 
-  describe "get_user_by_email_and_password/1" do
+  describe "get_user_by_email_and_password/2" do
     test "does not return the user if the email does not exist" do
       refute Accounts.get_user_by_email_and_password("unknown@example.com", "hello world!")
     end
 
     test "does not return the user if the password is not valid" do
       {:ok, user} = user_fixture()
-      refute Accounts.get_user_by_email_and_password(user.email, "fail")
+      refute Accounts.get_user_by_email_and_password(user.email, "invalid")
     end
 
     test "returns the user if the email and password are valid" do
-      {:ok, user} = user_fixture()
-      id = user.id
+      %{id: id} = user = user_fixture!()
 
       assert %User{id: ^id} =
                Accounts.get_user_by_email_and_password(user.email, valid_user_password())
     end
   end
 
-  describe "get_user/1" do
-    test "{:error, :not_found} if invalid" do
-      assert {:error, :not_found} = Accounts.get_user(-1)
+  describe "get_user!/1" do
+    test "raises if id is invalid" do
+      assert_raise Ecto.NoResultsError, fn ->
+        Accounts.get_user!("11111111-1111-1111-1111-111111111111")
+      end
     end
 
-    test "returns {:ok, user} with the given user" do
-      assert {:ok, user} = user_fixture()
+    test "returns the user with the given id" do
+      %{id: id} = user = user_fixture!()
+      assert %User{id: ^id} = Accounts.get_user!(user.id)
     end
   end
 
@@ -52,13 +53,12 @@ defmodule Db.AccountsTest do
 
       assert %{
                password: ["can't be blank"],
-               password_confirmation: ["can't be blank"],
                email: ["can't be blank"]
              } = errors_on(changeset)
     end
 
     test "validates email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "lol", password_confirmation: "not valid"})
+      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not"})
 
       assert %{
                email: ["must have the @ sign and no spaces"],
@@ -66,27 +66,26 @@ defmodule Db.AccountsTest do
              } = errors_on(changeset)
     end
 
-    test "validates maximum values for e-mail and password for security" do
+    test "validates maximum values for email and password for security" do
       too_long = String.duplicate("db", 100)
       {:error, changeset} = Accounts.register_user(%{email: too_long, password: too_long})
       assert "should be at most 160 character(s)" in errors_on(changeset).email
       assert "should be at most 80 character(s)" in errors_on(changeset).password
     end
 
-    test "validates e-mail uniqueness" do
-      {:ok, new_user} = user_fixture()
-      email = new_user.email
+    test "validates email uniqueness" do
+      %{email: email} = user_fixture!()
       {:error, changeset} = Accounts.register_user(%{email: email})
       assert "has already been taken" in errors_on(changeset).email
 
-      # Now try with the upper cased e-mail too, to check that email case is ignored.
+      # Now try with the upper cased email too, to check that email case is ignored.
       {:error, changeset} = Accounts.register_user(%{email: String.upcase(email)})
       assert "has already been taken" in errors_on(changeset).email
     end
 
     test "registers users with a hashed password" do
       email = unique_user_email()
-      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password(), password_confirmation: valid_user_password()})
+      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password()})
       assert user.email == email
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
@@ -97,7 +96,7 @@ defmodule Db.AccountsTest do
   describe "change_user_registration/2" do
     test "returns a changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
-      assert changeset.required == [:password, :password_confirmation, :email]
+      assert changeset.required == [:password, :email]
     end
   end
 
@@ -108,10 +107,11 @@ defmodule Db.AccountsTest do
     end
   end
 
+  @docp """
+
   describe "apply_user_email/3" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "requires email to change", %{user: user} do
@@ -126,7 +126,7 @@ defmodule Db.AccountsTest do
       assert %{email: ["must have the @ sign and no spaces"]} = errors_on(changeset)
     end
 
-    test "validates maximum value for e-mail for security", %{user: user} do
+    test "validates maximum value for email for security", %{user: user} do
       too_long = String.duplicate("db", 100)
 
       {:error, changeset} =
@@ -135,9 +135,8 @@ defmodule Db.AccountsTest do
       assert "should be at most 160 character(s)" in errors_on(changeset).email
     end
 
-    test "validates e-mail uniqueness", %{user: user} do
-      {:ok, new_user} = user_fixture()
-      email = new_user.email
+    test "validates email uniqueness", %{user: user} do
+      %{email: email} = user_fixture()
 
       {:error, changeset} =
         Accounts.apply_user_email(user, valid_user_password(), %{email: email})
@@ -151,12 +150,18 @@ defmodule Db.AccountsTest do
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
+
+    test "applies the email without persisting it", %{user: user} do
+      email = unique_user_email()
+      {:ok, user} = Accounts.apply_user_email(user, valid_user_password(), %{email: email})
+      assert user.email == email
+      assert Accounts.get_user!(user.id).email != email
+    end
   end
 
   describe "deliver_update_email_instructions/3" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "sends token through notification", %{user: user} do
@@ -175,7 +180,7 @@ defmodule Db.AccountsTest do
 
   describe "update_user_email/2" do
     setup do
-      {:ok, user} = user_fixture()
+      user = user_fixture!()
       email = unique_user_email()
 
       token =
@@ -186,7 +191,7 @@ defmodule Db.AccountsTest do
       %{user: user, token: token, email: email}
     end
 
-    test "updates the e-mail with a valid token", %{user: user, token: token, email: email} do
+    test "updates the email with a valid token", %{user: user, token: token, email: email} do
       assert Accounts.update_user_email(user, token) == :ok
       changed_user = Repo.get!(User, user.id)
       assert changed_user.email != user.email
@@ -196,19 +201,19 @@ defmodule Db.AccountsTest do
       refute Repo.get_by(UserToken, user_id: user.id)
     end
 
-    test "does not update e-mail with invalid token", %{user: user} do
+    test "does not update email with invalid token", %{user: user} do
       assert Accounts.update_user_email(user, "oops") == :error
       assert Repo.get!(User, user.id).email == user.email
       assert Repo.get_by(UserToken, user_id: user.id)
     end
 
-    test "does not update e-mail if user e-mail changed", %{user: user, token: token} do
+    test "does not update email if user email changed", %{user: user, token: token} do
       assert Accounts.update_user_email(%{user | email: "current@example.com"}, token) == :error
       assert Repo.get!(User, user.id).email == user.email
       assert Repo.get_by(UserToken, user_id: user.id)
     end
 
-    test "does not update e-mail if token expired", %{user: user, token: token} do
+    test "does not update email if token expired", %{user: user, token: token} do
       {1, nil} = Repo.update_all(UserToken, set: [inserted_at: ~N[2020-01-01 00:00:00]])
       assert Accounts.update_user_email(user, token) == :error
       assert Repo.get!(User, user.id).email == user.email
@@ -219,26 +224,25 @@ defmodule Db.AccountsTest do
   describe "change_user_password/2" do
     test "returns a user changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_password(%User{})
-      assert changeset.required == [:password, :password_confirmation]
+      assert changeset.required == [:password]
     end
   end
 
   describe "update_user_password/3" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "validates password", %{user: user} do
       {:error, changeset} =
         Accounts.update_user_password(user, valid_user_password(), %{
-          password: "lol",
+          password: "not valid",
           password_confirmation: "another"
         })
 
       assert %{
-               password: ["should be at least 5 character(s)"],
-               password_confirmation: ["does not match confirmation", "does not match password"]
+               password: ["should be at least 12 character(s)"],
+               password_confirmation: ["does not match password"]
              } = errors_on(changeset)
     end
 
@@ -282,8 +286,7 @@ defmodule Db.AccountsTest do
 
   describe "generate_user_session_token/1" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "generates a token", %{user: user} do
@@ -292,12 +295,10 @@ defmodule Db.AccountsTest do
       assert user_token.context == "session"
 
       # Creating the same token for another user should fail
-      {:ok, user2} = user_fixture()
-
       assert_raise Ecto.ConstraintError, fn ->
         Repo.insert!(%UserToken{
           token: user_token.token,
-          user_id: user2.id,
+          user_id: user_fixture().id,
           context: "session"
         })
       end
@@ -306,7 +307,7 @@ defmodule Db.AccountsTest do
 
   describe "get_user_by_session_token/1" do
     setup do
-      {:ok, user} = user_fixture()
+      user = user_fixture!()
       token = Accounts.generate_user_session_token(user)
       %{user: user, token: token}
     end
@@ -328,7 +329,7 @@ defmodule Db.AccountsTest do
 
   describe "delete_session_token/1" do
     test "deletes the token" do
-      {:ok, user} = user_fixture()
+      user = user_fixture()
       token = Accounts.generate_user_session_token(user)
       assert Accounts.delete_session_token(token) == :ok
       refute Accounts.get_user_by_session_token(token)
@@ -337,8 +338,7 @@ defmodule Db.AccountsTest do
 
   describe "deliver_user_confirmation_instructions/2" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "sends token through notification", %{user: user} do
@@ -357,7 +357,7 @@ defmodule Db.AccountsTest do
 
   describe "confirm_user/2" do
     setup do
-      {:ok, user} = user_fixture()
+      user = user_fixture!()
 
       token =
         extract_user_token(fn url ->
@@ -367,7 +367,7 @@ defmodule Db.AccountsTest do
       %{user: user, token: token}
     end
 
-    test "confirms the e-mail with a valid token", %{user: user, token: token} do
+    test "confirms the email with a valid token", %{user: user, token: token} do
       assert {:ok, confirmed_user} = Accounts.confirm_user(token)
       assert confirmed_user.confirmed_at
       assert confirmed_user.confirmed_at != user.confirmed_at
@@ -381,7 +381,7 @@ defmodule Db.AccountsTest do
       assert Repo.get_by(UserToken, user_id: user.id)
     end
 
-    test "does not confirm e-mail if token expired", %{user: user, token: token} do
+    test "does not confirm email if token expired", %{user: user, token: token} do
       {1, nil} = Repo.update_all(UserToken, set: [inserted_at: ~N[2020-01-01 00:00:00]])
       assert Accounts.confirm_user(token) == :error
       refute Repo.get!(User, user.id).confirmed_at
@@ -391,8 +391,7 @@ defmodule Db.AccountsTest do
 
   describe "deliver_user_reset_password_instructions/2" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "sends token through notification", %{user: user} do
@@ -409,9 +408,9 @@ defmodule Db.AccountsTest do
     end
   end
 
-  describe "get_user_by_reset_password_token/2" do
+  describe "get_user_by_reset_password_token/1" do
     setup do
-      {:ok, user} = user_fixture()
+      user = user_fixture!()
 
       token =
         extract_user_token(fn url ->
@@ -438,22 +437,21 @@ defmodule Db.AccountsTest do
     end
   end
 
-  describe "reset_user_password/3" do
+  describe "reset_user_password/2" do
     setup do
-      {:ok, user} = user_fixture()
-      %{user: user}
+      %{user: user_fixture!()}
     end
 
     test "validates password", %{user: user} do
       {:error, changeset} =
         Accounts.reset_user_password(user, %{
-          password: "lol",
+          password: "not valid",
           password_confirmation: "another"
         })
 
       assert %{
-               password: ["should be at least 5 character(s)"],
-               password_confirmation: ["does not match confirmation", "does not match password"]
+               password: ["should be at least 12 character(s)"],
+               password_confirmation: ["does not match password"]
              } = errors_on(changeset)
     end
 
@@ -473,6 +471,13 @@ defmodule Db.AccountsTest do
       _ = Accounts.generate_user_session_token(user)
       {:ok, _} = Accounts.reset_user_password(user, %{password: "new valid password"})
       refute Repo.get_by(UserToken, user_id: user.id)
+    end
+  end
+  """
+
+  describe "inspect/2" do
+    test "does not include password" do
+      refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
 end

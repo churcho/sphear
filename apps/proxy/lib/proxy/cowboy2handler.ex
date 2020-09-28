@@ -17,7 +17,6 @@ defmodule Proxy.Cowboy2Handler do
     # are dynamically chosen
     def init(req, {_endpoint, _opts}) do
       agent = req.headers["user-agent"]
-      log_request(agent, "Proxy.Cowboy2Handler called with req: #{inspect(req)}")
   
       conn = connection().conn(req)
   
@@ -25,8 +24,10 @@ defmodule Proxy.Cowboy2Handler do
       backends = Application.get_env(:proxy, :backends)
   
       backend = choose_backend(conn, backends)
-      log_request(agent, "Backend chosen: #{inspect(backend.phoenix_endpoint)}")
-
+      
+      #log_request(agent, "Backend chosen: #{inspect(backend.phoenix_endpoint)}")
+      #log_request(agent, "Proxy.Cowboy2Handler called with req: #{inspect(req)}")
+      # TODO manual analytics...
       #save_request(req)
   
       dispatch(backend, req)

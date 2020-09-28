@@ -1,6 +1,8 @@
 defmodule SynapsWeb.Router do
   use SynapsWeb, :router
 
+  import SynapsWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,20 +10,49 @@ defmodule SynapsWeb.Router do
     plug :put_root_layout, {SynapsWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
+  ## Authentication routes
   scope "/", SynapsWeb do
-    pipe_through :browser
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    #get "/register", UserRegistrationController, :new
+    #post "/register", UserRegistrationController, :create
+    get "/login", UserSessionController, :new
+    post "/login", UserSessionController, :create
+    #get "/reset_password", UserResetPasswordController, :new
+    #post "/reset_password", UserResetPasswordController, :create
+    #get "/reset_password/:token", UserResetPasswordController, :edit
+    #put "/reset_password/:token", UserResetPasswordController, :update
+  end
+
+  scope "/", SynapsWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    #get "/user/settings", UserSettingsController, :edit
+    #put "/user/settings/update_password", UserSettingsController, :update_password
+    #put "/user/settings/update_email", UserSettingsController, :update_email
+    #get "/user/settings/confirm_email/:token", UserSettingsController, :confirm_email
+  end
+
+  scope "/", SynapsWeb do
+    pipe_through [:browser]
 
     live "/", PageLive, :index
     get "/demo", DemoController, :index
     live "/chat", ChatLive, :index
     live "/demo2", Demo2Live, :index
     live "/demo3", Demo3Live, :index
+
+    delete "/logout", UserSessionController, :delete
+    #get "/user/confirm", UserConfirmationController, :new
+    #post "/user/confirm", UserConfirmationController, :create
+    #get "/user/confirm/:token", UserConfirmationController, :confirm
   end
 
   # Other scopes may use custom stacks.

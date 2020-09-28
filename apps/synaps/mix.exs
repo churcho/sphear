@@ -51,7 +51,8 @@ defmodule Synaps.MixProject do
       {:plug_health, "~> 0.1.0"},
       {:ex_bank_id, "~> 0.2.0", hex: :exBankID},
       {:httpoison, "~> 1.7"},
-      {:db, in_umbrella: true}
+      {:db, in_umbrella: true},
+      {:phx_gen_auth, "~> 0.5", only: [:dev], runtime: false}
     ]
   end
 

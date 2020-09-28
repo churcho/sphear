@@ -51,14 +51,14 @@ defmodule Db.Sales do
 
   """
 
-  def get_latest_cart(user_id) do
+  def get_latest_cart(id) do
     query =
       from(
         p in Cart,
-        where: p.user_id == ^user_id,
+        where: p.user_id == ^id,
         select: p,
         preload: [:cart_items, :discounts],
-        order_by: [desc: p.id],
+        order_by: [desc: p.inserted_at],
         limit: 1
       )
   

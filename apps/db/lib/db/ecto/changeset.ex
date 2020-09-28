@@ -517,7 +517,6 @@ defmodule SphearUtils.Ecto.Changeset do
       # The logic is copied from `validate_required` in Ecto.
       case get_field(changeset, field) do
         nil -> false
-        binary when is_binary(binary) -> String.trim_leading(binary) == ""
         _ -> true
       end
     end)

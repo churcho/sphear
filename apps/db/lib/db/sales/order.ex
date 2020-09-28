@@ -1,5 +1,5 @@
 defmodule Db.Sales.Order do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
 
   alias Db.Accounts.User
@@ -12,8 +12,8 @@ defmodule Db.Sales.Order do
     field :canceled_at, :naive_datetime
     field :completed_at, :naive_datetime
     
-    belongs_to :user, User
-    belongs_to :cart, Cart
+    belongs_to :user, User, references: :id, type: :binary_id
+    belongs_to :cart, Cart, type: :binary_id
 
     timestamps()
   end

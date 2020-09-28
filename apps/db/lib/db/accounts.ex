@@ -9,20 +9,20 @@ defmodule Db.Accounts do
 
   ## Database getters
 
+  
   defp preload_user({:ok, user}) do
     user =
       user
-      |> Repo.preload([:orders, :user_tokens])
+      |> Repo.preload([:orders])
     {:ok, user}
   end
   defp preload_user([user]) do
     [user]
-    |> Repo.preload([:orders, :user_tokens])
+    |> Repo.preload([:orders])
   end
   defp preload_user(error) do
     error
   end
-
   @doc """
   Gets a user by email.
 
@@ -61,15 +61,18 @@ defmodule Db.Accounts do
   @doc """
   Gets a single user.
 
+  Raises `Ecto.NoResultsError` if the User does not exist.
+
   ## Examples
 
-      iex> get_user(123)
-      {:ok, %User{}}
+      iex> get_user!(123)
+      %User{}
 
-      iex> get_user(456)
-      {:error, %Ecto.Changeset{}}
+      iex> get_user!(456)
+      ** (Ecto.NoResultsError)
 
   """
+  def get_user!(id), do: Repo.get!(User, id)
   def get_user(id) do
     case Repo.get(User, id) do
       nil -> {:error, :not_found}
@@ -97,6 +100,7 @@ defmodule Db.Accounts do
     %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
+    |> preload_user()
   end
 
   @doc """
@@ -115,7 +119,7 @@ defmodule Db.Accounts do
   ## Settings
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for changing the user e-mail.
+  Returns an `%Ecto.Changeset{}` for changing the user email.
 
   ## Examples
 
@@ -128,7 +132,7 @@ defmodule Db.Accounts do
   end
 
   @doc """
-  Emulates that the e-mail will change without actually changing
+  Emulates that the email will change without actually changing
   it in the database.
 
   ## Examples
@@ -148,7 +152,7 @@ defmodule Db.Accounts do
   end
 
   @doc """
-  Updates the user e-mail in token.
+  Updates the user email using the given token.
 
   If the token matches, the user email is updated and the token is deleted.
   The confirmed_at date is also updated to the current time.
@@ -174,7 +178,7 @@ defmodule Db.Accounts do
   end
 
   @doc """
-  Delivers the update e-mail instructions to the given user.
+  Delivers the update email instructions to the given user.
 
   ## Examples
 
@@ -261,7 +265,7 @@ defmodule Db.Accounts do
   ## Confirmation
 
   @doc """
-  Delivers the confirmation e-mail instructions to the given user.
+  Delivers the confirmation email instructions to the given user.
 
   ## Examples
 
@@ -308,7 +312,7 @@ defmodule Db.Accounts do
   ## Reset password
 
   @doc """
-  Delivers the reset password e-mail to the given user.
+  Delivers the reset password email to the given user.
 
   ## Examples
 
@@ -364,6 +368,20 @@ defmodule Db.Accounts do
     |> case do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  @doc """
+  Sets the user to admin
+  """
+  def set_admin{:ok, user} do
+    set_admin(user)
+  end
+  def set_admin(user) do
+    with {:ok, user} <- Repo.update(User.to_admin_changeset(user)) do
+      {:ok, user}
+    else
+      _ -> :error
     end
   end
 end

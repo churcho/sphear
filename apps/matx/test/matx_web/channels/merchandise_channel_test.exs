@@ -114,7 +114,7 @@ defmodule MatxWeb.Channels.MerchandiseChannelTest do
     end
 
     test "get non existing products from menu", %{socket: socket} do
-      ref = push socket, "get_products", %{"menu_id" => 343}
+      ref = push socket, "get_products", %{"menu_id" => Ecto.UUID.generate}
       assert_reply ref, :error
     end
   end

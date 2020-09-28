@@ -1,5 +1,5 @@
 defmodule Db.Merchandise.ProductExtraMenu do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
   import SphearUtils.Ecto.Changeset, only: [validate_one_of_present: 2]
 
@@ -13,8 +13,8 @@ defmodule Db.Merchandise.ProductExtraMenu do
     field :default_extra, :integer
     field :hidden, :boolean, default: true
     
-    belongs_to :product, Product
-    belongs_to :menu, Menu
+    belongs_to :product, Product, type: :binary_id
+    belongs_to :menu, Menu, type: :binary_id
     has_many :product_extras, ProductExtra
 
     timestamps()

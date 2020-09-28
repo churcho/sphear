@@ -3,7 +3,7 @@ defmodule Db.Repo.Migrations.AddRestaurantIdToProducts do
 
   def change do
     alter table(:products) do
-      add(:restaurant_id, references(:restaurants, on_delete: :nothing))
+      add(:restaurant_id, references(:restaurants, type: :binary_id, on_delete: :nothing))
       add(:hidden, :boolean, default: false)
     end
 

@@ -24,10 +24,10 @@ defmodule Db.SalesTest do
     test "get latest cart" do
       {:ok, user} = user_fixture()
       cart_fixture(user_id: user.id)
+      Process.sleep(500)
       cart_fixture(user_id: user.id)
+      Process.sleep(500)
       {:ok, latest_cart} = cart_fixture(user_id: user.id)
-      
-      {:ok, user} = Accounts.get_user(user.id)
       assert Sales.get_latest_cart(user.id) == latest_cart
     end
   end

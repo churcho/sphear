@@ -22,7 +22,8 @@ module.exports = (env, options) => {
             'views': glob.sync('./js/views/*.js'),
             'demo': './css/demo.scss',
             'demo2': './css/demo2.scss',
-            'demo3': './css/demo3.scss'
+            'demo3': './css/demo3.scss',
+            'login': './css/login.scss'
         },
         output: {
             filename: '[name].js',

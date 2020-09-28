@@ -9,6 +9,7 @@ defmodule Sphear.MixProject do
       deps: deps(),
       version: "0.1.0",
       elixir: "~> 1.10.2",
+      apps: [:matx, :proxy, :synaps, :db],
       releases: [
         sphear: [
           applications: [

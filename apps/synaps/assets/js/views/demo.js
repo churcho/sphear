@@ -42,24 +42,24 @@ export default class Demo extends MainView {
         const msg = ["Vi lever i en global och digital värld", "Bli inte utspelad av de största aktörerna", "Digitalisera din verksamhet via vår plattform", "Ta din verksamhet till nya nivåer"];
         let whyTl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
 
-        let whyTl1 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-        whyTl1.to(document.querySelector("#why-svg-1"), { duration: 3, opacity: 1 }, ">0")
-        whyTl1.to(document.querySelector("#why-text"), { duration: 3, text: msg[0], ease: "power2.out" }, "-=2.5")
+        let whyTl1 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 0.4 })
+        whyTl1.to(document.querySelector("#why-svg-1"), { duration: 2, opacity: 1 }, ">0")
+        whyTl1.to(document.querySelector("#why-text"), { duration: 3, text: msg[0], ease: "power3.out" }, "-=1.5")
         whyTl.add(whyTl1);
 
-        let whyTl2 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-        whyTl2.to(document.querySelector("#why-svg-2"), { duration: 3, opacity: 1 }, ">0")
-        whyTl2.to(document.querySelector("#why-text"), { duration: 3, text: msg[1], ease: "power2.out" }, "-=2.5")
+        let whyTl2 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 0.4 })
+        whyTl2.to(document.querySelector("#why-svg-2"), { duration: 2, opacity: 1 }, ">0")
+        whyTl2.to(document.querySelector("#why-text"), { duration: 3, text: msg[1], ease: "power3.out" }, "-=1.5")
         whyTl.add(whyTl2);
 
-        let whyTl3 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-        whyTl3.to(document.querySelector("#why-svg-3"), { duration: 3, opacity: 1 }, ">0")
-        whyTl3.to(document.querySelector("#why-text"), { duration: 3, text: msg[2], ease: "power2.out" }, "-=2.5")
+        let whyTl3 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 0.4 })
+        whyTl3.to(document.querySelector("#why-svg-3"), { duration: 2, opacity: 1 }, ">0")
+        whyTl3.to(document.querySelector("#why-text"), { duration: 3, text: msg[2], ease: "power3.out" }, "-=1.5")
         whyTl.add(whyTl3);
 
-        let whyTl4 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1 })
-        whyTl4.to(document.querySelector("#why-svg-4"), { duration: 3, opacity: 1 }, ">0")
-        whyTl4.to(document.querySelector("#why-text"), { duration: 3, text: msg[3], ease: "power2.out" }, "-=2.5")
+        let whyTl4 = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 0.4 })
+        whyTl4.to(document.querySelector("#why-svg-4"), { duration: 2, opacity: 1 }, ">0")
+        whyTl4.to(document.querySelector("#why-text"), { duration: 3, text: msg[3], ease: "power3.out" }, "-=1.5")
         whyTl.add(whyTl4);
 
         whyTl.play();
@@ -444,6 +444,65 @@ export default class Demo extends MainView {
         document.getElementById("demo_button").addEventListener("click", (e) => {
             tl_demo.seek(0);
             tl_demo.play();
+        })
+
+        /* login button */
+
+        let tl_login = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                tl_login.pause();
+                tl_login.seek(0);
+            }
+        })
+
+        let login_dots = [],
+            login_bg = document.querySelector("#loginBg"),
+            jj, login_dot;
+
+        // create 90 dot elements and put them in an array
+        for (jj = 0; jj < 90; jj++) {
+            login_dot = document.createElement("div");
+            login_dot.setAttribute("class", "login_dot");
+            login_bg.appendChild(login_dot);
+            login_dots.push(login_dot);
+        }
+
+        //set the initial position of all the dots, and pick a random color for each from an array of colors
+        tl_login.set(login_dots, {
+            backgroundColor: '#DC143C', //"random([#663399,#84d100,#cc9900,#0066cc,#993333])",
+            scale: "random(0.05, 0.1)",
+            transformOrigin: "0% -0.5rem",
+            x: 0,
+            y: 0
+        });
+
+        tl_login.to("#login_button", {
+            duration: 0,
+            scale: 0.85
+        });
+        tl_login.to("#login_button", {
+            duration: 0.7,
+            ease: "elastic",
+            scale: 1
+        });
+        tl_login.to(login_dots, {
+            duration: 1.5,
+            physics2D: {
+                velocity: "random(200, 550)",
+                angle: "random(0, 360)",
+                friction: 0.05
+            },
+            delay: "random(0, 0.2)"
+        }, "-=0.7");
+        tl_login.to(login_dots, {
+            duration: 1,
+            opacity: 0
+        }, "-=1");
+
+        document.getElementById("login_button").addEventListener("click", (e) => {
+            tl_login.seek(0);
+            tl_login.play();
         })
 
         gsap.globalTimeline.timeScale(1.4);

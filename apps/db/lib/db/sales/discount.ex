@@ -1,5 +1,5 @@
 defmodule Db.Sales.Discount do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
 
   alias Db.Sales.Cart
@@ -9,7 +9,7 @@ defmodule Db.Sales.Discount do
     field :percentage_discount, :integer, default: 0
     field :description, :string
 
-    belongs_to :cart, Cart
+    belongs_to :cart, Cart, type: :binary_id
     timestamps()
   end
 

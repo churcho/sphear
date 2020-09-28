@@ -1,5 +1,5 @@
 defmodule MatxWeb.Channels.RestaurantChannelTest do
-  use MatxWeb.ChannelCase
+  use MatxWeb.ChannelCase, async: false
 
   import Db.AccountsFixtures
   import Db.RestaurantsFixtures
@@ -125,7 +125,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "get non existing restaurant", %{socket: socket} do
-      ref = push socket, "get_restaurant", %{"restaurant_id" => 343}
+      ref = push socket, "get_restaurant", %{"restaurant_id" => Ecto.UUID.generate}
       assert_reply ref, :error, %{message: "Could not find restaurant"}
     end
 
@@ -161,7 +161,7 @@ defmodule MatxWeb.Channels.RestaurantChannelTest do
     end
 
     test "get non existing menu", %{socket: socket} do
-      ref = push socket, "get_menu", %{"menu_id" => 343}
+      ref = push socket, "get_menu", %{"menu_id" => Ecto.UUID.generate}
       assert_reply ref, :error
     end
 

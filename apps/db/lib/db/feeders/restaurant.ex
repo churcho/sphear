@@ -1,5 +1,5 @@
 defmodule Db.Feeders.Restaurant do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
 
   alias Db.Feeders.Menu
@@ -9,7 +9,7 @@ defmodule Db.Feeders.Restaurant do
     field :address, :string
     field :name, :string
     field :url, :string
-    field :menus_sequence, {:array, :id}, default: []
+    field :menus_sequence, {:array, :binary_id}, default: [], type: :binary_id
     field :hidden, :boolean, default: true
 
     has_many :menus, Menu

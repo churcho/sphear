@@ -11,10 +11,20 @@ defmodule Db.AccountsFixtures do
     attrs
     |> Enum.into(%{
       email: unique_user_email(),
-      password: valid_user_password(),
-      password_confirmation: valid_user_password()
+      password: valid_user_password()
     })
     |> Db.Accounts.register_user()
+  end
+
+  def user_fixture!(attrs \\ %{}) do
+    {:ok, user} = 
+      attrs
+      |> Enum.into(%{
+        email: unique_user_email(),
+        password: valid_user_password()
+      })
+      |> Db.Accounts.register_user()
+    user
   end
 
   def extract_user_token(fun) do

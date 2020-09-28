@@ -7,7 +7,7 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Synaps IT" %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/" <> js_view_path(@live_module) <> ".css") %>"/>
+    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/" <> js_view_path(assigns[:conn], assigns[:live_module] ) <> ".css") %>"/>
     <link rel="apple-touch-icon" sizes="57x57" href="<%= Routes.static_path(@conn, "/images/icons/apple-icon-57x57.png") %>">
     <link rel="apple-touch-icon" sizes="60x60" href="<%= Routes.static_path(@conn, "/images/icons/apple-icon-60x60.png") %>">
     <link rel="apple-touch-icon" sizes="72x72" href="<%= Routes.static_path(@conn, "/images/icons/apple-icon-72x72.png") %>">
@@ -41,7 +41,7 @@
       })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
   </head>
-  <body data-js-view-path="<%= js_view_path(@live_module) %>" class="bg-white">
+  <body data-js-view-path="<%= js_view_path(assigns[:conn], assigns[:live_module]) %>" class="bg-white">
     <header>
     </header>
     <%= @inner_content %>

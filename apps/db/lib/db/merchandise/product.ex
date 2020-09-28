@@ -1,5 +1,5 @@
 defmodule Db.Merchandise.Product do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
 
   alias Db.Feeders.{Restaurant, Menu}
@@ -10,8 +10,8 @@ defmodule Db.Merchandise.Product do
     field :price, Money.Ecto.Amount.Type
     field :hidden, :boolean, default: true
     
-    belongs_to :restaurant, Restaurant
-    belongs_to :menu, Menu
+    belongs_to :restaurant, Restaurant, type: :binary_id
+    belongs_to :menu, Menu, type: :binary_id
     has_many :product_extras, ProductExtra
     has_many :product_extra_menus, ProductExtraMenu
     

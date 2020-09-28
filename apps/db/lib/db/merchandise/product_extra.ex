@@ -1,5 +1,5 @@
 defmodule Db.Merchandise.ProductExtra do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
   import SphearUtils.Ecto.Changeset, only: [validate_if_present: 2]
 
@@ -10,8 +10,8 @@ defmodule Db.Merchandise.ProductExtra do
     field :new_price, Money.Ecto.Amount.Type
     field :hidden, :boolean, default: true
 
-    belongs_to :product, Product
-    belongs_to :product_extra_menu, ProductExtraMenu
+    belongs_to :product, Product, type: :binary_id
+    belongs_to :product_extra_menu, ProductExtraMenu, type: :binary_id
 
     timestamps()
   end

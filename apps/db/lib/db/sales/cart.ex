@@ -1,5 +1,5 @@
 defmodule Db.Sales.Cart do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
 
   alias Db.Accounts.User
@@ -7,7 +7,7 @@ defmodule Db.Sales.Cart do
   alias Db.Sales.Discount
 
   schema "carts" do
-    belongs_to :user, User
+    belongs_to :user, User, references: :id, type: :binary_id
     
     has_many :cart_items, CartItem
     has_many :discounts, Discount

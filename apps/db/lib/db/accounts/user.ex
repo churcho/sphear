@@ -1,20 +1,19 @@
 defmodule Db.Accounts.User do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
 
   alias Db.Sales.{Order, Cart}
-  alias Db.Accounts.UserToken
 
+  @derive {Inspect, except: [:password]}
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
-    field :password_confirmation, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    field :admin, :boolean, default: false
 
     has_many :carts, Cart
     has_many :orders, Order
-    has_many :user_tokens, UserToken
 
     timestamps()
   end
@@ -22,14 +21,14 @@ defmodule Db.Accounts.User do
   @doc """
   A user changeset for registration.
 
-  It is important to validate the length of both e-mail and password.
-  Otherwise databases may truncate the e-mail without warnings, which
+  It is important to validate the length of both email and password.
+  Otherwise databases may truncate the email without warnings, which
   could lead to unpredictable or insecure behaviour. Long passwords may
   also be very expensive to hash for certain algorithms.
   """
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password, :password_confirmation])
+    |> cast(attrs, [:email, :password])
     |> validate_email()
     |> validate_password()
   end
@@ -37,7 +36,7 @@ defmodule Db.Accounts.User do
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])
-    |> validate_format(:email, ~r/^[\w.!#$%&’*+\-\/=?\^`{|}~]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/i, message: "must have the @ sign and no spaces")
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> validate_length(:email, max: 160)
     |> unsafe_validate_unique(:email, Db.Repo)
     |> unique_constraint(:email)
@@ -45,8 +44,7 @@ defmodule Db.Accounts.User do
 
   defp validate_password(changeset) do
     changeset
-    |> validate_required([:password, :password_confirmation])
-    |> validate_confirmation(:password)
+    |> validate_required([:password])
     |> validate_length(:password, min: 5, max: 80)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
@@ -63,9 +61,9 @@ defmodule Db.Accounts.User do
   end
 
   @doc """
-  A user changeset for changing the e-mail.
+  A user changeset for changing the email.
 
-  It requires the e-mail to change otherwise an error is added.
+  It requires the email to change otherwise an error is added.
   """
   def email_changeset(user, attrs) do
     user
@@ -82,7 +80,7 @@ defmodule Db.Accounts.User do
   """
   def password_changeset(user, attrs) do
     user
-    |> cast(attrs, [:password, :password_confirmation])
+    |> cast(attrs, [:password])
     |> validate_confirmation(:password, message: "does not match password")
     |> validate_password()
   end
@@ -93,6 +91,13 @@ defmodule Db.Accounts.User do
   def confirm_changeset(user) do
     now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
     change(user, confirmed_at: now)
+  end
+
+  @doc """
+  Sets the account to admin
+  """
+  def to_admin_changeset(user) do
+    change(user, admin: true)
   end
 
   @doc """

@@ -6,17 +6,19 @@ defmodule Db.Accounts.UserToken do
   @rand_size 32
 
   # It is very important to keep the reset password token expiry short,
-  # since someone with access to the e-mail may take over the account.
+  # since someone with access to the email may take over the account.
   @reset_password_validity_in_days 1
   @confirm_validity_in_days 7
   @change_email_validity_in_days 7
   @session_validity_in_days 60
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "users_tokens" do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, Db.Accounts.User
+    belongs_to :user, Db.Accounts.User, type: :binary_id
 
     timestamps(updated_at: false)
   end
@@ -49,7 +51,7 @@ defmodule Db.Accounts.UserToken do
   @doc """
   Builds a token with a hashed counter part.
 
-  The non-hashed token is sent to the user e-mail while the
+  The non-hashed token is sent to the user email while the
   hashed part is stored in the database, to avoid reconstruction.
   The token is valid for a week as long as users don't change
   their email.

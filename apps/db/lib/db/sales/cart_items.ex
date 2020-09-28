@@ -1,5 +1,5 @@
 defmodule Db.Sales.CartItem do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
   import SphearUtils.Ecto.Changeset, only: [validate_one_of_present: 2, validate_one_or_none_of_present: 2]
 
@@ -11,9 +11,9 @@ defmodule Db.Sales.CartItem do
     field :quantity, :integer, default: 1
     field :price, Money.Ecto.Amount.Type
 
-    belongs_to :cart, Cart
-    belongs_to :product, Product
-    belongs_to :product_extra, ProductExtra
+    belongs_to :cart, Cart, type: :binary_id
+    belongs_to :product, Product, type: :binary_id
+    belongs_to :product_extra, ProductExtra, type: :binary_id
     
     timestamps()
   end
