@@ -16,19 +16,19 @@ defmodule SynapsWeb.MissionLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Mission")
+    |> assign(:page_title, "Ändra tid")
     |> assign(:mission, Bookings.get_mission!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Mission")
+    |> assign(:page_title, "Ny tid")
     |> assign(:mission, %Mission{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Missions")
+    |> assign(:page_title, "Alla tider")
     |> assign(:mission, nil)
   end
 
