@@ -23,7 +23,7 @@ defmodule Db.MixProject do
   def application do
     [
       mod: {Db.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:ssl, :logger, :runtime_tools]
     ]
   end
 
