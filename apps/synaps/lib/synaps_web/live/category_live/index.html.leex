@@ -1,0 +1,65 @@
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<div class="fixed top-0 h-full w-full">
+  <div phx-update="ignore" id="particles-js" class="p-5"></div>
+  <div class="fixed top-0 left-0 w-full" style="z-index: 1500;">
+    <div class="max-w-7xl m-4 md:m-6">
+      <div class="flex justify-between items-center md:justify-start">
+        <div class="flex">
+          <a href="/demo" class="inline-flex no_touch_outline outline-none">
+            <img id="logo" class="h-8 w-auto md:h-12" src="/images/synaps.png" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="min-h-screen flex justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-xl w-full mt-40">
+      <div>
+        <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+          Alla kategorier
+        </h2>
+      </div>
+      <%= if @live_action in [:new, :edit] do %>
+        <%= live_modal @socket, SynapsWeb.CategoryLive.FormComponent,
+          id: @category.id || :new,
+          title: @page_title,
+          action: @live_action,
+          category: @category,
+          return_to: Routes.category_index_path(@socket, :index) %>
+      <% end %>
+
+      <table class="w-full mt-3 text-left">
+        <thead>
+          <tr>
+            <th>Namn</th>
+            <th>Beskrivning</th>
+            <th>Bild</th>
+
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="categories">
+          <%= for category <- @categories do %>
+            <tr id="category-<%= category.id %>">
+              <td><%= category.name %></td>
+              <td><%= category.description %></td>
+              <td><%= category.image %></td>
+
+              <td>
+                <!--<span><%= live_redirect "Visa", to: Routes.category_show_path(@socket, :show, category) %></span>-->
+                <span><%= live_patch "Ändra", to: Routes.category_index_path(@socket, :edit, category) %></span>
+                <span><%= link "Ta bort", to: "#", phx_click: "delete", phx_value_id: category.id, data: [confirm: "Är du säker?"] %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <span class="rounded-full bg-green-800 opacity-75 mt-3"><%= link "Tillbaks", to: Routes.panel_path(@socket, :index) %></span>
+      <span class="rounded-full bg-red-600 opacity-75 mt-3"><%= live_patch "Ny kategori", to: Routes.category_index_path(@socket, :new) %></span>
+    </div>
+  </div>
+</div>

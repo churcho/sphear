@@ -34,6 +34,22 @@ defmodule SynapsWeb.Router do
   scope "/", SynapsWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live "/panel", PanelLive, :index
+
+    live "/kategorier", CategoryLive.Index, :index
+    live "/kategorier/ny", CategoryLive.Index, :new
+    live "/kategorier/:id/edit", CategoryLive.Index, :edit
+
+    live "/kategorier/:id", CategoryLive.Show, :show
+    live "/kategorier/:id/visa/edit", CategoryLive.Show, :edit
+
+    live "/tider", MissionLive.Index, :index
+    live "/tider/ny", MissionLive.Index, :new
+    live "/tider/:id/edit", MissionLive.Index, :edit
+
+    live "/tider/:id", MissionLive.Show, :show
+    live "/tider/:id/visa/edit", MissionLive.Show, :edit
+
     #get "/user/settings", UserSettingsController, :edit
     #put "/user/settings/update_password", UserSettingsController, :update_password
     #put "/user/settings/update_email", UserSettingsController, :update_email

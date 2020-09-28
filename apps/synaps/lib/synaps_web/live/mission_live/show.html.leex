@@ -1,0 +1,32 @@
+<h1>Show Mission</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, SynapsWeb.MissionLive.FormComponent,
+    id: @mission.id,
+    title: @page_title,
+    action: @live_action,
+    mission: @mission,
+    return_to: Routes.mission_show_path(@socket, :show, @mission) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Starts at:</strong>
+    <%= @mission.starts_at %>
+  </li>
+
+  <li>
+    <strong>Ends at:</strong>
+    <%= @mission.ends_at %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @mission.status %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.mission_show_path(@socket, :edit, @mission), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.mission_index_path(@socket, :index) %></span>

@@ -23,7 +23,10 @@ module.exports = (env, options) => {
             'demo': './css/demo.scss',
             'demo2': './css/demo2.scss',
             'demo3': './css/demo3.scss',
-            'login': './css/login.scss'
+            'login': './css/login.scss',
+            'panel': './css/panel.scss',
+            'tider': './css/tider.scss',
+            'kategorier': './css/kategorier.scss'
         },
         output: {
             filename: '[name].js',

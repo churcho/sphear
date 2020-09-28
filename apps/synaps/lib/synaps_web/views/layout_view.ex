@@ -5,7 +5,7 @@ defmodule SynapsWeb.LayoutView do
   Generates path for the JavaScript view we want to use
   in this combination of view/template.
   """
-  def js_view_path(conn, nil) do
+  def js_view_path(conn, _nil) do
     String.slice(conn.request_path, 1..-1)
   end
   def js_view_path(conn, view_template) do

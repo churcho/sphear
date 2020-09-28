@@ -21,11 +21,25 @@
         <div class="box1 boxx">
             <div class="bg"></div>
             <div class="details">
-                <h1>Vad kan vi göra för er?</h1>
-                <p>
-                    Vi är redo för ett långt och fruktfullt samarbete.
-                    Gå igenom dessa steg så kontaktar vi er så snart vi kan!
-                </p>
+                <h1>Lediga tider</h1>
+                <table class="w-full mt-3 text-left">
+                    <thead>
+                    <tr>
+                        <th>Börjar</th>
+                        <th>Slutar</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="missions">
+                    <%= for mission <- @missions do %>
+                        <tr id="mission-<%= mission.id %>">
+                        <td><%= mission.starts_at %></td>
+                        <td><%= mission.ends_at %></td>
+
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
                 <button class="next_slide">Gå vidare</button>
             </div>
 
