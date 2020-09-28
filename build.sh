@@ -6,7 +6,6 @@ set -o errexit
 mix deps.get --only prod
 MIX_ENV=prod mix compile
 
-NODE_ENV=production
 # Compile assets
 npm install --prefix apps/matx/assets
 npm run deploy --prefix apps/matx/assets
@@ -15,10 +14,10 @@ npm run deploy --prefix apps/matx/assets
 npm install --prefix apps/synaps/assets
 npm run deploy --prefix apps/synaps/assets
 
+mix phx.digest
+
 # Remove the existing release directory and build the release
 rm -rf "_build"
-
-MIX_ENV=prod mix phx.digest
 MIX_ENV=prod mix release
 
 # Run migrations
