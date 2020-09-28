@@ -21,4 +21,5 @@ mix compile --force
 MIX_ENV=prod mix release --overwrite
 
 # Run migrations
+mix ecto.create
 _build/prod/rel/sphear/bin/sphear eval "Db.Release.migrate"
