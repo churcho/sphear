@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => {
     const devMode = options.mode !== 'production';
+    process.env.NODE_ENV = options.mode;
 
     return {
         optimization: {

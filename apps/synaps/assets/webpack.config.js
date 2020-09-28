@@ -8,6 +8,7 @@ const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
 module.exports = (env, options) => {
     const devMode = options.mode !== 'production';
+    process.env.NODE_ENV = options.mode;
 
     return {
         optimization: {
