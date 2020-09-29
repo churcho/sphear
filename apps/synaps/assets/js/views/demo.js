@@ -8,6 +8,8 @@ import { Physics2DPlugin } from "gsap/Physics2DPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 import { EasePack } from "gsap/EasePack";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { CustomWiggle } from 'gsap/CustomWiggle';
+import { CustomEase } from 'gsap/CustomEase';
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
@@ -17,6 +19,7 @@ gsap.registerPlugin(Physics2DPlugin);
 gsap.registerPlugin(TextPlugin);
 gsap.registerPlugin(EasePack);
 gsap.registerPlugin(MorphSVGPlugin);
+gsap.registerPlugin(CustomEase, CustomWiggle);
 
 export default class Demo extends MainView {
     mount() {
@@ -26,7 +29,7 @@ export default class Demo extends MainView {
         });
 
         /* Front page text */
-        const words = ["Digitalisering", "Design och känsla", "Effektiva rutiner", "Automatiserade lösningar", "Statistik och diagnostik"];
+        const words = ["Digitalisering", "Design med känsla", "Effektiva rutiner", "Automatiserade lösningar", "Statistik och diagnostik"];
 
         gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
         let masterTl = gsap.timeline({ repeat: -1 }).pause()
@@ -135,10 +138,12 @@ export default class Demo extends MainView {
         const bankid_left = document.querySelector(".bankid_left");
         const bankid_right = document.querySelector(".bankid_right");
 
-        var tl = gsap.timeline({ repeat: -1, repeatDelay: 6 });
+        CustomWiggle.create("wiggle", { wiggles: 6, type: "easeOut" });
+        var tl = gsap.timeline({ repeat: -1, repeatDelay: 3 });
         gsap.utils.toArray(".box").forEach((box, i) => {
             /* change colors to rainbow on repeated timeline */
-            tl.to(box, dur / 2, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] + ')' } }, '+=' + dur / 3)
+            tl.to(box, dur / 2, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] + ')' } }, '+=' + dur / 3);
+            tl.to(box.querySelector('svg'), { duration: 0.6, rotation: 6, ease: "wiggle" }, "-=0.6");
             if (i == 0) {
                 tl.to(booking_bg, dur / 4, { css: { 'fill': '#55a4f9' } }, "bg")
                 tl.to(booking_mobile_a, dur / 4, { css: { 'fill': '#453d83' } }, 'bg+=' + dur / 5)
@@ -181,7 +186,7 @@ export default class Demo extends MainView {
                 }
                 for (let ii = 0; ii < order_body_fills.length; ii++) {
                     const g = document.querySelector("#order_body_" + (ii + 1));
-                    tl.to(g, dur / 2, { css: { 'fill': order_body_fills[ii] } }, 'order+=1.0');
+                    tl.to(g, dur / 2, { css: { 'fill': order_body_fills[ii] } }, 'order+=0.6');
                 }
             }
             if (i == 2) {
@@ -206,8 +211,9 @@ export default class Demo extends MainView {
             }
             if (i == 4) {
                 tl.to(bankid_text, dur / 3, { css: { 'fill': '#000' } }, "bankid")
-                tl.to(bankid_left, dur / 3, { css: { 'fill': '#479CBE' } }, 'bankid+=' + dur / 3)
-                tl.to(bankid_right, dur / 3, { css: { 'fill': '#235971' } }, 'bankid+=' + dur / 2)
+                tl.to(bankid_left, dur / 3, { css: { 'fill': '#479CBE' } }, 'bankid+=0.5')
+                tl.to(bankid_right, dur / 3, { css: { 'fill': '#235971' } }, 'bankid+=0.8')
+                tl.to(document.querySelectorAll('svg'), { duration: 0.7, rotation: 6, ease: "wiggle" }, "+=1.5");
             }
             /* hovers */
             box.addEventListener("mouseover", function(e) {
