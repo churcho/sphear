@@ -4,8 +4,7 @@ set -o errexit
 
 # Initial setup
 mix deps.get --only prod
-mix clean
-mix compile --force
+MIX_ENV=prod mix compile
 
 # Compile assets
 npm install --prefix apps/matx/assets
