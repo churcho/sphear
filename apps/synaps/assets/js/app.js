@@ -19,8 +19,8 @@ import NProgress from "nprogress"
 import { LiveSocket } from "phoenix_live_view"
 import "particles.js"
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let Hooks = {}
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+let Hooks = {};
 Hooks.particlesjs = {
     mounted() {
         console.log('Particles loading..');
