@@ -1,11 +1,15 @@
 defmodule Db.Bookings.Category do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
+
+  alias Db.Bookings.Mission
 
   schema "categories" do
     field :description, :string
     field :image, :string
     field :name, :string
+
+    has_many :missions, Mission
 
     timestamps()
   end

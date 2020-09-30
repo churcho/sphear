@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 
 module.exports = (env, options) => {
     const devMode = options.mode !== 'production';
@@ -19,14 +18,9 @@ module.exports = (env, options) => {
         },
         entry: {
             'app': glob.sync('./vendor/**/*.js').concat(['./js/app.js']),
-            'views': glob.sync('./js/views/*.js'),
-            'demo': './css/demo.scss',
+            'demo': ['./js/views/demo.js'].concat(glob.sync('./vendor/**/*.js')),
             'demo2': './css/demo2.scss',
-            'demo3': './css/demo3.scss',
-            'login': './css/login.scss',
-            'panel': './css/panel.scss',
-            'tider': './css/tider.scss',
-            'kategorier': './css/kategorier.scss'
+            'login': ['./js/views/login.js'].concat(glob.sync('./vendor/**/*.js')),
         },
         output: {
             filename: '[name].js',
@@ -54,7 +48,6 @@ module.exports = (env, options) => {
             ]
         },
         plugins: [
-            new FixStyleOnlyEntriesPlugin(),
             new MiniCssExtractPlugin({ filename: '../css/[name].css' }),
             new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
         ]

@@ -14,6 +14,14 @@ defmodule SynapsWeb.CategoryLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
+  def handle_event("back", _, socket) do
+    {:noreply, push_redirect(socket, to: Routes.panel_path(socket, :index))}
+  end
+
+  def handle_event("new", _, socket) do
+    {:noreply, push_patch(socket, to: Routes.category_index_path(socket, :new))}
+  end
+
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Ändra kategori")

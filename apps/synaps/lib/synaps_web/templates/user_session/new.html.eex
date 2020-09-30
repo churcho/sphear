@@ -32,10 +32,11 @@
         <div class="mt-4 rounded-md shadow-sm" style="<%= if @error_message, do: "box-shadow: 0 1px 2px 0 rgba(226, 5, 65, 0.71);" %>">
           <div>
             <%= error_tag f, :email %>
-            <%= email_input f, :email, required: true, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
+            <%= email_input f, :email, value: "admin@synapsus.se", required: true, placeholder: "Email address", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
           </div>
           <div class="-mt-px">
             <%= error_tag f, :password %>
+            test123
             <%= password_input f, :password, required: true, placeholder: "Lösenord", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
           </div>
         </div>

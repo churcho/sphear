@@ -21,6 +21,11 @@ defmodule Db.Bookings do
     Repo.all(Category)
   end
 
+  def list_categories_select do
+    query = from(c in Category, select: {c.name, c.id})
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single category.
 
@@ -115,6 +120,7 @@ defmodule Db.Bookings do
   """
   def list_missions do
     Repo.all(Mission)
+    |> Repo.preload(:category)
   end
 
   @doc """

@@ -1,130 +1,53 @@
-<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
 <div class="fixed top-0 h-full w-full">
-  <div phx-update="ignore" id="particles-js2"></div>
-  <div class="fixed top-0 left-0 w-full z-30">
-    <div class="max-w-7xl m-4 sm:m-6">
+  <div phx-hook="particlesjs" phx-update="ignore" id="particles-js" class="p-5"></div>
+  <div class="fixed top-0 left-0 w-full" style="z-index: 1500;">
+    <div class="max-w-7xl m-4 md:m-6">
       <div class="flex justify-between items-center md:justify-start">
         <div class="flex">
-          <a phx-click="logo_button" href="#" class="inline-flex">
-            <img class="h-10 w-auto sm:h-12 filterLogo md:noFilterLogo" src="/images/synaps.png" alt="">
+          <a href="/demo" class="inline-flex no_touch_outline outline-none">
+            <img id="logo" class="h-8 w-auto md:h-12" src="/images/synaps.png" alt="">
           </a>
         </div>
       </div>
     </div>
   </div>
 
-    <div class="z-20 container3 h-screen lg:rounded-full overflow-hidden opacity-75"> 
-        <div class="slider3 text-white">
+  <div class="min-h-screen z-50 flex justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-xl w-full mt-40">
+      <div>
+        <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+          Välj en tid bland dessa
+        </h2>
+      </div>
 
-        <div class="box1 boxx">
-            <div class="bg"></div>
-            <div class="details">
-                <h1>Lediga tider</h1>
-                <table class="w-full mt-3 text-left">
-                    <thead>
-                    <tr>
-                        <th>Börjar</th>
-                        <th>Slutar</th>
+      <table class="w-full mt-3 text-left">
+        <thead>
+          <tr>
+            <th>Börjar</th>
+            <th>Slutar</th>
+            <th>Kategori</th>
 
-                    </tr>
-                    </thead>
-                    <tbody id="missions">
-                    <%= for mission <- @missions do %>
-                        <tr id="mission-<%= mission.id %>">
-                        <td><%= mission.starts_at %></td>
-                        <td><%= mission.ends_at %></td>
-
-                        </tr>
-                    <% end %>
-                    </tbody>
-                </table>
-                <button class="next_slide">Gå vidare</button>
-            </div>
-
-            <div class="illustration">
-                <div class="inner">
-                </div>
-            </div>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="missions">
+          <%= for mission <- @missions do %>
+            <tr id="mission-<%= mission.id %>">
+              <td><%= mission.starts_at %></td>
+              <td><%= mission.ends_at %></td>
+              <td><%= mission.category.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <div class="mt-10 flex justify-evenly max-w-sm lg:max-w-lg m-auto">
+        <div class="flex items-center rounded-md justify-center h-10 w-24 lg:h-12 lg:w-32 no_touch_outline outline-none" style="box-shadow: 0px 0px 9px rgba(0,0,0,0.3);">
+          <a phx-click="back" href="#" class="rounded-md teko h-full w-full flex items-center justify-center border border-transparent text-2xl font-light hover:font-normal bg-white bg-opacity-25 text-black hover:text-white hover:bg-red-400 focus:outline-none transition duration-150 ease-in lg:text-3xl">
+            TILLBAKS
+          </a>
         </div>
-                                
-                
-        <div class="box2 boxx">
-            <div class="bg"></div>
-            <div class="details">
-                <h1>Vad kan vi göra för er?</h1>
-                <p>
-                    Vi är redo för ett långt och fruktfullt samarbete.
-                    Gå igenom dessa steg så kontaktar vi er så snart vi kan!
-                </p>
-                <button class="next_slide">Gå vidare</button>
-            </div>
-
-            <div class="illustration">
-                <div class="inner">
-                </div>
-            </div>
-        </div>
-                                
-        <div class="box3 boxx">
-            <div class="bg"></div>
-            <div class="details">
-                <h1>Vad kan vi göra för er?</h1>
-                <p>
-                    Vi är redo för ett långt och fruktfullt samarbete.
-                    Gå igenom dessa steg så kontaktar vi er så snart vi kan!
-                </p>
-                <button class="next_slide">Gå vidare</button>
-            </div>
-
-            <div class="illustration">
-                <div class="inner">
-                </div>
-            </div>
-        </div>
-                                
-        <div class="box4 boxx">
-            <div class="bg"></div>
-            <div class="details">
-                <h1>Vad kan vi göra för er?</h1>
-                <p>
-                    Vi är redo för ett långt och fruktfullt samarbete.
-                    Gå igenom dessa steg så kontaktar vi er så snart vi kan!
-                </p>
-                <button class="next_slide">Gå vidare</button>
-            </div>
-
-            <div class="illustration">
-                <div class="inner">
-                </div>
-            </div>
-        </div>
-                                
-        <div class="box5 boxx">
-            <div class="bg"></div>
-            <div class="details">
-                <h1>Vad kan vi göra för er?</h1>
-                <p>
-                    Vi är redo för ett långt och fruktfullt samarbete.
-                    Gå igenom dessa steg så kontaktar vi er så snart vi kan!
-                </p>
-                <button class="next_slide">Gå vidare</button>
-            </div>
-
-            <div class="illustration"><div class="inner"></div></div>
-            </div>                   
-        </div>
-
-        <svg xmlns="http://www.w3.org/2000/svg" class="prev" width="56.898" height="91" viewBox="0 0 56.898 91"><path d="M45.5,0,91,56.9,48.452,24.068,0,56.9Z" transform="translate(0 91) rotate(-90)" fill="#fff"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="next" width="56.898" height="91" viewBox="0 0 56.898 91"><path d="M45.5,0,91,56.9,48.452,24.068,0,56.9Z" transform="translate(56.898) rotate(90)" fill="#fff"/></svg>
-        <div class="trail text-white select-none">
-                <div class="box1 active">1</div>
-                <div class="box2">2</div>
-                <div class="box3">3</div>
-                <div class="box4">4</div>
-                <div class="box5">5</div>
-        </div>
-    </div>   
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CSSRulePlugin3.min.js"></script>
+      </div>
+    </div>
+  </div>
 </div>

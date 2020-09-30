@@ -17,9 +17,24 @@ import "phoenix_html"
 import { Socket } from "phoenix"
 import NProgress from "nprogress"
 import { LiveSocket } from "phoenix_live_view"
+import "particles.js"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let Hooks = {}
+Hooks.particlesjs = {
+    mounted() {
+        console.log('Particles loading..');
+        if (typeof(window.pJSDom[0]) != "undefined") {
+            window.pJSDom[0].pJS.fn.vendors.destroypJS();
+            window["pJSDom"] = [];
+        }
+        /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+        particlesJS.load('particles-js', 'particlesjs-config.json', function() {
+            console.log('Particles initiated!');
+        });
+    }
+}
+
 let liveSocket = new LiveSocket("/live", Socket, {
     dom: {
         onBeforeElUpdated(from, to) {
@@ -43,9 +58,3 @@ liveSocket.connect()
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)
 window.liveSocket = liveSocket
-
-let select = s => document.querySelector(s),
-    selectAll = s => document.querySelectorAll(s);
-
-// Import specific page views
-import './views/init';

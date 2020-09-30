@@ -10,7 +10,8 @@ defmodule SynapsWeb.MissionLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> assign(:categories, list_categories())}
   end
 
   @impl true
@@ -51,5 +52,9 @@ defmodule SynapsWeb.MissionLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+
+  defp list_categories do
+    Bookings.list_categories_select()
   end
 end

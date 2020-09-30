@@ -8,21 +8,21 @@
 
 <div class="flex flex-col max-w-md m-auto">
 
-  <%= label f, "Börjar:" %>
+  <%= label f, "Börjar:", class: "mt-3" %>
   <div class="flex flex-row">
     <%= datetime_select f, :starts_at %>
   </div>
   <%= error_tag f, :starts_at %>
 
-  <%= label f, "Slutar:" %>
+  <%= label f, "Slutar:", class: "mt-3" %>
   <div class="flex flex-row">
     <%= datetime_select f, :ends_at %>
   </div>
   <%= error_tag f, :ends_at %>
 
-  <%= label f, :status %>
-  <%= text_input f, :status, class: "border border-1 border-black" %>
-  <%= error_tag f, :status %>
+  <%= label f, "Kategori:", class: "mt-3" %>
+  <%= select f, :category_id, @categories, class: "form-control" %>
+  <%= error_tag f, :category_id %>
 
   <%= submit "Spara", phx_disable_with: "Sparar...", class: "mt-3 rounded-full border border-1 border-black" %>
 

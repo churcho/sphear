@@ -1,11 +1,18 @@
 defmodule Db.Bookings.Mission do
-  use Ecto.Schema
+  use Db.Schema
   import Ecto.Changeset
+
+  alias Db.Bookings.Category
 
   schema "missions" do
     field :ends_at, :utc_datetime
     field :starts_at, :utc_datetime
-    field :status, :string
+    field :status, :string, default: "Ledig"
+    field :location, :string, default: "Kransen"
+    field :phone, :string
+    field :email, :string
+
+    belongs_to :category, Category, type: :binary_id
 
     timestamps()
   end
@@ -13,7 +20,8 @@ defmodule Db.Bookings.Mission do
   @doc false
   def changeset(mission, attrs) do
     mission
-    |> cast(attrs, [:starts_at, :ends_at, :status])
-    |> validate_required([:starts_at, :ends_at, :status])
+    |> cast(attrs, [:category_id, :starts_at, :ends_at, :status, :location, :phone, :email])
+    |> validate_required([:starts_at, :ends_at, :category_id])
+    |> assoc_constraint(:category)
   end
 end

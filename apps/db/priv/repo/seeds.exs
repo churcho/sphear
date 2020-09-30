@@ -23,7 +23,7 @@ alias Db.Feeders.{Restaurant, Menu}
 alias Db.Merchandise.{Product, ProductExtra, ProductExtraMenu}
 alias Db.Accounts
 
-{:ok, user} = Accounts.register_user(%{email: "admin@synapsus.se", password: "troller123"}) |> Accounts.set_admin()
+{:ok, user} = Accounts.register_user(%{email: "admin@synapsus.se", password: "test123"}) |> Accounts.set_admin()
 
 restaurant = Repo.insert!(%Restaurant{name: "Tullinge Thai"})
 

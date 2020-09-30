@@ -13,6 +13,10 @@ defmodule SynapsWeb.Demo3Live do
     {:noreply, redirect(socket, to: "/demo")}
   end
 
+  def handle_event("back", _, socket) do
+    {:noreply, redirect(socket, to: "/demo")}
+  end
+
   defp list_missions do
     Bookings.list_missions()
   end

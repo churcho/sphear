@@ -18,3 +18,11 @@ canvas {
 .noFilterLogo {
     filter: none;
 }
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background-image: linear-gradient(135deg, #ffffff 0%, #c39cdc26 100%);
+}

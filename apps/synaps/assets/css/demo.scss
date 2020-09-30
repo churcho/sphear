@@ -1,13 +1,6 @@
-#particles-js2 {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    z-index: 0;
-    background-image: linear-gradient(135deg, #ffffff 0%, #c39cdc26 100%);
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@200;300;400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Teko&family=Montserrat&family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Raleway&display=swap');
 @font-face {
     font-family: Trench;
     src: url("/fonts/trench.otf")
@@ -125,24 +118,6 @@ h1 {
     stroke-width: 8px;
     stroke: #3b3b3b;
     fill: transparent;
-}
-
-.toolTips {
-    position: absolute;
-    top: 50%;
-    right: 50px;
-    z-index: auto;
-}
-
-.toolTip {
-    opacity: 0;
-    text-align: right;
-    height: 12px;
-    margin: 12px 0;
-    line-height: 12px;
-    left: 10px;
-    top: 10px;
-    color: #3b3b3b;
 }
 
 h3,
