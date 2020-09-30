@@ -7,8 +7,6 @@ mix deps.get --only prod
 mix clean
 mix compile --force
 
-mix phx.digest
-
 # Compile assets
 npm install --prefix apps/matx/assets
 npm run deploy --prefix apps/matx/assets
@@ -16,6 +14,8 @@ npm run deploy --prefix apps/matx/assets
 # Compile assets
 npm install --prefix apps/synaps/assets
 npm run deploy --prefix apps/synaps/assets
+
+mix phx.digest
 
 # Build the release and overwrite
 MIX_ENV=prod mix release --overwrite
