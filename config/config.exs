@@ -27,12 +27,20 @@ config :proxy,
       phoenix_endpoint: SynapsWeb.Endpoint
     },
     %{
+      host: ~r{synapsusit\.(se|nu)$},
+      phoenix_endpoint: SynapsWeb.Endpoint
+    },
+    %{
+      host: ~r{synapsus\.(se|nu)$},
+      phoenix_endpoint: SynapsWeb.Endpoint
+    },
+    %{
       host: ~r/localhost/,
       phoenix_endpoint: MatxWeb.Endpoint
     }
   ],
   default_backend: %{
-    phoenix_endpoint: MatxWeb.Endpoint
+    phoenix_endpoint: SynapsWeb.Endpoint
   }
 
 # Configure ecto_repo and generators
