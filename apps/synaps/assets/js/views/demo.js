@@ -40,25 +40,38 @@ words.forEach(word => {
 masterTl.play();
 
 /* why page */
-const msg = ["Vi lever i en global och digital värld", "Bli inte utspelad av de största aktörerna", "Digitalisera din verksamhet via vår plattform", "Ta din verksamhet till nya nivåer", "Med framtidens teknologi", "Bygger vi framtidens digitala vägar"];
-let whyTl = gsap.timeline({ repeat: 0 });
+const msg = ["Vi identifierar och modellerar er verksamhet tillsammans med er", "Vi skapar er hemsida i våran egna plattform skräddarsydd för er verksamhet", "Tillsammans fortsätter vi ett tätt samarbete där vi ständigt utforskar nya möjligheter"];
+let whyTl = gsap.timeline({ repeat: 0, paused: true });
 
 whyTl.to(document.querySelector("#why-svg-1"), { duration: 2, opacity: 1 }, "why")
+whyTl.to(document.querySelector("#why-text-1"), { duration: 3, scrambleText: { text: msg[0], chars: "lowerCase", speed: 0.4 } }, "why+=0.1")
 
-whyTl.to(document.querySelector("#why-text-1"), { duration: 5, scrambleText: { text: msg[0], revealDelay: 1, chars: "lowerCase", speed: 0.3 } }, "why+=0.1")
-whyTl.to(document.querySelector("#why-text-2"), { duration: 9, scrambleText: { text: msg[1], revealDelay: 5, chars: "lowerCase", speed: 0.3 } }, "why+=0.1")
-whyTl.to(document.querySelector("#why-text-3"), { duration: 12, scrambleText: { text: msg[2], revealDelay: 9, chars: "lowerCase", speed: 0.3 } }, "why+=0.1")
-whyTl.to(document.querySelector("#why-text-4"), { duration: 16, scrambleText: { text: msg[3], revealDelay: 13, chars: "lowerCase", speed: 0.3 } }, "why+=0.1")
-whyTl.to(document.querySelector("#why-text-5"), { duration: 20, scrambleText: { text: msg[4], revealDelay: 17, chars: "lowerCase", speed: 0.3 } }, "why+=0.1")
-whyTl.to(document.querySelector("#why-text-6"), { duration: 24, scrambleText: { text: msg[5], revealDelay: 21, chars: "lowerCase", speed: 0.3 } }, "why+=0.1")
+whyTl.to(document.querySelector("#why-svg-2"), { duration: 2, opacity: 1 }, "why+=3")
+whyTl.to(document.querySelector("#why-text-2"), { duration: 3, scrambleText: { text: msg[1], chars: "lowerCase", speed: 0.4 } }, "why+=3.1")
 
-whyTl.to(document.querySelector("#why-svg-2"), { duration: 2, opacity: 1 }, "why+=4.5")
-whyTl.to(document.querySelector("#why-svg-3"), { duration: 2, opacity: 1 }, "why+=8.5")
-whyTl.to(document.querySelector("#why-svg-4"), { duration: 2, opacity: 1 }, "why+=12.5")
-whyTl.to(document.querySelector("#why-svg-5"), { duration: 2, opacity: 1 }, "why+=16.5")
-whyTl.to(document.querySelector("#why-svg-6"), { duration: 2, opacity: 1 }, "why+=20.5")
+whyTl.to(document.querySelector("#why-svg-3"), { duration: 2, opacity: 1 }, "why+=6")
+whyTl.to(document.querySelector("#why-text-3"), { duration: 3, scrambleText: { text: msg[2], chars: "lowerCase", speed: 0.4 } }, "why+=6.1")
 
-whyTl.play();
+let magniTl = gsap.timeline({ repeat: -1, yoyo: true });
+magniTl.to(document.querySelectorAll(".magni"), { y: -7, ease: "Sine.easeIn", duration: 1 });
+magniTl.to(document.querySelectorAll(".magni"), { x: -20, ease: "Sine.easeIn", duration: 3 });
+magniTl.to(document.querySelectorAll(".magni"), { y: 40, ease: "Sine.easeIn", duration: 3 });
+magniTl.to(document.querySelectorAll(".magni"), { x: 2, ease: "Sine.easeIn", duration: 1.5 });
+magniTl.play();
+
+let fireTl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+fireTl.to(document.querySelectorAll(".rocket"), { x: 6, ease: "Sine.easeIn", duration: 0.3 });
+fireTl.to(document.querySelectorAll(".rocket"), { y: 6, ease: "Sine.easeIn", duration: 0.3 });
+fireTl.to(document.querySelectorAll(".rocket"), { x: 0, ease: "Sine.easeIn", duration: 0.3 });
+fireTl.to(document.querySelectorAll(".rocket"), { y: 0, ease: "Sine.easeIn", duration: 0.3 });
+fireTl.play();
+
+let cloudTl = gsap.timeline({ repeat: -1, repeatDelay: 0, yoyo: true });
+cloudTl.to(document.querySelectorAll(".cloud"), { x: 8, ease: "Sine.easeIn", duration: 3 });
+cloudTl.to(document.querySelectorAll(".cloud"), { x: -8, ease: "Sine.easeIn", duration: 3 });
+cloudTl.play();
+
+
 
 // whyTl.to(document.querySelector("#why-svg-3"), { duration: 2, opacity: 1, yoyo: true }, ">1")
 // whyTl.to(document.querySelector("#why-text-3"), { duration: 2, text: msg[2], yoyo: true }, "-=4")
@@ -131,12 +144,12 @@ const bankid_text = document.querySelector(".bankid_text");
 const bankid_left = document.querySelector(".bankid_left");
 const bankid_right = document.querySelector(".bankid_right");
 
-CustomWiggle.create("wiggle", { wiggles: 6, type: "easeOut" });
+CustomWiggle.create("wiggle", { wiggles: 4, type: "easeOut" });
 var tl = gsap.timeline({ repeat: -1, repeatDelay: 3 });
 gsap.utils.toArray(".box").forEach((box, i) => {
     /* change colors to rainbow on repeated timeline */
     tl.to(box, dur / 2, { css: { 'opacity': 0.75, 'background-image': 'linear-gradient(to ' + orientation + ', ' + colors[i] + ',' + colors[i + 1] + ')' } }, '+=' + dur / 3);
-    tl.to(box.querySelector('svg'), { duration: 0.6, rotation: 6, ease: "wiggle" }, "-=0.6");
+    tl.to(box.querySelector('svg'), { duration: 0.6, rotation: 5, ease: "wiggle" }, "-=0.6");
     if (i == 0) {
         tl.to(booking_bg, dur / 4, { css: { 'fill': '#55a4f9' } }, "bg")
         tl.to(booking_mobile_a, dur / 4, { css: { 'fill': '#453d83' } }, 'bg+=' + dur / 5)
@@ -206,21 +219,20 @@ gsap.utils.toArray(".box").forEach((box, i) => {
         tl.to(bankid_text, dur / 3, { css: { 'fill': '#000' } }, "bankid")
         tl.to(bankid_left, dur / 3, { css: { 'fill': '#479CBE' } }, 'bankid+=0.5')
         tl.to(bankid_right, dur / 3, { css: { 'fill': '#235971' } }, 'bankid+=0.8')
-        tl.to(document.querySelectorAll('svg'), { duration: 0.7, rotation: 6, ease: "wiggle" }, "+=1.5");
+        tl.to(document.querySelector("#battery").querySelectorAll('svg'), { stagger: 0.16, duration: 1, rotation: 9, ease: "wiggle" }, "+=1.5");
     }
     /* hovers */
     box.addEventListener("mouseover", function(e) {
-        gsap.to('#hover-arrow-' + i, { morphSVG: "M5 15l7-7 7 7", duration: 0.5 });
+        gsap.to('#hover-arrow-' + i, { morphSVG: "M5 15l7-7 7 7", duration: 1.3 });
     });
     box.addEventListener("mouseout", function(e) {
-        gsap.to('#hover-arrow-' + i, { morphSVG: "M19 9l-7 7-7-7", duration: 0.5 });
+        gsap.to('#hover-arrow-' + i, { morphSVG: "M19 9l-7 7-7-7", duration: 1.3 });
     });
     /* pulse arrows */
     gsap.to('#hover-arrow-' + i, { y: -4, ease: "Sine.easeIn", duration: 1.5, repeat: -1, repeatDelay: 0, yoyo: true });
 });
 tl.play();
 
-/* demo 2 */
 const slides = document.querySelectorAll("section");
 const container = document.querySelector("#panelWrap");
 let dots = document.querySelector(".dots");
@@ -239,7 +251,7 @@ let ih = window.innerHeight;
 document.querySelector("#goto_cell").addEventListener("click", function() {
     activeSlide = 1;
     gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
-    whyTl.restart();
+    whyTl.play();
     gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
 });
 
@@ -314,7 +326,7 @@ function slideAnim(e) {
         return;
     }
     if (activeSlide == 1) {
-        whyTl.restart();
+        whyTl.play();
         gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
     }
     // Restart pill if slide 1
@@ -430,6 +442,9 @@ tl_demo.to(demo_dots, {
 document.getElementById("demo_button").addEventListener("click", (e) => {
     tl_demo.seek(0);
     tl_demo.play();
+    setTimeout(function() {
+        window.location.href = "/kontakt";
+    }, 1000);
 })
 
 /* login button */
@@ -491,6 +506,9 @@ if (login_button != null) {
     document.getElementById("login_button").addEventListener("click", (e) => {
         tl_login.seek(0);
         tl_login.play();
+        setTimeout(function() {
+            window.location.href = "/login";
+        }, 1000);
     });
 }
 

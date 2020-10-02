@@ -63,7 +63,7 @@ defmodule SynapsWeb.Router do
     get "/demo", DemoController, :index
     live "/chat", ChatLive, :index
     live "/demo2", Demo2Live, :index
-    live "/demo3", Demo3Live, :index
+    live "/kontakt", Demo3Live, :index
 
     delete "/logout", UserSessionController, :delete
     #get "/user/confirm", UserConfirmationController, :new
