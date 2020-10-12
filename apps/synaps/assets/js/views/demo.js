@@ -27,7 +27,7 @@ particlesJS.load('particles-js', 'particlesjs-config.json', function() {
 });
 
 /* Front page text */
-const words = ["Digitalisering", "Design med känsla", "Effektiva rutiner", "Automatisering", "Statistik och diagnostik"];
+const words = ["Digitalisera er verksamhet", "Automatisera lösningar", "Design med känsla", "Förbättra kundrelationer", "Effektivisera rutiner m.m"];
 
 gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
 let masterTl = gsap.timeline({ repeat: -1 }).pause()
@@ -40,17 +40,6 @@ words.forEach(word => {
 masterTl.play();
 
 /* why page */
-const msg = ["Vi identifierar och modellerar er verksamhet tillsammans med er", "Vi skapar er hemsida i våran egna plattform skräddarsydd för er verksamhet", "Tillsammans fortsätter vi ett tätt samarbete där vi ständigt utforskar nya möjligheter"];
-let whyTl = gsap.timeline({ repeat: 0, paused: true });
-
-whyTl.to(document.querySelector("#why-svg-1"), { duration: 2, opacity: 1 }, "why")
-whyTl.to(document.querySelector("#why-text-1"), { duration: 3, scrambleText: { text: msg[0], chars: "lowerCase", speed: 0.4 } }, "why+=0.1")
-
-whyTl.to(document.querySelector("#why-svg-2"), { duration: 2, opacity: 1 }, "why+=3")
-whyTl.to(document.querySelector("#why-text-2"), { duration: 3, scrambleText: { text: msg[1], chars: "lowerCase", speed: 0.4 } }, "why+=3.1")
-
-whyTl.to(document.querySelector("#why-svg-3"), { duration: 2, opacity: 1 }, "why+=6")
-whyTl.to(document.querySelector("#why-text-3"), { duration: 3, scrambleText: { text: msg[2], chars: "lowerCase", speed: 0.4 } }, "why+=6.1")
 
 let magniTl = gsap.timeline({ repeat: -1, yoyo: true });
 magniTl.to(document.querySelectorAll(".magni"), { y: -7, ease: "Sine.easeIn", duration: 1 });
@@ -251,7 +240,6 @@ let ih = window.innerHeight;
 document.querySelector("#goto_cell").addEventListener("click", function() {
     activeSlide = 1;
     gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
-    whyTl.play();
     gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
 });
 
@@ -326,8 +314,7 @@ function slideAnim(e) {
         return;
     }
     if (activeSlide == 1) {
-        whyTl.play();
-        gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
+        gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 4, css: { display: 'block' } })
     }
     // Restart pill if slide 1
     if (activeSlide == 2) {
