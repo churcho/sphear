@@ -9,6 +9,10 @@ defmodule SynapsWeb.PanelLive do
     {:noreply, push_redirect(socket, to: Routes.category_index_path(socket, :index))}
   end
 
+  def handle_event("goto_demo", _, socket) do
+    {:noreply, push_redirect(socket, to: Routes.demo_index_path(socket, :index))}
+  end
+
   def handle_event("goto_missions", _, socket) do
     {:noreply, push_redirect(socket, to: Routes.mission_index_path(socket, :index))}
   end

@@ -50,6 +50,13 @@ defmodule SynapsWeb.Router do
     live "/tider/:id", MissionLive.Show, :show
     live "/tider/:id/visa/edit", MissionLive.Show, :edit
 
+    live "/kontakter", DemoLive.Index, :index
+    live "/kontakter/ny", DemoLive.Index, :new
+    live "/kontakter/:id/edit", DemoLive.Index, :edit
+
+    live "/kontakter/:id", DemoLive.Show, :show
+    live "/kontakter/:id/visa/edit", DemoLive.Show, :edit
+
     #get "/user/settings", UserSettingsController, :edit
     #put "/user/settings/update_password", UserSettingsController, :update_password
     #put "/user/settings/update_email", UserSettingsController, :update_email
@@ -63,7 +70,9 @@ defmodule SynapsWeb.Router do
     get "/demo", DemoController, :index
     live "/chat", ChatLive, :index
     live "/demo2", Demo2Live, :index
-    live "/kontakt", Demo3Live, :index
+    live "/demo3", Demo3Live, :index
+
+    live "/kontakt", DemoLive.Kontakt, :index
 
     delete "/logout", UserSessionController, :delete
     #get "/user/confirm", UserConfirmationController, :new

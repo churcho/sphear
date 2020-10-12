@@ -128,4 +128,69 @@ defmodule Db.BookingsTest do
       assert %Ecto.Changeset{} = Bookings.change_mission(mission)
     end
   end
+
+  describe "demo" do
+    alias Db.Bookings.Demo
+
+    @valid_attrs %{email: "some email", message: "some message", name: "some name", phone: "some phone"}
+    @update_attrs %{email: "some updated email", message: "some updated message", name: "some updated name", phone: "some updated phone"}
+    @invalid_attrs %{email: nil, message: nil, name: nil, phone: nil}
+
+    def demo_fixture(attrs \\ %{}) do
+      {:ok, demo} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Bookings.create_demo()
+
+      demo
+    end
+
+    test "list_demo/0 returns all demo" do
+      demo = demo_fixture()
+      assert Bookings.list_demo() == [demo]
+    end
+
+    test "get_demo!/1 returns the demo with given id" do
+      demo = demo_fixture()
+      assert Bookings.get_demo!(demo.id) == demo
+    end
+
+    test "create_demo/1 with valid data creates a demo" do
+      assert {:ok, %Demo{} = demo} = Bookings.create_demo(@valid_attrs)
+      assert demo.email == "some email"
+      assert demo.message == "some message"
+      assert demo.name == "some name"
+      assert demo.phone == "some phone"
+    end
+
+    test "create_demo/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Bookings.create_demo(@invalid_attrs)
+    end
+
+    test "update_demo/2 with valid data updates the demo" do
+      demo = demo_fixture()
+      assert {:ok, %Demo{} = demo} = Bookings.update_demo(demo, @update_attrs)
+      assert demo.email == "some updated email"
+      assert demo.message == "some updated message"
+      assert demo.name == "some updated name"
+      assert demo.phone == "some updated phone"
+    end
+
+    test "update_demo/2 with invalid data returns error changeset" do
+      demo = demo_fixture()
+      assert {:error, %Ecto.Changeset{}} = Bookings.update_demo(demo, @invalid_attrs)
+      assert demo == Bookings.get_demo!(demo.id)
+    end
+
+    test "delete_demo/1 deletes the demo" do
+      demo = demo_fixture()
+      assert {:ok, %Demo{}} = Bookings.delete_demo(demo)
+      assert_raise Ecto.NoResultsError, fn -> Bookings.get_demo!(demo.id) end
+    end
+
+    test "change_demo/1 returns a demo changeset" do
+      demo = demo_fixture()
+      assert %Ecto.Changeset{} = Bookings.change_demo(demo)
+    end
+  end
 end

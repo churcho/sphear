@@ -7,7 +7,7 @@
       <div class="flex justify-between items-center md:justify-start">
         <div class="flex">
           <a href="/demo" class="inline-flex no_touch_outline outline-none">
-            <img id="logo" class="h-12 w-auto md:h-16" src="/images/synapsus.svg" alt="">
+            <img id="logo" class="h-8 w-auto md:h-16" src="/images/synapsus.svg" alt="">
           </a>
         </div>
       </div>

@@ -16,39 +16,41 @@
     <div class="max-w-xl w-full mt-40">
       <div>
         <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-          Alla kategorier
+          Alla demo svar
         </h2>
       </div>
       <%= if @live_action in [:new, :edit] do %>
-        <%= live_modal @socket, SynapsWeb.CategoryLive.FormComponent,
-          id: @category.id || :new,
+        <%= live_modal @socket, SynapsWeb.DemoLive.FormComponent,
+          id: @demo.id || :new,
           title: @page_title,
           action: @live_action,
-          category: @category,
-          return_to: Routes.category_index_path(@socket, :index) %>
+          demo: @demo,
+          return_to: Routes.demo_index_path(@socket, :index) %>
       <% end %>
 
       <table class="w-full mt-3 text-left">
         <thead>
           <tr>
             <th>Namn</th>
-            <th>Beskrivning</th>
-            <th>Bild</th>
+            <th>Tele</th>
+            <th>Email</th>
+            <th>Meddelande</th>
 
             <th></th>
           </tr>
         </thead>
-        <tbody id="categories">
-          <%= for category <- @categories do %>
-            <tr id="category-<%= category.id %>">
-              <td><%= category.name %></td>
-              <td><%= category.description %></td>
-              <td><%= category.image %></td>
+        <tbody id="demo">
+          <%= for demo <- @demo_collection do %>
+            <tr id="demo-<%= demo.id %>">
+              <td><%= demo.name %></td>
+              <td><%= demo.phone %></td>
+              <td><%= demo.email %></td>
+              <td><%= demo.message %></td>
 
               <td>
-                <!--<span><%= live_redirect "Visa", to: Routes.category_show_path(@socket, :show, category) %></span>-->
-                <span><%= live_patch "Ändra", to: Routes.category_index_path(@socket, :edit, category) %></span>
-                <span><%= link "Ta bort", to: "#", phx_click: "delete", phx_value_id: category.id, data: [confirm: "Är du säker?"] %></span>
+                <!--<span><%= live_redirect "Visa", to: Routes.category_show_path(@socket, :show, demo) %></span>-->
+                <span><%= live_patch "Edit", to: Routes.demo_index_path(@socket, :edit, demo) %></span>
+                <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: demo.id, data: [confirm: "Are you sure?"] %></span>
               </td>
             </tr>
           <% end %>

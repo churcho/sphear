@@ -19,6 +19,10 @@ import NProgress from "nprogress"
 import { LiveSocket } from "phoenix_live_view"
 import "particles.js"
 
+import { gsap } from "gsap";
+import { Physics2DPlugin } from "gsap/Physics2DPlugin";
+gsap.registerPlugin(Physics2DPlugin);
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 let Hooks = {};
 Hooks.particlesjs = {
@@ -31,6 +35,40 @@ Hooks.particlesjs = {
         /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
         particlesJS.load('particles-js', 'particlesjs-config.json', function() {
             console.log('Particles initiated!');
+        });
+    }
+}
+Hooks.kontaktSent = {
+    mounted() {
+        let dots = [],
+            bg = document.querySelector("#featureBackground"),
+            i, dot;
+
+        // create 80 dot elements and put them in an array
+        for (i = 0; i < 100; i++) {
+            dot = document.createElement("div");
+            dot.setAttribute("class", "dot");
+            bg.appendChild(dot);
+            dots.push(dot);
+        }
+
+        //set the initial position of all the dots, and pick a random color for each from an array of colors
+        gsap.set(dots, {
+            backgroundColor: "random([#663399,#84d100,#cc9900,#0066cc,#993333])",
+            scale: "random(0.4, 1)",
+            x: document.body.clientWidth / 2,
+            y: document.body.clientHeight
+        });
+
+        // create the physics2D animation
+        let tween = gsap.to(dots, {
+            duration: 15,
+            physics2D: {
+                velocity: "random(200, 450)",
+                angle: "random(250, 290)",
+                gravity: 85
+            },
+            delay: "random(0, 3)"
         });
     }
 }

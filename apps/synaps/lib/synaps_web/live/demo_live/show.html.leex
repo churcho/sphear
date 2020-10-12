@@ -1,0 +1,37 @@
+<h1>Show Demo</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, SynapsWeb.DemoLive.FormComponent,
+    id: @demo.id,
+    title: @page_title,
+    action: @live_action,
+    demo: @demo,
+    return_to: Routes.demo_show_path(@socket, :show, @demo) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @demo.name %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @demo.phone %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @demo.email %>
+  </li>
+
+  <li>
+    <strong>Message:</strong>
+    <%= @demo.message %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.demo_show_path(@socket, :edit, @demo), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.demo_index_path(@socket, :index) %></span>
