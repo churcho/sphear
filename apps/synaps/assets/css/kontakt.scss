@@ -1,6 +1,5 @@
 #featureAnimation {
     height: 500px;
-    overflow: hidden;
     position: relative;
     width: 100%;
     margin: auto;
@@ -8,8 +7,9 @@
 
 .dot {
     position: absolute;
-    background-color: #91e600;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    opacity: 0.9;
+    box-shadow: 5px 5px 10px 1px black;
 }
