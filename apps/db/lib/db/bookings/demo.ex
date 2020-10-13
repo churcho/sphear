@@ -15,6 +15,6 @@ defmodule Db.Bookings.Demo do
   def changeset(demo, attrs) do
     demo
     |> cast(attrs, [:name, :phone, :email, :message])
-    |> validate_required([:name, :email, :message])
+    |> validate_required([:name, :email, :message], message: "Måste fyllas i")
   end
 end

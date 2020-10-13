@@ -48,18 +48,15 @@
                 Vi bygger en komplett <span class="text-green-700 font-semibold">digital plattform</span> för er verksamhet, så att ni kan möta era kunder <span class="text-green-700 font-semibold">när som helst!</span>
               </p>
               <div class="flex justify-evenly max-w-sm lg:max-w-lg m-auto">
-                <div id="loginAnimation" class="flex items-center rounded-md justify-center h-10 w-24 lg:h-12 lg:w-32 no_touch_outline outline-none" style="box-shadow: 0px 0px 9px rgba(0,0,0,0.3);">
-                  <div class="absolute" id="loginBg"></div>
-                  <%= if !@current_user do %>
-                    <a id="login_button" class="rounded-md teko h-full w-full flex items-center justify-center border border-transparent text-xl font-light hover:font-normal bg-white bg-opacity-25 text-black hover:text-white hover:bg-red-400 focus:outline-none transition duration-150 ease-in lg:text-3xl">
-                      LOGGA IN
-                  <% else %>
+                <%= if @current_user do %>
+                  <div id="loginAnimation" class="flex items-center rounded-md justify-center h-10 w-24 lg:h-12 lg:w-32 no_touch_outline outline-none" style="box-shadow: 0px 0px 9px rgba(0,0,0,0.3);">
+                    <div class="absolute" id="loginBg"></div>
                     <a id="panel_button" href="/panel" class="rounded-md teko h-full w-full flex items-center justify-center border border-transparent text-xl font-light hover:font-normal bg-white bg-opacity-25 text-black hover:text-white hover:bg-red-400 focus:outline-none transition duration-150 ease-in lg:text-3xl">
                       DIN PANEL
-                  <% end %>
-                  </a>
-                </div>
-                <div class="flex items-center rounded-md justify-center h-10 w-24 lg:h-12 lg:w-32 no_touch_outline outline-none" style="box-shadow: 0px 0px 9px rgba(0,0,0,0.3);">
+                    </a>
+                  </div>
+                <% end %>  
+                <div class="flex mt-32 items-center rounded-md justify-center h-10 w-24 lg:h-12 lg:w-32 no_touch_outline outline-none" style="box-shadow: 0px 0px 9px rgba(0,0,0,0.3);">
                   <a id="goto_cell" href="#" class="rounded-md teko h-full w-full flex items-center justify-center border border-transparent text-xl font-light hover:font-normal bg-white bg-opacity-25 text-black hover:text-white hover:bg-red-400 focus:outline-none transition duration-150 ease-in lg:text-3xl">
                     LÄS MER
                   </a>

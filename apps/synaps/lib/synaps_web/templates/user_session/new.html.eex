@@ -6,7 +6,7 @@
     <div class="max-w-7xl m-4 md:m-6">
       <div class="flex justify-between items-center md:justify-start">
         <div class="flex">
-          <a href="/demo" class="inline-flex no_touch_outline outline-none">
+          <a href="/" class="inline-flex no_touch_outline outline-none">
             <img id="logo" class="h-8 w-auto md:h-16" src="/images/synapsus.svg" alt="">
           </a>
         </div>
@@ -35,7 +35,6 @@
           </div>
           <div class="-mt-px">
             <%= error_tag f, :password %>
-            test123
             <%= password_input f, :password, required: true, placeholder: "Lösenord", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" %>
           </div>
         </div>

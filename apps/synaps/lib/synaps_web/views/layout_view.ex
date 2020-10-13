@@ -6,7 +6,7 @@ defmodule SynapsWeb.LayoutView do
   in this combination of view/template.
   """
   def js_view_path(conn, _nil) do
-    String.slice(conn.request_path, 1..-1)
+    "demo"
   end
   def js_view_path(conn, view_template) do
     module_name(to_string(view_template))

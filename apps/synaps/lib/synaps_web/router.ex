@@ -66,8 +66,8 @@ defmodule SynapsWeb.Router do
   scope "/", SynapsWeb do
     pipe_through [:browser]
 
-    live "/", PageLive, :index
-    get "/demo", DemoController, :index
+    #live "/", PageLive, :index
+    get "/", DemoController, :index
     live "/chat", ChatLive, :index
     live "/demo2", Demo2Live, :index
     live "/demo3", Demo3Live, :index

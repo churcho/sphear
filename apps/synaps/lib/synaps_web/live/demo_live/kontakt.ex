@@ -11,11 +11,11 @@ defmodule SynapsWeb.DemoLive.Kontakt do
   end
 
   def handle_event("logo_button", _, socket) do
-    {:noreply, redirect(socket, to: "/demo")}
+    {:noreply, redirect(socket, to: "/")}
   end
 
   def handle_event("back", _, socket) do
-    {:noreply, redirect(socket, to: "/demo")}
+    {:noreply, redirect(socket, to: "/")}
   end
 
   @impl true

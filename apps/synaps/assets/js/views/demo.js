@@ -240,7 +240,7 @@ let ih = window.innerHeight;
 document.querySelector("#goto_cell").addEventListener("click", function() {
     activeSlide = 1;
     gsap.to(container, dura, { y: offsets[activeSlide], ease: "power2.inOut", onUpdate: tweenDot });
-    gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 13, css: { display: 'block' } })
+    gsap.to(document.querySelector("#goto_pill"), { duration: 2, delay: 4, css: { display: 'block' } })
 });
 
 document.querySelector("#goto_pill").addEventListener("click", function() {
