@@ -27,7 +27,7 @@ particlesJS.load('particles-js', 'particlesjs-config.json', function() {
 });
 
 /* Front page text */
-const words = ["Digitalisera er verksamhet", "Automatisera lösningar", "Design med känsla", "Förbättra kundrelationer", "Effektivisera rutiner m.m"];
+const words = ["Digitalisera er verksamhet", "Automatisera lösningar", "Designa med känsla", "Förbättra kundrelationer", "Effektivisera rutiner m.m"];
 
 gsap.to('.cursor', { opacity: 0, duration: 1, ease: "power2.inOut", repeat: -1 })
 let masterTl = gsap.timeline({ repeat: -1 }).pause()
